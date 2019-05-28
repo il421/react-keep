@@ -1,0 +1,18 @@
+.user-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-box__name {
+  font-size: $font-size-large;
+  color: $clean;
+}
+
+.user-box__photo {
+  margin-right: $s-size;
+}
+
+.user-box__photo img {
+  border-radius: 50%;
+}

@@ -34,7 +34,7 @@ ReactDOM.render(<LoadingPage />, document.getElementById('app'));
 // google authification
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
-    store.dispatch(login(user.uid, user.displayName));
+    store.dispatch(login(user.uid, user.displayName, user.photoURL));
 
     renderApp();
     if (history.location.pathname === '/') {

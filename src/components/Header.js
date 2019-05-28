@@ -45,6 +45,9 @@ export const Header = ({ startLogout, auth }) => {
             <h1 className="header__title">Keep Me</h1>
           </Link>
           <div className="header__user-box user-box">
+            <div className="user-box__photo">
+              <img src={auth.url} width={35} height={35} />
+            </div>
             <div className="user-box__name show-for-mobile">{ auth.name }</div>
             <button className="button button--link" onClick={ startLogout }>
               <FontAwesomeIcon icon={ faSignOutAlt } size="1x" />
@@ -63,7 +66,8 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state) => {
   return {
-    auth: state.auth
+    auth: state.auth,
+    url: state.url,
   }
 };
 
