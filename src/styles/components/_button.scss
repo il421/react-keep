@@ -1,5 +1,5 @@
 .button {
-  background: $blue;
+  background: $varmillion;
   color: white;
   border: none;
   padding: $s-size;
@@ -12,7 +12,7 @@
 
 .button--link {
   background: none;
-  color: white;
+  color: $clean;
   border: none;
   padding: $s-size;
   font-size: $font-size-large;
@@ -24,4 +24,11 @@
 
 .button--secondary {
   background: #888;
+}
+
+.button--sidenav {
+  display: inline-block;
+  background: none;
+  border: none;
+  color: $clean;
 }
