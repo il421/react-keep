@@ -5,6 +5,7 @@ import { startLogout } from '../actions/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faSignOutAlt, faTimes } from '@fortawesome/free-solid-svg-icons'
 import SideNav from 'react-simple-sidenav';
+import Search from './Search';
 
 export const Header = ({ startLogout, auth }) => {
   let [ showNav, onSetSidebarOpen ] = useState(false);
@@ -26,7 +27,7 @@ export const Header = ({ startLogout, auth }) => {
         <div className="header__content">
           <div className="header__sidebar sidebar">
             <button className="button--sidenav" onClick={() => onSetSidebarOpen(showNav = true)}>
-              <FontAwesomeIcon icon={ faBars } size="2x" />
+              <FontAwesomeIcon icon={ faBars } size="3x" />
             </button>
             <SideNav
               showNav={ showNav }
@@ -44,9 +45,12 @@ export const Header = ({ startLogout, auth }) => {
           <Link to="/dashboard">
             <h1 className="header__title">Keep Me</h1>
           </Link>
+          <div className="header__search">
+            <Search />
+          </div>
           <div className="header__user-box user-box">
             <div className="user-box__photo">
-              <img src={auth.url} width={35} height={35} />
+              <img src={auth.url} width={50} height={50} />
             </div>
             <div className="user-box__name show-for-mobile">{ auth.name }</div>
             <button className="button button--link" onClick={ startLogout }>

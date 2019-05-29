@@ -1,0 +1,11 @@
+.note {
+  margin: $s-size;
+
+  border: 1px solid green;
+}
+
+@media (min-width: $tablet-widths) {
+  .note {
+    width: 270px;
+  }
+}

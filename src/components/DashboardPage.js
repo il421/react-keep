@@ -1,8 +1,11 @@
 import React from 'react';
+import Create from './Create';
+import Notes from './Notes';
 
 const DashboardPage = () => (
   <div>
-    DashboardPage
+    <Create />
+    <Notes />
   </div>
 );
 
