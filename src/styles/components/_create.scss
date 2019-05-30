@@ -1,20 +1,17 @@
 .create {
-  border: 1px solid red;
+  width: 300px;
+  min-height: 150px;
   margin-top: 2rem;
-  margin-left: 5rem;
-  margin-right: 5rem;
+
+  border: 1px solid red;
 }
 
 @media (min-width: $tablet-widths) {
   .create {
-    margin-left: 15rem;
-    margin-right: 15rem;
+    width: 500px;
   }
 }
 
 @media (min-width: $desktop-widths) {
-  .create {
-    margin-left: 35rem;
-    margin-right: 35rem;
-  }
+
 }

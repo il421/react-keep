@@ -1,11 +1,11 @@
 import React from 'react';
 import Create from './Create';
-import Notes from './Notes';
+import NotesList from './NotesList';
 
 const DashboardPage = () => (
   <div>
-    <Create />
-    <Notes />
+    <Create className="content-container" />
+    <NotesList />
   </div>
 );
 

@@ -13,6 +13,6 @@
 @media (min-width: $tablet-widths) {
   .notes {
     flex-direction: row;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
   }
 }
