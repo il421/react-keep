@@ -4,6 +4,11 @@ export const addNote = (note) => ({
   note
 });
 
+export const removeNote = ({id}) => ({
+  type: 'REMOVE_NOTE',
+  id
+});
+
 export const setNotes = (notes) => ({
   type: 'SET_NOTES',
   notes

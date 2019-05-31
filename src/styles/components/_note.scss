@@ -1,7 +1,37 @@
 .note {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  min-height: 120px;
   margin: $s-size;
 
-  border: 1px solid green;
+  box-shadow: 0 1px 1px 0 rgba(65,69,73,0.3), 0 1px 3px 1px rgba(65,69,73,0.15);
+  word-break: break-word;
+}
+
+.note:hover {
+  box-shadow:  0 4px 4px 0 rgba(65,69,73,0.3), 0 4px 12px 4px rgba(65,69,73,0.15);
+}
+
+.note__title,
+.note__text {
+  margin-bottom: $s-size;
+
+  font-size: $font-size-small;
+  line-height: 2rem;
+}
+
+.note__title {
+  margin-bottom: $m-size;
+
+  font-size: $font-size-large;
+  font-weight: bold;
+}
+
+.note__remove-btn {
+  display: flex;
+  justify-content: space-between;
 }
 
 @media (min-width: $tablet-widths) {

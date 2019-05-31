@@ -14,6 +14,11 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { firebase } from './firebase/firebase';
 import LoadingPage from './components/LoadingPage';
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faBars, faSignOutAlt, faTimes, faPalette, faMapMarkerAlt, faMapMarker } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faBars, faSignOutAlt, faTimes, faPalette, faMapMarkerAlt, faMapMarker)
+
 
 const store = configStore();
 

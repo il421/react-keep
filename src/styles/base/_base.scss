@@ -12,15 +12,11 @@ body {
   line-height: 1.6
 }
 
-button {
-  cursor: pointer;
-}
-
 button:disabled {
   cursor: default;
+  opacity: .5;
 }
 
-.is-active {
-  color: red;
-  font-weight: bold;
+.pointer {
+  cursor: pointer;
 }

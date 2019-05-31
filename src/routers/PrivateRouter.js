@@ -20,4 +20,4 @@ const mapStateToProps = (state) => ({
   isAuthenticated: !!state.auth.uid
 });
 
-export default connect(mapStateToProps)(PrivateRouter)
+export default connect(mapStateToProps)(PrivateRouter);

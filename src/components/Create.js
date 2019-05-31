@@ -4,19 +4,30 @@ import { addNote } from '../actions/notes';
 
 import uuid from 'uuid/v4';
 
-import NewNote from './NewNote';
+import NoteForm from './NoteForm';
 
 export class Create extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      color: '#fff'
+    };
+  }
   addNewNote = (note) => {
     const { addNote } = this.props;
-    addNote({id: uuid(), ...note});
+    addNote({ id: uuid(), ...note });
+  }
+
+  changeNoteColor = (color) => {
+    this.setState(() => ({ color }));
   }
 
   render() {
     return (
-      <div className="create content-container">
-        <NewNote
+      <div className="create content-container" style={{ backgroundColor: this.state.color }}>
+        <NoteForm
           addNote={ this.addNewNote }
+          onColorChange={ this.changeNoteColor }
         />
       </div>
     );

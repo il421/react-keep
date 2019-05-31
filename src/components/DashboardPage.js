@@ -1,9 +1,10 @@
 import React from 'react';
 import Create from './Create';
 import NotesList from './NotesList';
+// import Footer from './Footer';
 
 const DashboardPage = () => (
-  <div>
+  <div className="content-container--flex">
     <Create className="content-container" />
     <NotesList />
   </div>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { startLogout } from '../actions/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faSignOutAlt, faTimes } from '@fortawesome/free-solid-svg-icons'
+// import { faBars, faSignOutAlt, faTimes } from '@fortawesome/free-solid-svg-icons'
 import SideNav from 'react-simple-sidenav';
 import Search from './Search';
 
@@ -27,7 +27,7 @@ export const Header = ({ startLogout, auth }) => {
         <div className="header__content">
           <div className="header__sidebar sidebar">
             <button className="button--sidenav" onClick={() => onSetSidebarOpen(showNav = true)}>
-              <FontAwesomeIcon icon={ faBars } size="3x" />
+              <FontAwesomeIcon icon="bars" size="3x" />
             </button>
             <SideNav
               showNav={ showNav }
@@ -37,7 +37,7 @@ export const Header = ({ startLogout, auth }) => {
               items={[]}
               title={
                 <button className="button--sidenav" onClick={() => onSetSidebarOpen(showNav = false)}>
-                  <FontAwesomeIcon icon={ faTimes } size="1x" />
+                  <FontAwesomeIcon icon="times" size="1x" />
                 </button>
               }
             />
@@ -53,8 +53,8 @@ export const Header = ({ startLogout, auth }) => {
               <img src={auth.url} width={50} height={50} />
             </div>
             <div className="user-box__name show-for-mobile">{ auth.name }</div>
-            <button className="button button--link" onClick={ startLogout }>
-              <FontAwesomeIcon icon={ faSignOutAlt } size="1x" />
+            <button className="button button--sidenav" onClick={ startLogout }>
+              <FontAwesomeIcon icon="sign-out-alt" size="1x" />
             </button>
           </div>
         </div>

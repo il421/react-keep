@@ -14,14 +14,13 @@ const AppRouter = () => (
   <Router history={ history }>
     <>
       <Switch>
-        <PublicRouter path="/" component={ LoginPage } exact={ true } />>
+        <PublicRouter path="/" component={ LoginPage } exact={ true } />
         <PrivateRouter path="/dashboard" component={ DashboardPage } />
         <Route component={ NotFoundPage } />
       </Switch>
     </>
   </Router>
 );
-// path, component, exact (tell router not to match paths if true)
-// :id save a paramentr in match/params
+
 
 export default AppRouter;

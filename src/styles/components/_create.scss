@@ -3,7 +3,11 @@
   min-height: 150px;
   margin-top: 2rem;
 
-  border: 1px solid red;
+  box-shadow: 0 1px 1px 0 rgba(65,69,73,0.3), 0 1px 3px 1px rgba(65,69,73,0.15);
+}
+
+.create:hover {
+  box-shadow:  0 4px 4px 0 rgba(65,69,73,0.3), 0 4px 12px 4px rgba(65,69,73,0.15);
 }
 
 @media (min-width: $tablet-widths) {

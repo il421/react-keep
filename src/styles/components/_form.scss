@@ -4,3 +4,36 @@
   justify-content: space-between;
   align-content: space-between;
 }
+
+.form__title,
+.form__text {
+  margin-bottom: $s-size;
+
+  font-size: $font-size-small;
+  border: none;
+  outline: none;
+}
+
+.form__title {
+  font-weight: bold;
+}
+
+.form__wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding-top: $s-size;
+
+  border-top: 1px solid $clean;
+}
+
+.form__options {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.form__actions button:last-child {
+  margin-left: $s-size;
+}
