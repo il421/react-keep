@@ -1,8 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ColorBox from './ColorBox';
+import ContentEditable from 'react-contenteditable';
 
 export default class NoteForm extends React.Component {
   constructor(props) {
@@ -33,8 +33,6 @@ export default class NoteForm extends React.Component {
   };
 
   onColorChange = (color) => {
-    this.setState(() => ({ color }));
-
     this.props.onColorChange(color);
   };
 
@@ -51,7 +49,18 @@ export default class NoteForm extends React.Component {
     }
   }
 
-  clearForm =() => {
+  updateNote = () => {
+    if (this.props.note) {
+      this.props.updateNote(this.props.note.id, {
+        title: this.state.title,
+        text: this.state.text,
+        createAt: this.state.createAt.valueOf(),
+        color: this.state.color,
+      });
+    }
+  }
+
+  clearForm = () => {
     const defaultNoteState = {
       title: '',
       text: '',
@@ -63,28 +72,34 @@ export default class NoteForm extends React.Component {
     this.onColorChange(defaultNoteState.color);
   }
 
+  closeUpdateForm = () => {
+    if (this.props.note) {
+      this.props.closeUpdateForm();
+    }
+  }
+
   render() {
     return (
       <>
         <div className="form">
           <input
             className="form__title"
-            style={{ backgroundColor: this.state.color }}
             type="text"
             autoFocus
             value={ this.state.title }
             onChange={ this.onTitleChange }
             placeholder="Title"
+            spellCheck="false"
           />
-          <textarea
+
+          <ContentEditable
             className="form__text"
-            style={{ backgroundColor: this.state.color }}
-            value={ this.state.text }
+            html={ this.state.text }
             onChange={ this.onTextChange }
-            required
-            placeholder="Text a note ..."
-            rows="2"
+            placeholder={'Type something ...'}
+            spellCheck="false"
           />
+
           <div className="form__wrapper">
             <div className="form__options options">
               {
@@ -101,8 +116,20 @@ export default class NoteForm extends React.Component {
               }
             </div>
             <div className="form__actions">
-              <button className="button--link pointer" onClick={ this.addNote } disabled={ this.state.text === '' }>Keep</button>
-              <button className="button--link pointer" onClick={ this.clearForm }>Close</button>
+              <button
+                className="button--link pointer"
+                onClick={ this.props.note ? this.updateNote : this.addNote }
+                disabled={ this.state.text === '' }
+              >
+                { this.props.note ? 'Update' : 'Keep' }
+              </button>
+
+              <button
+                className="button--link pointer"
+                onClick={ this.props.note ? this.closeUpdateForm : this.clearForm }
+              >
+                { this.props.note ? 'Close' : 'Clean' }
+              </button>
             </div>
           </div>
         </div>
@@ -110,8 +137,3 @@ export default class NoteForm extends React.Component {
     );
   }
 }
-
-NoteForm.propTypes = {
-  note: PropTypes.object,
-  addNote: PropTypes.func,
-};

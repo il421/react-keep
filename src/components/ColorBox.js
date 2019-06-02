@@ -48,9 +48,9 @@ export default class ColorBox extends React.Component {
     const targetColor = evt.target.value;
     this.colors.forEach((color) => {
       color.default = color.value === targetColor;
-    })
+    });
 
-    this.props.changeColor(targetColor)
+    this.props.changeColor(targetColor);
   }
 
   render() {
@@ -80,4 +80,4 @@ export default class ColorBox extends React.Component {
       </div>
     );
   }
-};
+}

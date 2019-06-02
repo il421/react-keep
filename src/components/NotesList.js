@@ -1,28 +1,52 @@
 import React from 'react';
-import Note from './note';
+import Note from './Note';
+import EditNote from './UpdateNote';
 import { connect } from 'react-redux';
 
 
-const NotesList = (props)  => {
+export class NotesList extends React.Component {
 
-  return (
-    <div className="notes content-container">
-      { props.notes.length > 0 &&
-        props.notes.map((note) => (
+  state = {
+    selectedNote: undefined
+  };
+
+  selectNote = (note) => {
+    this.setState(() => ({
+      selectedNote: note
+    }));
+  };
+
+  handleClearSelectedNote = () => {
+    this.setState(() => ({
+      selectedNote: undefined
+    }));
+  };
+
+  render() {
+    return (
+      <div className="notes content-container">
+        { this.props.notes.length > 0 &&
+        this.props.notes.map((note) => (
           <Note
             key={ note.id }
             { ...note }
+            selectNote={ () => this.selectNote(note) }
           />
         ))
-      }
-    </div>
-  );
-};
+        }
+        <EditNote
+          selectedNote={ this.state.selectedNote }
+          handleClearSelectedNote={ this.handleClearSelectedNote }
+        />
+      </div>
+    );
+  }
+}
 
 const mapStateToProps = (state) => {
   return {
     notes: state.notes
   };
-}
+};
 
 export default connect(mapStateToProps)(NotesList);

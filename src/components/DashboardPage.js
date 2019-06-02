@@ -1,5 +1,5 @@
 import React from 'react';
-import Create from './Create';
+import Create from './AddNote';
 import NotesList from './NotesList';
 // import Footer from './Footer';
 

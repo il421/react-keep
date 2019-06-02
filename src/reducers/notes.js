@@ -9,8 +9,18 @@ export default (state = expensesReducerDefaultState, action) => {
   case 'REMOVE_NOTE':
     return state.filter(({ id }) => id !== action.id);
 
-  case 'SET_EXPENSES':
-    return action.notes;
+  case 'UPDATE_NOTE':
+    return state.map((note) => {
+      if (note.id === action.id) {
+        return {
+          ...note,
+          ...action.updates
+        };
+      } else {
+        return note;
+      }
+    });
+
   default:
     return state;
   }

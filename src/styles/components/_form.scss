@@ -12,10 +12,27 @@
   font-size: $font-size-small;
   border: none;
   outline: none;
+  background-color: inherit;
+
+  cursor: text;
+}
+
+.form__text--bigger {
+  font-size: $font-size-large;
+}
+
+.form__title--bigger {
+  font-size: $font-size-xlarge;
 }
 
 .form__title {
   font-weight: bold;
+}
+
+[contenteditable=true]:empty:before {
+  content: attr(placeholder);
+  display: block;
+  color: #757575;
 }
 
 .form__wrapper {

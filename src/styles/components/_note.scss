@@ -29,9 +29,13 @@
   font-weight: bold;
 }
 
-.note__remove-btn {
+.note__wrapper {
   display: flex;
   justify-content: space-between;
+}
+
+.note__remove-btn:hover {
+  opacity: 0.3;
 }
 
 @media (min-width: $tablet-widths) {

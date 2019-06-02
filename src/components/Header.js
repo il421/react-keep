@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { startLogout } from '../actions/auth';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faBars, faSignOutAlt, faTimes } from '@fortawesome/free-solid-svg-icons'
 import SideNav from 'react-simple-sidenav';
 import Search from './Search';
@@ -19,7 +19,7 @@ export const Header = ({ startLogout, auth }) => {
       backgroundColor: '#4abdac',
       width: '300px'
     }
-  }
+  };
 
   return (
     <header className="header">
@@ -61,7 +61,7 @@ export const Header = ({ startLogout, auth }) => {
       </div>
     </header>
   );
-}
+};
 
 
 const mapDispatchToProps = (dispatch) => ({
@@ -72,7 +72,7 @@ const mapStateToProps = (state) => {
   return {
     auth: state.auth,
     url: state.url,
-  }
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

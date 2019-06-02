@@ -39,6 +39,7 @@
     "raf": "^3.3.2",
     "react": "^16.6.1",
     "react-addons-shallow-compare": "^15.6.0",
+    "react-contenteditable": "^3.2.6",
     "react-dates": "20.2.0",
     "react-dom": "^16.6.1",
     "react-modal": "^3.6.1",

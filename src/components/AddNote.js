@@ -6,7 +6,7 @@ import uuid from 'uuid/v4';
 
 import NoteForm from './NoteForm';
 
-export class Create extends React.Component {
+export class AddNote extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -39,4 +39,4 @@ const mapDispatchToProps = (dispatch) => ({
 }
 );
 
-export default connect(undefined, mapDispatchToProps)(Create);
+export default connect(undefined, mapDispatchToProps)(AddNote);
