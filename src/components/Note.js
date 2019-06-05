@@ -26,7 +26,9 @@ const Note = ({ title, text, createAt, color, id, removeNote, selectNote }) => {
           <FontAwesomeIcon icon="times" size="2x" />
         </div>
       </div>
-      <div className="note__title">{ title }</div>
+      {
+        title.trim() !== '' && <div className="note__title">{ title }</div>
+      }
       <div className="note__text">{ text }</div>
       <div className='note__date'>{ moment(createAt).format('MMMM Do, YYYY') }</div>
     </div>

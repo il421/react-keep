@@ -42,16 +42,17 @@ export default class ColorBox extends React.Component {
       value: '#fbbc04',
       default: false
     }
-  ]
+  ];
+  state = {
+    color: this.props.defaultColor ? this.props.defaultColor : '#fff'
+  };
 
-  changeColor = (evt) => {
-    const targetColor = evt.target.value;
-    this.colors.forEach((color) => {
-      color.default = color.value === targetColor;
-    });
+  updateColor = (evt) => {
+    const color = evt.target.value;
 
-    this.props.changeColor(targetColor);
-  }
+    this.setState(({ color }))
+    this.props.updateColor(color);
+  };
 
   render() {
     return (
@@ -59,20 +60,22 @@ export default class ColorBox extends React.Component {
         {
           this.colors.map((color) => (
             <div key={ color.value }>
+              <input
+                ref={ color.value + this.props.name }
+                id={ color.value + this.props.name }
+                type="radio"
+                name={ this.props.name }
+                value={ color.value }
+                onChange={ this.updateColor }
+                checked={ this.state.color === color.value }
+              />
+
               <label
-                htmlFor={ color.value }
+                htmlFor={ color.value + this.props.name }
                 className="pointer"
                 style={{
                   backgroundColor: color.value,
-                  border: color.default && '1px solid black'
                 }}
-              />
-              <input
-                id={ color.value }
-                type="radio"
-                name="color"
-                value={ color.value }
-                onChange={ this.changeColor }
               />
             </div>
           ))

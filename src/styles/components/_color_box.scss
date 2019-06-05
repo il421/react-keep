@@ -1,5 +1,6 @@
 .color-box {
   display: none;
+
   position: absolute;
 
   width: 150px;
@@ -25,4 +26,8 @@
 
 .color-box label:active {
   opacity: .5;
+}
+
+.color-box input:checked + label {
+  border: 1px solid black;
 }

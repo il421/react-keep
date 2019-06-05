@@ -1,6 +1,6 @@
 import React from 'react';
 import Note from './Note';
-import EditNote from './UpdateNote';
+import UpdateNote from './UpdateNote';
 import { connect } from 'react-redux';
 
 
@@ -16,7 +16,7 @@ export class NotesList extends React.Component {
     }));
   };
 
-  handleClearSelectedNote = () => {
+  removeSelectedNote = () => {
     this.setState(() => ({
       selectedNote: undefined
     }));
@@ -24,21 +24,28 @@ export class NotesList extends React.Component {
 
   render() {
     return (
-      <div className="notes content-container">
-        { this.props.notes.length > 0 &&
-        this.props.notes.map((note) => (
-          <Note
-            key={ note.id }
-            { ...note }
-            selectNote={ () => this.selectNote(note) }
-          />
-        ))
+      <>
+        <div className="notes content-container">
+          { this.props.notes.length > 0 &&
+          this.props.notes.map((note) => (
+            <Note
+              key={ note.id }
+              { ...note }
+              selectNote={ () => this.selectNote(note) }
+            />
+          ))
+          }
+        </div>
+        {
+          this.state.selectedNote &&
+          (
+            <UpdateNote
+              selectedNote={ this.state.selectedNote }
+              removeSelectedNote={ this.removeSelectedNote }
+            />
+          )
         }
-        <EditNote
-          selectedNote={ this.state.selectedNote }
-          handleClearSelectedNote={ this.handleClearSelectedNote }
-        />
-      </div>
+      </>
     );
   }
 }

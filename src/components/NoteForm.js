@@ -11,16 +11,9 @@ export default class NoteForm extends React.Component {
       title: props.note ? props.note.title : '',
       text: props.note ? props.note.text : '',
       createAt: props.note ? moment(props.note.createAt) : moment(),
-      color: props.note ? props.note.color : 'white',
+      color: props.note ? props.note.color : '#fff',
     };
   }
-
-  options = [
-    {
-      key: 'color',
-      icon: 'palette',
-    }
-  ]
 
   onTitleChange = (evt) => {
     const title = evt.target.value;
@@ -33,6 +26,7 @@ export default class NoteForm extends React.Component {
   };
 
   onColorChange = (color) => {
+    this.setState(() => ({ color }));
     this.props.onColorChange(color);
   };
 
@@ -45,7 +39,7 @@ export default class NoteForm extends React.Component {
         color: this.state.color,
       });
 
-      this.clearForm();
+      this.cleanForm();
     }
   }
 
@@ -60,12 +54,12 @@ export default class NoteForm extends React.Component {
     }
   }
 
-  clearForm = () => {
+  cleanForm = () => {
     const defaultNoteState = {
       title: '',
       text: '',
       createAt: moment(),
-      color: 'white',
+      color: '#fff',
     };
 
     this.setState(defaultNoteState);
@@ -102,18 +96,14 @@ export default class NoteForm extends React.Component {
 
           <div className="form__wrapper">
             <div className="form__options options">
-              {
-                this.options.map((option) => (
-                  <div key={ option.key } className={ `pointer options__${ option.key }` }>
-                    <FontAwesomeIcon icon={ option.icon } size="2x" />
-                    {
-                      option.key === 'color' && (
-                        <ColorBox changeColor={ this.onColorChange } />
-                      )
-                    }
-                  </div>
-                ))
-              }
+              <div className="pointer options__color">
+                <FontAwesomeIcon icon="palette" size="2x" />
+                <ColorBox
+                  name={ this.props.name }
+                  updateColor={ this.onColorChange }
+                  defaultColor={ this.state.color }
+                />
+              </div>
             </div>
             <div className="form__actions">
               <button
@@ -126,7 +116,7 @@ export default class NoteForm extends React.Component {
 
               <button
                 className="button--link pointer"
-                onClick={ this.props.note ? this.closeUpdateForm : this.clearForm }
+                onClick={ this.props.note ? this.closeUpdateForm : this.cleanForm }
               >
                 { this.props.note ? 'Close' : 'Clean' }
               </button>

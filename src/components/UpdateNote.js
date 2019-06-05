@@ -6,18 +6,28 @@ import {connect} from 'react-redux';
 // import uuid from 'uuid/v4';
 
 export class UpdateNote extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      color: props.selectedNote ? props.selectedNote.color : '#fff'
+    };
+  }
 
   updateEditedNote = (id, note) => {
-    const { updateNote, handleClearSelectedNote } = this.props;
+    const { updateNote, removeSelectedNote } = this.props;
     updateNote(id, note);
-    handleClearSelectedNote();
+    removeSelectedNote();
+  }
+
+  updateNoteColor = (color) => {
+    this.setState(({color}));
   }
 
   render() {
     return (
       <Modal
         isOpen={ !!this.props.selectedNote }
-        onRequestClose={ this.props.handleClearSelectedNote }
+        onRequestClose={ this.props.removeSelectedNote }
         contentLabel="Selected option"
         closeTimeoutMS={ 200 }
         className="note-modal"
@@ -27,13 +37,14 @@ export class UpdateNote extends React.Component {
           this.props.selectedNote !== undefined &&
           <div
             className="create content-container"
-            style={{ backgroundColor: this.props.selectedNote.color }}
+            style={{ backgroundColor: this.state.color }}
           >
             <NoteForm
               updateNote={ this.updateEditedNote }
-              onColorChange={ this.changeNoteColor }
+              onColorChange={ this.updateNoteColor }
               note={ this.props.selectedNote }
-              closeUpdateForm={ this.props.handleClearSelectedNote }
+              closeUpdateForm={ this.props.removeSelectedNote }
+              name={ 'update' }
             />
           </div>
         }

@@ -27,6 +27,7 @@ export class AddNote extends React.Component {
       <div className="create content-container" style={{ backgroundColor: this.state.color }}>
         <NoteForm
           addNote={ this.addNewNote }
+          name={ 'add' }
           onColorChange={ this.changeNoteColor }
         />
       </div>
