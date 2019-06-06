@@ -1,11 +1,11 @@
 import React from 'react';
 import moment from 'moment';
 import { connect } from 'react-redux';
-import { removeNote } from '../actions/notes';
+import { startRemoveNote } from '../actions/notes';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const Note = ({ title, text, createAt, color, id, removeNote, selectNote }) => {
+const Note = ({ title, text, createAt, color, id, startRemoveNote, selectNote }) => {
 
   return (
     <div
@@ -20,7 +20,7 @@ const Note = ({ title, text, createAt, color, id, removeNote, selectNote }) => {
         <div className="pointer note__remove-btn" onClick={
           (evt) => {
             evt.stopPropagation();
-            removeNote({id});
+            startRemoveNote(id);
           }
         }>
           <FontAwesomeIcon icon="times" size="2x" />
@@ -36,7 +36,7 @@ const Note = ({ title, text, createAt, color, id, removeNote, selectNote }) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  removeNote: (id) => dispatch(removeNote(id))
+  startRemoveNote: (id) => dispatch(startRemoveNote(id))
 }
 );
 

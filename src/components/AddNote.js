@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addNote } from '../actions/notes';
-
-import uuid from 'uuid/v4';
+import { startAddExpense } from '../actions/notes';
 
 import NoteForm from './NoteForm';
 
@@ -14,8 +12,8 @@ export class AddNote extends React.Component {
     };
   }
   addNewNote = (note) => {
-    const { addNote } = this.props;
-    addNote({ id: uuid(), ...note });
+    const { startAddExpense } = this.props;
+    startAddExpense(note);
   }
 
   changeNoteColor = (color) => {
@@ -36,7 +34,7 @@ export class AddNote extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  addNote: (note) => dispatch(addNote(note))
+  startAddExpense: (note) => dispatch(startAddExpense(note))
 }
 );
 
