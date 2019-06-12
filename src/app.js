@@ -5,6 +5,7 @@ import AppRouter, { history } from './routers/AppRouter';
 import configStore from './store/configStore';
 import { login, logout } from './actions/auth';
 import { startSetNotes } from './actions/notes';
+import { startSetTags } from './actions/tags';
 
 
 import 'normalize.css/normalize.css';
@@ -15,9 +16,10 @@ import { firebase } from './firebase/firebase';
 import LoadingPage from './components/LoadingPage';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faBars, faSignOutAlt, faTimes, faPalette, faMapMarkerAlt, faMapMarker } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faSignOutAlt, faTimes, faPalette, faMapMarkerAlt, faBookmark, faTags, faEdit }
+  from '@fortawesome/free-solid-svg-icons';
 
-library.add(faBars, faSignOutAlt, faTimes, faPalette, faMapMarkerAlt, faMapMarker);
+library.add(faBars, faSignOutAlt, faTimes, faPalette, faMapMarkerAlt, faBookmark, faTags, faEdit);
 
 
 const store = configStore();
@@ -43,6 +45,7 @@ firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     store.dispatch(login(user.uid, user.displayName, user.photoURL));
     store.dispatch(startSetNotes());
+    store.dispatch(startSetTags());
 
     renderApp();
     if (history.location.pathname === '/') {

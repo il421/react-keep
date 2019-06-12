@@ -1,6 +1,9 @@
 import database from '../firebase/firebase';
+const initDocumentRef = (uid) => {
+  const USERS_NOTES_DATABASE = 'users';
+  return database.collection(USERS_NOTES_DATABASE).doc(uid).collection('notes');
+};
 
-const USERS_NOTES_DATABASE = 'users';
 
 export const setNotes = (notes) => ({
   type: 'SET_NOTES',
@@ -23,12 +26,18 @@ export const updateNote = ( id, updates ) => ({
   updates
 });
 
+export const toggleImportance = ( id ) => ({
+  type: 'TOGGLE_IMPORTANCE',
+  id,
+});
+
 export const startSetNotes = () => {
   return (dispatch, getState) => {
     const notes = [];
     const uid = getState().auth.uid;
+    const docRef = initDocumentRef(uid);
 
-    database.collection(USERS_NOTES_DATABASE).doc(uid).collection('notes').get()
+    docRef.get()
       .then((snapshot) => {
         snapshot.forEach((doc) => {
           if(doc.exists) {
@@ -47,26 +56,28 @@ export const startSetNotes = () => {
 };
 
 export const startAddExpense = (noteData = {}) => {
-  return (dispatch, getState) => {
+  return async (dispatch, getState) => {
     const uid = getState().auth.uid;
     const {
       title = '',
       text = '',
       color = '#fff',
       createAt = 0,
+      important = false,
+      tags = [],
     } = noteData;
 
-    const note = { title, text, color, createAt };
+    const note = { title, text, color, createAt, important, tags };
 
-    database.collection(USERS_NOTES_DATABASE).doc(uid).collection('notes').add(note)
-      .then((docRef) => {
-        dispatch(addNote({
-          id: docRef.id,
-          ...note
-        }));
-      }).catch((error) => {
-        console.log('Error writing document: ', error);
-      });
+    try {
+      const docRef = await initDocumentRef(uid).add(note);
+      dispatch(addNote({
+        id: docRef.id,
+        ...note
+      }));
+    } catch (e) {
+      console.log(e);
+    }
   };
 };
 
@@ -74,11 +85,44 @@ export const startRemoveNote = (id) => {
   return async (dispatch, getState) => {
     const uid = getState().auth.uid;
 
-    const ref = database.collection(USERS_NOTES_DATABASE).doc(uid).collection('notes');
-
+    const docRef = initDocumentRef(uid);
     try {
-      await ref.doc(id).delete();
       dispatch(removeNote(id));
+      await docRef.doc(id).delete();
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};
+
+export const startUpdateNote = (id, updates) => {
+  return async (dispatch, getState) => {
+    const uid = getState().auth.uid;
+
+    const docRef = initDocumentRef(uid);
+    try {
+      dispatch(updateNote(id, updates));
+      await docRef.doc(id).set(updates);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};
+
+export const toggleNoteImportance = (id) => {
+  return async (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    const docRef = initDocumentRef(uid);
+    try {
+      dispatch(toggleImportance(id));
+      const doc = await docRef.doc(id).get();
+      if(doc.exists) {
+        const impValue = doc.data().importance;
+
+        await docRef.doc(id).update({
+          important: !impValue
+        });
+      }
     } catch (e) {
       console.log(e);
     }

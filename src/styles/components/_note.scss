@@ -4,7 +4,7 @@
   justify-content: space-between;
 
   min-height: 120px;
-  margin: $s-size;
+  margin: 1rem;
 
   box-shadow: 0 1px 1px 0 rgba(65,69,73,0.3), 0 1px 3px 1px rgba(65,69,73,0.15);
   word-break: break-word;
@@ -16,14 +16,16 @@
 
 .note__title,
 .note__text {
-  margin-bottom: $s-size;
-
   font-size: $font-size-small;
   line-height: 2rem;
 }
 
+.note__text {
+  padding: $s-size 0;
+}
+
 .note__title {
-  margin: $m-size 0;
+  margin-top: $m-size;
 
   font-size: $font-size-large;
   font-weight: bold;
@@ -36,6 +38,60 @@
 
 .note__remove-btn:hover {
   opacity: 0.3;
+}
+
+.note--important {
+  color: $varmillion;
+}
+
+.note--casual {
+  color: $black;
+}
+
+.note__confirm {
+  padding: $l-size;
+
+  background-color: $fresh;
+  font-size: $font-size-large;
+  font-size: $white;
+}
+
+.note__date {
+  width: 50%;
+}
+
+.note__details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.note__tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+}
+
+.note__tags div {
+  margin: calc(#{$s-size} / 3);
+  padding: calc(#{$s-size} / 3);
+
+  background-color: $grey-light;
+  border-radius: 5px;
+  color: $white;
+}
+
+
+.note__confirm div:first-child {
+  margin-bottom: $l-size;
+}
+
+.note__confirm div:last-child {
+  display: flex;
+  justify-content: space-between;
+}
+
+.note__confirm button {
+  width: 45%;
 }
 
 @media (min-width: $tablet-widths) {

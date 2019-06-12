@@ -1,7 +1,6 @@
 import React from 'react';
-import AddNote from './AddNote';
-import NotesList from './NotesList';
-// import Footer from './Footer';
+import AddNote from './note/AddNote';
+import NotesList from './note/NotesList';
 
 const DashboardPage = () => (
   <div className="content-container--flex">

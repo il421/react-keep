@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { startLogout } from '../actions/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faBars, faSignOutAlt, faTimes } from '@fortawesome/free-solid-svg-icons'
-import SideNav from 'react-simple-sidenav';
+import SideBar from 'react-simple-sidenav';
 import Search from './Search';
+import Tags from './note/Tags';
 
 export const Header = ({ startLogout, auth }) => {
-  let [ showNav, onSetSidebarOpen ] = useState(false);
+  let [ showNav, toggleSidebarDisplay ] = useState(false);
   const sidenavStyles = {
     title: {
       backgroundColor: '#4abdac',
@@ -26,21 +26,28 @@ export const Header = ({ startLogout, auth }) => {
       <div className="content-container">
         <div className="header__content">
           <div className="header__sidebar sidebar">
-            <button className="button--sidenav" onClick={() => onSetSidebarOpen(showNav = true)}>
+
+            <button className="button--sidenav" onClick={() => toggleSidebarDisplay(showNav = true)}>
               <FontAwesomeIcon icon="bars" size="3x" />
             </button>
-            <SideNav
+
+            <SideBar
               showNav={ showNav }
-              onHideNav={() => onSetSidebarOpen(showNav = false)}
+              onHideNav={() => toggleSidebarDisplay(showNav = false)}
               navStyle={ sidenavStyles.nav }
               titleStyle={ sidenavStyles.title }
-              items={[]}
-              title={
-                <button className="button--sidenav" onClick={() => onSetSidebarOpen(showNav = false)}>
-                  <FontAwesomeIcon icon="times" size="1x" />
-                </button>
-              }
-            />
+            >
+              <div className="sidebar">
+                <div className="sidebar__close">
+                  <button className="button--sidenav" onClick={() => toggleSidebarDisplay(showNav = false)}>
+                    <FontAwesomeIcon icon="times" size="3x" />
+                  </button>
+                </div>
+
+                <Tags toggleSidebarDisplay={() => toggleSidebarDisplay(showNav = false)} />
+              </div>
+            </SideBar>
+
           </div>
           <Link to="/dashboard">
             <h1 className="header__title">Keep Me</h1>

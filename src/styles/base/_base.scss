@@ -8,7 +8,7 @@ html {
 
 body {
   font-family: Helvetica, Arial sans-serif;
-  font-size: $m-size;
+  font-size: $font-size-small;
   line-height: 1.6
 }
 
@@ -17,6 +17,20 @@ button:disabled {
   opacity: .5;
 }
 
+button:focus,
+input:focus {
+  outline: none!important;
+}
+
 .pointer {
   cursor: pointer;
 }
+
+.modal-overlay {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  background-color: rgba(0, 0, 0, 0.4);
+  transition: none 0s ease 0s;}

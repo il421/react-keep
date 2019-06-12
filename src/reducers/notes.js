@@ -1,13 +1,13 @@
 // Expenses Reducer
-const expensesReducerDefaultState = [];
+const notesReducerDefaultState = [];
 
-export default (state = expensesReducerDefaultState, action) => {
+export default (state = notesReducerDefaultState, action) => {
   switch (action.type) {
   case 'ADD_NOTE':
     return [action.note, ...state];
 
   case 'SET_NOTES':
-    return action.notes
+    return action.notes;
 
   case 'REMOVE_NOTE':
     return state.filter((note) => note.id !== action.id);
@@ -22,6 +22,14 @@ export default (state = expensesReducerDefaultState, action) => {
       } else {
         return note;
       }
+    });
+
+  case 'TOGGLE_IMPORTANCE':
+    return state.map((note) => {
+      if (note.id === action.id) {
+        note.important = !note.important;
+      }
+      return note;
     });
 
   default:

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { startAddExpense } from '../actions/notes';
+import { startAddExpense } from '../../actions/notes';
 
 import NoteForm from './NoteForm';
 

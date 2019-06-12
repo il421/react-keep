@@ -2,7 +2,8 @@
   position: relative;
 }
 
-.options__color {
+.options__color,
+.options__tags {
   position: relative;
 
   padding: 10px;
@@ -15,4 +16,8 @@
 
   justify-content: space-between;
   align-items: center;
+}
+
+.options__tags:hover .tags-selection {
+  display: block;
 }

@@ -1,9 +1,8 @@
 import React from 'react';
 import Modal from 'react-modal';
 import NoteForm from './NoteForm';
-import { updateNote } from '../actions/notes';
+import { startUpdateNote } from '../../actions/notes';
 import {connect} from 'react-redux';
-// import uuid from 'uuid/v4';
 
 export class UpdateNote extends React.Component {
   constructor(props) {
@@ -14,8 +13,8 @@ export class UpdateNote extends React.Component {
   }
 
   updateEditedNote = (id, note) => {
-    const { updateNote, removeSelectedNote } = this.props;
-    updateNote(id, note);
+    const { startUpdateNote, removeSelectedNote } = this.props;
+    startUpdateNote(id, note);
     removeSelectedNote();
   }
 
@@ -55,7 +54,7 @@ export class UpdateNote extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  updateNote: (id, note) => dispatch(updateNote(id, note))
+  startUpdateNote: (id, note) => dispatch(startUpdateNote(id, note))
 });
 
 export default connect(undefined, mapDispatchToProps)(UpdateNote);
