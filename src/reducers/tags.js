@@ -17,7 +17,7 @@ export default (state = tagsReducerDefaultState, action) => {
       if (tag.id === action.id) {
         return {
           ...tag,
-          ...action.updates
+          value: action.update
         };
       } else {
         return tag;

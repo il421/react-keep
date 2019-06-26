@@ -26,36 +26,46 @@ export const updateNote = ( id, updates ) => ({
   updates
 });
 
-export const toggleImportance = ( id ) => ({
+export const changeImportance = ( id ) => ({
   type: 'TOGGLE_IMPORTANCE',
   id,
 });
 
-export const startSetNotes = () => {
-  return (dispatch, getState) => {
+export const removeTag = (id) => ({
+  type: 'REMOVE_TAG_FROM_NOTES',
+  id,
+});
+
+export const updateTag = (id, update) => ({
+  type: 'UPDATE_NOTES_TAG',
+  id,
+  update,
+});
+
+
+export const handleSetNotes = () => {
+  return async (dispatch, getState) => {
     const notes = [];
     const uid = getState().auth.uid;
     const docRef = initDocumentRef(uid);
 
-    docRef.get()
-      .then((snapshot) => {
-        snapshot.forEach((doc) => {
-          if(doc.exists) {
-            notes.push({id: doc.id, ...doc.data()});
-          } else {
-            console.log('No such document!');
-          }
-        });
-
-        dispatch(setNotes(notes));
-      })
-      .catch((error) => {
-        console.log(error);
+    try {
+      const snapshot = await docRef.get();
+      snapshot.forEach((doc) => {
+        if(doc.exists) {
+          notes.push({id: doc.id, ...doc.data()});
+        } else {
+          console.log('No such document!');
+        }
       });
+      dispatch(setNotes(notes));
+    } catch (e) {
+      console.log(e);
+    }
   };
 };
 
-export const startAddExpense = (noteData = {}) => {
+export const handleAddENote = (noteData = {}) => {
   return async (dispatch, getState) => {
     const uid = getState().auth.uid;
     const {
@@ -81,7 +91,7 @@ export const startAddExpense = (noteData = {}) => {
   };
 };
 
-export const startRemoveNote = (id) => {
+export const handleRemoveNote = (id) => {
   return async (dispatch, getState) => {
     const uid = getState().auth.uid;
 
@@ -95,7 +105,7 @@ export const startRemoveNote = (id) => {
   };
 };
 
-export const startUpdateNote = (id, updates) => {
+export const handleUpdateNote = (id, updates) => {
   return async (dispatch, getState) => {
     const uid = getState().auth.uid;
 
@@ -109,12 +119,14 @@ export const startUpdateNote = (id, updates) => {
   };
 };
 
-export const toggleNoteImportance = (id) => {
+export const changeNoteImportance = (id) => {
   return async (dispatch, getState) => {
     const uid = getState().auth.uid;
     const docRef = initDocumentRef(uid);
+
     try {
-      dispatch(toggleImportance(id));
+      dispatch(changeImportance(id));
+
       const doc = await docRef.doc(id).get();
       if(doc.exists) {
         const impValue = doc.data().importance;
@@ -123,6 +135,60 @@ export const toggleNoteImportance = (id) => {
           important: !impValue
         });
       }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};
+
+export const removeTagFromNotes = (id) => {
+  return async (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    const docRef = initDocumentRef(uid);
+
+    dispatch(removeTag(id));
+
+    try {
+      const snapshot = await docRef.get();
+      snapshot.forEach(async (doc) => {
+        if(doc.exists) {
+          let data = doc.data();
+
+          let updatedTags = data.tags.filter((tag) => tag.id !== id);
+          await docRef.doc(doc.id).update({
+            tags: updatedTags
+          });
+        }
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};
+
+export const updateNotesTag = (id, update) => {
+  return async (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    const docRef = initDocumentRef(uid);
+
+    dispatch(updateTag(id, update));
+
+    try {
+      const snapshot = await docRef.get();
+      snapshot.forEach(async (doc) => {
+        if(doc.exists) {
+          let data = doc.data();
+          let tags = data.tags;
+
+          if (tags.some(tag => tag.id === id)) {
+            tags.find(tag => tag.id === id).value = update;
+
+            await docRef.doc(doc.id).update({
+              tags
+            });
+          }
+        }
+      });
     } catch (e) {
       console.log(e);
     }

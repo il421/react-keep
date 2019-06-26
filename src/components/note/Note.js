@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Note = ({
   title, text, createAt, color, id, important, tags,
-  startRemoveNote, selectNote, toggleNoteImportance,
+  handleRemoveNote, selectNote, changeNoteImportance,
   confirmDelete, toggleConfirmDelete
 }) => {
 
@@ -20,7 +20,7 @@ const Note = ({
           <div
             className={ important ? 'note--important pointer' : 'note--casual pointer' }
             onClick={(evt) => {
-              toggleNoteImportance(id);
+              changeNoteImportance(id);
               evt.stopPropagation();
             }
             }>
@@ -70,7 +70,7 @@ const Note = ({
           <div>Do you want to delete this note?</div>
           <div>
             <button className="button" onClick={() => {
-              startRemoveNote(id);
+              handleRemoveNote(id);
               toggleConfirmDelete();
             }}>Yep</button>
             <button className="button button--secondary" onClick={() => { toggleConfirmDelete(); }}>Nope</button>

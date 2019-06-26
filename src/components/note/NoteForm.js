@@ -14,8 +14,8 @@ export class NoteForm extends React.Component {
       text: props.note ? props.note.text : '',
       createAt: props.note ? moment(props.note.createAt) : moment(),
       color: props.note ? props.note.color : '#fff',
-      important: props.important ? props.note.important : false,
-      tags: props.tags ? props.note.tags : []
+      important: props.note ? props.note.important : false,
+      tags: props.note ? props.note.tags : []
     };
   }
 
@@ -83,6 +83,7 @@ export class NoteForm extends React.Component {
       text: '',
       createAt: moment(),
       color: '#fff',
+      tags: []
     };
 
     this.setState(defaultNoteState);
@@ -133,7 +134,8 @@ export class NoteForm extends React.Component {
                 {
                   this.props.userTags.length > 0 && (
                     <TagsSelection
-                      tags={ this.props.userTags }
+                      tags={ this.state.tags }
+                      userTags={ this.props.userTags }
                       handleInputChange={ this.handleInputChange }
                       name={ this.props.name }
                     />

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { startAddExpense } from '../../actions/notes';
+import { handleAddENote } from '../../actions/notes';
 
 import NoteForm from './NoteForm';
 
@@ -12,8 +12,8 @@ export class AddNote extends React.Component {
     };
   }
   addNewNote = (note) => {
-    const { startAddExpense } = this.props;
-    startAddExpense(note);
+    const { handleAddENote } = this.props;
+    handleAddENote(note);
   }
 
   changeNoteColor = (color) => {
@@ -34,7 +34,7 @@ export class AddNote extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  startAddExpense: (note) => dispatch(startAddExpense(note))
+  handleAddENote: (note) => dispatch(handleAddENote(note))
 }
 );
 

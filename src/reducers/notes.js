@@ -32,6 +32,20 @@ export default (state = notesReducerDefaultState, action) => {
       return note;
     });
 
+  case 'REMOVE_TAG_FROM_NOTES':
+    return state.map((note) => {
+      note.tags = note.tags.filter((tag) => tag.id !== action.id);
+      return note;
+    });
+
+  case 'UPDATE_NOTES_TAG':
+    return state.map((note) => {
+      if (note.tags.some(tag => tag.id === action.id)) {
+        note.tags.find(tag => tag.id === action.id).value = action.update;
+      }
+      return note;
+    });
+
   default:
     return state;
   }

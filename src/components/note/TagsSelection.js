@@ -1,24 +1,17 @@
 import React from 'react';
 
 export default class TagsSelection extends React.Component {
-  checked = [];
 
-  // need to solve the problem with fetching checked, updating, removing tags
-  componentDidMount() {
-    for (let i = 0; i < this.props.tags.length; i++) {
-      this.checked.push(false);
-    }
+  handleInputChange = (evt) => {
+    const { checked, value } = evt.target;
+    this.props.handleInputChange(checked, value);
   }
 
-  handleInputChange = (id, index) => {
-    this.checked[index] = !this.checked[index];
-    this.props.handleInputChange(this.checked[index], id);
-  }
-
-  uncheckedAllInputs = () => {
-    for (let i = 0; i < this.checked.length; i++) {
-      this.checked[i] = false;
+  checkInputs = (tags, id) => {
+    if (tags.some((tag) => tag.id === id)) {
+      return true;
     }
+    return false;
   }
 
   render() {
@@ -26,18 +19,18 @@ export default class TagsSelection extends React.Component {
       <div className="tags-selection">
         <div className="tags-selection__options">
           {
-            this.props.tags.length > 0 && (
-              this.props.tags.map((tag, index) => (
+            this.props.userTags.length > 0 && (
+              this.props.userTags.map((tag, index) => (
                 <div key={ index } className="tags-selection__option">
                   <input
-                    ref={ index + this.props.name }
-                    id={ tag.id }
+                    ref={ tag.id + this.props.name }
+                    id={ tag.id + this.props.name }
                     type="checkbox"
                     value={ tag.id }
-                    onChange={ () => this.handleInputChange(tag.id, index) }
-                    defaultChecked={ this.checked[index] }
+                    onChange={ this.handleInputChange }
+                    checked={ this.checkInputs(this.props.tags, tag.id) }
                   />
-                  <label htmlFor={ tag.id }></label>
+                  <label htmlFor={ tag.id + this.props.name }></label>
                   <div>{ tag.value }</div>
                 </div>
               ))
@@ -47,4 +40,4 @@ export default class TagsSelection extends React.Component {
       </div>
     );
   }
-};
+}

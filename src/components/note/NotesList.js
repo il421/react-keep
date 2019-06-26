@@ -2,7 +2,7 @@ import React from 'react';
 import Note from './Note';
 import UpdateNote from './UpdateNote';
 import { connect } from 'react-redux';
-import { startRemoveNote, toggleNoteImportance } from '../../actions/notes';
+import { handleRemoveNote, changeNoteImportance } from '../../actions/notes';
 
 
 export class NotesList extends React.Component {
@@ -43,8 +43,8 @@ export class NotesList extends React.Component {
                     key={ note.id }
                     { ...note }
                     selectNote={ () => this.selectNote(note) }
-                    startRemoveNote={ this.props.startRemoveNote }
-                    toggleNoteImportance={ this.props.toggleNoteImportance }
+                    handleRemoveNote={ this.props.handleRemoveNote }
+                    changeNoteImportance={ this.props.changeNoteImportance }
                     confirmDelete={ this.state.confirmDelete }
                     toggleConfirmDelete={ this.toggleConfirmDelete }
                   />)
@@ -61,8 +61,8 @@ export class NotesList extends React.Component {
                 key={ note.id }
                 { ...note }
                 selectNote={ () => this.selectNote(note) }
-                startRemoveNote={ this.props.startRemoveNote }
-                toggleNoteImportance={ this.props.toggleNoteImportance }
+                handleRemoveNote={ this.props.handleRemoveNote }
+                changeNoteImportance={ this.props.changeNoteImportance }
                 confirmDelete={ this.state.confirmDelete }
                 toggleConfirmDelete={ this.toggleConfirmDelete }
               />)
@@ -89,8 +89,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  startRemoveNote: (id) => dispatch(startRemoveNote(id)),
-  toggleNoteImportance: (id) => dispatch(toggleNoteImportance(id))
+  handleRemoveNote: (id) => dispatch(handleRemoveNote(id)),
+  changeNoteImportance: (id) => dispatch(changeNoteImportance(id))
 }
 );
 

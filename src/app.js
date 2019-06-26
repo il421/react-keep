@@ -4,8 +4,8 @@ import { Provider } from 'react-redux';
 import AppRouter, { history } from './routers/AppRouter';
 import configStore from './store/configStore';
 import { login, logout } from './actions/auth';
-import { startSetNotes } from './actions/notes';
-import { startSetTags } from './actions/tags';
+import { handleSetNotes } from './actions/notes';
+import { handleSetTags } from './actions/tags';
 
 
 import 'normalize.css/normalize.css';
@@ -44,8 +44,8 @@ ReactDOM.render(<LoadingPage />, document.getElementById('app'));
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     store.dispatch(login(user.uid, user.displayName, user.photoURL));
-    store.dispatch(startSetNotes());
-    store.dispatch(startSetTags());
+    store.dispatch(handleSetNotes());
+    store.dispatch(handleSetTags());
 
     renderApp();
     if (history.location.pathname === '/') {

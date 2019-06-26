@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from 'react-modal';
 import NoteForm from './NoteForm';
-import { startUpdateNote } from '../../actions/notes';
+import { handleUpdateNote } from '../../actions/notes';
 import {connect} from 'react-redux';
 
 export class UpdateNote extends React.Component {
@@ -13,8 +13,8 @@ export class UpdateNote extends React.Component {
   }
 
   updateEditedNote = (id, note) => {
-    const { startUpdateNote, removeSelectedNote } = this.props;
-    startUpdateNote(id, note);
+    const { handleUpdateNote, removeSelectedNote } = this.props;
+    handleUpdateNote(id, note);
     removeSelectedNote();
   }
 
@@ -54,7 +54,7 @@ export class UpdateNote extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  startUpdateNote: (id, note) => dispatch(startUpdateNote(id, note))
+  handleUpdateNote: (id, note) => dispatch(handleUpdateNote(id, note))
 });
 
 export default connect(undefined, mapDispatchToProps)(UpdateNote);
