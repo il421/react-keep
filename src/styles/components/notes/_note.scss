@@ -53,15 +53,12 @@
 
   background-color: $fresh;
   font-size: $font-size-large;
-  font-size: $white;
-}
-
-.note__date {
-  width: 50%;
+  color: $white;
 }
 
 .note__details {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
 }
 

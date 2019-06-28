@@ -34,7 +34,7 @@ export default (state = notesReducerDefaultState, action) => {
 
   case 'REMOVE_TAG_FROM_NOTES':
     return state.map((note) => {
-      note.tags = note.tags.filter((tag) => tag.id !== action.id);
+      note.tags = note.tags.filters((tag) => tag.id !== action.id);
       return note;
     });
 

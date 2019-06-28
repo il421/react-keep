@@ -5,7 +5,7 @@ import { startLogout } from '../actions/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SideBar from 'react-simple-sidenav';
 import Search from './Search';
-import Tags from './note/Tags';
+import Tags from './tags/Tags';
 
 export const Header = ({ startLogout, auth }) => {
   let [ showNav, toggleSidebarDisplay ] = useState(false);
@@ -49,9 +49,9 @@ export const Header = ({ startLogout, auth }) => {
             </SideBar>
 
           </div>
-          <Link to="/dashboard">
+          <div>
             <h1 className="header__title">Keep Me</h1>
-          </Link>
+          </div>
           <div className="header__search">
             <Search />
           </div>

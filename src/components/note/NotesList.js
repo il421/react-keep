@@ -3,6 +3,7 @@ import Note from './Note';
 import UpdateNote from './UpdateNote';
 import { connect } from 'react-redux';
 import { handleRemoveNote, changeNoteImportance } from '../../actions/notes';
+import getFilteredNotes from '../../libs/filters';
 
 
 export class NotesList extends React.Component {
@@ -84,14 +85,15 @@ export class NotesList extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    notes: state.notes
+    notes: getFilteredNotes(state.notes, state.filters.search, state.filters.tagFilters)
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  handleRemoveNote: (id) => dispatch(handleRemoveNote(id)),
-  changeNoteImportance: (id) => dispatch(changeNoteImportance(id))
-}
+const mapDispatchToProps = (dispatch) => (
+  {
+    handleRemoveNote: (id) => dispatch(handleRemoveNote(id)),
+    changeNoteImportance: (id) => dispatch(changeNoteImportance(id))
+  }
 );
 
 export default connect(mapStateToProps, mapDispatchToProps)(NotesList);

@@ -1,9 +1,14 @@
 import React, { Component, createRef } from 'react';
+import {connect} from 'react-redux';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Modal from 'react-modal';
+
 import { handleAddTag, handleRemoveTag, handleUpdateTag } from '../../actions/tags';
 import { removeTagFromNotes, updateNotesTag } from '../../actions/notes';
-import {connect} from 'react-redux';
+
+import TagsList from './TagsList';
+
 // import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 export class Tags extends Component{
@@ -73,10 +78,13 @@ export class Tags extends Component{
   render() {
     return (
       <div className="tags">
-        <div className="tags__filters"></div>
         <div className="tags__add-edit pointer">
           <FontAwesomeIcon icon="edit" size="2x" />
           <button onClick={ this.toggleEditTags } className="button--link">Add/Edit Tags</button>
+        </div>
+
+        <div className="tags__filters">
+          <TagsList userTags={ this.props.tags } name={ 'list' } />
         </div>
 
         <Modal

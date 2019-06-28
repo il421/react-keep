@@ -1,22 +1,25 @@
 @import 'base/variables';
 @import './base/base';
-@import './components/box-layout';
-@import './components/button';
-@import './components/header';
-@import './components/content-conteiner';
-@import './components/visibility';
-@import './components/loader';
-@import './components/user-box';
-@import './components/search';
-@import './components/create';
-@import './components/notes';
-@import './components/note';
-@import './components/form';
-@import './components/footer';
-@import './components/options';
-@import './components/color_box';
-@import 'components/tags-selection';
-@import 'components/note-modal';
-@import 'components/sidebar';
-@import 'components/tags';
+
+@import 'components/common/box-layout';
+@import 'components/common/button';
+@import 'components/common/content-conteiner';
+@import 'components/common/visibility';
+@import 'components/common/loader';
+@import 'components/common/sidebar';
+
+@import 'components/header/header';
+@import 'components/header/user-box';
+@import 'components/header/search';
+
+@import 'components/notes/create';
+@import 'components/notes/notes';
+@import 'components/notes/note';
+@import 'components/notes/form';
+@import 'components/notes/color_box';
+@import 'components/notes/note-modal';
+
+@import 'components/tags/tags-selection';
+@import 'components/tags/tags';
+@import 'components/tags/tags-list';
 

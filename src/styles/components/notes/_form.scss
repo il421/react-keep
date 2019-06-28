@@ -54,3 +54,27 @@
 .form__actions button:last-child {
   margin-left: $s-size;
 }
+
+.options {
+  position: relative;
+}
+
+.options__color,
+.options__tags {
+  position: relative;
+
+  padding: 10px;
+}
+
+.options__color:hover .color-box {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.options__tags:hover .tags-selection {
+  display: block;
+}

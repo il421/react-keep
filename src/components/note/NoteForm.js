@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ColorBox from './ColorBox';
-import TagsSelection from './TagsSelection';
+import TagsSelection from '../tags/TagsSelection';
 import ContentEditable from 'react-contenteditable';
 
 export class NoteForm extends React.Component {
@@ -44,7 +44,7 @@ export class NoteForm extends React.Component {
     } else {
       // delete tag
       this.setState((prevState) => ({
-        tags: prevState.tags.filter((tag) => tag.id !== id)
+        tags: prevState.tags.filters((tag) => tag.id !== id)
       }));
     }
   }

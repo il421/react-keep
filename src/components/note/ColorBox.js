@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class ColorBox extends React.Component {
+export class ColorBox extends React.Component {
   colors = [
     {
       label: 'white',
@@ -40,6 +40,16 @@ export default class ColorBox extends React.Component {
     {
       label: 'orange',
       value: '#fbbc04',
+      default: false
+    },
+    {
+      label: 'bark-blue',
+      value: '#0076b4',
+      default: false
+    },
+    {
+      label: 'purple',
+      value: '#b448ae',
       default: false
     }
   ];
@@ -84,3 +94,4 @@ export default class ColorBox extends React.Component {
     );
   }
 }
+export default ColorBox;

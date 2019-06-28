@@ -7,7 +7,6 @@ import NotFoundPage from '../components/NotFoundPage';
 import PrivateRouter from './PrivateRouter';
 import PublicRouter from './PublicRouter';
 
-//can access history everythere
 export const history = createBrowserHistory();
 
 const AppRouter = () => (
