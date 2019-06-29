@@ -88,6 +88,7 @@ export class NoteForm extends React.Component {
 
     this.setState(defaultNoteState);
     this.onColorChange(defaultNoteState.color);
+    this.props.displayNoteForm(false);
   }
 
   closeUpdateForm = () => {
@@ -156,7 +157,7 @@ export class NoteForm extends React.Component {
                 className="button--link pointer"
                 onClick={ this.props.note ? this.closeUpdateForm : this.cleanForm }
               >
-                { this.props.note ? 'Close' : 'Clean' }
+                Close
               </button>
             </div>
           </div>

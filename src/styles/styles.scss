@@ -7,12 +7,13 @@
 @import 'components/common/visibility';
 @import 'components/common/loader';
 @import 'components/common/sidebar';
+@import 'components/common/dashboard';
 
 @import 'components/header/header';
 @import 'components/header/user-box';
 @import 'components/header/search';
 
-@import 'components/notes/create';
+@import 'components/notes/note-form';
 @import 'components/notes/notes';
 @import 'components/notes/note';
 @import 'components/notes/form';

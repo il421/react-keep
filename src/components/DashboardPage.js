@@ -3,7 +3,7 @@ import AddNote from './note/AddNote';
 import NotesList from './note/NotesList';
 
 const DashboardPage = () => (
-  <div className="content-container--flex">
+  <div className="dashboard">
     <AddNote className="content-container" />
     <NotesList />
   </div>

@@ -1,6 +1,6 @@
 .tags__modal {
   min-width: 300px;
-  max-height: auto;
+  max-height: 100%;
   padding: $s-size;
 
   font-size: $font-size-small;
@@ -13,6 +13,10 @@
 .tags__title {
   text-align: center;
   font-size: $font-size-large;
+}
+
+.tags__add-edit {
+  text-align: center;
 }
 
 .tags__add {

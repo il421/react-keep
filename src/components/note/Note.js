@@ -12,13 +12,13 @@ const Note = ({
   return (
     <>
       <div
-        className="note content-container"
+        className="note"
         style={{ backgroundColor: color }}
         onClick={ () => selectNote({ title, text, createAt, color, id }) }
       >
-        <div className="note__wrapper">
+        <div className="note__actions actions">
           <div
-            className={ important ? 'note--important pointer' : 'note--casual pointer' }
+            className={ important ? 'actions--important pointer' : 'actions--casual pointer' }
             onClick={(evt) => {
               changeNoteImportance(id);
               evt.stopPropagation();
@@ -26,7 +26,7 @@ const Note = ({
             }>
             <FontAwesomeIcon icon="bookmark" size="2x" />
           </div>
-          <div className="pointer note__remove-btn" onClick={
+          <div className="actions__remove-btn pointer" onClick={
             (evt) => {
               evt.stopPropagation();
               toggleConfirmDelete();
@@ -36,16 +36,16 @@ const Note = ({
           </div>
         </div>
 
-        <div>
+        <div className="note__content content">
           {
-            title.trim() !== '' && <div className="note__title">{ title }</div>
+            title.trim() !== '' && <div className="content__title">{ title }</div>
           }
-          <div className="note__text">{ text }</div>
+          <div className="content__text">{ text }</div>
         </div>
 
-        <div className="note__details">
-          <div className='note__date'>{ moment(createAt).format('MMMM Do, YYYY') }</div>
-          <div className='note__tags'>
+        <div className="note__details details">
+          <div className='details__date'>{ moment(createAt).format('MMMM Do, YYYY') }</div>
+          <div className='details__tags'>
             {
               tags.length > 0 && (
                 tags.map((tag, index) => (

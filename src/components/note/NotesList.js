@@ -36,7 +36,7 @@ export class NotesList extends React.Component {
       <>
         {
           this.props.notes.some((note) => note.important) && (
-            <div className="notes content-container">
+            <div className="notes">
               { this.props.notes.length > 0 &&
               this.props.notes.map((note) => (
                 note.important && (
@@ -54,7 +54,7 @@ export class NotesList extends React.Component {
           )
         }
 
-        <div className="notes content-container">
+        <div className="notes">
           { this.props.notes.length > 0 &&
           this.props.notes.map((note) => (
             !note.important && (

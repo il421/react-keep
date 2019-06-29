@@ -35,7 +35,7 @@ export class UpdateNote extends React.Component {
         {
           this.props.selectedNote !== undefined &&
           <div
-            className="create content-container"
+            className="note-form content-container"
             style={{ backgroundColor: this.state.color }}
           >
             <NoteForm

@@ -78,13 +78,14 @@ export class Tags extends Component{
   render() {
     return (
       <div className="tags">
-        <div className="tags__add-edit pointer">
-          <FontAwesomeIcon icon="edit" size="2x" />
-          <button onClick={ this.toggleEditTags } className="button--link">Add/Edit Tags</button>
-        </div>
 
         <div className="tags__filters">
           <TagsList userTags={ this.props.tags } name={ 'list' } />
+        </div>
+
+        <div className="tags__add-edit pointer">
+          <FontAwesomeIcon icon="edit" size="2x" />
+          <button onClick={ this.toggleEditTags } className="button--link">Add/Edit Tags</button>
         </div>
 
         <Modal

@@ -2,11 +2,3 @@
   margin: 0 auto;
   padding: $s-size;
 }
-
-.content-container--flex {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  //height: calc(100vh - #{$header-height});
-}
