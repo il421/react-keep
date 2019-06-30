@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import AppRouter, { history } from './routers/AppRouter';
 import configStore from './store/configStore';
+
 import { login, logout } from './actions/auth';
 import { handleSetNotes } from './actions/notes';
 import { handleSetTags } from './actions/tags';

@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -16,6 +17,7 @@ module.exports = (env) => {
   const minCssExtract = new MiniCssExtractPlugin({
     filename: 'style.css',
   });
+  const BundleAnalyzer = new BundleAnalyzerPlugin();
 
   return {
     entry: ['@babel/polyfill', './src/app.js'],
@@ -73,6 +75,7 @@ module.exports = (env) => {
     },
     plugins: [
       minCssExtract,
+      // BundleAnalyzer,
       new webpack.DefinePlugin({
         'process.env.FIREBASE_API_KEY': JSON.stringify(process.env.FIREBASE_API_KEY),
         'process.env.FIREBASE_AUTH_DOMAIN': JSON.stringify(process.env.FIREBASE_AUTH_DOMAIN),
@@ -87,6 +90,9 @@ module.exports = (env) => {
       contentBase: path.join(__dirname, 'public'),
       historyApiFallback: true,
       publicPath: '/dist/'
+    },
+    performance: {
+      hints: false
     }
   };
 };
