@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -17,7 +17,7 @@ module.exports = (env) => {
   const minCssExtract = new MiniCssExtractPlugin({
     filename: 'style.css',
   });
-  const BundleAnalyzer = new BundleAnalyzerPlugin();
+  // const BundleAnalyzer = new BundleAnalyzerPlugin();
 
   return {
     entry: ['@babel/polyfill', './src/app.js'],
