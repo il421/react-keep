@@ -8,7 +8,7 @@
     "build-prod": "webpack -p --env production",
     "start": "webpack-dev-server",
     "test": "cross-env NODE_ENV=test jest --config=jest.config.json",
-    "release": "release-it --github.release --no-npm.publish",
+    "release": "release-it --github.release --no-npm.publish --no-git.requireUpstream",
     "deploy": "yarn run build-prod && firebase deploy"
   },
   "author": "Ilya Suglobov",
