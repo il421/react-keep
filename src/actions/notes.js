@@ -97,7 +97,7 @@ export const handleRemoveNote = (id) => {
 
     const docRef = initDocumentRef(uid);
     try {
-      dispatch(removeNote(id));
+      await dispatch(removeNote(id));
       await docRef.doc(id).delete();
     } catch (e) {
       console.log(e);
@@ -154,10 +154,12 @@ export const removeTagFromNotes = (id) => {
         if(doc.exists) {
           let data = doc.data();
 
-          let updatedTags = data.tags.filters((tag) => tag.id !== id);
-          await docRef.doc(doc.id).update({
-            tags: updatedTags
-          });
+          if (data.tags.length > 0) {
+            let updatedTags = data.tags.filter((tag) => tag.id !== id);
+            await docRef.doc(doc.id).update({
+              tags: updatedTags
+            });
+          }
         }
       });
     } catch (e) {

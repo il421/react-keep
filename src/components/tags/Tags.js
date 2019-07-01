@@ -9,8 +9,6 @@ import { removeTagFromNotes, updateNotesTag } from '../../actions/notes';
 
 import TagsList from './TagsList';
 
-// import { CSSTransition, TransitionGroup } from 'react-transition-group';
-
 export class Tags extends Component{
   constructor(props) {
     super(props);
@@ -25,11 +23,10 @@ export class Tags extends Component{
   }
 
   toggleEditTags = () => {
-    this.props.toggleSidebarDisplay();
-
     this.setState((prevState) => ({
       displayEditTags: !prevState.displayEditTags
     }));
+    this.props.hideSidebar();
   }
 
   onTagChange = (evt) => {
@@ -145,7 +142,7 @@ export class Tags extends Component{
                               <FontAwesomeIcon icon="edit" size="1x" />
                             </div>
                             <div className="tags__name">{ tag.value }</div>
-                            <div className="pointer" onClick={ () => this.removeTag(tag.id) }>
+                            <div className="pointer" onClick={ () => {this.removeTag(tag.id)} }>
                               <FontAwesomeIcon icon="times" size="1x" />
                             </div>
                           </>

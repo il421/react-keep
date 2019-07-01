@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import SideBar from 'react-simple-sidenav';
+
 import { startLogout } from '../actions/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import SideBar from 'react-simple-sidenav';
+
 import Search from './Search';
 import Tags from './tags/Tags';
 
@@ -21,30 +22,37 @@ export const Header = ({ startLogout, auth }) => {
     }
   };
 
+  const showSidebar = () => {
+    toggleSidebarDisplay(showNav = true);
+  }
+
+  const hideSidebar = () => {
+    toggleSidebarDisplay(showNav = false);
+  }
+
   return (
-    <header className="header">
+    <header className="header" onClick={(evt) => evt.stopPropagation()}>
       <div className="content-container">
         <div className="header__content">
           <div className="header__sidebar sidebar">
 
-            <button className="button--sidenav" onClick={() => toggleSidebarDisplay(showNav = true)}>
+            <button className="button--sidenav" onClick={() => showSidebar()}>
               <FontAwesomeIcon icon="bars" size="3x" />
             </button>
 
             <SideBar
               showNav={ showNav }
-              onHideNav={() => toggleSidebarDisplay(showNav = false)}
               navStyle={ sidenavStyles.nav }
               titleStyle={ sidenavStyles.title }
             >
               <div className="sidebar">
                 <div className="sidebar__close">
-                  <button className="button--sidenav" onClick={() => toggleSidebarDisplay(showNav = false)}>
+                  <button className="button--sidenav" onClick={() => hideSidebar()}>
                     <FontAwesomeIcon icon="times" size="3x" />
                   </button>
                 </div>
 
-                <Tags toggleSidebarDisplay={() => toggleSidebarDisplay(showNav = false)} />
+                <Tags hideSidebar={() => hideSidebar()} />
               </div>
             </SideBar>
 

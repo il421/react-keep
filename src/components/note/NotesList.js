@@ -4,13 +4,15 @@ import UpdateNote from './UpdateNote';
 import { connect } from 'react-redux';
 import { handleRemoveNote, changeNoteImportance } from '../../actions/notes';
 import getFilteredNotes from '../../libs/filters';
+import Modal from 'react-modal';
 
 
 export class NotesList extends React.Component {
 
   state = {
     selectedNote: undefined,
-    confirmDelete: false
+    confirmDelete: false,
+    shouldBeDeletedId: null
   };
 
   selectNote = (note) => {
@@ -25,9 +27,13 @@ export class NotesList extends React.Component {
     }));
   };
 
-  toggleConfirmDelete = () => {
+  toggleConfirmDelete = (id) => {
     this.setState((prevState) => ({
       confirmDelete: !prevState.confirmDelete
+    }));
+
+    this.setState(() => ({
+      shouldBeDeletedId: id
     }));
   };
 
@@ -78,6 +84,26 @@ export class NotesList extends React.Component {
             />
           )
         }
+
+        <Modal
+          isOpen={ this.state.confirmDelete }
+          onRequestClose={ this.toggleConfirmDelete }
+          contentLabel="Selected option"
+          closeTimeoutMS={ 200 }
+          className="note-modal"
+          ariaHideApp={ false }
+        >
+          <div className="note__confirm">
+            <div>Do you want to delete this note?</div>
+            <div>
+              <button className="button" onClick={() => {
+                this.props.handleRemoveNote(this.state.shouldBeDeletedId);
+                this.toggleConfirmDelete();
+              }}>Yep</button>
+              <button className="button button--secondary" onClick={() => { this.toggleConfirmDelete(); }}>Nope</button>
+            </div>
+          </div>
+        </Modal>
       </>
     );
   }

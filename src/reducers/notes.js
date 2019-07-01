@@ -10,6 +10,7 @@ export default (state = notesReducerDefaultState, action) => {
     return action.notes;
 
   case 'REMOVE_NOTE':
+    console.log(action.id)
     return state.filter((note) => note.id !== action.id);
 
   case 'UPDATE_NOTE':
@@ -34,7 +35,9 @@ export default (state = notesReducerDefaultState, action) => {
 
   case 'REMOVE_TAG_FROM_NOTES':
     return state.map((note) => {
-      note.tags = note.tags.filters((tag) => tag.id !== action.id);
+      if (note.tags.length > 0) {
+        note.tags = note.tags.filter((tag) => tag.id !== action.id);
+      }
       return note;
     });
 
