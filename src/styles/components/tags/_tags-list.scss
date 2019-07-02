@@ -14,12 +14,13 @@
 .tags-list__filter {
   position: relative;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
 
   width: 100%;
   height: 30px;
 
   margin-bottom: $l-size;
+  padding-left: 70px;
 
   font-size: $font-size-large;
 
@@ -55,7 +56,7 @@
       transform: rotate(-45deg);
     }
     &:hover::after {
-      opacity: 0.5;
+      opacity: 0;
     }
   }
   input[type=checkbox] {

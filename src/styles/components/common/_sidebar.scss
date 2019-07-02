@@ -1,7 +1,33 @@
 .sidebar {
+  position: fixed;
+
+  width: 300px;
+  height: 100vh;
   padding: $s-size;
+
+  background-color: $fresh;
+
+  transform: translateX(-300px);
+  transition: transform 0.2s linear;
+
+  z-index: 20;
+}
+
+.sidebar--show {
+  transform: translateX(0);
+  transition: transform 0.2s linear;
 }
 
 .sidebar__close {
   text-align: right;
+}
+
+.sidebar__cover {
+  position: fixed;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+  background-color: $grey-light;
+  opacity: 0.7;
 }

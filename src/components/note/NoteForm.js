@@ -44,7 +44,7 @@ export class NoteForm extends React.Component {
     } else {
       // delete tag
       this.setState((prevState) => ({
-        tags: prevState.tags.filters((tag) => tag.id !== id)
+        tags: prevState.tags.filter((tag) => tag.id !== id)
       }));
     }
   }
