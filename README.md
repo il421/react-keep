@@ -17,13 +17,17 @@ yarn install
 ## Usage
 
 ```
-yarn build
+// development server
 yarn start
+
+yarn build-dev
+yarn build-prod
 ```
 
 ## Testing
 
 ```
+// will be added soon
 yarn test
 ```
 
