@@ -6,63 +6,70 @@
   width: 200px;
   padding: 5px;
 
+  top: 40px;
+
   background-color: $clean;
   box-shadow: 0 1px 1px 0 rgba(65,69,73,0.3), 0 1px 3px 1px rgba(65,69,73,0.15);
-}
 
-.tags-selection__options {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
+  &__options {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
 
-  padding: $s-size;
-}
-
-.tags-selection__option div {
-  padding-left: $m-size;
-
-  font-size: $font-size-small;
-}
-
-.tags-selection__option {
-  display: flex;
-  padding: 5px;
-
-  position: relative;
-
-  label {
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    position: absolute;
-    top: 5px;
-    left: 0;
-    background: #fcfff4;
-    border-radius: 4px;
-    box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
-    &:after {
-      content: '';
-      width: 9px;
-      height: 5px;
-      position: absolute;
-      top: 6px;
-      left: 6px;
-      border: 3px solid #333;
-      border-top: none;
-      border-right: none;
-      background: transparent;
-      opacity: 0;
-      transform: rotate(-45deg);
-    }
-    &:hover::after {
-      opacity: 0;
-    }
+    padding: $s-size;
   }
-  input[type=checkbox] {
-    visibility: hidden;
-    &:checked + label:after {
-      opacity: 1;
+
+  &__option {
+    display: flex;
+    padding: 5px;
+
+    position: relative;
+
+    div {
+      padding-left: $m-size;
+
+      font-size: $font-size-small;
+    }
+
+    label {
+      position: absolute;
+
+      width: 20px;
+      height: 20px;
+
+      top: 5px;
+      left: 0;
+
+      background: #fcfff4;
+      cursor: pointer;
+      box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+      &:after {
+        position: absolute;
+        content: '';
+
+        width: 9px;
+        height: 5px;
+
+        top: 6px;
+        left: 6px;
+
+        border: 3px solid #333;
+        border-top: none;
+        border-right: none;
+        background: transparent;
+        opacity: 0;
+        transform: rotate(-45deg);
+      }
+      &:hover::after {
+        opacity: 0;
+      }
+    }
+    input[type=checkbox] {
+      visibility: hidden;
+      &:checked + label:after {
+        opacity: 1;
+      }
     }
   }
 }

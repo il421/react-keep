@@ -3,78 +3,79 @@
   flex-direction: column;
   justify-content: space-between;
   align-content: space-between;
+
+  &__title,
+  &__text {
+    margin-bottom: $s-size;
+
+    font-size: $font-size-small;
+    border: none;
+    outline: none;
+    background-color: inherit;
+
+    cursor: text;
+  }
+
+  &__text--bigger {
+    font-size: $font-size-large;
+  }
+
+  &__title--bigger {
+    font-size: $font-size-xlarge;
+  }
+
+  &__title {
+    font-weight: bold;
+  }
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-top: $s-size;
+
+    border-top: 1px solid $clean;
+  }
+
+  &__options {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+  }
+
+  &__actions button:last-child {
+    margin-left: $s-size;
+  }
 }
 
-.form__title,
-.form__text {
-  margin-bottom: $s-size;
+.options {
+  position: relative;
 
-  font-size: $font-size-small;
-  border: none;
-  outline: none;
-  background-color: inherit;
+  &__color,
+  &__tags {
+    position: relative;
 
-  cursor: text;
+    padding: 10px;
+  }
+
+  &__color:hover .color-box {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  &__tags:hover .tags-selection {
+    display: block;
+  }
 }
 
-.form__text--bigger {
-  font-size: $font-size-large;
-}
-
-.form__title--bigger {
-  font-size: $font-size-xlarge;
-}
-
-.form__title {
-  font-weight: bold;
-}
 
 [contenteditable=true]:empty:before {
   content: attr(placeholder);
   display: block;
   color: #757575;
-}
-
-.form__wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  padding-top: $s-size;
-
-  border-top: 1px solid $clean;
-}
-
-.form__options {
-  display: flex;
-  justify-content: start;
-  align-items: center;
-}
-
-.form__actions button:last-child {
-  margin-left: $s-size;
-}
-
-.options {
-  position: relative;
-}
-
-.options__color,
-.options__tags {
-  position: relative;
-
-  padding: 10px;
-}
-
-.options__color:hover .color-box {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.options__tags:hover .tags-selection {
-  display: block;
 }

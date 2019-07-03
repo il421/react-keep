@@ -4,15 +4,14 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-
-if (process.env.NODE_ENV === 'test') {
-  require('dotenv').config({ path: '.env.test' });
-} else if (process.env.NODE_ENV === 'development') {
-  require('dotenv').config({ path: '.env.development' });
-}
 
 module.exports = (env) => {
+  if (env.development) {
+    require('dotenv').config({ path: '.env.development' });
+  } else if (env.production) {
+    require('dotenv').config({ path: '.env.production' });
+  }
+
   const isProduction = env === 'production';
   const minCssExtract = new MiniCssExtractPlugin({
     filename: 'style.css',

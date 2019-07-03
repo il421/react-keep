@@ -10,7 +10,6 @@ export default (state = notesReducerDefaultState, action) => {
     return action.notes;
 
   case 'REMOVE_NOTE':
-    console.log(action.id)
     return state.filter((note) => note.id !== action.id);
 
   case 'UPDATE_NOTE':

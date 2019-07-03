@@ -8,19 +8,19 @@
 
   background: url('/img/bg.jpg');
   background-size: cover;
-}
 
-.box-layout__box {
-  width: 25rem;
-  padding: $l-size $m-size;
+  &__box {
+    width: 25rem;
+    padding: $l-size $m-size;
 
-  background: white;
-  border-radius: 3px;
-  text-align: center;
-}
+    background: white;
+    border-radius: 3px;
+    text-align: center;
+  }
 
-.box-layout__title {
-  margin: 0 0 $m-size 0;
+  &__title {
+    margin: 0 0 $m-size 0;
 
-  line-height: 1;
+    line-height: 1;
+  }
 }

@@ -5,9 +5,11 @@
 
   height: 100vh;
   margin: 0 auto;
+
+  &__img {
+    height: 6rem;
+    width: 6rem;
+  }
 }
 
-.loader__img {
-  height: 6rem;
-  width: 6rem;
-}
+

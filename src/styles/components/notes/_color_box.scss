@@ -3,31 +3,34 @@
 
   position: absolute;
 
+  top: 40px;
+  left: -15px;
+
   width: 150px;
   height: auto;
   padding: 10px;
 
   background-color: $clean;
   box-shadow: 0 1px 1px 0 rgba(65,69,73,0.3), 0 1px 3px 1px rgba(65,69,73,0.15);
-}
 
-.color-box div {
-  padding: 3px;
-}
+  & div {
+    padding: 3px;
+  }
 
-.color-box input {
-  display: none;
-}
+  & input {
+    display: none;
+  }
 
-.color-box label {
-  width: 25px;
-  height: 25px;
-}
+  & label {
+    width: 25px;
+    height: 25px;
+  }
 
-.color-box label:active {
-  opacity: .5;
-}
+  & label:active {
+    opacity: .5;
+  }
 
-.color-box input:checked + label {
-  border: 1px solid black;
+  & input:checked + label {
+    border: 1px solid black;
+  }
 }

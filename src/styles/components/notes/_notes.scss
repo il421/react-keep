@@ -1,18 +1,17 @@
 .notes {
   display: flex;
-  //flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-between;
   align-content: center;
   align-items: stretch;
 
   height: 100%;
-}
 
-@media (min-width: $tablet-widths) {
-  .notes {
-    justify-content: center;
+  @media (min-width: $tablet-widths) {
+    & {
+      justify-content: center;
 
-    margin: 0 $xl-size;
+      margin: 0 $xl-size;
+    }
   }
 }

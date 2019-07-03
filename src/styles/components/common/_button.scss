@@ -9,27 +9,25 @@
   text-decoration: none;
   line-height: 1;
   cursor: pointer;
+
+  &--link {
+    background: none;
+    color: $black;
+    border: none;
+    padding: $s-size;
+    font-size: $font-size-large;
+    font-weight: 300;
+    display: inline-block;
+    text-decoration: none;
+    line-height: 1;
+  }
+
+  &--sidenav {
+    display: inline-block;
+    background: none;
+    border: none;
+    color: $clean;
+  }
 }
 
-.button--link {
-  background: none;
-  color: $black;
-  border: none;
-  padding: $s-size;
-  font-size: $font-size-large;
-  font-weight: 300;
-  display: inline-block;
-  text-decoration: none;
-  line-height: 1;
-}
 
-.button--secondary {
-  background: #888;
-}
-
-.button--sidenav {
-  display: inline-block;
-  background: none;
-  border: none;
-  color: $clean;
-}
