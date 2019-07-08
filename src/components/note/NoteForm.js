@@ -97,6 +97,13 @@ export class NoteForm extends React.Component {
     }
   }
 
+  // to paste plain text
+  handleTextPaste = (evt, field) => {
+    evt.preventDefault();
+    const text = evt.clipboardData.getData('text/plain');
+    this.setState(() => ({ [field]: text }));
+  }
+
   render() {
     return (
       <>
@@ -108,6 +115,7 @@ export class NoteForm extends React.Component {
             value={ this.state.title }
             onChange={ this.onTitleChange }
             placeholder="Title"
+            onPaste={ (evt) => this.handleTextPaste(evt, 'title') }
             spellCheck="false"
           />
 
@@ -115,6 +123,7 @@ export class NoteForm extends React.Component {
             className="form__text"
             html={ this.state.text }
             onChange={ this.onTextChange }
+            onPaste={ (evt) => this.handleTextPaste(evt, 'text') }
             placeholder={'Type something ...'}
             spellCheck="false"
           />
