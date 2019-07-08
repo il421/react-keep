@@ -1,0 +1,47 @@
+{
+  "src_folders" : ["./src/tests/e2e/specs"],
+  "output_folder" : "./src/tests/e2e/reports",
+  "disable_colors": false,
+  "test_workers" : false,
+
+  "webdriver" : {
+    "start_process": false,
+    "host": "localhost",
+    "port": 4444
+  },
+
+  "test_settings" : {
+    "default" : {
+      "desiredCapabilities": {
+        "browserName": "chrome"
+      }
+    },
+
+    "chrome" : {
+      "webdriver": {
+        "port": 9515,
+        "default_path_prefix": "",
+        "server_path": ".node_modules/chromedriver/bin/chromedriver",
+        "cli_args": [
+          "--verbose"
+        ]
+      },
+      "desiredCapabilities" : {
+        "browserName" : "chrome",
+        "loggingPrefs": {"driver": "INFO", "server": "OFF", "browser": "INFO"}
+      }
+    },
+
+    "selenium_server" : {
+      "selenium" : {
+        "start_process": true,
+        "host": "localhost",
+        "port": 4444,
+        "server_path": "./bin/selenium-server-standalone-4.0.0-alpha-1.jar",
+        "cli_args": {
+          "webdriver.chrome.driver": ".node_modules/chromedriver/bin/chromedriver"
+        }
+      }
+    }
+  }
+}
