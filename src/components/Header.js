@@ -30,7 +30,7 @@ export const Header = ({ startLogout, auth, showSidebar }) => {
               <img src={auth.url} width={50} height={50} />
             </div>
             <div className="user-box__name show-for-mobile">{ auth.name }</div>
-            <button className="button button--sidenav" onClick={ startLogout }>
+            <button className="button user-box__logout button--sidenav" onClick={ startLogout }>
               <FontAwesomeIcon icon="sign-out-alt" size="1x" />
             </button>
           </div>
