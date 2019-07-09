@@ -91,7 +91,6 @@ export class Tags extends Component{
           closeTimeoutMS={ 200 }
           className="tags__modal"
           ariaHideApp={ false }
-          overlayClassName="modal-overlay"
         >
           <div>
             <div className="tags__title">Add/Edit Tags</div>
