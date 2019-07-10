@@ -30,7 +30,7 @@ export default class TagsSelection extends React.Component {
                     onChange={ this.handleInputChange }
                     checked={ this.checkInputs(this.props.tags, tag.id) }
                   />
-                  <label htmlFor={ tag.id + this.props.name }></label>
+                  <label htmlFor={ tag.id + this.props.name } className={`option-${index}`} />
                   <div>{ tag.value }</div>
                 </div>
               ))
