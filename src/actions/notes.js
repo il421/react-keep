@@ -129,7 +129,7 @@ export const changeNoteImportance = (id) => {
 
       const doc = await docRef.doc(id).get();
       if(doc.exists) {
-        const impValue = doc.data().importance;
+        const impValue = doc.data().important;
 
         await docRef.doc(id).update({
           important: !impValue

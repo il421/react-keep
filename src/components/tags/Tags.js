@@ -100,7 +100,6 @@ export class Tags extends Component{
                 ref={ this.refNewInput }
                 type="text"
                 placeholder="Type a new tag ..."
-                autoFocus={ true }
                 onChange={ this.onTagChange }
                 onKeyPress={ (evt) => evt.key === 'Enter' && this.addNewTag() }
                 disabled={ this.state.editableTag !== null }
