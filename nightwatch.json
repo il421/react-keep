@@ -1,0 +1,18 @@
+{
+  "src_folders" : ["./src/tests/e2e/specs"],
+
+  "webdriver" : {
+    "start_process": true,
+    "server_path": "node_modules/.bin/chromedriver",
+    "port": 9515
+  },
+
+  "test_settings" : {
+    "default" : {
+      "launch_url": "http://dev.my-keep.co.nz:9000/dashboard",
+      "desiredCapabilities": {
+        "browserName": "chrome"
+      }
+    }
+  }
+}

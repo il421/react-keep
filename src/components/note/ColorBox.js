@@ -68,7 +68,7 @@ export class ColorBox extends React.Component {
     return (
       <div className="color-box">
         {
-          this.colors.map((color) => (
+          this.colors.map((color, index) => (
             <div key={ color.value }>
               <input
                 ref={ color.value + this.props.name }
@@ -82,7 +82,7 @@ export class ColorBox extends React.Component {
 
               <label
                 htmlFor={ color.value + this.props.name }
-                className="pointer"
+                className={ `pointer ${this.props.name + index}` }
                 style={{
                   backgroundColor: color.value,
                 }}

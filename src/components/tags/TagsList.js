@@ -41,7 +41,7 @@ export class TagsList extends React.Component {
                     defaultChecked={ true }
                     onChange={ this.handleTagsCheck }
                   />
-                  <label htmlFor={ tag.id + this.props.name }></label>
+                  <label htmlFor={ tag.id + this.props.name } className={ `tag-${index}` }/>
                   <div>{ tag.value }</div>
                 </div>
               ))

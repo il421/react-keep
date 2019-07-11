@@ -7,7 +7,8 @@
     "build-dev": "webpack --env.development --mode=none",
     "build-prod": "webpack --env.production --mode=none",
     "start": "webpack-dev-server --env.development",
-    "test": "cross-env NODE_ENV=test jest --config=jest.config.json",
+    "test-unit": "cross-env NODE_ENV=test jest --config=jest.config.json",
+    "test-e2e": "./node_modules/.bin/nightwatch",
     "release": "release-it --github.release --no-npm.publish --no-git.requireUpstream",
     "deploy": "yarn run build-prod && firebase deploy"
   },
@@ -47,7 +48,6 @@
     "react-modal": "^3.6.1",
     "react-redux": "7.0.3",
     "react-router-dom": "5.0.0",
-    "react-transition-group": "^4.1.1",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "regenerator-runtime": "^0.13.1",
@@ -57,7 +57,10 @@
     "webpack-cli": "^3.1.2"
   },
   "devDependencies": {
+    "@babel/register": "^7.4.4",
     "babel-eslint": "^10.0.1",
+    "babel-plugin-add-module-exports": "^1.0.2",
+    "chromedriver": "^75.0.1",
     "cross-env": "^5.2.0",
     "dotenv": "8.0.0",
     "enzyme": "^3.8.0",
@@ -67,6 +70,7 @@
     "eslint-plugin-react": "^7.13.0",
     "jest": "24.8.0",
     "mini-css-extract-plugin": "^0.7.0",
+    "nightwatch": "^1.1.13",
     "react-test-renderer": "^16.7.0",
     "redux-mock-store": "^1.5.3",
     "release-it": "^12.3.0",

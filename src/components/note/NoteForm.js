@@ -107,7 +107,7 @@ export class NoteForm extends React.Component {
   render() {
     return (
       <>
-        <div className="form">
+        <div className={ `form form--${ this.props.name }` }>
           <input
             className="form__title"
             type="text"
@@ -155,14 +155,14 @@ export class NoteForm extends React.Component {
             </div>
             <div className="form__actions">
               <button
-                className="button--link pointer"
+                className="button--link pointer actions__close-note"
                 onClick={ this.props.note ? this.closeUpdateForm : this.cleanForm }
               >
                 Close
               </button>
 
               <button
-                className="button--link pointer"
+                className="button--link pointer actions__keep-note"
                 onClick={ this.props.note ? this.updateNote : this.addNote }
                 disabled={ this.state.text === '' }
               >

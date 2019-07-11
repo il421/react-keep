@@ -25,10 +25,10 @@ yarn build-prod
 ```
 
 ## Testing
-
+For correct e2e tests it is necessary to clean 
+Firestore data in a testing account (user).
 ```
-// will be added soon
-yarn test
+yarn test-e2e
 ```
 
 ## Technologies and Libraries
@@ -36,4 +36,4 @@ yarn test
 - Redux
 - SCSS
 - Webpack
-- Jest + Enzyme
+- Jest + Enzyme, Nightwatch

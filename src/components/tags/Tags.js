@@ -104,7 +104,7 @@ export class Tags extends Component{
                 onKeyPress={ (evt) => evt.key === 'Enter' && this.addNewTag() }
                 disabled={ this.state.editableTag !== null }
               />
-              <button className="button--link" onClick={ this.addNewTag }>+</button>
+              <button className="button--link tags__add-btn" onClick={ this.addNewTag }>+</button>
             </div>
 
             <div className="tags__list">
@@ -126,21 +126,21 @@ export class Tags extends Component{
                               placeholder={ tag.value }
                             />
                             <div className="item__actions">
-                              <div className="pointer" onClick={ () => this.onCurrentTagUpdate(tag.id, this.state.tag) }>
+                              <div className="pointer actions__edit" onClick={ () => this.onCurrentTagUpdate(tag.id, this.state.tag) }>
                                 <FontAwesomeIcon icon="edit" size="1x" />
                               </div>
-                              <div className="pointer" onClick={ () => this.setEditableTag(tag.id) }>
+                              <div className="pointer actions__remove" onClick={ () => this.setEditableTag(tag.id) }>
                                 <FontAwesomeIcon icon="times" size="1x" />
                               </div>
                             </div>
                           </>
                         ) : (
                           <>
-                            <div className="pointer" onClick={ () => this.setEditableTag(tag.id) }>
+                            <div className="pointer tags__edit-btn" onClick={ () => this.setEditableTag(tag.id) }>
                               <FontAwesomeIcon icon="edit" size="1x" />
                             </div>
-                            <div className="tags__name">{ tag.value }</div>
-                            <div className="pointer" onClick={ () => {this.removeTag(tag.id)} }>
+                            <div className={`tags__name tags__name--${index}`}>{ tag.value }</div>
+                            <div className="pointer tags__remove-btn" onClick={ () => {this.removeTag(tag.id);} }>
                               <FontAwesomeIcon icon="times" size="1x" />
                             </div>
                           </>
