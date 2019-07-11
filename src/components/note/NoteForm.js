@@ -107,7 +107,7 @@ export class NoteForm extends React.Component {
   render() {
     return (
       <>
-        <div className="form">
+        <div className={ `form form--${ this.props.name }` }>
           <input
             className="form__title"
             type="text"

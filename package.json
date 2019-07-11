@@ -57,7 +57,9 @@
     "webpack-cli": "^3.1.2"
   },
   "devDependencies": {
+    "@babel/register": "^7.4.4",
     "babel-eslint": "^10.0.1",
+    "babel-plugin-add-module-exports": "^1.0.2",
     "chromedriver": "^75.0.1",
     "cross-env": "^5.2.0",
     "dotenv": "8.0.0",

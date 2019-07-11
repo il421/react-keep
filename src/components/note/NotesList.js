@@ -96,11 +96,18 @@ export class NotesList extends React.Component {
           <div className="note__confirm">
             <div>Do you want to delete this note?</div>
             <div>
-              <button className="button" onClick={() => {
+              <button className="button button--yep" onClick={() => {
                 this.props.handleRemoveNote(this.state.shouldBeDeletedId);
-                this.toggleConfirmDelete();
-              }}>Yep</button>
-              <button className="button button--secondary" onClick={() => { this.toggleConfirmDelete(); }}>Nope</button>
+                this.toggleConfirmDelete();}}
+              >
+                Yep
+              </button>
+              <button
+                className="button button--nope button--secondary"
+                onClick={() => { this.toggleConfirmDelete(); }}
+              >
+                Nope
+              </button>
             </div>
           </div>
         </Modal>

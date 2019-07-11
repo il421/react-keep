@@ -9,7 +9,7 @@
 
   "test_settings" : {
     "default" : {
-      "launch_url" : "http://localhost:8082/dashboard",
+      "launch_url": "http://dev.my-keep.co.nz:9000/dashboard",
       "desiredCapabilities": {
         "browserName": "chrome"
       }
