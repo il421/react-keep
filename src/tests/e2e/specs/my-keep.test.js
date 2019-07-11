@@ -268,8 +268,10 @@ module.exports = {
       .waitForElementPresent('.note__confirm', 3000)
 
       .click('.button--yep')
+      .pause(2000)
       .waitForElementNotPresent('.note', 3000)
       .refresh()
+      .pause(2000)
       .waitForElementNotPresent('.note', 3000);
   },
 
