@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = (env) => {
   let isProduction = false;
@@ -17,7 +17,7 @@ module.exports = (env) => {
   const minCssExtract = new MiniCssExtractPlugin({
     filename: 'style.css',
   });
-  const BundleAnalyzer = new BundleAnalyzerPlugin();
+  // const BundleAnalyzer = new BundleAnalyzerPlugin();
 
   return {
     entry: ['@babel/polyfill', './src/app.js'],
@@ -75,7 +75,7 @@ module.exports = (env) => {
     },
     plugins: [
       minCssExtract,
-      BundleAnalyzer,
+      // BundleAnalyzer,
       new webpack.DefinePlugin({
         'process.env.FIREBASE_API_KEY': JSON.stringify(process.env.FIREBASE_API_KEY),
         'process.env.FIREBASE_AUTH_DOMAIN': JSON.stringify(process.env.FIREBASE_AUTH_DOMAIN),
