@@ -2,21 +2,23 @@ const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = (env) => {
   let isProduction = false;
-  require('dotenv').config({ path: '.env.development' });
 
   if (typeof env !== 'undefined' && env.production) {
     require('dotenv').config({ path: '.env.production' });
     isProduction = true;
-
+  } else {
+    require('dotenv').config({ path: '.env.development' });
   }
 
   const minCssExtract = new MiniCssExtractPlugin({
     filename: 'style.css',
   });
+  const compressionPlugin = new CompressionPlugin();
   // const BundleAnalyzer = new BundleAnalyzerPlugin();
 
   return {
@@ -75,6 +77,7 @@ module.exports = (env) => {
     },
     plugins: [
       minCssExtract,
+      compressionPlugin,
       // BundleAnalyzer,
       new webpack.DefinePlugin({
         'process.env.FIREBASE_API_KEY': JSON.stringify(process.env.FIREBASE_API_KEY),
