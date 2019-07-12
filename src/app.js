@@ -17,11 +17,16 @@ import { firebase } from './firebase/firebase';
 import LoadingPage from './components/LoadingPage';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faBars, faSignOutAlt, faTimes, faPalette, faMapMarkerAlt, faBookmark, faTags, faEdit }
-  from '@fortawesome/free-solid-svg-icons';
+import { faBars } from '@fortawesome/free-solid-svg-icons/faBars';
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons/faSignOutAlt';
+import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
+import { faPalette } from '@fortawesome/free-solid-svg-icons/faPalette';
+import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons/faMapMarkerAlt';
+import { faBookmark } from '@fortawesome/free-solid-svg-icons/faBookmark';
+import { faTags } from '@fortawesome/free-solid-svg-icons/faTags';
+import { faEdit } from '@fortawesome/free-solid-svg-icons/faEdit';
 
 library.add(faBars, faSignOutAlt, faTimes, faPalette, faMapMarkerAlt, faBookmark, faTags, faEdit);
-
 
 const store = configStore();
 

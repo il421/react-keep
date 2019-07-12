@@ -4,10 +4,10 @@
   "description": "A react version of Google Keep",
   "main": "index.js",
   "scripts": {
-    "build-dev": "webpack --env.development --mode=none",
-    "build-prod": "webpack --env.production --mode=none",
-    "start": "webpack-dev-server --env.development",
-    "test-unit": "cross-env NODE_ENV=test jest --config=jest.config.json",
+    "build-dev": "webpack --mode=none",
+    "build-prod": "webpack --env.production --mode=production",
+    "start": "webpack-dev-server",
+    "test-unit": "jest --config=jest.config.json",
     "test-e2e": "./node_modules/.bin/nightwatch",
     "release": "release-it --github.release --no-npm.publish --no-git.requireUpstream",
     "deploy": "yarn run build-prod && firebase deploy"

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { xor } from 'lodash';
+import xor from 'lodash/xor';
 
 import { setTagsFilter } from '../../actions/filters';
 
