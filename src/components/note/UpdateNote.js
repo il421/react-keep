@@ -29,7 +29,7 @@ export class UpdateNote extends React.Component {
         onRequestClose={ this.props.removeSelectedNote }
         contentLabel="Selected option"
         closeTimeoutMS={ 200 }
-        className="note-modal"
+        className="note-modal--form"
         ariaHideApp={ false }
       >
         {

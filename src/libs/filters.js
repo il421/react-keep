@@ -13,4 +13,12 @@ const getFilteredNotes = (notes, searchText, tagFilters) => {
   });
 };
 
-export default getFilteredNotes;
+const getShortText = (text) => {
+  const maxLength = 300;
+  if (text.length > maxLength) {
+    text = text.slice(0, 300) + '...';
+  }
+  return text;
+};
+
+export { getFilteredNotes, getShortText };

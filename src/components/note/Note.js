@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {getShortText} from '../../libs/filters';
 
 import html from 'react-inner-html';
 
@@ -39,7 +40,7 @@ const Note = ({
           {
             title.trim() !== '' && <div className="content__title">{ title }</div>
           }
-          <div className="content__text" { ...html(text) } />
+          <div className="content__text" { ...html(getShortText(text)) } />
         </div>
 
         <div className="note__details details">

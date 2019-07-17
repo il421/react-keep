@@ -3,7 +3,7 @@ import Note from './Note';
 import UpdateNote from './UpdateNote';
 import { connect } from 'react-redux';
 import { handleRemoveNote, changeNoteImportance } from '../../actions/notes';
-import getFilteredNotes from '../../libs/filters';
+import {getFilteredNotes} from '../../libs/filters';
 import Modal from 'react-modal';
 
 

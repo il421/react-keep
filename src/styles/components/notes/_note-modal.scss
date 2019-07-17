@@ -21,14 +21,8 @@
   }
 }
 
-.modal {
-  display: block;
-
-  max-width: 30rem;
-  padding: $s-size;
-
-  text-align: center;
-  background: $clean;
-  color: white;
-  outline: none;
+.note-modal {
+  &--form {
+    height: 100vh;
+  }
 }
