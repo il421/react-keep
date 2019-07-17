@@ -18,7 +18,8 @@ const getShortText = (text) => {
   if (text.length > maxLength) {
     text = text.slice(0, 300) + '...';
   }
-  return text;
+  return text.replace(/\\r\\n/g, '<br />');
 };
+
 
 export { getFilteredNotes, getShortText };
