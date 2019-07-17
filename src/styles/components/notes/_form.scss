@@ -30,6 +30,8 @@
 
   &__text {
     font-size: $font-size-medium;
+    resize: none;
+    overflow: hidden;
   }
 
   &__wrapper {

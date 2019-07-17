@@ -98,13 +98,6 @@ export class NoteForm extends React.Component {
     }
   }
 
-  // to paste plain text
-  handleTextPaste = (evt, field) => {
-    evt.persist();
-    console.log(evt);
-    const text = evt.clipboardData.getData('text/plain');
-  }
-
   render() {
     return (
       <>
