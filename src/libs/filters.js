@@ -14,7 +14,7 @@ const getFilteredNotes = (notes, searchText, tagFilters) => {
 };
 
 const getShortText = (text) => {
-  const maxLength = 300;
+  const maxLength = 200;
   if (text.length > maxLength) {
     text = text.slice(0, 300) + '...';
   }

@@ -4,7 +4,8 @@ import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ColorBox from './ColorBox';
 import TagsSelection from '../tags/TagsSelection';
-import ContentEditable from 'react-contenteditable';
+import Textarea from 'react-textarea-autosize';
+
 
 export class NoteForm extends React.Component {
   constructor(props) {
@@ -97,6 +98,13 @@ export class NoteForm extends React.Component {
     }
   }
 
+  // to paste plain text
+  handleTextPaste = (evt, field) => {
+    evt.persist();
+    console.log(evt);
+    const text = evt.clipboardData.getData('text/plain');
+  }
+
   render() {
     return (
       <>
@@ -107,13 +115,14 @@ export class NoteForm extends React.Component {
             value={ this.state.title }
             onChange={ this.onTitleChange }
             placeholder="Title"
+            onPaste={ (evt) => this.handleTextPaste(evt, 'title') }
             spellCheck="false"
           />
 
-          <ContentEditable
+          <Textarea
             className="form__text"
-            html={ this.state.text }
-            onChange={ this.onTextChange }
+            value={this.state.text}
+            onChange={this.onTextChange}
             placeholder={'Type something ...'}
             spellCheck="false"
           />
