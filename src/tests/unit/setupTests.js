@@ -7,5 +7,5 @@ Enzyme.configure({
 });
 
 DotEnv.config({
-  path: '.env.test'
+  path: '.env.development'
 });

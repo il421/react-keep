@@ -4,13 +4,14 @@ module.exports = {
         'browser': true,
         'es6': true,
         'node': true,
+        'jest': true,
     },
     extends: ['eslint:recommended', 'plugin:react/recommended'],
     globals: {
         'Atomics': 'readonly',
         'SharedArrayBuffer': 'readonly'
     },
-    parser: "babel-eslint",
+    parser: 'babel-eslint',
     parserOptions: {
         'ecmaFeatures': {
             'jsx': true
@@ -19,7 +20,7 @@ module.exports = {
         'sourceType': 'module'
     },
     plugins: [
-        'react'
+        'react', 'jest'
     ],
     rules: {
         'indent': [
@@ -38,8 +39,13 @@ module.exports = {
             'error',
             'always'
         ],
-      "react/prop-types": 0,
-      "no-console": "off"
+      'react/prop-types': 0,
+      'no-console': 'off',
+      'jest/no-disabled-tests': 'warn',
+      'jest/no-focused-tests': 'error',
+      'jest/no-identical-title': 'error',
+      'jest/prefer-to-have-length': 'warn',
+      'jest/valid-expect': 'error'
     }
 };
 

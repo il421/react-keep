@@ -42,7 +42,8 @@ export default (state = notesReducerDefaultState, action) => {
 
   case 'UPDATE_NOTES_TAG':
     return state.map((note) => {
-      if (note.tags.some(tag => tag.id === action.id)) {
+      const noteHasTag = note.tags.some(tag => tag.id === action.id);
+      if (noteHasTag) {
         note.tags.find(tag => tag.id === action.id).value = action.update;
       }
       return note;
