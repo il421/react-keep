@@ -1,6 +1,6 @@
 {
   "name": "react-keep",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A react version of Google Keep",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "start": "webpack-dev-server",
     "test-unit": "jest --config=jest.config.json",
     "test-e2e": "./node_modules/.bin/nightwatch",
-    "release": "release-it --github.release --no-npm.publish --no-git.requireUpstream",
+    "release": "release-it --github.release --no-npm.publish --no-git.requireUpstream --no-git.requireCleanWorkingDir",
     "deploy": "yarn run build-prod && firebase deploy"
   },
   "author": "Ilya Suglobov",
