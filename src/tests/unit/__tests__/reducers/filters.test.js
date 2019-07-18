@@ -1,7 +1,6 @@
 import filtersReducer from '../../../../reducers/filters';
 import { filters } from '../../../fixtures/unit.js';
 
-
 test('should setup default filter values', () => {
   const state = filtersReducer(undefined, { type: '@@INIT' });
   expect(state).toEqual({
