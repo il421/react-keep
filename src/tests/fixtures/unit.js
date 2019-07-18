@@ -51,7 +51,7 @@ const text = [
   'Tany Ilya Vany Tany Ilya Vany Tany Ilya Vany Tany Ilya Vany Tany Ilya Vany Tany Ilya Vany Tany Ilya Vany Tany ' +
   'Ilya Vany Tany Ilya Vany Tany Ilya Vany Tany Ilya Vany Tany',
   'Ilya Vany Tany Ilya <br />Vany Tany Ilya Vany Tany Ilya Vany Tany Ilya Vany Tany Ilya Vany Tany Ilya Vany...'
-]
+];
 
 
 
