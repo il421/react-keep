@@ -1,4 +1,4 @@
-import { user, note, updatedNote, colors, tags } from '../../fixtures/e2e.js';
+import { user, note, updatedNote, colors, tags, cutText } from '../../fixtures/e2e.js';
 
 module.exports = {
   'should login correctly with the test user data' : function (client) {
@@ -132,7 +132,7 @@ module.exports = {
       .pause(2000)
       .waitForElementVisible('.note', 2000)
       .assert.containsText('.content__title', note.title)
-      .assert.containsText('.content__text', note.text)
+      .assert.containsText('.content__text', cutText)
       .assert.containsText('.details__tags div:first-child', tags[1])
       .assert.containsText('.details__tags div:last-child', tags[0])
 
@@ -147,7 +147,7 @@ module.exports = {
       .refresh()
       .waitForElementVisible('.note', 2000)
       .assert.containsText('.content__title', note.title)
-      .assert.containsText('.content__text', note.text)
+      .assert.containsText('.content__text', cutText)
       .assert.containsText('.details__tags div:first-child', tags[1])
       .assert.containsText('.details__tags div:last-child', tags[0])
 

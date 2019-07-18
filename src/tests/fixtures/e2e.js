@@ -12,6 +12,9 @@ const note = {
   color: 'background-color: rgb(180, 72, 174);'
 };
 
+const cutText = 'I need to buy a new laptop as soon as possible. I think it should be a Mac Book. As it is ' +
+  'really fas...';
+
 const updatedNote = {
   title: 'Not Important Note',
   text: 'Nothing interesting',
@@ -63,4 +66,4 @@ const colors = [
   }
 ];
 
-export { tags, note, updatedNote, colors, user };
+export { tags, note, updatedNote, colors, user, cutText };
