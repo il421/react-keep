@@ -6,5 +6,7 @@
 
   "snapshotSerializers": [
     "enzyme-to-json/serializer"
-  ]
+  ],
+
+  "testRegex": "./tests/unit/__tests__/.*.js$"
 }
