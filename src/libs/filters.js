@@ -14,9 +14,9 @@ const getFilteredNotes = (notes, searchText, tagFilters) => {
 };
 
 const getShortText = (text) => {
-  const maxLength = 200;
+  const maxLength = 100;
   if (text.length > maxLength) {
-    text = text.slice(0, 300) + '...';
+    text = text.slice(0, maxLength) + '...';
   }
   return text.replace(/\n/g, '<br />');
 };
