@@ -18,6 +18,8 @@ const getShortText = (text) => {
   if (text.length > maxLength) {
     text = text.slice(0, maxLength) + '...';
   }
+
+  // raplace all new lines to <br />
   return text.replace(/\n/g, '<br />');
 };
 

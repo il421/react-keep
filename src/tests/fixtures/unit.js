@@ -45,6 +45,14 @@ const notes = [
   }
 ];
 
+const text = [
+  'Ilya Vany Tany Ilya \n' +
+  'Vany Tany Ilya Vany Tany Ilya Vany Tany Ilya Vany Tany Ilya Vany Tany Ilya Vany Tany Ilya Vany Tany Ilya Vany ' +
+  'Tany Ilya Vany Tany Ilya Vany Tany Ilya Vany Tany Ilya Vany Tany Ilya Vany Tany Ilya Vany Tany Ilya Vany Tany ' +
+  'Ilya Vany Tany Ilya Vany Tany Ilya Vany Tany Ilya Vany Tany',
+  'Ilya Vany Tany Ilya <br />Vany Tany Ilya Vany Tany Ilya Vany Tany Ilya Vany Tany Ilya Vany Tany Ilya Vany...'
+]
 
 
-export { notes, filters, tags };
+
+export { notes, filters, tags, text };
