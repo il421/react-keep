@@ -3,16 +3,19 @@ const filters = {
   search: 'Important'
 };
 
-const tags = [
-  {
-    id: 'YpjypoYGueKBUukRPQ5F',
-    value: 'Not important'
-  },
-  {
-    id: 'DgKMm5pgnXWn9tB9gJve',
-    value: 'Important'
-  }
-];
+const tags = {
+  list: [
+    {
+      id: 'YpjypoYGueKBUukRPQ5F',
+      value: 'Not important'
+    },
+    {
+      id: 'DgKMm5pgnXWn9tB9gJve',
+      value: 'Important'
+    }
+  ],
+  displayTagsModal: false,
+};
 
 const notes = [
   {

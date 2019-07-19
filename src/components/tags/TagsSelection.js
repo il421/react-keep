@@ -8,7 +8,8 @@ export default class TagsSelection extends React.Component {
   }
 
   checkInputs = (tags, id) => {
-    if (tags.some((tag) => tag.id === id)) {
+    const isChecked = tags.some((tag) => tag.id === id);
+    if (isChecked) {
       return true;
     }
     return false;

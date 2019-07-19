@@ -85,19 +85,19 @@ test('should setup change note importance tag action object correctly', () => {
 
 test('should setup remove tag from note action object correctly', () => {
 
-  const action = removeTag(tags[0].id);
+  const action = removeTag(tags.list[0].id);
   expect(action).toEqual({
     type: 'REMOVE_TAG_FROM_NOTES',
-    id: tags[0].id,
+    id: tags.list[0].id,
   });
 });
 
 test('should setup update tag from note action object correctly', () => {
   const update = { value: 'Ha ha' };
-  const action = updateTag(tags[0].id, update);
+  const action = updateTag(tags.list[0].id, update);
   expect(action).toEqual({
     type: 'UPDATE_NOTES_TAG',
-    id: tags[0].id,
+    id: tags.list[0].id,
     update
   });
 });

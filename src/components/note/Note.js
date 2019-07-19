@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {getShortText, replaceNewineYoHtml} from '../../libs/filters';
+import { getShortText } from '../../libs/filters';
 
 import html from 'react-inner-html';
 

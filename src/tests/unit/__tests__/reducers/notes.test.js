@@ -69,7 +69,7 @@ test('should delete a tag from all notes', () => {
 
   const action = {
     type: 'REMOVE_TAG_FROM_NOTES',
-    id: tags[0].id,
+    id: tags.list[0].id,
   };
 
   const state = notesReducer(notes, action);
@@ -80,7 +80,7 @@ test('should update a tag from all notes', () => {
   const update = 'Need to buy';
   const action = {
     type: 'UPDATE_NOTES_TAG',
-    id: tags[1].id,
+    id: tags.list[1].id,
     update
   };
 

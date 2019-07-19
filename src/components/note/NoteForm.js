@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ColorBox from './ColorBox';
 import TagsSelection from '../tags/TagsSelection';
 import Textarea from 'react-textarea-autosize';
+import { handleDisplayTagsModal } from '../../actions/tags';
 
 
 export class NoteForm extends React.Component {
@@ -98,6 +99,11 @@ export class NoteForm extends React.Component {
     }
   }
 
+  displayTagsModal = () => {
+    this.closeUpdateForm();
+    this.props.handleDisplayTagsModal(true);
+  }
+
   render() {
     return (
       <>
@@ -108,7 +114,6 @@ export class NoteForm extends React.Component {
             value={ this.state.title }
             onChange={ this.onTitleChange }
             placeholder="Title"
-            onPaste={ (evt) => this.handleTextPaste(evt, 'title') }
             spellCheck="false"
           />
 
@@ -134,13 +139,17 @@ export class NoteForm extends React.Component {
               <div className="pointer options__tags">
                 <FontAwesomeIcon icon="tags" size="2x" />
                 {
-                  this.props.userTags.length > 0 && (
+                  this.props.userTags.length > 0 ? (
                     <TagsSelection
                       tags={ this.state.tags }
                       userTags={ this.props.userTags }
                       handleInputChange={ this.handleInputChange }
                       name={ this.props.name }
                     />
+                  ) : (
+                    <div className="tags-selection tags-selection__none">
+                      <a onClick={ this.displayTagsModal  }>Add your personal tags</a>
+                    </div>
                   )
                 }
               </div>
@@ -170,9 +179,13 @@ export class NoteForm extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    userTags: state.tags
+    userTags: state.tags.list
   };
 };
 
-export default connect(mapStateToProps)(NoteForm);
+const mapDispatchToProps = (dispatch) => ({
+  handleDisplayTagsModal: (value) => dispatch(handleDisplayTagsModal(value))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(NoteForm);
 

@@ -34,14 +34,14 @@ export class TagsList extends React.Component {
               this.props.userTags.map((tag, index) => (
                 <div key={ index } className="tags-list__filter">
                   <input
-                    ref={ tag.id + this.props.name }
-                    id={ tag.id + this.props.name }
+                    ref={ tag.id + 'list' }
+                    id={ tag.id + 'list' }
                     type="checkbox"
                     value={ tag.id }
                     defaultChecked={ true }
                     onChange={ this.handleTagsCheck }
                   />
-                  <label htmlFor={ tag.id + this.props.name } className={ `tag-${index}` }/>
+                  <label htmlFor={ tag.id + 'list' } className={ `tag-${index}` }/>
                   <div>{ tag.value }</div>
                 </div>
               ))
@@ -59,5 +59,10 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
+const mapStateToProps = (state) => {
+  return {
+    userTags: state.tags.list
+  };
+};
 
-export default connect(undefined, mapDispatchToProps)(TagsList);
+export default connect(mapStateToProps, mapDispatchToProps)(TagsList);

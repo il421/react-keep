@@ -26,9 +26,17 @@ export const updateTag = (id, update) => ({
   update,
 });
 
+export const handleDisplayTagsModal = (displayTagsModal) => ({
+  type: 'DISPLAY_TAGS_MODAL',
+  displayTagsModal,
+});
+
 export const handleSetTags = () => {
   return (dispatch, getState) => {
-    const tags = [];
+    const tags = {
+      list: [],
+      displayTagsModal: false,
+    };
     const uid = getState().auth.uid;
     const docRef = initDocumentRef(uid);
 
@@ -36,7 +44,7 @@ export const handleSetTags = () => {
       .then((snapshot) => {
         snapshot.forEach((doc) => {
           if(doc.exists) {
-            tags.unshift({id: doc.id, ...doc.data()});
+            tags.list.unshift({id: doc.id, ...doc.data()});
           } else {
             console.log('No such document!');
           }
