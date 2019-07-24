@@ -25,10 +25,11 @@ yarn build-prod
 ```
 
 ## Testing
-For correct e2e tests it is necessary to clean 
+For correct tests it is necessary to clean 
 Firestore data in a testing account (user).
 ```
 yarn test-e2e
+yarn test-unit
 ```
 
 ## Technologies and Libraries

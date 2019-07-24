@@ -42,7 +42,6 @@ export const updateTag = (id, update) => ({
   update,
 });
 
-
 export const handleSetNotes = () => {
   return async (dispatch, getState) => {
     const notes = [];

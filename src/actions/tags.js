@@ -32,7 +32,7 @@ export const handleDisplayTagsModal = (displayTagsModal) => ({
 });
 
 export const handleSetTags = () => {
-  return (dispatch, getState) => {
+  return async (dispatch, getState) => {
     const tags = {
       list: [],
       displayTagsModal: false,
@@ -40,21 +40,19 @@ export const handleSetTags = () => {
     const uid = getState().auth.uid;
     const docRef = initDocumentRef(uid);
 
-    docRef.get()
-      .then((snapshot) => {
-        snapshot.forEach((doc) => {
-          if(doc.exists) {
-            tags.list.unshift({id: doc.id, ...doc.data()});
-          } else {
-            console.log('No such document!');
-          }
-        });
-
-        dispatch(setTags(tags));
-      })
-      .catch((error) => {
-        console.log(error);
+    try {
+      const snapshot = await docRef.get();
+      snapshot.forEach((doc) => {
+        if(doc.exists) {
+          tags.list.unshift({id: doc.id, ...doc.data()});
+        } else {
+          console.log('No such document!');
+        }
       });
+      dispatch(setTags(tags));
+    } catch (e) {
+      console.log(e);
+    }
   };
 };
 
