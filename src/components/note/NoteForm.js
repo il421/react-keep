@@ -52,18 +52,16 @@ export class NoteForm extends React.Component {
   }
 
   addNote = () => {
-    if (this.state.text !== '') {
-      this.props.addNote({
-        title: this.state.title,
-        text: this.state.text,
-        createAt: this.state.createAt.valueOf(),
-        color: this.state.color,
-        important: this.state.important,
-        tags: this.state.tags,
-      });
+    this.props.addNote({
+      title: this.state.title,
+      text: this.state.text,
+      createAt: this.state.createAt.valueOf(),
+      color: this.state.color,
+      important: this.state.important,
+      tags: this.state.tags,
+    });
 
-      this.cleanForm();
-    }
+    this.cleanForm();
   }
 
   updateNote = () => {
@@ -165,7 +163,7 @@ export class NoteForm extends React.Component {
               <button
                 className="button--link pointer actions__keep-note"
                 onClick={ this.props.note ? this.updateNote : this.addNote }
-                disabled={ this.state.text === '' }
+                disabled={ this.state.text === '' && this.state.title === '' }
               >
                 { this.props.note ? 'Update' : 'Keep' }
               </button>

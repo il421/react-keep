@@ -44,7 +44,7 @@ test('should remove a tag', () => {
 });
 
 test('update a tag', () => {
-  const id = 'YpjypoYGueKBUukRPQ5F';
+  const id = 'testId';
   const update = 'Need To Buy';
   const action = {
     type: 'UPDATE_TAG',
