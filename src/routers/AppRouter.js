@@ -1,9 +1,9 @@
 import React from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import {createBrowserHistory} from 'history';
-import LoginPage from '../components/LoginPage';
-import DashboardPage from '../components/DashboardPage';
-import NotFoundPage from '../components/NotFoundPage';
+import LoginPage from '../components/login/LoginPage';
+import DashboardPage from '../components/common/DashboardPage';
+import NotFoundPage from '../components/common/NotFoundPage';
 import PrivateRouter from './PrivateRouter';
 import PublicRouter from './PublicRouter';
 

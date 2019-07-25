@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import AddNote from './note/AddNote';
-import NotesList from './note/NotesList';
+import AddNote from '../note/AddNote';
+import NotesList from '../note/NotesList';
 import Header from './Header';
 import SideBar from './SideBar';
 

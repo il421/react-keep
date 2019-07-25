@@ -14,7 +14,7 @@ import './styles/styles.scss';
 import 'react-dates/lib/css/_datepicker.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import { firebase } from './firebase/firebase';
-import LoadingPage from './components/LoadingPage';
+import LoadingPage from './components/login/LoadingPage';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faBars } from '@fortawesome/free-solid-svg-icons/faBars';

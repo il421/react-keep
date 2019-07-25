@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setSearchFilter } from '../actions/filters';
+import { setSearchFilter } from '../../actions/filters';
 
 export const Search = ({ setSearchFilter }) => {
 

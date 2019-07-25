@@ -2,7 +2,7 @@ import React from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import Tags from './tags/Tags';
+import Tags from '../tags/Tags';
 
 export const SideBar = ({ hideSidebar, showBar }) => {
   return (
