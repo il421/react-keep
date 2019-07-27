@@ -7,7 +7,6 @@ import TagsSelection from '../tags/TagsSelection';
 import Textarea from 'react-textarea-autosize';
 import { handleDisplayTagsModal } from '../../actions/tags';
 
-
 export class NoteForm extends React.Component {
   constructor(props) {
     super(props);
@@ -36,7 +35,7 @@ export class NoteForm extends React.Component {
     this.props.onColorChange(color);
   };
 
-  handleInputChange = (checked, id) => {
+  onTagChange = (checked, id) => {
     if (checked) {
       const tag = this.props.userTags.find((tag) => tag.id === id);
       // add tag
@@ -83,6 +82,7 @@ export class NoteForm extends React.Component {
       text: '',
       createAt: moment(),
       color: '#fff',
+      important: false,
       tags: []
     };
 
@@ -141,7 +141,7 @@ export class NoteForm extends React.Component {
                     <TagsSelection
                       tags={ this.state.tags }
                       userTags={ this.props.userTags }
-                      handleInputChange={ this.handleInputChange }
+                      handleTagChange={ this.onTagChange }
                       name={ this.props.name }
                     />
                   ) : (

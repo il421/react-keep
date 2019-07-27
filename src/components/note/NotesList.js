@@ -21,7 +21,7 @@ export class NotesList extends React.Component {
     }));
   };
 
-  removeSelectedNote = () => {
+  resetSelectedNote = () => {
     this.setState(() => ({
       selectedNote: undefined
     }));
@@ -80,7 +80,7 @@ export class NotesList extends React.Component {
           (
             <UpdateNote
               selectedNote={ this.state.selectedNote }
-              removeSelectedNote={ this.removeSelectedNote }
+              resetSelectedNote={ this.resetSelectedNote }
             />
           )
         }

@@ -2,9 +2,9 @@ import React from 'react';
 
 export default class TagsSelection extends React.Component {
 
-  handleInputChange = (evt) => {
+  handleTagChange = (evt) => {
     const { checked, value } = evt.target;
-    this.props.handleInputChange(checked, value);
+    this.props.handleTagChange(checked, value);
   }
 
   checkInputs = (tags, id) => {
@@ -28,7 +28,7 @@ export default class TagsSelection extends React.Component {
                     id={ tag.id + this.props.name }
                     type="checkbox"
                     value={ tag.id }
-                    onChange={ this.handleInputChange }
+                    onChange={ this.handleTagChange }
                     checked={ this.checkInputs(this.props.tags, tag.id) }
                   />
                   <label htmlFor={ tag.id + this.props.name } className={`option-${index}`} />

@@ -38,7 +38,7 @@ export class TagsModal extends Component {
     if (this.state.tag !== '') {
       this.props.handleAddTag(this.state.tag);
     } else {
-      // Add toast
+      // @todo Add toast
     }
 
     // clean state.tag and local input value by ref
@@ -65,7 +65,7 @@ export class TagsModal extends Component {
     return (
       <>
         <Modal
-          isOpen={ this.props.displayTagsModal}
+          isOpen={ this.props.displayTagsModal }
           onRequestClose={ () => this.props.handleDisplayTagsModal(false) }
           closeTimeoutMS={ 200 }
           className="tags__modal"
@@ -119,7 +119,7 @@ export class TagsModal extends Component {
                                 <FontAwesomeIcon icon="edit" size="1x" />
                               </div>
                               <div className={`tags__name tags__name--${index}`}>{ tag.value }</div>
-                              <div className="pointer tags__remove-btn" onClick={ () => {this.removeTag(tag.id);} }>
+                              <div className="pointer tags__remove-btn" onClick={ () => { this.removeTag(tag.id); } }>
                                 <FontAwesomeIcon icon="times" size="1x" />
                               </div>
                             </>
@@ -135,7 +135,6 @@ export class TagsModal extends Component {
     );
   }
 }
-
 
 const mapDispatchToProps = (dispatch) => ({
   handleAddTag: (tag) => dispatch(handleAddTag(tag)),

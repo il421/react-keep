@@ -16,7 +16,7 @@ beforeEach(() => {
 
 });
 
-test('should render SideBar correctly', () => {
+test('should render AddNote correctly', () => {
   expect(wrapper).toMatchSnapshot();
 });
 

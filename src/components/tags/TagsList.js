@@ -36,6 +36,7 @@ export class TagsList extends React.Component {
                   <input
                     ref={ tag.id + 'list' }
                     id={ tag.id + 'list' }
+                    name={ tag.id + 'list' }
                     type="checkbox"
                     value={ tag.id }
                     defaultChecked={ true }

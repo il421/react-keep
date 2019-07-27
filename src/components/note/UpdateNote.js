@@ -13,9 +13,9 @@ export class UpdateNote extends React.Component {
   }
 
   updateEditedNote = (id, note) => {
-    const { handleUpdateNote, removeSelectedNote } = this.props;
+    const { handleUpdateNote, resetSelectedNote } = this.props;
     handleUpdateNote(id, note);
-    removeSelectedNote();
+    resetSelectedNote();
   }
 
   updateNoteColor = (color) => {
@@ -26,7 +26,7 @@ export class UpdateNote extends React.Component {
     return (
       <Modal
         isOpen={ !!this.props.selectedNote }
-        onRequestClose={ this.props.removeSelectedNote }
+        onRequestClose={ this.props.resetSelectedNote }
         contentLabel="Selected option"
         closeTimeoutMS={ 200 }
         className="note-modal--form"
@@ -42,7 +42,7 @@ export class UpdateNote extends React.Component {
               updateNote={ this.updateEditedNote }
               onColorChange={ this.updateNoteColor }
               note={ this.props.selectedNote }
-              closeUpdateForm={ this.props.removeSelectedNote }
+              closeUpdateForm={ this.props.resetSelectedNote }
               name={ 'update' }
             />
           </div>
