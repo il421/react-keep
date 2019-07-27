@@ -3,7 +3,7 @@
 
   position: absolute;
 
-  top: -140px;
+  top: -110px;
 
   width: 150px;
   height: auto;
@@ -14,22 +14,23 @@
 
   & div {
     padding: 3px;
-  }
+  };
 
   & input {
     display: none;
-  }
+  };
 
   & label {
+    display: block;
     width: 25px;
     height: 25px;
-  }
+  };
 
   & label:active {
     opacity: .5;
-  }
+  };
 
   & input:checked + label {
     border: 1px solid black;
-  }
-}
+  };
+};

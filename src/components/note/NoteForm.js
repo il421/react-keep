@@ -126,7 +126,7 @@ export class NoteForm extends React.Component {
           <div className="form__wrapper">
             <div className="form__options options">
               <div className="pointer options__color">
-                <FontAwesomeIcon icon="palette" size="2x" />
+                <FontAwesomeIcon icon="palette" size="lg" />
                 <ColorBox
                   name={ this.props.name }
                   updateColor={ this.onColorChange }
@@ -135,7 +135,7 @@ export class NoteForm extends React.Component {
               </div>
 
               <div className="pointer options__tags">
-                <FontAwesomeIcon icon="tags" size="2x" />
+                <FontAwesomeIcon icon="tags" size="lg" />
                 {
                   this.props.userTags.length > 0 ? (
                     <TagsSelection

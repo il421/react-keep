@@ -3,7 +3,7 @@
   "short_name": "Keep",
   "theme_color": "#4abdac",
   "background_color": "#ffffff",
-  "display": "browser",
+  "display": "fullscreen",
   "Scope": "/",
   "start_url": "/",
   "icons": [

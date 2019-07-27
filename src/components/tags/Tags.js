@@ -22,7 +22,7 @@ export class Tags extends Component{
         </div>
 
         <div className="tags__add-edit pointer">
-          <FontAwesomeIcon icon="edit" size="2x" />
+          <FontAwesomeIcon icon="edit" size="lg" />
           <button onClick={ this.toggleEditTags } className="button--link">Add/Edit Tags</button>
         </div>
 

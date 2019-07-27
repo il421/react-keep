@@ -98,10 +98,10 @@
 
   &__tags div {
     margin: calc(#{$s-size} / 3);
-    padding: calc(#{$s-size} / 2);
+    padding: calc(#{$s-size} / 3);
 
     background-color: $grey-light;
-    border-radius: 5px;
+    border-radius: 1rem;
     color: $white;
   }
 }

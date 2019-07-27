@@ -8,6 +8,8 @@ const TerserPlugin = require('terser-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = (env) => {
   let isProduction = false;
@@ -29,6 +31,15 @@ module.exports = (env) => {
     filename: '../index.html',
     template: 'src/index.ejs'
   });
+  const momentLocalesPlugin = new MomentLocalesPlugin();
+
+  const optimizeCssAssetsPlugin = new OptimizeCssAssetsPlugin({
+    cssProcessor: require('cssnano'),
+    cssProcessorPluginOptions: {
+      preset: ['default', { discardComments: { removeAll: true } }],
+    },
+    canPrint: true
+  });
 
   return {
     entry: ['@babel/polyfill', './src/app.js'],
@@ -39,7 +50,7 @@ module.exports = (env) => {
     },
 
     optimization: {
-      minimizer: [ new TerserPlugin() ],
+      minimizer: [ new TerserPlugin(), optimizeCssAssetsPlugin ],
     },
 
     stats: {
@@ -89,6 +100,7 @@ module.exports = (env) => {
       minCssExtract,
       // compressionPlugin,
       // BundleAnalyzer,
+      momentLocalesPlugin,
       new webpack.DefinePlugin({
         'process.env.FIREBASE_API_KEY': JSON.stringify(process.env.FIREBASE_API_KEY),
         'process.env.FIREBASE_AUTH_DOMAIN': JSON.stringify(process.env.FIREBASE_AUTH_DOMAIN),
@@ -107,6 +119,7 @@ module.exports = (env) => {
       publicPath: '/dist/',
       host: 'dev.my-keep.co.nz',
       port: 9000,
+      writeToDisk: true
     },
     performance: {
       hints: false

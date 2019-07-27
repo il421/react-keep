@@ -8,11 +8,8 @@ import { login, logout } from './actions/auth';
 import { handleSetNotes } from './actions/notes';
 import { handleSetTags } from './actions/tags';
 
-
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
-import 'react-dates/lib/css/_datepicker.css';
-import 'bootstrap/dist/css/bootstrap.css';
 import { firebase } from './firebase/firebase';
 import LoadingPage from './components/login/LoadingPage';
 

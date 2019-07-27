@@ -10,7 +10,7 @@ export const SideBar = ({ hideSidebar, showBar }) => {
       <div className={ `sidebar ${showBar && 'sidebar--show'}` }>
         <div className="sidebar__close">
           <button className="button--sidenav sidebar__close-button" onClick={() => hideSidebar()}>
-            <FontAwesomeIcon icon="times" size="3x"/>
+            <FontAwesomeIcon icon="times" size="2x"/>
           </button>
         </div>
 

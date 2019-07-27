@@ -24,7 +24,7 @@ const Note = ({
               evt.stopPropagation();
             }
             }>
-            <FontAwesomeIcon icon="bookmark" size="2x" />
+            <FontAwesomeIcon icon="bookmark" size="lg" />
           </div>
           <div className="actions__remove-btn pointer" onClick={
             (evt) => {
@@ -32,7 +32,7 @@ const Note = ({
               toggleConfirmDelete(id);
             }
           }>
-            <FontAwesomeIcon icon="times" size="2x" />
+            <FontAwesomeIcon icon="times" size="lg" />
           </div>
         </div>
 
