@@ -13,19 +13,10 @@
   &--link {
     background: none;
     color: $black;
-    border: none;
-    padding: $s-size;
-    font-size: $font-size-large;
-    font-weight: 300;
-    display: inline-block;
-    text-decoration: none;
-    line-height: 1;
   }
 
   &--sidenav {
-    display: inline-block;
     background: none;
-    border: none;
     color: $clean;
   }
 }

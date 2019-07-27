@@ -83,7 +83,7 @@ export class TagsModal extends Component {
                 onKeyPress={ (evt) => evt.key === 'Enter' && this.addNewTag() }
                 disabled={ this.state.editableTag !== null }
               />
-              <button className="button--link tags__add-btn" onClick={ this.addNewTag }>+</button>
+              <button className="button button--link tags__add-btn" onClick={ this.addNewTag }>+</button>
             </div>
 
             <div className="tags__list">

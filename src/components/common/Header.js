@@ -14,7 +14,7 @@ export const Header = ({ startLogout, auth, showSidebar }) => {
         <div className="header__content">
           <div className="header__sidebar">
 
-            <button className="button--sidenav" onClick={() => showSidebar()}>
+            <button className="button button--sidenav" onClick={() => showSidebar()}>
               <FontAwesomeIcon icon="bars" size="2x" />
             </button>
 
@@ -30,7 +30,7 @@ export const Header = ({ startLogout, auth, showSidebar }) => {
               <img src={ auth.url } width={ 50 } height={ 50 } />
             </div>
             <div className="user-box__name show-for-mobile">{ auth.name }</div>
-            <button className="button user-box__logout button--sidenav" onClick={ startLogout }>
+            <button className="user-box__logout button button--sidenav" onClick={ startLogout }>
               <FontAwesomeIcon icon="sign-out-alt" size="lg" />
             </button>
           </div>

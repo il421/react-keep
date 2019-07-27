@@ -154,14 +154,14 @@ export class NoteForm extends React.Component {
             </div>
             <div className="form__actions">
               <button
-                className="button--link pointer actions__close-note"
+                className="button button--link actions__close-note"
                 onClick={ this.props.note ? this.closeUpdateForm : this.cleanForm }
               >
                 Close
               </button>
 
               <button
-                className="button--link pointer actions__keep-note"
+                className="button button--link actions__keep-note"
                 onClick={ this.props.note ? this.updateNote : this.addNote }
                 disabled={ this.state.text === '' && this.state.title === '' }
               >
