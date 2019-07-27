@@ -1,5 +1,5 @@
 const path = require('path');
-const PACKAGE = require('./package.json');
+// const PACKAGE = require('./package.json');
 
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -26,14 +26,16 @@ module.exports = (env) => {
   // const BundleAnalyzer = new BundleAnalyzerPlugin();
   const cleanWebpackPlugin = new CleanWebpackPlugin();
   const htmlWebpackPlugin = new HtmlWebpackPlugin({
-    title: 'Caching'
+    filename: '../index.html',
+    template: 'src/index.ejs'
   });
 
   return {
     entry: ['@babel/polyfill', './src/app.js'],
     output: {
       path: path.join(__dirname, 'public', 'dist'),
-      filename: 'bundle.js?v=' + PACKAGE.version,
+      // filename: 'bundle.js?v=' + PACKAGE.version,
+      filename: 'bundle.[contenthash].js',
     },
 
     optimization: {
