@@ -44,13 +44,13 @@ const renderApp = () => {
 ReactDOM.render(<LoadingPage />, document.getElementById('app'));
 
 // google authentication
-firebase.auth().onAuthStateChanged((user) => {
+firebase.auth().onAuthStateChanged(async (user) => {
   if (user) {
     store.dispatch(login(user.uid, user.displayName, user.photoURL));
     store.dispatch(handleSetNotes());
     store.dispatch(handleSetTags());
 
-    renderApp();
+    await renderApp();
     if (history.location.pathname === '/') {
       history.push('/dashboard');
     }

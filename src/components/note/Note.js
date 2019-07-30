@@ -12,7 +12,7 @@ const Note = ({
   return (
     <>
       <div
-        className="note"
+        className="note note--animation"
         style={{ backgroundColor: color }}
         onClick={ () => selectNote({ title, text, createAt, color, id }) }
       >

@@ -1,8 +1,14 @@
 import React from 'react';
+import { RingLoader } from 'react-spinners';
 
 const LoadingPage = () => (
   <div className="loader">
-    <img className="loader__img" src="/img/loader.gif" />
+    <RingLoader
+      sizeUnit={'px'}
+      size={ 100 }
+      color={'#4abdac'}
+      loading={ true }
+    />
   </div>
 );
 
