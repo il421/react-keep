@@ -57,6 +57,10 @@ export const handleSetNotes = () => {
           console.log('No such document!');
         }
       });
+
+      // sort notes by created day
+      notes.sort((a, b) => b.createAt - a.createAt);
+
       dispatch(setNotes(notes));
     } catch (e) {
       console.log(e);

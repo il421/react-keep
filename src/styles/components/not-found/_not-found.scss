@@ -1,0 +1,16 @@
+.not-found {
+  @include extra-bg;
+
+  &__wrapper {
+    width: 25rem;
+    padding: $l-size $m-size;
+
+    background: white;
+    border-radius: 3px;
+    text-align: center;
+  }
+
+  &__text {
+    margin-bottom: $s-size;
+  }
+}

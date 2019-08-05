@@ -1,7 +1,9 @@
 @import 'base/variables';
 @import './base/base';
+@import 'mixins/mixins';
 
-@import 'components/common/box-layout';
+@import 'components/login/login-page';
+
 @import 'components/common/button';
 @import 'components/common/content-conteiner';
 @import 'components/common/visibility';
@@ -23,4 +25,6 @@
 @import 'components/tags/tags-selection';
 @import 'components/tags/tags';
 @import 'components/tags/tags-list';
+
+@import 'components/not-found/not-found';
 

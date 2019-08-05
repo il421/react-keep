@@ -52,7 +52,7 @@ firebase.auth().onAuthStateChanged(async (user) => {
 
     await renderApp();
     if (history.location.pathname === '/') {
-      history.push('/dashboard');
+      await history.push('/dashboard');
     }
 
   } else {
