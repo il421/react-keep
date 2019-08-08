@@ -1,18 +1,69 @@
 .login-page {
   @include extra-bg;
 
-  &__box {
+  &__login-box {
     width: 25rem;
+    height: 30rem;
     padding: $l-size $m-size;
 
     background: white;
     border-radius: 3px;
     text-align: center;
   }
+}
 
-  &__title {
-    margin: 0 0 $m-size 0;
+.login-box {
+  @include flex-col-between-center;
+
+  &__desc {
+    height: 25%;
+    margin-bottom: $m-size;
+  }
+
+  &__desc h1 {
+    margin: 0 0 $s-size 0;
 
     line-height: 1;
+  }
+
+  &__form {
+    flex-grow: 1;
+    @include flex-col-between-center;
+
+    //input container
+    & div {
+      position: relative;
+    }
+
+    & input {
+      width: 100%;
+      padding: 15px;
+
+      background-color: $white;
+      border: none;
+      box-shadow: 0 1px 1px 0 rgba(65,69,73,0.3), 0 1px 3px 1px rgba(65,69,73,0.15);
+      font-size: $font-size-medium;
+
+      &:focus {
+        box-shadow:  0 4px 4px 0 rgba(65,69,73,0.3), 0 4px 12px 4px rgba(65,69,73,0.15);
+      }
+    }
+
+    //error message
+    & span {
+      position: absolute;
+
+      width: 100%;
+      left: 0;
+      bottom: 0;
+
+      font-size: calc(#{$font-size-small} / 1.3);
+      color: $varmillion;
+    }
+
+    & button {
+      width: 100%;
+      box-shadow: 0 1px 1px 0 rgba(65,69,73,0.3), 0 1px 3px 1px rgba(65,69,73,0.15);
+    }
   }
 }
