@@ -19,20 +19,6 @@ const tags = {
 
 const notes = [
   {
-    id: 'kYKnuzVVnPKKhohfo7Z7',
-    color: '#f28b82',
-    createAt: 1562901836192,
-    important: true,
-    tags: [
-      {
-        id: 'DgKMm5pgnXWn9tB9gJve',
-        value: 'Important'
-      }
-    ],
-    text: 'I am going to a meeting. It is an important one.',
-    title: 'Information'
-  },
-  {
     id: 'orNjPwhicsrT5HZ7FdV8',
     color: '#cbf0f8',
     createAt: 1562906831465,
@@ -45,6 +31,20 @@ const notes = [
     ],
     text: 'I need to buy a bike for my son.',
     title: 'Buy'
+  },
+  {
+    id: 'kYKnuzVVnPKKhohfo7Z7',
+    color: '#f28b82',
+    createAt: 1562901836192,
+    important: true,
+    tags: [
+      {
+        id: 'DgKMm5pgnXWn9tB9gJve',
+        value: 'Important'
+      }
+    ],
+    text: 'I am going to a meeting. It is an important one.',
+    title: 'Information'
   }
 ];
 

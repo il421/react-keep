@@ -35,7 +35,7 @@ test('should remove a note by id', () => {
   };
 
   const state = notesReducer(notes, action);
-  expect(state).toEqual([notes[1]]);
+  expect(state).toEqual([notes[0]]);
 });
 
 test('should update a note', () => {
@@ -50,7 +50,7 @@ test('should update a note', () => {
   };
 
   const state = notesReducer(notes, action);
-  expect(state[0].title).toBe(updates.title);
+  expect(state[1].title).toBe(updates.title);
 });
 
 test('should change importance tag to opposite', () => {
@@ -73,7 +73,7 @@ test('should delete a tag from all notes', () => {
   };
 
   const state = notesReducer(notes, action);
-  expect(state[1].tags).toEqual([]);
+  expect(state[0].tags).toEqual([]);
 });
 
 test('should update a tag from all notes', () => {
@@ -85,5 +85,5 @@ test('should update a tag from all notes', () => {
   };
 
   const state = notesReducer(notes, action);
-  expect(state[0].tags[0].value).toBe(update);
+  expect(state[1].tags[0].value).toBe(update);
 });

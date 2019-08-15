@@ -1,13 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { startLogin } from '../../actions/auth';
+import { ToastContainer, toast } from 'react-toastify';
+import { BeatLoader } from 'react-spinners';
 
 export class LoginPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       email: '',
-      password: '',
+      password: ''
     };
   }
 
@@ -65,10 +67,9 @@ export class LoginPage extends React.Component {
     const emptyValues = this.state.email.length === 0 && this.state.password.length === 0;
 
     if(hasErrors && !emptyValues) {
-      console.log('valid');
+      this.props.startLogin(this.state.email, this.state.password);
     } else {
-      // @todo toast
-      console.log('not');
+      toast.warn('Some fields are empty, or data is not valid');
     }
   }
 
@@ -97,16 +98,31 @@ export class LoginPage extends React.Component {
                 </div>
               ))
             }
-            <button className="button" onClick={ this.onLoginUser }>Log In</button>
+
+            {
+              !this.props.loading ? (
+                <button className="button" onClick={ this.onLoginUser }>Log In</button>
+              ) : (
+                <BeatLoader sizeUnit={'px'} size={ 10 } color={'#4abdac'} css={ 'height: 42px;' }/>
+              )
+            }
           </div>
         </div>
+
+        <ToastContainer autoClose={ 3000 } />
       </div>
     );
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    loading: state.auth.loading
+  };
+};
+
 const mapDispatchToProps = (dispatch) => ({
-  startLogin: () => dispatch(startLogin())
+  startLogin: (email, password) => dispatch(startLogin(email, password))
 });
 
-export default connect(undefined, mapDispatchToProps)(LoginPage);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
