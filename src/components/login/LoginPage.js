@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { startLogin } from '../../actions/auth';
+import { startLogin, startSignUp } from '../../actions/auth';
 import { ToastContainer, toast } from 'react-toastify';
 import { BeatLoader } from 'react-spinners';
 
@@ -9,7 +9,13 @@ export class LoginPage extends React.Component {
     super(props);
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      new: false,
+
+      errors: {
+        email: '',
+        password: '',
+      },
     };
   }
 
@@ -28,10 +34,6 @@ export class LoginPage extends React.Component {
     }
   ];
 
-  errors = {
-    email: '',
-    password: '',
-  };
 
   handleInputChange = (id, evt) => {
     const VALID_EMAIL_REGEX =
@@ -42,16 +44,28 @@ export class LoginPage extends React.Component {
 
     switch (id) {
     case 'email':
-      this.errors.email =
+      // eslint-disable-next-line no-case-declarations
+      const emailError =
           VALID_EMAIL_REGEX.test(value)
             ? ''
             : 'Email is not valid!';
+      this.setState((prevState) => ({
+        errors: {...prevState.errors,
+          email: emailError,
+        },
+      }));
       break;
     case 'password':
-      this.errors.password =
+      // eslint-disable-next-line no-case-declarations
+      const passError =
             value.length < 8
               ? 'Password must be 8 characters long!'
               : '';
+      this.setState((prevState) => ({
+        errors: {...prevState.errors,
+          password: passError,
+        },
+      }));
       break;
     default:
       break;
@@ -62,12 +76,23 @@ export class LoginPage extends React.Component {
     }));
   }
 
+  handleNewUserCheckbox = () => {
+    this.setState((prevState) => ({
+      new: !prevState.new,
+    }));
+  }
+
   onLoginUser = () => {
-    const hasErrors = this.errors.email.length === 0 && this.errors.password.length === 0;
+    const hasErrors = this.state.errors.email.length === 0 && this.state.errors.password.length === 0;
     const emptyValues = this.state.email.length === 0 && this.state.password.length === 0;
 
     if(hasErrors && !emptyValues) {
-      this.props.startLogin(this.state.email, this.state.password);
+      if(this.state.new) { // new user
+        this.props.startSignUp(this.state.email, this.state.password);
+
+      } else {
+        this.props.startLogin(this.state.email, this.state.password);
+      }
     } else {
       toast.warn('Some fields are empty, or data is not valid');
     }
@@ -82,10 +107,22 @@ export class LoginPage extends React.Component {
             <p>Design by Ilya Suglobov</p>
           </div>
 
-          <div className="login-box__form">
+          <div className="login-box__form login-form">
+            <div className="login-form__new-user">
+              <input
+                id="new" type="checkbox" name="new-user"
+                value={ this.state.new }
+                onChange={ this.handleNewUserCheckbox }
+                defaultChecked={ false }
+              />
+              <label htmlFor="new" />
+
+              <div>I want to sign up as a new user</div>
+            </div>
+
             {
               this.login.map((input, index) => (
-                <div key={ index }>
+                <div className="login-form__fields" key={ index }>
                   <input
                     id={ input.id }
                     type={ input.type }
@@ -94,14 +131,14 @@ export class LoginPage extends React.Component {
                     defaultValue={ this.state[input.id] }
                     onInput={ (evt) => this.handleInputChange(input.id, evt) }
                   />
-                  <span>{ this.errors[input.id] }</span>
+                  <span>{ this.state.errors[input.id] }</span>
                 </div>
               ))
             }
 
             {
               !this.props.loading ? (
-                <button className="button" onClick={ this.onLoginUser }>Log In</button>
+                <button className="button login-form__btn" onClick={ this.onLoginUser }>Log In</button>
               ) : (
                 <BeatLoader sizeUnit={'px'} size={ 10 } color={'#4abdac'} css={ 'height: 42px;' }/>
               )
@@ -122,7 +159,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  startLogin: (email, password) => dispatch(startLogin(email, password))
+  startLogin: (email, password) => dispatch(startLogin(email, password)),
+  startSignUp: (email, password) => dispatch(startSignUp(email, password))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

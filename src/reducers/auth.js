@@ -1,4 +1,3 @@
-const defaultState = { loading: false };
 export default (state = {}, action) => {
   switch (action.type) {
   case 'LOGIN':

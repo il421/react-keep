@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { NoteForm } from '../../../../../components/note/NoteForm';
-import { notes, tags } from '../../../../fixtures/unit';
+import { tags } from '../../../../fixtures/unit';
 
 let wrapper, addNote, updateNote, displayNoteForm, name, onColorChange, closeUpdateForm, handleDisplayTagsModal;
 

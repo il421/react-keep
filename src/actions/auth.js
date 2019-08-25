@@ -29,6 +29,22 @@ export const startLogin = (email, password) => {
   };
 };
 
+export const startSignUp = (email, password) => {
+  return async (dispatch) => {
+    try {
+      dispatch(loading(true));
+      await firebase.auth().createUserWithEmailAndPassword(email, password);
+      console.log('Logged in successfully');
+    } catch (e) {
+      console.log(e);
+      toast.error(e.message);
+      dispatch(loading(false));
+    } finally {
+      dispatch(loading(false));
+    }
+  };
+};
+
 export const logout = () => ({
   type: 'LOGOUT'
 });
