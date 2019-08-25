@@ -4,29 +4,10 @@ module.exports = {
   'should login correctly with the test user data' : function (client) {
     client
       .init()
-      .waitForElementVisible('.login', 10000)
-      .click('.login__btn')
-      .windowHandles(function(result) {
-        const handle = result.value[1];
-        client.switchWindow(handle);
-      })
-      .waitForElementVisible('#identifierId', 10000)
-      .clearValue('#identifierId')
-      .setValue('#identifierId', user.email)
-      .click('.RveJvd')
-
-      .pause(3000)
-
-      .waitForElementVisible('.whsOnd', 10000)
-
-      .clearValue('.whsOnd')
-      .setValue('.whsOnd', user.password)
-      .click('.RveJvd')
-
-      .windowHandles(function(result) {
-        const handle = result.value[0];
-        client.switchWindow(handle);
-      })
+      .waitForElementVisible('.login-page', 10000)
+      .setValue('#email', user.email)
+      .setValue('#password', user.password)
+      .click('.login-form__btn')
 
       .waitForElementVisible('.dashboard', 10000)
       .assert.containsText('.user-box__name', `${user.name} ${user.surname}`);
@@ -278,7 +259,7 @@ module.exports = {
   'should logout correctly': function (client) {
     client
       .click('.user-box__logout')
-      .waitForElementVisible('.login', 1000)
+      .waitForElementVisible('.login-page', 1000)
       .end();
   }
 };
