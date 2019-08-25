@@ -1,18 +1,122 @@
 .login-page {
   @include extra-bg;
 
-  &__box {
-    width: 25rem;
+  &__login-box {
+    width: 30rem;
+    height: 35rem;
     padding: $l-size $m-size;
 
     background: white;
     border-radius: 3px;
     text-align: center;
   }
+}
 
-  &__title {
-    margin: 0 0 $m-size 0;
+.login-box {
+  @include flex-col-between-center;
+
+  &__desc {
+    height: 25%;
+    margin-bottom: $m-size;
+  }
+
+  &__desc h1 {
+    margin: 0 0 $s-size 0;
 
     line-height: 1;
+  }
+
+  &__form {
+    flex-grow: 1;
+
+    width: 100%;
+    @include flex-col-between-center;
+  }
+}
+
+.login-form {
+  &__new-user {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+
+    width: 100%;
+    label {
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      width: 20px;
+      height: 20px;
+      margin: 0;
+
+      background: $white;
+      box-shadow: inset 0 1px 1px $grey-light, 0 1px 3px rgba(0,0,0,0.5);
+
+      cursor: pointer;
+
+      &:after {
+        content: '';
+        position: absolute;
+        top: 4px;
+        left: 4px;
+
+        width: 10px;
+        height: 6px;
+
+        border: 3px solid #333;
+        border-top: none;
+        border-right: none;
+        background: transparent;
+        opacity: 0;
+        transform: rotate(-45deg);
+      }
+      &:hover::after {
+        opacity: 0;
+      }
+    }
+    input[type=checkbox] {
+      visibility: hidden;
+      &:checked + label:after {
+        opacity: 1;
+      }
+    }
+  }
+
+  //input container
+  &__fields {
+    position: relative;
+    width: 100%;
+  }
+
+  & input:not([type='checkbox']) {
+    width: 100%;
+    padding: 15px;
+
+    background-color: $white;
+    border: none;
+    box-shadow: 0 1px 1px 0 rgba(65,69,73,0.3), 0 1px 3px 1px rgba(65,69,73,0.15);
+    font-size: $font-size-medium;
+
+    &:focus {
+      box-shadow:  0 4px 4px 0 rgba(65,69,73,0.3), 0 4px 12px 4px rgba(65,69,73,0.15);
+    }
+  }
+
+  //error message
+  & span {
+    position: absolute;
+
+    width: 100%;
+    left: 0;
+    bottom: 0;
+
+    font-size: calc(#{$font-size-small} / 1.3);
+    color: $varmillion;
+  }
+
+  & button {
+    width: 100%;
+    box-shadow: 0 1px 1px 0 rgba(65,69,73,0.3), 0 1px 3px 1px rgba(65,69,73,0.15);
   }
 }

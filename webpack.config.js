@@ -21,7 +21,7 @@ module.exports = (env) => {
   }
 
   const minCssExtract = new MiniCssExtractPlugin({
-    filename: 'style.css',
+    filename: '[name].style.css',
   });
   // const compressionPlugin = new CompressionPlugin();
   // const BundleAnalyzer = new BundleAnalyzerPlugin();
@@ -44,11 +44,28 @@ module.exports = (env) => {
     entry: ['@babel/polyfill', './src/app.js'],
     output: {
       path: path.join(__dirname, 'public', 'dist'),
-      filename: 'bundle.[contenthash].js',
+      filename: '[name].[contenthash].js',
     },
 
     optimization: {
       minimizer: [ new TerserPlugin(), optimizeCssAssetsPlugin ],
+
+      splitChunks: {
+        chunks: 'all',
+        cacheGroups: {
+          vendors: {
+            name: 'vendors',
+            test: /[\\/]node_modules[\\/]/,
+            priority: -10,
+          },
+          main: {
+            name: 'main',
+            minChunks: 2,
+            priority: -20,
+            reuseExistingChunk: true
+          }
+        }
+      }
     },
 
     stats: {
@@ -90,6 +107,12 @@ module.exports = (env) => {
                 sourceMap: true
               }
             }
+          ]
+        },
+        {
+          test: /\.(png|svg|jpg|gif)$/,
+          use: [
+            'file-loader'
           ]
         }
       ]
