@@ -10,6 +10,7 @@ import { handleSetTags } from './actions/tags';
 
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { firebase } from './firebase/firebase';
 import LoadingPage from './components/login/LoadingPage';

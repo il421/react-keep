@@ -9,3 +9,10 @@
   background-image: url('/img/bg.jpg');
   background-size: cover;
 }
+
+@mixin flex-col-between-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}

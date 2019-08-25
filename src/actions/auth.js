@@ -1,4 +1,10 @@
-import { firebase, googleAuthProvider } from '../firebase/firebase';
+import { firebase } from '../firebase/firebase';
+import { toast } from 'react-toastify';
+
+export const loading = (loading) => ({
+  type: 'LOADING',
+  loading,
+});
 
 export const login = (uid, name, url) => ({
   type: 'LOGIN',
@@ -7,9 +13,35 @@ export const login = (uid, name, url) => ({
   url
 });
 
-export const startLogin = () => {
-  return () => {
-    return firebase.auth().signInWithPopup(googleAuthProvider);
+export const startLogin = (email, password) => {
+  return async (dispatch) => {
+    try {
+      dispatch(loading(true));
+      await firebase.auth().signInWithEmailAndPassword(email, password);
+      console.log('Logged in successfully');
+    } catch (e) {
+      console.log(e);
+      toast.error(e.message);
+      dispatch(loading(false));
+    } finally {
+      dispatch(loading(false));
+    }
+  };
+};
+
+export const startSignUp = (email, password) => {
+  return async (dispatch) => {
+    try {
+      dispatch(loading(true));
+      await firebase.auth().createUserWithEmailAndPassword(email, password);
+      console.log('Logged in successfully');
+    } catch (e) {
+      console.log(e);
+      toast.error(e.message);
+      dispatch(loading(false));
+    } finally {
+      dispatch(loading(false));
+    }
   };
 };
 
@@ -18,7 +50,13 @@ export const logout = () => ({
 });
 
 export const startLogout = () => {
-  return () => {
-    return firebase.auth().signOut();
+  return async () => {
+    try {
+      await firebase.auth().signOut();
+      console.log('Logged out successfully');
+    } catch (e) {
+      console.log(e);
+      toast.error(e.message);
+    }
   };
 };

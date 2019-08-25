@@ -1,5 +1,15 @@
 import authReducer from '../../../../reducers/auth';
 
+test('should set loading value', () => {
+  const action = {
+    type: 'LOADING',
+    loading: true
+  };
+
+  const state = authReducer({}, action);
+  expect(state.loading).toBe(action.loading);
+})
+
 test('should set uid for login', () => {
   const action = {
     type: 'LOGIN',

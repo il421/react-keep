@@ -24,9 +24,9 @@ test('should render NotesList correctly', () => {
 });
 
 test('should select correct note', () => {
-  wrapper.find('Note').at(0).prop('selectNote')(notes[0]);
+  wrapper.find('Note').at(0).prop('selectNote')(notes[1]);
 
-  expect(wrapper.state('selectedNote')).toEqual(notes[0]);
+  expect(wrapper.state('selectedNote')).toEqual(notes[1]);
 });
 
 test('should remove selected note correctly', () => {

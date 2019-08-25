@@ -4,7 +4,6 @@ const initDocumentRef = (uid) => {
   return database.collection(USERS_NOTES_DATABASE).doc(uid).collection('notes');
 };
 
-
 export const setNotes = (notes) => ({
   type: 'SET_NOTES',
   notes
