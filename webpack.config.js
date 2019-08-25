@@ -21,7 +21,7 @@ module.exports = (env) => {
   }
 
   const minCssExtract = new MiniCssExtractPlugin({
-    filename: '[name].style.css',
+    filename: '[name].[contenthash].style.css',
   });
   // const compressionPlugin = new CompressionPlugin();
   // const BundleAnalyzer = new BundleAnalyzerPlugin();
