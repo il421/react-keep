@@ -24,4 +24,4 @@ export const SideBar = ({ hideSidebar, showBar }) => {
   );
 };
 
-export  default SideBar;
+export default SideBar;

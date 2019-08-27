@@ -24,8 +24,12 @@ import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons/faMapMarkerAlt
 import { faBookmark } from '@fortawesome/free-solid-svg-icons/faBookmark';
 import { faTags } from '@fortawesome/free-solid-svg-icons/faTags';
 import { faEdit } from '@fortawesome/free-solid-svg-icons/faEdit';
+import { faCheckSquare } from '@fortawesome/free-solid-svg-icons/faCheckSquare';
+import { faAlignLeft } from '@fortawesome/free-solid-svg-icons/faAlignLeft';
 
-library.add(faBars, faSignOutAlt, faTimes, faPalette, faMapMarkerAlt, faBookmark, faTags, faEdit);
+library.add(
+  faBars, faSignOutAlt, faTimes, faPalette, faMapMarkerAlt, faBookmark, faTags, faEdit, faCheckSquare, faAlignLeft
+);
 
 const store = configStore();
 

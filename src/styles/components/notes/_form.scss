@@ -34,52 +34,86 @@
     resize: none;
     overflow: hidden;
   }
+}
 
-  &__wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    padding-top: $s-size;
-
-    border-top: 1px solid $clean;
-  }
-
-  &__options {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-  }
-
-  &__actions button:last-child {
-    margin-left: $s-size;
+//List Form
+.list {
+  &__item {
+    padding: 5px 0;
+    &:hover {
+      padding: 4px 0;
+      border-top: 1px solid $clean;
+      border-bottom: 1px solid $clean;
+    }
   }
 }
 
-.options {
-  position: relative;
+.item {
+  @include flex-row-between-center;
+  box-sizing: content-box;
 
-  &__color,
-  &__tags {
-    position: relative;
-
-    padding: 10px;
-  }
-
-  &__color:hover .color-box {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-
-    justify-content: flex-start;
-    align-items: center;
-  }
-
-  &__tags:hover .tags-selection {
+  &:hover &__remove {
     display: block;
   }
-}
 
+  &__check {
+    position: relative;
+    label {
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      width: 20px;
+      height: 20px;
+      margin: 0;
+
+      background: transparent;
+      box-shadow: inset 0 1px 1px $grey-light, 0 1px 3px rgba(0,0,0,0.5);
+
+      cursor: pointer;
+
+      &:after {
+        content: '';
+        position: absolute;
+        top: 4px;
+        left: 4px;
+
+        width: 10px;
+        height: 6px;
+
+        border: 3px solid #333;
+        border-top: none;
+        border-right: none;
+        background: transparent;
+        opacity: 0;
+        transform: rotate(-45deg);
+      }
+      &:hover::after {
+        opacity: 0;
+      }
+    }
+    input[type=checkbox] {
+      visibility: hidden;
+      &:checked + label:after {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__text {
+    flex-grow: 1;
+    margin: 0 $m-size;
+
+    input {
+      width: 100%;
+      margin: 0;
+    }
+  }
+
+  &__remove {
+    display: none;
+  }
+}
 
 [contenteditable=true]:empty:before {
   content: attr(placeholder);

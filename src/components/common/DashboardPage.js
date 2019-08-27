@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import AddNote from '../note/AddNote';
+import NoteSelection from '../note/NoteSelection';
 import NotesList from '../note/NotesList';
 import Header from './Header';
 import SideBar from './SideBar';
@@ -20,7 +20,7 @@ const DashboardPage = () => {
   return (
     <div className="dashboard">
       <Header showSidebar={ showSidebar } />
-      <AddNote className="content-container"/>
+      <NoteSelection className="content-container"/>
       <NotesList/>
 
       <SideBar showBar={ showBar } hideSidebar={ hideSidebar } />

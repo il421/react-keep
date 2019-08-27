@@ -1,14 +1,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { AddNote } from '../../../../../components/note/AddNote';
-import { notes } from '../../../../fixtures/unit';
+import { Add } from '../../../../../../components/note/NoteSelection';
+import { notes } from '../../../../../fixtures/unit';
 
 let wrapper, handleAddENote;
 
 beforeEach(() => {
   handleAddENote = jest.fn();
   wrapper = shallow(
-    <AddNote
+    <Add
       handleAddENote={ handleAddENote }
     />
   );
@@ -16,7 +16,7 @@ beforeEach(() => {
 
 });
 
-test('should render AddNote correctly', () => {
+test('should render Add correctly', () => {
   expect(wrapper).toMatchSnapshot();
 });
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { NoteForm } from '../../../../../components/note/NoteForm';
-import { tags } from '../../../../fixtures/unit';
+import { SimpleForm } from '../../../../../../components/note/forms/TextForm';
+import { tags } from '../../../../../fixtures/unit';
 
 let wrapper, addNote, updateNote, displayNoteForm, name, onColorChange, closeUpdateForm, handleDisplayTagsModal;
 
@@ -14,7 +14,7 @@ beforeEach(() => {
   handleDisplayTagsModal = jest.fn();
   name = 'add';
   wrapper = shallow(
-    <NoteForm
+    <SimpleForm
       addNote={ addNote }
       updateNote={ updateNote }
       displayNoteForm={ displayNoteForm }

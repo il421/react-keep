@@ -13,7 +13,7 @@ test('should filter by a tag', () => {
   expect(result).toEqual([notes[1]]);
 });
 
-test('should cut and format text with ...', () => {
+test('should cut and format simple with ...', () => {
 
   const result = getShortText(text[0]);
   expect(result).toEqual(text[1]);

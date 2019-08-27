@@ -1,6 +1,6 @@
 import React from 'react';
 import Note from './Note';
-import UpdateNote from './UpdateNote';
+import Update from './Update';
 import { connect } from 'react-redux';
 import { handleRemoveNote, changeNoteImportance } from '../../actions/notes';
 import { getFilteredNotes } from '../../libs/filters';
@@ -78,7 +78,7 @@ export class NotesList extends React.Component {
         {
           this.state.selectedNote &&
           (
-            <UpdateNote
+            <Update
               selectedNote={ this.state.selectedNote }
               resetSelectedNote={ this.resetSelectedNote }
             />

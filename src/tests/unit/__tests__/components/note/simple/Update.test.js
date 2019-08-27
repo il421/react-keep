@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { UpdateNote } from '../../../../../components/note/UpdateNote';
-import { notes } from '../../../../fixtures/unit';
+import { Update } from '../../../../../../components/note/Update';
+import { notes } from '../../../../../fixtures/unit';
 
 let wrapper, handleUpdateNote, resetSelectedNote;
 
@@ -9,7 +9,7 @@ beforeEach(() => {
   handleUpdateNote = jest.fn();
   resetSelectedNote = jest.fn();
   wrapper = shallow(
-    <UpdateNote
+    <Update
       resetSelectedNote={ resetSelectedNote }
       handleUpdateNote={ handleUpdateNote }
       selectedNote={notes[0]}

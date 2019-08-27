@@ -1,0 +1,48 @@
+.form-actions {
+    @include flex-row-between-center;
+
+    padding-top: $s-size;
+
+    border-top: 1px solid $clean;
+
+  &__options {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+  }
+
+  &__actions button:last-child {
+    margin-left: $s-size;
+  }
+}
+
+.options {
+  position: relative;
+
+  &__color,
+  &__tags {
+    position: relative;
+
+    padding: 10px;
+  }
+
+  &__color:hover .color-box {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  &__tags:hover .tags-selection {
+    display: block;
+  }
+}
+
+
+[contenteditable=true]:empty:before {
+  content: attr(placeholder);
+  display: block;
+  color: #757575;
+}

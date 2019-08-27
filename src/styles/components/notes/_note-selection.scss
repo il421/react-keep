@@ -1,4 +1,4 @@
-.note-form {
+.note-selection {
   width: 95vw;
   margin-top: $m-size;
   margin-bottom: $m-size;
@@ -6,8 +6,30 @@
   background-color: $white;
   box-shadow: 0 1px 1px 0 rgba(65,69,73,0.3), 0 1px 3px 1px rgba(65,69,73,0.15);
 
-  &__keep {
+  &__title {
     font-size: $font-size-small;
+  }
+
+  &__options {
+    width: 15%;
+    @include flex-row-between-center;
+
+    & input {
+      display: none;
+    }
+
+    & label {
+      opacity: 1;
+      transition: opacity .3s ease;
+    }
+
+    & label:hover {
+      opacity: 0.3;
+    }
+  }
+
+  &--select {
+    @include flex-row-between-center;
   }
 
   &--animation {

@@ -1,13 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import moment from 'moment';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import ColorBox from './ColorBox';
-import TagsSelection from '../tags/TagsSelection';
-import Textarea from 'react-textarea-autosize';
-import { handleDisplayTagsModal } from '../../actions/tags';
 
-export class NoteForm extends React.Component {
+import Textarea from 'react-textarea-autosize';
+import FormActions from '../FormActions';
+
+export class TextForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -88,18 +85,13 @@ export class NoteForm extends React.Component {
 
     this.setState(defaultNoteState);
     this.onColorChange(defaultNoteState.color);
-    this.props.displayNoteForm(false);
+    this.props.handleFormOptionSelect(null);
   }
 
   closeUpdateForm = () => {
     if (this.props.note) {
       this.props.closeUpdateForm();
     }
-  }
-
-  displayTagsModal = () => {
-    this.closeUpdateForm();
-    this.props.handleDisplayTagsModal(true);
   }
 
   render() {
@@ -123,67 +115,23 @@ export class NoteForm extends React.Component {
             spellCheck="false"
           />
 
-          <div className="form__wrapper">
-            <div className="form__options options">
-              <div className="pointer options__color">
-                <FontAwesomeIcon icon="palette" size="lg" />
-                <ColorBox
-                  name={ this.props.name }
-                  updateColor={ this.onColorChange }
-                  defaultColor={ this.state.color }
-                />
-              </div>
-
-              <div className="pointer options__tags">
-                <FontAwesomeIcon icon="tags" size="lg" />
-                {
-                  this.props.userTags.length > 0 ? (
-                    <TagsSelection
-                      tags={ this.state.tags }
-                      userTags={ this.props.userTags }
-                      handleTagChange={ this.onTagChange }
-                      name={ this.props.name }
-                    />
-                  ) : (
-                    <div className="tags-selection tags-selection__none">
-                      <a onClick={ this.displayTagsModal  }>Add your personal tags</a>
-                    </div>
-                  )
-                }
-              </div>
-            </div>
-            <div className="form__actions">
-              <button
-                className="button button--link actions__close-note"
-                onClick={ this.props.note ? this.closeUpdateForm : this.cleanForm }
-              >
-                Close
-              </button>
-
-              <button
-                className="button button--link actions__keep-note"
-                onClick={ this.props.note ? this.updateNote : this.addNote }
-                disabled={ this.state.text === '' && this.state.title === '' }
-              >
-                { this.props.note ? 'Update' : 'Keep' }
-              </button>
-            </div>
-          </div>
+          <FormActions
+            userTags={ this.props.userTags }
+            name={ this.props.name }
+            state={ this.state }
+            note={ this.props.note }
+            updateColor={ this.onColorChange }
+            updateNote={ this.updateNote }
+            addNote={ this.addNote }
+            closeUpdateForm={ this.closeUpdateForm }
+            cleanForm={ this.cleanForm }
+            handleTagChange={ this.onTagChange }
+          />
         </div>
       </>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    userTags: state.tags.list
-  };
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  handleDisplayTagsModal: (value) => dispatch(handleDisplayTagsModal(value))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(NoteForm);
+export default TextForm;
 

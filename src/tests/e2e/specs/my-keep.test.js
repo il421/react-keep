@@ -206,7 +206,7 @@ module.exports = {
       .waitForElementPresent('.note', 3000)
       .waitForElementPresent('.search', 3000)
 
-      // search by text
+      // search by simple
       .setValue('.search', textSearchQuery)
       .waitForElementNotPresent('.note', 3000)
       .clearValue('.search')

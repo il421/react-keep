@@ -1,10 +1,10 @@
 import React from 'react';
 import Modal from 'react-modal';
-import NoteForm from './NoteForm';
+import SimpleForm from './forms/TextForm';
 import { handleUpdateNote } from '../../actions/notes';
 import {connect} from 'react-redux';
 
-export class UpdateNote extends React.Component {
+export class Update extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -38,7 +38,7 @@ export class UpdateNote extends React.Component {
             className="note-form content-container"
             style={{ backgroundColor: this.state.color }}
           >
-            <NoteForm
+            <SimpleForm
               updateNote={ this.updateEditedNote }
               onColorChange={ this.updateNoteColor }
               note={ this.props.selectedNote }
@@ -57,4 +57,4 @@ const mapDispatchToProps = (dispatch) => ({
   handleUpdateNote: (id, note) => dispatch(handleUpdateNote(id, note))
 });
 
-export default connect(undefined, mapDispatchToProps)(UpdateNote);
+export default connect(undefined, mapDispatchToProps)(Update);
