@@ -1,3 +1,4 @@
 # Git Attributes
-ilya.js filter=firebaseAPIKey
+.env.development filter=firestoreDevAPIKey
+.env.production filter=firestoreProdAPIKey
 
