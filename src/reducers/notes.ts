@@ -1,5 +1,5 @@
 import {
-  AddNoteAction, Note, NotesActionsTypes, NotesStoreState, RemoveNoteAction,
+  AddNoteAction, NotesActionsTypes, NotesStoreState, RemoveNoteAction,
   RemoveNoteTagAction,
   SetNotesAction,
   ToggleImportantAction,

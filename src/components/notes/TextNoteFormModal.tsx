@@ -1,7 +1,7 @@
-import React from "react";
+import React, {Dispatch} from "react";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {BaseForm} from "../form/BaseForm";
-import {Note} from "../../store/store.types";
+import {AddNote, Note, NotesStoreState, Store} from "../../store/store.types";
 import {NoteType} from "./notes.types";
 import {PickerColors} from "../../common/variables";
 import {TextInputField} from "../form/TextInputField";
@@ -14,11 +14,16 @@ import ColorsPickerField from "./options/ColorsPickerField";
 import {BaseFormOptions} from "../form/BaseForm.types";
 import {FormRenderProps, FormSpy} from "react-final-form";
 import {FieldSpy} from "../form/FieldSpy";
+import {connect} from "react-redux";
+import {handleAddNote} from "../../actions/notes";
 
 interface TextNoteFormValues extends Omit<Note, "id" | "important" | "createdAt" | "updatedAt"> {
   currentOption: BaseFormOptions
 }
-interface TextNoteFormModalProps extends RouteComponentProps{}
+interface TextNoteFormModalProps extends RouteComponentProps {
+  addNote: (note: AddNote) => void;
+  notes: NotesStoreState
+}
 
 class TextNoteFormModal extends React.PureComponent<TextNoteFormModalProps> {
   private defaultTextNote: TextNoteFormValues = {
@@ -34,7 +39,7 @@ class TextNoteFormModal extends React.PureComponent<TextNoteFormModalProps> {
 
   state = {
     currentNoteColor: this.defaultTextNote.color
-  };
+  } as { currentNoteColor: PickerColors };
 
   render() {
     return (
@@ -51,7 +56,12 @@ class TextNoteFormModal extends React.PureComponent<TextNoteFormModalProps> {
         >
           <BaseForm<TextNoteFormValues>
             initialValues={this.defaultTextNote}
-            onSubmit={(values) => console.log(values)}
+            onSubmit={
+              async (values: TextNoteFormValues) => {
+                const { currentOption, ...note } = values;
+                await this.props.addNote(note);
+                this.props.history.push(PathNames.base);
+              }}
             onCancel={() => this.props.history.push(PathNames.base)}
             getFormOptions={
               <FormSpy>
@@ -87,9 +97,10 @@ class TextNoteFormModal extends React.PureComponent<TextNoteFormModalProps> {
             <FieldSpy
               name={this.nameOf("color")}
               onChange={
-                (value) => {
-                  if (this.state.currentNoteColor !== value) {
-                    this.setState({currentNoteColor: value});
+                // set the component color
+                (currentNoteColor: PickerColors) => {
+                  if (this.state.currentNoteColor !== currentNoteColor) {
+                    this.setState({ currentNoteColor });
                   }
                 }
               }
@@ -101,4 +112,17 @@ class TextNoteFormModal extends React.PureComponent<TextNoteFormModalProps> {
   }
 }
 
-export default withRouter(TextNoteFormModal);
+const mapStateToProps = (state: Store) => {
+  return {
+    notes: state.notes
+  };
+};
+
+const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
+  addNote: (note: AddNote) => dispatch(handleAddNote(note)),
+});
+
+export default withRouter(connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TextNoteFormModal));

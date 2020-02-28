@@ -1,4 +1,3 @@
-import { Moment } from "moment";
 import {NoteType} from "../components/notes/notes.types";
 import {User} from "firebase";
 
@@ -58,9 +57,11 @@ export interface Note {
   tags: string[];
   color: string;
   important: boolean,
-  createdAt: Moment,
-  updatedAt: Moment
+  createdAt: number,
+  updatedAt: number
 }
+
+export interface AddNote extends Omit<Note, "id" | "important" | "createdAt" | "updatedAt"> {}
 
 export interface ListItem {
   id: string;

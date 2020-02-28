@@ -71,6 +71,7 @@ firebase.auth().onAuthStateChanged(async (user) => {
     store.dispatch<any>(handleSetNotes());
     store.dispatch<any>(handleSetTags());
 
+
     await renderApp();
     if (history.location.pathname === "/") {
       await history.push(PathNames.base);

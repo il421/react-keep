@@ -1,5 +1,6 @@
 import database from "../firebase/firebase";
 import {
+  AddNote,
   AddNoteAction,
   Note,
   NotesActionsTypes,
@@ -14,6 +15,7 @@ import {
 import {Dispatch} from "redux";
 import {getMessage, Message} from "../common";
 import {toast} from "react-toastify";
+import moment from "moment";
 
 const initDocumentRef = (uid: string) => {
   const USERS_NOTES_DATABASE = "users";
@@ -79,25 +81,21 @@ export const handleSetNotes = () => {
   };
 };
 
-export const handleAddNote = (note: Note) => {
+export const handleAddNote = (note: AddNote) => {
   return async (dispatch: Dispatch, getState: () => Store) => {
     const uid = getState().auth.uid;
-    // const {
-    //   title = '',
-    //   text = '',
-    //   color = '#fff',
-    //   createdAt = 0,
-    //   important = false,
-    //   tags = [],
-    // } = noteData;
-    //
-    // const note = { title, text, color, createdAt, important, tags };
 
+    const newNote = {
+      createdAt: moment().valueOf(),
+      updatedAt: moment().valueOf(),
+      important: false,
+      ...note
+    };
     try {
-      const docRef = await initDocumentRef(uid).add(note);
+      const docRef = await initDocumentRef(uid).add(newNote);
       dispatch(addNote({
         id: docRef.id,
-        ...note
+        ...newNote
       }));
     } catch (e) {
       console.log(e.message);
