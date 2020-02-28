@@ -1,11 +1,14 @@
-.user-box {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+@import '../../mixins/mixins';
+@import '../../base/variables';
 
-  &__name {
+.user-box {
+  @include flex-row-between-center;
+
+  &__link {
     font-size: $font-size-large;
+
     color: $clean;
+    text-decoration: underline;
   }
 
   &__photo {

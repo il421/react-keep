@@ -1,0 +1,14 @@
+.note-options {
+  height: 0;
+  transition: height 500ms ease;
+
+  &--colors {
+    height: 100px;
+    transition: height 500ms ease;
+  }
+
+  &--tags {
+    height: 200px;
+    transition: height 500ms ease;
+  }
+}

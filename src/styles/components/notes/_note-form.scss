@@ -1,72 +1,88 @@
+@import '../../base/variables';
+@import '../../mixins/mixins';
+
 .note-form {
-  width: 95vw;
-  margin-top: $m-size;
-  margin-bottom: $m-size;
+  @include flex-col-between-between;
 
-  background-color: $white;
-  box-shadow: 0 1px 1px 0 rgba(65,69,73,0.3), 0 1px 3px 1px rgba(65,69,73,0.15);
+  &__title input,
+  &__text textarea{
+    width: 100%;
+    margin-bottom: $s-size;
 
-  &__keep {
-    font-size: $font-size-small;
+    border: none;
+    outline: none;
+    background-color: inherit;
+
+    cursor: text;
   }
 
-  &--animation {
-    animation-duration: 0.75s;
-    animation-name: bounceIn;
+  &__title input {
+    font-weight: bold;
+    font-size: $font-size-large;
   }
 
-  &:hover {
-    box-shadow:  0 4px 4px 0 rgba(65,69,73,0.3), 0 4px 12px 4px rgba(65,69,73,0.15);
+  &__text textarea {
+    font-size: $font-size-medium;
+    line-height: 1.6;
+    resize: none;
+    overflow: hidden;
   }
 
-  @media (min-width: $tablet-widths) {
-    & {
-      width: 500px;
-    }
+  &__actions {
+    border-top: 1px solid $clean ;
   }
 }
 
-@keyframes bounceIn {
-  from,
-  20%,
-  40%,
-  60%,
-  80%,
-  to {
-    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+.actions {
+  &__options {
+    flex-grow: 1;
   }
 
-  0% {
-    opacity: 0;
-    -webkit-transform: scale3d(0.3, 0.3, 0.3);
-    transform: scale3d(0.3, 0.3, 0.3);
-  }
+  &__buttons {
+    width: 50%;
 
-  20% {
-    -webkit-transform: scale3d(1.1, 1.1, 1.1);
-    transform: scale3d(1.1, 1.1, 1.1);
-  }
+    @media (min-width: $tablet-widths)   {
+      width: 35%;
+    }
 
-  40% {
-    -webkit-transform: scale3d(0.9, 0.9, 0.9);
-    transform: scale3d(0.9, 0.9, 0.9);
-  }
+    @media (min-width: $desktop-widths)   {
+      width: 30%;
+    }
+    }
+}
 
-  60% {
-    opacity: 1;
-    -webkit-transform: scale3d(1.03, 1.03, 1.03);
-    transform: scale3d(1.03, 1.03, 1.03);
-  }
+.options {
+  &__item {
+    margin: $s-size;
+    & input {
+      display: none;
+    };
 
-  80% {
-    -webkit-transform: scale3d(0.97, 0.97, 0.97);
-    transform: scale3d(0.97, 0.97, 0.97);
-  }
+    & label {
+      display: block;
+      transition: transform 300ms ease-in-out;
 
-  to {
-    opacity: 1;
-    -webkit-transform: scale3d(1, 1, 1);
-    transform: scale3d(1, 1, 1);
+      &:hover {
+        transform: scale(1.2);
+        transition: transform 300ms ease-in-out;
+      }
+
+      &:active {
+        opacity: .5;
+      };
+    };
+
+    & input:checked + label.icon-button--radio {
+      border: 1px solid black;
+    };
   }
+}
+
+.example-appear {
+  opacity: 0.01;
+}
+
+.example-appear.example-appear-active {
+  opacity: 1;
+  transition: opacity .5s ease-in;
 }

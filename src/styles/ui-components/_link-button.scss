@@ -1,0 +1,9 @@
+@import '../mixins/mixins';
+@import '../base/variables';
+
+.link-button {
+  @include button;
+
+  background: none;
+  color: $black;
+}

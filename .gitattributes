@@ -1,4 +1,0 @@
-# Git Attributes
-.env.development filter=firestoreDevAPIKey
-.env.production filter=firestoreProdAPIKey
-

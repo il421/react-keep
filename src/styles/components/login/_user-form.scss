@@ -1,0 +1,19 @@
+@import '../../mixins/mixins';
+@import '../../base/variables';
+@import './login-page';
+
+.user-modal {
+  width: 320px;
+
+  background-color: $white;
+  box-shadow: 0 1px 1px 0 rgba(65,69,73,0.3), 0 1px 3px 1px rgba(65,69,73,0.15);
+}
+
+.user-form {
+  @include flex-col-between-center;
+
+  &__field {
+    @extend .login-form__field;
+    margin-bottom: $s-size;
+  }
+}

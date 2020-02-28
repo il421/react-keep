@@ -1,0 +1,22 @@
+@import '../mixins/mixins';
+@import '../base/variables';
+
+.icon-radio {
+  background: none;
+  color: $grey-light;
+  font-size: $font-size-large;
+
+
+  transition: color 500ms ease;
+  cursor: pointer;
+
+  &:hover {
+    color: lighten($varmillion, 20%);
+
+    transition: color 500ms ease;
+  }
+
+  &--checked {
+    color: $varmillion;
+  }
+}

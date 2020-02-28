@@ -1,0 +1,25 @@
+{
+  "extends": "react-app",
+  "rules": {
+    "jsx-a11y/anchor-is-valid": "off",
+    "indent": [
+      "error",
+      2
+    ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "quotes": [
+      "error",
+      "double"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ]
+  },
+  "globals": {
+    "gtm": false
+  }
+}
