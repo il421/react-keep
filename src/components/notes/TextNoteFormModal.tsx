@@ -89,7 +89,7 @@ class TextNoteFormModal extends React.PureComponent<TextNoteFormModalProps> {
               onChange={
                 (value) => {
                   if (this.state.currentNoteColor !== value) {
-                    this.setState({currentNoteColor: value})
+                    this.setState({currentNoteColor: value});
                   }
                 }
               }
