@@ -3,9 +3,9 @@ import { User } from "firebase";
 
 export type Store =  {
     auth: AuthStoreState,
-    notes: NotesStoreState,
+    notes: NotesStoreState[],
     filters: FiltersStoreState,
-    tags: TagsStoreState
+    tags: TagsStoreState[]
 }
 
 // AUTH

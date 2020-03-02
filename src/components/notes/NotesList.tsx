@@ -1,22 +1,31 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Store } from "../../store/store.types";
-import { ContentContainer } from "../ui-components/ContentContainer";
+import { Note } from "../../store/store.types";
 
-const NotesList: React.FunctionComponent = () => {
+import { ContentContainer } from "../ui-components/ContentContainer";
+import { NotesItem } from "./NotesItem";
+
+interface NotesListProps {
+  notes: Note[];
+}
+
+const NotesList: React.FunctionComponent<NotesListProps> = ({ notes }): JSX.Element => {
 
   return (
     <ContentContainer>
-      notes
+      {
+        notes!.map((note: Note, index: number) => (
+          <NotesItem note={note} key={index} />
+        ))
+      }
     </ContentContainer>
   );
 };
 
-const mapStateToProps = (state: Store) => {
-  return {
-    notes: state.notes
-  };
-};
+const mapStateToProps = (state: Store) => ({
+  notes: state.notes
+});
 
 
-export default connect(mapStateToProps, undefined)(NotesList);
+export default connect(mapStateToProps, () => {})(NotesList);

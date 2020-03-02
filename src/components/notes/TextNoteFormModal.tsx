@@ -2,17 +2,17 @@ import React, { Dispatch } from "react";
 import { connect } from "react-redux";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import Modal from "react-modal";
-import { AddNote, Note } from "../../../store/store.types";
-import { NoteType } from "../notes.types";
-import { PickerColors } from "../../../common/variables";
-import ColorsPickerField from "../options/ColorsPickerField";
-import { isModal, nameOf, Placeholders } from "../../../common";
-import { PathNames, QueryKeys } from "../../../routers/Routing";
-import { ContentContainer } from "../../ui-components";
-import { BaseFormOptions, FieldSpy, TextInputField, BaseForm } from "../../form";
+import { AddNote, Note } from "../../store/store.types";
+import { NoteType } from "./notes.types";
+import { PickerColors } from "../../common/variables";
+import ColorsPickerField from "./options/ColorsPickerField";
+import { isModal, nameOf, Placeholders } from "../../common";
+import { PathNames, QueryKeys } from "../../routers/Routing";
+import { ContentContainer } from "../ui-components/index";
+import { BaseFormOptions, FieldSpy, TextInputField, BaseForm } from "../form/index";
 import { FormRenderProps, FormSpy } from "react-final-form";
-import { handleAddNote } from "../../../actions/notes";
-import "../../../styles/components/notes/_note-form.scss";
+import { handleAddNote } from "../../actions/notes";
+import "../../styles/components/notes/_note-form.scss";
 
 interface TextNoteFormValues extends Omit<Note, "id" | "important" | "createdAt" | "updatedAt"> {
   currentOption: BaseFormOptions

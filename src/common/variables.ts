@@ -1,6 +1,8 @@
 // theme colors
 export enum Colors {
   fresh = "#4abdac",
+  varmillion = "#fc4a1a",
+  lightGray = "#7A7A7A",
   white = "#fff",
   black = "#000"
 }
