@@ -8,7 +8,7 @@ import NotFoundPage from "../components/common/NotFoundPage";
 
 import PrivateRouter from "./PrivateRouter";
 import PublicRouter from "./PublicRouter";
-import {PathNames} from "./Routing";
+import { PathNames } from "./Routing";
 
 export const history: History = createBrowserHistory();
 

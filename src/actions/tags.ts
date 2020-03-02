@@ -9,9 +9,9 @@ import {
   TagsActionsTypes,
   UpdateTagAction
 } from "../store/store.types";
-import {Dispatch} from "redux";
-import {toast} from "react-toastify";
-import {getMessage, Message} from "../common";
+import { Dispatch } from "redux";
+import { toast } from "react-toastify";
+import { getMessage, Message } from "../common";
 
 const initDocumentRef = (uid: string) => {
   const USERS_NOTES_DATABASE = "users";
@@ -55,7 +55,7 @@ export const handleSetTags = () => {
       const snapshot = await docRef.get();
       snapshot.forEach((doc) => {
         if(doc.exists) {
-          tags.unshift({id: doc.id, ...doc.data() as Tag});
+          tags.unshift({ id: doc.id, ...doc.data() as Tag });
         } else {
           console.log(getMessage(Message.errorNoSuchDoc));
           toast.error(getMessage(Message.errorNoSuchDoc));

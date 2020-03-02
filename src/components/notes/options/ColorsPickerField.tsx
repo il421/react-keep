@@ -1,8 +1,8 @@
 import React from "react";
-import { FlexBox } from "../../ui-components/FlexBox";
+import { FlexBox } from "../../ui-components";
 import { JustifyContent, PickerColors } from "../../../common/variables";
+import { RadioButtonsInputField } from "../../form";
 import "../../../styles/components/notes/_colors-picker.scss";
-import { RadioButtonsInputField } from "../../form/RadioButtonsInputField";
 
 class ColorsPickerField extends React.PureComponent {
   render() {

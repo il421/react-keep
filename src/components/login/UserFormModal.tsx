@@ -1,19 +1,15 @@
-import React, {Dispatch} from "react";
-import {BaseForm} from "../form/BaseForm";
-import {TextInputField} from "../form/TextInputField";
-import { isModal, nameOf, Placeholders} from "../../common";
+import React, { Dispatch } from "react";
+import { connect } from "react-redux";
+import { History } from "history";
 import Modal from "react-modal";
-import {PathNames, QueryKeys} from "../../routers/Routing";
-import {ContentContainer} from "../ui-components/ContentContainer";
-import {LoginButton} from "../ui-components/LoginButton";
-import {connect} from "react-redux";
-import {AuthStoreState, Store, UpdateUser} from "../../store/store.types";
-import {History} from "history";
-import {FlexBox} from "../ui-components/FlexBox";
-import {JustifyContent} from "../../common/variables";
-import {updateUserData} from "../../actions/auth";
+import { PathNames, QueryKeys } from "../../routers/Routing";
+import { JustifyContent } from "../../common/variables";
+import { AuthStoreState, Store, UpdateUser } from "../../store/store.types";
+import { isModal, nameOf, Placeholders } from "../../common";
+import { updateUserData } from "../../actions/auth";
+import { ContentContainer, LoginButton, FlexBox } from "../ui-components";
+import { BaseForm, TextInputField, FileFormField } from "../form";
 import "../../styles/components/login/_user-form.scss";
-import {FileFormField} from "../form/FileFormField";
 
 interface UserFormValues {
   firstName: string,
@@ -68,7 +64,7 @@ class UserFormModal extends React.PureComponent<UserFormModalProps> {
   render() {
     return (
       <Modal
-        isOpen={ isModal({query: this.props.history.location.search, type: QueryKeys.user}) }
+        isOpen={ isModal({ query: this.props.history.location.search, type: QueryKeys.user }) }
         onRequestClose={ () => this.props.history.push(PathNames.base) }
         closeTimeoutMS={ 200 }
         className="user-modal"
@@ -85,7 +81,7 @@ class UserFormModal extends React.PureComponent<UserFormModalProps> {
             getButtons={this.getButtons}
           >
             {/*// @TODO change to a component*/}
-            <div style={{width: "100px", height: "100px", borderRadius: "50%", background: "green"}} />
+            <div style={{ width: "100px", height: "100px", borderRadius: "50%", background: "green" }} />
 
             <FileFormField name={this.nameOf("url")} className="user-form__avatar" />
             <FlexBox vertical justifyContent={JustifyContent.spaceBetween} className="user-form__fields">

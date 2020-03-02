@@ -11,7 +11,7 @@ interface PublicRouterProps {
   exact: boolean;
 }
 
-const PublicRouter: React.FunctionComponent<PublicRouterProps> = ({isAuthenticated, component: Component, ...rest}) => (
+const PublicRouter: React.FunctionComponent<PublicRouterProps> = ({ isAuthenticated, component: Component, ...rest }) => (
   <Route {...rest} component={(props: any) => (
     isAuthenticated ? (
       <Redirect to={PathNames.base} />

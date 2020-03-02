@@ -1,4 +1,4 @@
-import {FiltersActionsTypes, SearchFilterAction, TagsFilterAction} from "../store/store.types";
+import { FiltersActionsTypes, SearchFilterAction, TagsFilterAction } from "../store/store.types";
 
 export const setSearchFilter = (search: string): SearchFilterAction => ({
   type: FiltersActionsTypes.setSearchFilter,

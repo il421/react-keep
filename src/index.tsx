@@ -30,7 +30,7 @@ import { faCheckSquare } from "@fortawesome/free-solid-svg-icons/faCheckSquare";
 import { faAlignLeft } from "@fortawesome/free-solid-svg-icons/faAlignLeft";
 import { faImage } from "@fortawesome/free-solid-svg-icons/faImage";
 import { LoginAction } from "./store/store.types";
-import {PathNames} from "./routers/Routing";
+import { PathNames } from "./routers/Routing";
 
 library.add(
   faBars,

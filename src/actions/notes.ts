@@ -12,9 +12,9 @@ import {
   ToggleImportantAction,
   UpdateNoteAction
 } from "../store/store.types";
-import {Dispatch} from "redux";
-import {getMessage, Message} from "../common";
-import {toast} from "react-toastify";
+import { Dispatch } from "redux";
+import { getMessage, Message } from "../common";
+import { toast } from "react-toastify";
 import moment from "moment";
 
 const initDocumentRef = (uid: string) => {
@@ -63,7 +63,7 @@ export const handleSetNotes = () => {
       const snapshot = await docRef.get();
       snapshot.forEach((doc) => {
         if(doc.exists) {
-          notes.push({id: doc.id, ...doc.data() as Note});
+          notes.push({ id: doc.id, ...doc.data() as Note });
         } else {
           toast.error(Message.errorNoSuchDoc);
           console.log(getMessage(Message.errorNoSuchDoc));

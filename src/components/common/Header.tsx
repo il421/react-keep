@@ -1,21 +1,16 @@
 import React, { Dispatch } from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { stringify } from "query-string";
+import { AuthStoreState, Store } from "../../store/store.types";
+import { QueryKeys } from "../../routers/Routing";
+import { startLogout } from "../../actions/auth";
+import Search from "./Search";
+import { Controllers } from "./Controllers";
+import { IconButton, UserPhoto, ContentContainer, LinkButton } from "../ui-components";
 import "../../styles/components/header/_header.scss";
 import "../../styles/components/header/_user-box.scss";
 import "../../styles/components/common/_visibility.scss";
-
-import { startLogout } from "../../actions/auth";
-
-import Search from "./Search";
-import { IconButton } from "../ui-components/IconButton";
-import { AuthStoreState, Store } from "../../store/store.types";
-import { UserPhoto } from "../ui-components/UserPhoto";
-import { ContentContainer } from "../ui-components/ContentContainer";
-import { Controllers } from "./Controllers";
-import { LinkButton } from "../ui-components/LinkButton";
-import { QueryKeys } from "../../routers/Routing";
-import { useHistory } from "react-router-dom";
-import {stringify} from "query-string";
 
 interface HeaderProps {
   startLogout: () => void;

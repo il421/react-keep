@@ -1,5 +1,5 @@
+import React from "react";
 import { FormState, getIn } from "final-form";
-import * as React from "react";
 import { FormSpy } from "react-final-form";
 
 export interface FieldSpyProps<

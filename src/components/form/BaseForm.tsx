@@ -1,12 +1,11 @@
-import React, {ReactNode} from "react";
-import {Form, FormRenderProps} from "react-final-form";
-import {ValidationErrors} from "final-form";
-import {FlexBox} from "../ui-components/FlexBox";
-import {LinkButton} from "../ui-components/LinkButton";
-import {AlignItems, JustifyContent} from "../../common/variables";
-import {BaseFormOptions} from "./BaseForm.types";
-import {RadioButtonsInputField} from "./RadioButtonsInputField";
-import {IconProp} from "@fortawesome/fontawesome-svg-core";
+import React, { ReactNode } from "react";
+import { Form, FormRenderProps } from "react-final-form";
+import { ValidationErrors } from "final-form";
+import { FlexBox, LinkButton } from "../ui-components";
+import { AlignItems, JustifyContent } from "../../common/variables";
+import { BaseFormOptions } from "./BaseForm.types";
+import { RadioButtonsInputField } from "./RadioButtonsInputField";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import "../../styles/components/notes/_note-form.scss";
 import "../../styles/ui-components/_icon-button.scss";
 

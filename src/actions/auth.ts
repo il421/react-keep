@@ -1,7 +1,7 @@
-import {firebase} from "../firebase/firebase";
-import {toast} from "react-toastify";
-import {AuthActionsTypes, LoadingAction, LoginAction, LogoutAction, Store, UpdateUser} from "../store/store.types";
-import {Dispatch} from "redux";
+import { firebase } from "../firebase/firebase";
+import { toast } from "react-toastify";
+import { AuthActionsTypes, LoadingAction, LoginAction, LogoutAction, Store, UpdateUser } from "../store/store.types";
+import { Dispatch } from "redux";
 import { getMessage, Message } from "../common";
 
 export const loading = (loading: boolean): LoadingAction => ({

@@ -1,5 +1,5 @@
-import {NoteType} from "../components/notes/notes.types";
-import {User} from "firebase";
+import { NoteType } from "../components/notes/notes.types";
+import { User } from "firebase";
 
 export type Store =  {
     auth: AuthStoreState,

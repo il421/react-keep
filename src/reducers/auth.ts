@@ -1,4 +1,4 @@
-import {AuthActionsTypes, AuthStoreState, LoadingAction, LoginAction, LogoutAction} from "../store/store.types";
+import { AuthActionsTypes, AuthStoreState, LoadingAction, LoginAction, LogoutAction } from "../store/store.types";
 
 type AuthAction = LoginAction | LogoutAction | LoadingAction;
 

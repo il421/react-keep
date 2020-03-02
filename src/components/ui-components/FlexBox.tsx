@@ -1,5 +1,5 @@
-import React, {CSSProperties} from "react";
-import {AlignItems, JustifyContent} from "../../common/variables";
+import React, { CSSProperties } from "react";
+import { AlignItems, JustifyContent } from "../../common/variables";
 
 interface FlexBoxProps extends Partial<Pick<HTMLElement, "className">> {
   vertical?: boolean;

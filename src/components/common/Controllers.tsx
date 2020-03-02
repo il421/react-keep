@@ -1,11 +1,10 @@
 import React from "react";
-import { FlexBox } from "../ui-components/FlexBox";
-import { IconButton } from "../ui-components/IconButton";
 import { QueryKeys } from "../../routers/Routing";
 import { useHistory } from "react-router-dom";
 import { stringify } from "query-string";
+import { AlignItems, JustifyContent } from "../../common/variables";
+import { IconButton, FlexBox } from "../ui-components";
 import "../../styles/components/common/_controllers.scss";
-import {AlignItems, JustifyContent} from "../../common/variables";
 
 interface Controllers extends Partial<Pick<HTMLElement, "className">> {
   isMobile?: boolean;

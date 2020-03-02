@@ -1,8 +1,8 @@
 import React from "react";
-import {BeatLoader} from "react-spinners";
+import { BeatLoader } from "react-spinners";
+import { Colors, JustifyContent } from "../../common/variables";
+import { FlexBox } from "./FlexBox";
 import "../../styles/ui-components/_login-button.scss";
-import {Colors, JustifyContent} from "../../common/variables";
-import {FlexBox} from "./FlexBox";
 
 interface LoginButtonProps extends Partial<Pick<HTMLButtonElement, "disabled" | "className">>{
   loading: boolean;

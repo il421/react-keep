@@ -1,13 +1,13 @@
 import React, { Dispatch } from "react";
 import { connect } from "react-redux";
+import { ValidationErrors } from "final-form";
+import { ToastContainer } from "react-toastify";
 import { startLogin, startSignUp } from "../../actions/auth";
 import { Store } from "../../store/store.types";
-import { LoginButton } from "../ui-components/LoginButton";
-import { nameOf, Errors, emailRegEx, Placeholders} from "../../common";
+import { nameOf, Errors, emailRegEx, Placeholders } from "../../common";
 import "../../styles/components/login/_login-page.scss";
-import { ValidationErrors } from "final-form";
 import { BaseForm, CheckboxInputField, TextInputField } from "../form";
-import {ToastContainer} from "react-toastify";
+import { LoginButton } from "../ui-components";
 
 interface LoginPageProps {
   startLogin: (email: string, password: string) => void;

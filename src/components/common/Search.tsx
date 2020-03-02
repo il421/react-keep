@@ -1,7 +1,7 @@
 import React, { Dispatch } from "react";
 import { connect } from "react-redux";
 import { setSearchFilter } from "../../actions/filters";
-import { Placeholders } from "../../common/placeholders";
+import { Placeholders } from "../../common";
 import "../../styles/components/header/_search.scss";
 
 interface SearchProps {

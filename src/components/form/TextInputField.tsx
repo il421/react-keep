@@ -1,7 +1,7 @@
 import React from "react";
 import { Field } from "react-final-form";
-import { ExposedFieldProps, FieldAdapterProps } from "./BaseForm.types";
 import TextareaAutosize from "react-textarea-autosize";
+import { ExposedFieldProps, FieldAdapterProps } from "./BaseForm.types";
 
 const FieldAdapter: React.FunctionComponent<FieldAdapterProps> = ({
   className,

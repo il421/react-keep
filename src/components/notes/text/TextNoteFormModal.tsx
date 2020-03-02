@@ -1,28 +1,24 @@
-import React, {Dispatch} from "react";
-import {RouteComponentProps, withRouter} from "react-router-dom";
-import {BaseForm} from "../form/BaseForm";
-import {AddNote, Note, NotesStoreState, Store} from "../../store/store.types";
-import {NoteType} from "./notes.types";
-import {PickerColors} from "../../common/variables";
-import {TextInputField} from "../form/TextInputField";
-import {isModal, nameOf, Placeholders} from "../../common";
+import React, { Dispatch } from "react";
+import { connect } from "react-redux";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import Modal from "react-modal";
-import "../../styles/components/notes/_note-form.scss";
-import {PathNames, QueryKeys} from "../../routers/Routing";
-import {ContentContainer} from "../ui-components/ContentContainer";
-import ColorsPickerField from "./options/ColorsPickerField";
-import {BaseFormOptions} from "../form/BaseForm.types";
-import {FormRenderProps, FormSpy} from "react-final-form";
-import {FieldSpy} from "../form/FieldSpy";
-import {connect} from "react-redux";
-import {handleAddNote} from "../../actions/notes";
+import { AddNote, Note } from "../../../store/store.types";
+import { NoteType } from "../notes.types";
+import { PickerColors } from "../../../common/variables";
+import ColorsPickerField from "../options/ColorsPickerField";
+import { isModal, nameOf, Placeholders } from "../../../common";
+import { PathNames, QueryKeys } from "../../../routers/Routing";
+import { ContentContainer } from "../../ui-components";
+import { BaseFormOptions, FieldSpy, TextInputField, BaseForm } from "../../form";
+import { FormRenderProps, FormSpy } from "react-final-form";
+import { handleAddNote } from "../../../actions/notes";
+import "../../../styles/components/notes/_note-form.scss";
 
 interface TextNoteFormValues extends Omit<Note, "id" | "important" | "createdAt" | "updatedAt"> {
   currentOption: BaseFormOptions
 }
 interface TextNoteFormModalProps extends RouteComponentProps {
   addNote: (note: AddNote) => void;
-  notes: NotesStoreState
 }
 
 class TextNoteFormModal extends React.PureComponent<TextNoteFormModalProps> {
@@ -44,7 +40,7 @@ class TextNoteFormModal extends React.PureComponent<TextNoteFormModalProps> {
   render() {
     return (
       <Modal
-        isOpen={ isModal({query: this.props.history.location.search, type: QueryKeys.text}) }
+        isOpen={ isModal({ query: this.props.history.location.search, type: QueryKeys.text }) }
         onRequestClose={ () => this.props.history.push(PathNames.base) }
         closeTimeoutMS={ 200 }
         className="note-modal"
@@ -112,17 +108,11 @@ class TextNoteFormModal extends React.PureComponent<TextNoteFormModalProps> {
   }
 }
 
-const mapStateToProps = (state: Store) => {
-  return {
-    notes: state.notes
-  };
-};
-
 const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
   addNote: (note: AddNote) => dispatch(handleAddNote(note)),
 });
 
 export default withRouter(connect(
-  mapStateToProps,
+  undefined,
   mapDispatchToProps
 )(TextNoteFormModal));

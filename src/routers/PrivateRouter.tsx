@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
-import { Store} from "../store/store.types";
+import { Store } from "../store/store.types";
 
 interface PrivateRouterProps {
   isAuthenticated: boolean;
@@ -12,7 +12,7 @@ interface PrivateRouterProps {
 export const PrivateRouter: React.FunctionComponent<PrivateRouterProps> = ({
   isAuthenticated,
   component: Component,
-  ...rest}) => (
+  ...rest }) => (
   <Route {...rest} component={(props: any) => (
     isAuthenticated ? (
       <div>

@@ -1,4 +1,4 @@
-import React, {CSSProperties} from "react";
+import React, { CSSProperties } from "react";
 import "../../styles/components/common/_content-conteiner.scss";
 
 interface ContentContainerProps extends Partial<Pick<HTMLElement, "className">> {
