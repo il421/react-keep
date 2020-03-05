@@ -2,6 +2,9 @@
   "extends": "react-app",
   "rules": {
     "jsx-a11y/anchor-is-valid": "off",
+    "no-unused-vars": "off",
+    "unused-imports/no-unused-imports": 2,
+    "unused-imports/no-unused-vars": 2,
     "object-curly-spacing": ["error", "always"],
     "indent": [
       "error",
@@ -22,5 +25,6 @@
   },
   "globals": {
     "gtm": false
-  }
+  },
+  "plugins": ["unused-imports"]
 }

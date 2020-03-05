@@ -1,4 +1,4 @@
-import React, { Dispatch } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { History } from "history";
 import Modal from "react-modal";
@@ -10,6 +10,7 @@ import { updateUserData } from "../../actions/auth";
 import { ContentContainer, ConfirmButton, FlexBox } from "../ui-components";
 import { BaseForm, TextInputField, FileFormField } from "../form";
 import "../../styles/components/login/_user-form.scss";
+import { ThunkDispatch } from "redux-thunk";
 
 interface UserFormValues {
   firstName: string;
@@ -17,13 +18,21 @@ interface UserFormValues {
   url: any;
 }
 
-interface UserFormModalProps {
+interface StateProps {
   auth: AuthStoreState;
+}
+
+interface DispatchProps {
   updateUserData: (data: UpdateUser) => void;
+}
+
+interface UserFormModalProps {
   history: History;
 }
 
-class UserFormModal extends React.PureComponent<UserFormModalProps> {
+type Props = StateProps & UserFormModalProps & DispatchProps;
+
+class UserFormModal extends React.PureComponent<Props> {
   private nameOf = nameOf<UserFormValues>();
 
   private getFormValues = (auth: AuthStoreState): UserFormValues => {
@@ -127,14 +136,19 @@ class UserFormModal extends React.PureComponent<UserFormModalProps> {
   }
 }
 
-const mapStateToProps = (state: Store) => {
+const mapStateToProps = (state: Store): StateProps => {
   return {
     auth: state.auth
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
+const mapDispatchToProps = (
+  dispatch: ThunkDispatch<{}, {}, any>
+): DispatchProps => ({
   updateUserData: (data: UpdateUser) => dispatch(updateUserData(data))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserFormModal);
+export default connect<StateProps, DispatchProps, UserFormModalProps, Store>(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserFormModal);

@@ -1,4 +1,4 @@
-import React, { Dispatch } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { stringify } from "query-string";
@@ -16,14 +16,23 @@ import {
 import "../../styles/components/header/_header.scss";
 import "../../styles/components/header/_user-box.scss";
 import "../../styles/components/common/_visibility.scss";
+import { ThunkDispatch } from "redux-thunk";
 
 interface HeaderProps {
-  startLogout: () => void;
-  auth: AuthStoreState;
   showSidebar: (value: boolean) => void;
 }
 
-const Header: React.FunctionComponent<HeaderProps> = ({
+interface StateProps {
+  auth: AuthStoreState;
+}
+
+interface DispatchProps {
+  startLogout: () => void;
+}
+
+type Props = HeaderProps & DispatchProps & StateProps;
+
+const Header: React.FunctionComponent<Props> = ({
   startLogout,
   auth,
   showSidebar
@@ -82,14 +91,19 @@ const Header: React.FunctionComponent<HeaderProps> = ({
   );
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
+const mapDispatchToProps = (
+  dispatch: ThunkDispatch<{}, {}, any>
+): DispatchProps => ({
   startLogout: () => dispatch(startLogout())
 });
 
-const mapStateToProps = (state: Store) => {
+const mapStateToProps = (state: Store): StateProps => {
   return {
     auth: state.auth
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect<StateProps, DispatchProps, HeaderProps, Store>(
+  mapStateToProps,
+  mapDispatchToProps
+)(Header);

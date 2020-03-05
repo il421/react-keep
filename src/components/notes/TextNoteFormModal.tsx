@@ -1,4 +1,5 @@
-import React, { Dispatch } from "react";
+/* eslint-disable indent */
+import React from "react";
 import { connect } from "react-redux";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import Modal from "react-modal";
@@ -18,16 +19,19 @@ import {
 import { FormRenderProps, FormSpy } from "react-final-form";
 import { handleAddNote } from "../../actions/notes";
 import "../../styles/components/notes/_note-form.scss";
+import { ThunkDispatch } from "redux-thunk";
 
 interface TextNoteFormValues
   extends Omit<Note, "id" | "important" | "createdAt" | "updatedAt"> {
   currentOption: BaseFormOptions;
 }
-interface TextNoteFormModalProps extends RouteComponentProps {
+interface DispatchProps {
   addNote: (note: AddNote) => void;
 }
 
-class TextNoteFormModal extends React.PureComponent<TextNoteFormModalProps> {
+type Props = RouteComponentProps & DispatchProps;
+
+class TextNoteFormModal extends React.PureComponent<Props> {
   private defaultTextNote: TextNoteFormValues = {
     type: NoteType.text,
     title: "",
@@ -62,6 +66,7 @@ class TextNoteFormModal extends React.PureComponent<TextNoteFormModalProps> {
           <BaseForm<TextNoteFormValues>
             initialValues={this.defaultTextNote}
             onSubmit={async (values: TextNoteFormValues) => {
+              // eslint-disable-next-line
               const { currentOption, ...note } = values;
               await this.props.addNote(note);
               this.props.history.push(PathNames.base);
@@ -112,10 +117,15 @@ class TextNoteFormModal extends React.PureComponent<TextNoteFormModalProps> {
   }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
+const mapDispatchToProps = (
+  dispatch: ThunkDispatch<{}, {}, any>
+): DispatchProps => ({
   addNote: (note: AddNote) => dispatch(handleAddNote(note))
 });
 
 export default withRouter(
-  connect(undefined, mapDispatchToProps)(TextNoteFormModal)
+  connect<{}, DispatchProps, {}>(
+    undefined,
+    mapDispatchToProps
+  )(TextNoteFormModal)
 );

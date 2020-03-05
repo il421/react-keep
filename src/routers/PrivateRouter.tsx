@@ -2,14 +2,16 @@ import React from "react";
 import { connect } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
 import { Store } from "../store/store.types";
+import { RouterStateProps } from "./PublicRouter";
 
 interface PrivateRouterProps {
-  isAuthenticated: boolean;
   component: React.ElementType;
   path: string;
 }
 
-export const PrivateRouter: React.FunctionComponent<PrivateRouterProps> = ({
+type Prop = PrivateRouterProps & RouterStateProps;
+
+export const PrivateRouter: React.FunctionComponent<Prop> = ({
   isAuthenticated,
   component: Component,
   ...rest
@@ -28,8 +30,10 @@ export const PrivateRouter: React.FunctionComponent<PrivateRouterProps> = ({
   />
 );
 
-const mapStateToProps = (state: Store) => ({
+const mapStateToProps = (state: Store): RouterStateProps => ({
   isAuthenticated: !!state.auth.uid
 });
 
-export default connect(mapStateToProps)(PrivateRouter);
+export default connect<RouterStateProps, {}, PrivateRouterProps, Store>(
+  mapStateToProps
+)(PrivateRouter);

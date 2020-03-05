@@ -1,4 +1,4 @@
-import React, { Dispatch } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { ValidationErrors } from "final-form";
 import { ToastContainer } from "react-toastify";
@@ -8,12 +8,7 @@ import { nameOf, Errors, emailRegEx, Placeholders } from "../../common";
 import "../../styles/components/login/_login-page.scss";
 import { BaseForm, CheckboxInputField, TextInputField } from "../form";
 import { ConfirmButton } from "../ui-components";
-
-interface LoginPageProps {
-  startLogin: (email: string, password: string) => void;
-  startSignUp: (email: string, password: string) => void;
-  loading: boolean;
-}
+import { ThunkDispatch } from "redux-thunk";
 
 interface LoginFormValues {
   email: string;
@@ -21,7 +16,18 @@ interface LoginFormValues {
   isNew: boolean;
 }
 
-export class LoginPage extends React.PureComponent<LoginPageProps> {
+interface StateProps {
+  loading: boolean;
+}
+
+interface DispatchProps {
+  startLogin: (email: string, password: string) => void;
+  startSignUp: (email: string, password: string) => void;
+}
+
+type Props = StateProps & DispatchProps;
+
+export class LoginPage extends React.PureComponent<Props> {
   private initialValues: LoginFormValues = {
     email: "",
     password: "",
@@ -83,7 +89,7 @@ export class LoginPage extends React.PureComponent<LoginPageProps> {
           <BaseForm<LoginFormValues>
             initialValues={this.initialValues}
             classNames={{
-              form: 'login-box__form login-form"'
+              form: "login-box__form login-form"
             }}
             onSubmit={this.submitLoginForm}
             validate={this.getValidationErrors}
@@ -118,17 +124,22 @@ export class LoginPage extends React.PureComponent<LoginPageProps> {
   }
 }
 
-const mapStateToProps = (state: Store) => {
+const mapStateToProps = (state: Store): StateProps => {
   return {
     loading: state.auth.loading
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
+const mapDispatchToProps = (
+  dispatch: ThunkDispatch<{}, {}, any>
+): DispatchProps => ({
   startLogin: (email: string, password: string) =>
     dispatch(startLogin(email, password)),
   startSignUp: (email: string, password: string) =>
     dispatch(startSignUp(email, password))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
+export default connect<StateProps, DispatchProps, {}, Store>(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginPage);

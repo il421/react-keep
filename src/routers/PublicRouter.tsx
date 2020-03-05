@@ -5,13 +5,18 @@ import { Store } from "../store/store.types";
 import { PathNames } from "./Routing";
 
 interface PublicRouterProps {
-  isAuthenticated: boolean;
   component: React.ElementType;
   path: string;
   exact: boolean;
 }
 
-const PublicRouter: React.FunctionComponent<PublicRouterProps> = ({
+export interface RouterStateProps {
+  isAuthenticated: boolean;
+}
+
+type Prop = PublicRouterProps & RouterStateProps;
+
+const PublicRouter: React.FunctionComponent<Prop> = ({
   isAuthenticated,
   component: Component,
   ...rest
@@ -28,8 +33,10 @@ const PublicRouter: React.FunctionComponent<PublicRouterProps> = ({
   />
 );
 
-const mapStateToProps = (state: Store) => ({
+const mapStateToProps = (state: Store): RouterStateProps => ({
   isAuthenticated: !!state.auth.uid
 });
 
-export default connect(mapStateToProps)(PublicRouter);
+export default connect<RouterStateProps, {}, PublicRouterProps, Store>(
+  mapStateToProps
+)(PublicRouter);
