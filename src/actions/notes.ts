@@ -19,7 +19,10 @@ import moment from "moment";
 
 const initDocumentRef = (uid: string) => {
   const USERS_NOTES_DATABASE = "users";
-  return database.collection(USERS_NOTES_DATABASE).doc(uid).collection("notes");
+  return database
+    .collection(USERS_NOTES_DATABASE)
+    .doc(uid)
+    .collection("notes");
 };
 
 const setNotes = (notes: Note[]): SetNotesAction => ({
@@ -50,7 +53,7 @@ const changeImportance = (id: string): ToggleImportantAction => ({
 
 const removeTag = (tagId: string): RemoveNoteTagAction => ({
   type: NotesActionsTypes.removeTagFromNote,
-  tagId,
+  tagId
 });
 
 export const handleSetNotes = () => {
@@ -61,9 +64,9 @@ export const handleSetNotes = () => {
 
     try {
       const snapshot = await docRef.get();
-      snapshot.forEach((doc) => {
-        if(doc.exists) {
-          notes.push({ id: doc.id, ...doc.data() as Note });
+      snapshot.forEach(doc => {
+        if (doc.exists) {
+          notes.push({ id: doc.id, ...(doc.data() as Note) });
         } else {
           toast.error(Message.errorNoSuchDoc);
           console.log(getMessage(Message.errorNoSuchDoc));
@@ -93,10 +96,12 @@ export const handleAddNote = (note: AddNote) => {
     };
     try {
       const docRef = await initDocumentRef(uid).add(newNote);
-      dispatch(addNote({
-        id: docRef.id,
-        ...newNote
-      }));
+      dispatch(
+        addNote({
+          id: docRef.id,
+          ...newNote
+        })
+      );
     } catch (e) {
       console.log(e.message);
       toast.error(e.message);
@@ -143,7 +148,7 @@ export const changeNoteImportance = (id: string) => {
       dispatch(changeImportance(id));
 
       const doc = await docRef.doc(id).get();
-      if(doc.exists) {
+      if (doc.exists) {
         const note = doc.data() as Note;
         const impValue = note.important;
 
@@ -167,8 +172,8 @@ export const removeTagFromNotes = (id: string) => {
 
     try {
       const snapshot = await docRef.get();
-      snapshot.forEach((doc) => {
-        if(doc.exists) {
+      snapshot.forEach(doc => {
+        if (doc.exists) {
           let data = doc.data();
 
           if (data.tags.length > 0) {

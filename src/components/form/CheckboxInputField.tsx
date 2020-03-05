@@ -9,17 +9,20 @@ const FieldAdapter: React.FunctionComponent<FieldAdapterProps> = ({
 }) => {
   return (
     <div className={className}>
-      <input
-        id="defaultId"
-        {...input}
-        type="checkbox"
-      />
+      <input id="defaultId" {...input} type="checkbox" />
       <label htmlFor={id} />
     </div>
   );
 };
 
-export const CheckboxInputField: React.FunctionComponent<ExposedFieldProps<string, HTMLElement>
-  & { className: string, id?: string }> = (props) => (
-    <Field {...props} name={props.name} type="checkbox" component={FieldAdapter} />
-  );
+export const CheckboxInputField: React.FunctionComponent<ExposedFieldProps<
+  string,
+  HTMLElement
+> & { className: string; id?: string }> = props => (
+  <Field
+    {...props}
+    name={props.name}
+    type="checkbox"
+    component={FieldAdapter}
+  />
+);

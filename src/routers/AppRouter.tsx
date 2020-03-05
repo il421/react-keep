@@ -13,12 +13,12 @@ import { PathNames } from "./Routing";
 export const history: History = createBrowserHistory();
 
 const AppRouter: React.FunctionComponent = (): JSX.Element => (
-  <Router history={ history }>
+  <Router history={history}>
     <>
       <Switch>
-        <PublicRouter path="/" component={ LoginPage } exact={ true } />
-        <PrivateRouter path={ PathNames.base } component={ DashboardPage } />
-        <Route component={ NotFoundPage } />
+        <PublicRouter path="/" component={LoginPage} exact={true} />
+        <PrivateRouter path={PathNames.base} component={DashboardPage} />
+        <Route component={NotFoundPage} />
       </Switch>
     </>
   </Router>

@@ -1,4 +1,4 @@
-@import '../../base/variables';
+@import "../../base/variables";
 
 .note {
   position: relative;
@@ -9,7 +9,8 @@
   margin: 0.8rem;
   padding: $s-size;
 
-  box-shadow: 0 1px 1px 0 rgba(65,69,73,0.3), 0 1px 3px 1px rgba(65,69,73,0.15);
+  box-shadow: 0 1px 1px 0 rgba(65, 69, 73, 0.3),
+    0 1px 3px 1px rgba(65, 69, 73, 0.15);
   word-break: break-word;
 
   @media (min-width: $tablet-widths) {
@@ -19,7 +20,8 @@
   }
 
   &:hover {
-    box-shadow:  0 4px 4px 0 rgba(65,69,73,0.3), 0 4px 12px 4px rgba(65,69,73,0.15);
+    box-shadow: 0 4px 4px 0 rgba(65, 69, 73, 0.3),
+      0 4px 12px 4px rgba(65, 69, 73, 0.15);
   }
 
   &__actions {
@@ -95,7 +97,6 @@
     color: $white;
   }
 }
-
 
 @keyframes bounceIn {
   from,

@@ -30,7 +30,11 @@ export class LoginPage extends React.PureComponent<LoginPageProps> {
 
   private nameOf = nameOf<LoginFormValues>();
 
-  private getButtons = (isDisable: boolean, isSubmitting: boolean, values: LoginFormValues) => {
+  private getButtons = (
+    isDisable: boolean,
+    isSubmitting: boolean,
+    values: LoginFormValues
+  ) => {
     return (
       <ConfirmButton
         text={values.isNew ? "Sign Up" : "Log In"}
@@ -79,7 +83,7 @@ export class LoginPage extends React.PureComponent<LoginPageProps> {
           <BaseForm<LoginFormValues>
             initialValues={this.initialValues}
             classNames={{
-              form: "login-box__form login-form\""
+              form: 'login-box__form login-form"'
             }}
             onSubmit={this.submitLoginForm}
             validate={this.getValidationErrors}
@@ -88,14 +92,14 @@ export class LoginPage extends React.PureComponent<LoginPageProps> {
             <TextInputField
               name={this.nameOf("email")}
               type="text"
-              placeholder={ Placeholders.email }
+              placeholder={Placeholders.email}
               className="login-form__field"
             />
 
             <TextInputField
               name={this.nameOf("password")}
               type="password"
-              placeholder={ Placeholders.password }
+              placeholder={Placeholders.password}
               className="login-form__field"
             />
 
@@ -108,7 +112,7 @@ export class LoginPage extends React.PureComponent<LoginPageProps> {
             </div>
           </BaseForm>
         </div>
-        <ToastContainer autoClose={ 3000 } />
+        <ToastContainer autoClose={3000} />
       </div>
     );
   }
@@ -121,8 +125,10 @@ const mapStateToProps = (state: Store) => {
 };
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
-  startLogin: (email: string, password: string) => dispatch(startLogin(email, password)),
-  startSignUp: (email: string, password: string) => dispatch(startSignUp(email, password))
+  startLogin: (email: string, password: string) =>
+    dispatch(startLogin(email, password)),
+  startSignUp: (email: string, password: string) =>
+    dispatch(startSignUp(email, password))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

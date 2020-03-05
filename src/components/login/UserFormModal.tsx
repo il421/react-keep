@@ -12,15 +12,15 @@ import { BaseForm, TextInputField, FileFormField } from "../form";
 import "../../styles/components/login/_user-form.scss";
 
 interface UserFormValues {
-  firstName: string,
-  lastName: string,
-  url: any
+  firstName: string;
+  lastName: string;
+  url: any;
 }
 
 interface UserFormModalProps {
-  auth: AuthStoreState
+  auth: AuthStoreState;
   updateUserData: (data: UpdateUser) => void;
-  history: History
+  history: History;
 }
 
 class UserFormModal extends React.PureComponent<UserFormModalProps> {
@@ -32,7 +32,10 @@ class UserFormModal extends React.PureComponent<UserFormModalProps> {
 
     if (auth.name !== null) {
       firstName = auth.name.split(" ")[0];
-      lastName = auth.name.split(" ").filter(i => i !== firstName).join(" ");
+      lastName = auth.name
+        .split(" ")
+        .filter(i => i !== firstName)
+        .join(" ");
     }
 
     return {
@@ -46,8 +49,8 @@ class UserFormModal extends React.PureComponent<UserFormModalProps> {
     return (
       <ConfirmButton
         text="Update"
-        loading={ this.props.auth.loading }
-        disabled={ isDisable }
+        loading={this.props.auth.loading}
+        disabled={isDisable}
         className="user-form__button"
       />
     );
@@ -57,18 +60,21 @@ class UserFormModal extends React.PureComponent<UserFormModalProps> {
     const displayName = `${values.firstName} ${values.lastName}`.trim();
     this.props.updateUserData({
       displayName: !!displayName ? displayName : null,
-      photoURL: values.url,
+      photoURL: values.url
     });
   };
 
   render() {
     return (
       <Modal
-        isOpen={ isModal({ query: this.props.history.location.search, type: QueryKeys.user }) }
-        onRequestClose={ () => this.props.history.push(PathNames.base) }
-        closeTimeoutMS={ 200 }
+        isOpen={isModal({
+          query: this.props.history.location.search,
+          type: QueryKeys.user
+        })}
+        onRequestClose={() => this.props.history.push(PathNames.base)}
+        closeTimeoutMS={200}
         className="user-modal"
-        ariaHideApp={ false }
+        ariaHideApp={false}
       >
         <ContentContainer>
           <BaseForm<UserFormValues>
@@ -81,14 +87,28 @@ class UserFormModal extends React.PureComponent<UserFormModalProps> {
             getButtons={this.getButtons}
           >
             {/*// @TODO change to a component*/}
-            <div style={{ width: "100px", height: "100px", borderRadius: "50%", background: "green" }} />
+            <div
+              style={{
+                width: "100px",
+                height: "100px",
+                borderRadius: "50%",
+                background: "green"
+              }}
+            />
 
-            <FileFormField name={this.nameOf("url")} className="user-form__avatar" />
-            <FlexBox vertical justifyContent={JustifyContent.spaceBetween} className="user-form__fields">
+            <FileFormField
+              name={this.nameOf("url")}
+              className="user-form__avatar"
+            />
+            <FlexBox
+              vertical
+              justifyContent={JustifyContent.spaceBetween}
+              className="user-form__fields"
+            >
               <TextInputField
                 name={this.nameOf("firstName")}
                 type="text"
-                placeholder={ Placeholders.firstName }
+                placeholder={Placeholders.firstName}
                 className="user-form__field"
                 autoFocus={true}
               />
@@ -96,11 +116,10 @@ class UserFormModal extends React.PureComponent<UserFormModalProps> {
               <TextInputField
                 name={this.nameOf("lastName")}
                 type="text"
-                placeholder={ Placeholders.lastName }
+                placeholder={Placeholders.lastName}
                 className="user-form__field"
               />
             </FlexBox>
-
           </BaseForm>
         </ContentContainer>
       </Modal>
@@ -115,7 +134,7 @@ const mapStateToProps = (state: Store) => {
 };
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
-  updateUserData: (data: UpdateUser) => dispatch(updateUserData(data)),
+  updateUserData: (data: UpdateUser) => dispatch(updateUserData(data))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserFormModal);

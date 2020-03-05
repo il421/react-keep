@@ -6,22 +6,26 @@ import { Store } from "../store/store.types";
 interface PrivateRouterProps {
   isAuthenticated: boolean;
   component: React.ElementType;
-  path: string,
+  path: string;
 }
 
 export const PrivateRouter: React.FunctionComponent<PrivateRouterProps> = ({
   isAuthenticated,
   component: Component,
-  ...rest }) => (
-  <Route {...rest} component={(props: any) => (
-    isAuthenticated ? (
-      <div>
-        <Component {...props} />
-      </div>
-    ) : (
-      <Redirect to="/" />
-    )
-  )}/>
+  ...rest
+}) => (
+  <Route
+    {...rest}
+    component={(props: any) =>
+      isAuthenticated ? (
+        <div>
+          <Component {...props} />
+        </div>
+      ) : (
+        <Redirect to="/" />
+      )
+    }
+  />
 );
 
 const mapStateToProps = (state: Store) => ({

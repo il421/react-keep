@@ -49,7 +49,7 @@ library.add(
 const store = configStore();
 
 const jsx = ( // Provider - Now we can use store everywhere
-  <Provider store={ store }>
+  <Provider store={store}>
     <AppRouter />
   </Provider>
 );
@@ -65,18 +65,18 @@ const renderApp = () => {
 ReactDOM.render(<LoadingPage />, document.getElementById("root"));
 
 // google authentication
-firebase.auth().onAuthStateChanged(async (user) => {
+firebase.auth().onAuthStateChanged(async user => {
   if (user) {
-    store.dispatch<LoginAction>(login(user.uid, user.displayName, user.photoURL));
+    store.dispatch<LoginAction>(
+      login(user.uid, user.displayName, user.photoURL)
+    );
     store.dispatch<any>(handleSetNotes());
     store.dispatch<any>(handleSetTags());
-
 
     await renderApp();
     if (history.location.pathname === "/") {
       await history.push(PathNames.base);
     }
-
   } else {
     store.dispatch(logout());
     renderApp();

@@ -8,36 +8,38 @@ import "../../styles/components/notes/_confirm-dialog.scss";
  * This component works only as a part of Note for now.
  */
 
-interface ConfirmDialogProps extends Pick<HTMLElement, "className">{
+interface ConfirmDialogProps extends Pick<HTMLElement, "className"> {
   removeNote: () => void;
   closeDialog: () => void;
 }
 
 const ConfirmDialog: React.FunctionComponent<ConfirmDialogProps> = ({
-  className, closeDialog, removeNote
+  className,
+  closeDialog,
+  removeNote
 }) => {
   return (
     <FlexBox
       className={`${className} confirm-dialog`}
-      justifyContent={ JustifyContent.center }
-      alignItems={ AlignItems.center }
+      justifyContent={JustifyContent.center}
+      alignItems={AlignItems.center}
     >
       <FlexBox
         className="confirm-dialog__wrapper"
-        justifyContent={ JustifyContent.spaceAround }
+        justifyContent={JustifyContent.spaceAround}
       >
         <ConfirmButton
           type="button"
           text="Delete"
           wrapperClassName="confirm-dialog__button"
-          onCLick={ removeNote }
+          onCLick={removeNote}
         />
 
         <ConfirmButton
           type="button"
           text="Don't"
           wrapperClassName="confirm-dialog__button"
-          onCLick={ closeDialog }
+          onCLick={closeDialog}
         />
       </FlexBox>
     </FlexBox>

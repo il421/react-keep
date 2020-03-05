@@ -3,12 +3,8 @@ import { FieldProps, FieldRenderProps } from "react-final-form";
 export interface ExposedFieldProps<FieldValue, T extends HTMLElement>
   extends Pick<
     FieldProps<FieldValue, FieldRenderProps<FieldValue, T>, T>,
-    | "name"
-    | "subscription"
-    | "validate"
-    | "value"
-    | "defaultValue"
-    > {}
+    "name" | "subscription" | "validate" | "value" | "defaultValue"
+  > {}
 
 export type FieldAdapterProps = FieldRenderProps<string, HTMLElement>;
 
@@ -17,5 +13,5 @@ export type FieldAdapterProps = FieldRenderProps<string, HTMLElement>;
 export enum BaseFormOptions {
   times = "times",
   palette = "palette",
-  tags = "tags",
+  tags = "tags"
 }

@@ -1,11 +1,12 @@
-@import '../mixins/mixins';
-@import '../base/variables';
+@import "../mixins/mixins";
+@import "../base/variables";
 
 .login-button {
   @include button;
 
   width: 100%;
-  box-shadow: 0 1px 1px 0 rgba(65,69,73,0.3), 0 1px 3px 1px rgba(65,69,73,0.15);
+  box-shadow: 0 1px 1px 0 rgba(65, 69, 73, 0.3),
+    0 1px 3px 1px rgba(65, 69, 73, 0.15);
   transition: background 500ms ease, transform 500ms ease;
 
   &:hover {

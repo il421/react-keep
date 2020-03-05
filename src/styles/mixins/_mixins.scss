@@ -1,4 +1,4 @@
-@import '../base/variables';
+@import "../base/variables";
 
 @mixin extra-bg {
   display: flex;
@@ -8,7 +8,7 @@
   height: 100vh;
   width: 100vw;
 
-  background-image: url('/img/bg.jpg');
+  background-image: url("/img/bg.jpg");
   background-size: cover;
 }
 

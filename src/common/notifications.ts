@@ -5,10 +5,7 @@ export enum Message {
   errorNoSuchDoc
 }
 
-export const getMessage = (
-  message: Message,
-  data?: string | number
-) => {
+export const getMessage = (message: Message, data?: string | number) => {
   const notifications = {
     [Message.successLoggedIn]: "Logged in successfully",
     [Message.successLoggedOut]: "Logged out successfully",

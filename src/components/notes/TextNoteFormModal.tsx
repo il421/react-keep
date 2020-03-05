@@ -9,13 +9,19 @@ import ColorsPickerField from "./options/ColorsPickerField";
 import { isModal, nameOf, Placeholders } from "../../common";
 import { PathNames, QueryKeys } from "../../routers/Routing";
 import { ContentContainer } from "../ui-components/index";
-import { BaseFormOptions, FieldSpy, TextInputField, BaseForm } from "../form/index";
+import {
+  BaseFormOptions,
+  FieldSpy,
+  TextInputField,
+  BaseForm
+} from "../form/index";
 import { FormRenderProps, FormSpy } from "react-final-form";
 import { handleAddNote } from "../../actions/notes";
 import "../../styles/components/notes/_note-form.scss";
 
-interface TextNoteFormValues extends Omit<Note, "id" | "important" | "createdAt" | "updatedAt"> {
-  currentOption: BaseFormOptions
+interface TextNoteFormValues
+  extends Omit<Note, "id" | "important" | "createdAt" | "updatedAt"> {
+  currentOption: BaseFormOptions;
 }
 interface TextNoteFormModalProps extends RouteComponentProps {
   addNote: (note: AddNote) => void;
@@ -40,11 +46,14 @@ class TextNoteFormModal extends React.PureComponent<TextNoteFormModalProps> {
   render() {
     return (
       <Modal
-        isOpen={ isModal({ query: this.props.history.location.search, type: QueryKeys.text }) }
-        onRequestClose={ () => this.props.history.push(PathNames.base) }
-        closeTimeoutMS={ 200 }
+        isOpen={isModal({
+          query: this.props.history.location.search,
+          type: QueryKeys.text
+        })}
+        onRequestClose={() => this.props.history.push(PathNames.base)}
+        closeTimeoutMS={200}
         className="note-modal"
-        ariaHideApp={ false }
+        ariaHideApp={false}
       >
         <ContentContainer
           className="note-modal__container"
@@ -52,27 +61,22 @@ class TextNoteFormModal extends React.PureComponent<TextNoteFormModalProps> {
         >
           <BaseForm<TextNoteFormValues>
             initialValues={this.defaultTextNote}
-            onSubmit={
-              async (values: TextNoteFormValues) => {
-                const { currentOption, ...note } = values;
-                await this.props.addNote(note);
-                this.props.history.push(PathNames.base);
-              }}
+            onSubmit={async (values: TextNoteFormValues) => {
+              const { currentOption, ...note } = values;
+              await this.props.addNote(note);
+              this.props.history.push(PathNames.base);
+            }}
             onCancel={() => this.props.history.push(PathNames.base)}
             getFormOptions={
               <FormSpy>
-                {
-                  ({ values }: FormRenderProps<TextNoteFormValues>) => {
-                    switch (values.currentOption) {
+                {({ values }: FormRenderProps<TextNoteFormValues>) => {
+                  switch (values.currentOption) {
                     case BaseFormOptions.palette:
-                      return ( <ColorsPickerField /> );
+                      return <ColorsPickerField />;
                     default:
                       return null;
-                    }
-
-
                   }
-                }
+                }}
               </FormSpy>
             }
           >
@@ -109,10 +113,9 @@ class TextNoteFormModal extends React.PureComponent<TextNoteFormModalProps> {
 }
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
-  addNote: (note: AddNote) => dispatch(handleAddNote(note)),
+  addNote: (note: AddNote) => dispatch(handleAddNote(note))
 });
 
-export default withRouter(connect(
-  undefined,
-  mapDispatchToProps
-)(TextNoteFormModal));
+export default withRouter(
+  connect(undefined, mapDispatchToProps)(TextNoteFormModal)
+);

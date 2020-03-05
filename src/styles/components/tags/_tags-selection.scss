@@ -9,7 +9,8 @@
   bottom: 40px;
 
   background-color: $clean;
-  box-shadow: 0 1px 1px 0 rgba(65,69,73,0.3), 0 1px 3px 1px rgba(65,69,73,0.15);
+  box-shadow: 0 1px 1px 0 rgba(65, 69, 73, 0.3),
+    0 1px 3px 1px rgba(65, 69, 73, 0.15);
 
   &__none {
     padding: $s-size 0;
@@ -53,10 +54,10 @@
 
       background: #fcfff4;
       cursor: pointer;
-      box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+      box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
       &:after {
         position: absolute;
-        content: '';
+        content: "";
 
         width: 9px;
         height: 5px;
@@ -75,7 +76,7 @@
         opacity: 0;
       }
     }
-    input[type=checkbox] {
+    input[type="checkbox"] {
       visibility: hidden;
       &:checked + label:after {
         opacity: 1;

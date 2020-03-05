@@ -3,7 +3,7 @@
     opacity: 0;
   }
 
-  & .ReactModal__Overlay  {
+  & .ReactModal__Overlay {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,11 +12,11 @@
     overflow-y: auto;
   }
 
-  & .ReactModal__Overlay--after-open  {
+  & .ReactModal__Overlay--after-open {
     opacity: 1;
   }
 
-  & .ReactModal__Overlay--before-close  {
+  & .ReactModal__Overlay--before-close {
     opacity: 0;
   }
 }

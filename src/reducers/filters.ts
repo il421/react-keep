@@ -1,6 +1,7 @@
 import {
   Filters,
-  FiltersActionsTypes, FiltersStoreState,
+  FiltersActionsTypes,
+  FiltersStoreState,
   SearchFilterAction,
   TagsFilterAction
 } from "../store/store.types";
@@ -12,21 +13,24 @@ const defaultFiltersState: FiltersStoreState = {
 
 type FiltersAction = SearchFilterAction | TagsFilterAction;
 
-export default (state = defaultFiltersState, action: FiltersAction): FiltersStoreState => {
+export default (
+  state = defaultFiltersState,
+  action: FiltersAction
+): FiltersStoreState => {
   switch (action.type) {
-  case FiltersActionsTypes.setSearchFilter:
-    return {
-      ...state,
-      search: action.search
-    };
+    case FiltersActionsTypes.setSearchFilter:
+      return {
+        ...state,
+        search: action.search
+      };
 
-  case FiltersActionsTypes.setTagsFilter:
-    return {
-      ...state,
-      tagFilters: action.tagFilters
-    };
+    case FiltersActionsTypes.setTagsFilter:
+      return {
+        ...state,
+        tagFilters: action.tagFilters
+      };
 
-  default:
-    return state;
+    default:
+      return state;
   }
 };

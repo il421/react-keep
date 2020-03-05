@@ -1,11 +1,11 @@
-@import '../../base/variables';
-@import '../../mixins/mixins';
+@import "../../base/variables";
+@import "../../mixins/mixins";
 
 .note-form {
   @include flex-col-between-between;
 
   &__title input,
-  &__text textarea{
+  &__text textarea {
     width: 100%;
     margin-bottom: $s-size;
 
@@ -29,7 +29,7 @@
   }
 
   &__actions {
-    border-top: 1px solid $clean ;
+    border-top: 1px solid $clean;
   }
 }
 
@@ -41,14 +41,14 @@
   &__buttons {
     width: 50%;
 
-    @media (min-width: $tablet-widths)   {
+    @media (min-width: $tablet-widths) {
       width: 35%;
     }
 
-    @media (min-width: $desktop-widths)   {
+    @media (min-width: $desktop-widths) {
       width: 30%;
     }
-    }
+  }
 }
 
 .options {
@@ -56,7 +56,7 @@
     margin: $s-size;
     & input {
       display: none;
-    };
+    }
 
     & label {
       display: block;
@@ -68,13 +68,13 @@
       }
 
       &:active {
-        opacity: .5;
-      };
-    };
+        opacity: 0.5;
+      }
+    }
 
     & input:checked + label.icon-button--radio {
       border: 1px solid black;
-    };
+    }
   }
 }
 
@@ -84,5 +84,5 @@
 
 .example-appear.example-appear-active {
   opacity: 1;
-  transition: opacity .5s ease-in;
+  transition: opacity 0.5s ease-in;
 }

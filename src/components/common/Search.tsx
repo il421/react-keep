@@ -12,16 +12,18 @@ interface SearchProps {
 class Search extends React.PureComponent<SearchProps> {
   render() {
     return (
-      <div className={ this.props.wrapperClass }>
+      <div className={this.props.wrapperClass}>
         <input
           className="search"
-          placeholder={ Placeholders.search }
-          onInput={ (evt) => this.props.setSearchFilter((evt.target as HTMLInputElement).value) }
+          placeholder={Placeholders.search}
+          onInput={evt =>
+            this.props.setSearchFilter((evt.target as HTMLInputElement).value)
+          }
         />
       </div>
     );
   }
-};
+}
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) => {
   return {

@@ -1,5 +1,5 @@
 export enum Placeholders {
-  email= "Email",
+  email = "Email",
   password = "Password",
   search = "Search",
   title = "Title",

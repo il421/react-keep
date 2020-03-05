@@ -1,11 +1,10 @@
-@import '../mixins/mixins';
-@import '../base/variables';
+@import "../mixins/mixins";
+@import "../base/variables";
 
 .icon-radio {
   background: none;
   color: $grey-light;
   font-size: $font-size-large;
-
 
   transition: color 500ms ease;
   cursor: pointer;

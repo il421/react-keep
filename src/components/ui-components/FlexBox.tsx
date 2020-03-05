@@ -24,8 +24,8 @@ export class FlexBox extends React.PureComponent<FlexBoxProps> {
 
   render() {
     return (
-      <div style={ this.style } className={ this.props.className }>
-        { this.props.children }
+      <div style={this.style} className={this.props.className}>
+        {this.props.children}
       </div>
     );
   }

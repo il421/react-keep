@@ -13,35 +13,33 @@ import TextNoteFormModal from "../notes/TextNoteFormModal";
 import NotesList from "../notes/NotesList";
 
 interface DashboardPageProps {
-  history: History
+  history: History;
 }
 
-export const DashboardPage: React.FunctionComponent<DashboardPageProps> = ({ history }): JSX.Element => {
+export const DashboardPage: React.FunctionComponent<DashboardPageProps> = ({
+  history
+}): JSX.Element => {
   const [showBar, setShowSidebar] = useState<boolean>(false);
 
   return (
     <FlexBox
-      vertical={ true }
-      justifyContent={ JustifyContent.spaceBetween }
+      vertical={true}
+      justifyContent={JustifyContent.spaceBetween}
       className="dashboard"
     >
-      <Header showSidebar={ setShowSidebar } />
+      <Header showSidebar={setShowSidebar} />
       {/*<NoteSelection className="content-container"/>*/}
       <NotesList />
 
-      <SideBar
-        showBar={ showBar }
-        setShowSidebar={ setShowSidebar }
-      >
+      <SideBar showBar={showBar} setShowSidebar={setShowSidebar}>
         test
       </SideBar>
 
       <TextNoteFormModal />
-      <UserFormModal history={ history } />
+      <UserFormModal history={history} />
       <Controllers isMobile />
 
-
-      <ToastContainer autoClose={ 2000 } />
+      <ToastContainer autoClose={2000} />
     </FlexBox>
   );
 };

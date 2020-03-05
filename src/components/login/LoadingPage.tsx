@@ -4,11 +4,7 @@ import { Colors } from "../../common/variables";
 
 const LoadingPage = (): JSX.Element => (
   <div className="loader">
-    <RingLoader
-      size={ 100 }
-      color={Colors.fresh}
-      loading={ true }
-    />
+    <RingLoader size={100} color={Colors.fresh} loading={true} />
   </div>
 );
 

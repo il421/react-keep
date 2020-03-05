@@ -8,60 +8,78 @@ import "../../styles/components/notes/_note.scss";
 
 interface NoteProps {
   note: Note;
-  removeNote: (id: string) => void,
+  removeNote: (id: string) => void;
   toggleImportance: (id: string) => void;
 }
 
-const NotesItem:React.FunctionComponent<NoteProps> = ({ note, removeNote, toggleImportance }): JSX.Element => {
-
+const NotesItem: React.FunctionComponent<NoteProps> = ({
+  note,
+  removeNote,
+  toggleImportance
+}): JSX.Element => {
   const [isConfirm, setIsConfirm] = useState<boolean>(false);
 
   return (
-    <ContentContainer className="note note--animation" style={{ backgroundColor: note.color }}>
+    <ContentContainer
+      className="note note--animation"
+      style={{ backgroundColor: note.color }}
+    >
       <FlexBox vertical justifyContent={JustifyContent.spaceBetween}>
         {/*actions*/}
-        <FlexBox className="note__actions" justifyContent={JustifyContent.spaceBetween} alignItems={AlignItems.center}>
+        <FlexBox
+          className="note__actions"
+          justifyContent={JustifyContent.spaceBetween}
+          alignItems={AlignItems.center}
+        >
           <IconButton
             onClick={() => toggleImportance(note.id)}
             icon="bookmark"
-            color={ note.important ? Colors.varmillion : Colors.lightGray }
+            color={note.important ? Colors.varmillion : Colors.lightGray}
           />
           <IconButton onClick={() => setIsConfirm(true)} icon="times" />
         </FlexBox>
 
         {/*title and content*/}
-        <FlexBox className="note__content content" vertical justifyContent={JustifyContent.spaceBetween}>
-          { !!note.title.trim() && <h2 className="content__title">{ note.title }</h2> }
-          <div className="content__text">{ note.content }</div>
+        <FlexBox
+          className="note__content content"
+          vertical
+          justifyContent={JustifyContent.spaceBetween}
+        >
+          {!!note.title.trim() && (
+            <h2 className="content__title">{note.title}</h2>
+          )}
+          <div className="content__text">{note.content}</div>
         </FlexBox>
 
         {/*date nad tags*/}
         <FlexBox
           className="note__details details"
           vertical
-          justifyContent={ JustifyContent.spaceBetween }
+          justifyContent={JustifyContent.spaceBetween}
         >
-          <div className="details__date">{ moment(note.updatedAt).format("MMMM Do, YYYY") }</div>
+          <div className="details__date">
+            {moment(note.updatedAt).format("MMMM Do, YYYY")}
+          </div>
 
-          <FlexBox className="details__tags" justifyContent={JustifyContent.start}>
+          <FlexBox
+            className="details__tags"
+            justifyContent={JustifyContent.start}
+          >
             tags
           </FlexBox>
         </FlexBox>
       </FlexBox>
 
-      {
-        isConfirm && (
-          <ConfirmDialog
-            key={ Math.random() }
-            className="note__confirm"
-            closeDialog={ () => setIsConfirm(false) }
-            removeNote={() => removeNote(note.id)}
-          />
-        )
-      }
+      {isConfirm && (
+        <ConfirmDialog
+          key={Math.random()}
+          className="note__confirm"
+          closeDialog={() => setIsConfirm(false)}
+          removeNote={() => removeNote(note.id)}
+        />
+      )}
     </ContentContainer>
   );
 };
 
 export default NotesItem;
-

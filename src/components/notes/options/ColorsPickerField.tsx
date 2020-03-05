@@ -11,19 +11,17 @@ class ColorsPickerField extends React.PureComponent {
         justifyContent={JustifyContent.spaceBetween}
         className="colors-picker"
       >
-        {
-          Object.values(PickerColors).map((color: string) => (
-            <RadioButtonsInputField
-              key={ color }
-              name="color"
-              radioClassName="colors-picker__item"
-              value={ color }
-              labelProps={{
-                style: { backgroundColor: color, cursor: "pointer" },
-              }}
-            />
-          ))
-        }
+        {Object.values(PickerColors).map((color: string) => (
+          <RadioButtonsInputField
+            key={color}
+            name="color"
+            radioClassName="colors-picker__item"
+            value={color}
+            labelProps={{
+              style: { backgroundColor: color, cursor: "pointer" }
+            }}
+          />
+        ))}
       </FlexBox>
     );
   }

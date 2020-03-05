@@ -15,7 +15,10 @@ import { getMessage, Message } from "../common";
 
 const initDocumentRef = (uid: string) => {
   const USERS_NOTES_DATABASE = "users";
-  return database.collection(USERS_NOTES_DATABASE).doc(uid).collection("tags");
+  return database
+    .collection(USERS_NOTES_DATABASE)
+    .doc(uid)
+    .collection("tags");
 };
 
 export const setTags = (tags: Tag[]): SetTagsAction => ({
@@ -36,26 +39,27 @@ export const removeTag = (id: string): RemoveTagAction => ({
 export const updateTag = (id: string, update: Tag): UpdateTagAction => ({
   type: TagsActionsTypes.updateTag,
   id,
-  update,
+  update
 });
 
-export const handleDisplayTagsModal = (displayTagsModal: boolean): DisplayTagsModalAction => ({
+export const handleDisplayTagsModal = (
+  displayTagsModal: boolean
+): DisplayTagsModalAction => ({
   type: TagsActionsTypes.displayTagsModal,
-  displayTagsModal,
+  displayTagsModal
 });
 
 export const handleSetTags = () => {
   return async (dispatch: Dispatch, getState: () => Store) => {
-
     let tags: Tag[] = [];
     const uid = getState().auth.uid;
     const docRef = initDocumentRef(uid);
 
     try {
       const snapshot = await docRef.get();
-      snapshot.forEach((doc) => {
-        if(doc.exists) {
-          tags.unshift({ id: doc.id, ...doc.data() as Tag });
+      snapshot.forEach(doc => {
+        if (doc.exists) {
+          tags.unshift({ id: doc.id, ...(doc.data() as Tag) });
         } else {
           console.log(getMessage(Message.errorNoSuchDoc));
           toast.error(getMessage(Message.errorNoSuchDoc));
@@ -77,10 +81,12 @@ export const handleAddTag = (value: Tag) => {
 
     try {
       const docRef = await initDocumentRef(uid).add(tag);
-      dispatch(addTag({
-        id: docRef.id,
-        ...tag
-      }));
+      dispatch(
+        addTag({
+          id: docRef.id,
+          ...tag
+        })
+      );
     } catch (e) {
       console.log(e.message);
       toast.error(e.message);

@@ -25,7 +25,11 @@ import "../../styles/ui-components/_icon-button.scss";
 interface BaseFormProps<FormValues> {
   initialValues: FormValues & { currentOption?: BaseFormOptions };
   onSubmit: (values: FormValues) => void;
-  getButtons?: (isDisable: boolean, isSubmitting: boolean, values: FormValues) => ReactNode;
+  getButtons?: (
+    isDisable: boolean,
+    isSubmitting: boolean,
+    values: FormValues
+  ) => ReactNode;
   getFormOptions?: ReactNode;
   onCancel?: () => void;
   submitButtonName?: string;
@@ -34,14 +38,15 @@ interface BaseFormProps<FormValues> {
 }
 
 interface BaseFormClassNames {
-  form?: string,
-  buttons?: string,
-  actions?: string,
-  options?: string
+  form?: string;
+  buttons?: string;
+  actions?: string;
+  options?: string;
 }
 
-
-export class BaseForm<FormValues> extends React.PureComponent<BaseFormProps<FormValues>> {
+export class BaseForm<FormValues> extends React.PureComponent<
+  BaseFormProps<FormValues>
+> {
   render() {
     const {
       initialValues,
@@ -59,80 +64,85 @@ export class BaseForm<FormValues> extends React.PureComponent<BaseFormProps<Form
         onSubmit={onSubmit}
         validate={validate}
       >
-        {
-          (props: FormRenderProps<FormValues>) => {
-            const { dirty, values, submitting } = props;
-            const isDisable: boolean = !dirty;
+        {(props: FormRenderProps<FormValues>) => {
+          const { dirty, values, submitting } = props;
+          const isDisable: boolean = !dirty;
 
-            return (
-              <>
-                <form onSubmit={props.handleSubmit} className={classNames?.form ?? "note-form"} autoComplete="off">
-                  { this.props.children }
-                  <>
-                    { // if getButtons = true, use custom buttons if the form is not user
-                      // for notes (like login form), otherwise render original buttons
-                      getButtons ? getButtons(isDisable, submitting, values) : (
-                        <>
-                          <FlexBox
-                            justifyContent={ JustifyContent.spaceBetween }
-                            alignItems={ AlignItems.center }
-                            className={ classNames?.actions ?? "note-form__actions actions" }
-                          >
-                            <FlexBox
-                              justifyContent={JustifyContent.start}
-                              alignItems={AlignItems.baseline}
-                              className={ classNames?.options ?? "actions__options" }
-                            >
-                              {
-                                Object.values(BaseFormOptions).map((option: string) => (
-                                  <RadioButtonsInputField
-                                    key={ option }
-                                    name="currentOption"
-                                    radioClassName="options__item"
-                                    value={ option }
-                                    labelProps={{
-                                      iconName: option as IconProp,
-                                    }}
-                                  />
-                                ))
-                              }
-                            </FlexBox>
-
-                            <FlexBox
-                              justifyContent={ JustifyContent.end }
-                              alignItems={ AlignItems.center }
-                              className={ classNames?.buttons ?? "actions__buttons" }
-                            >
-                              <LinkButton
-                                text={ submitButtonName }
-                                type="submit"
-                                disabled={ isDisable }
+          return (
+            <>
+              <form
+                onSubmit={props.handleSubmit}
+                className={classNames?.form ?? "note-form"}
+                autoComplete="off"
+              >
+                {this.props.children}
+                <>
+                  {// if getButtons = true, use custom buttons if the form is not user
+                  // for notes (like login form), otherwise render original buttons
+                  getButtons ? (
+                    getButtons(isDisable, submitting, values)
+                  ) : (
+                    <>
+                      <FlexBox
+                        justifyContent={JustifyContent.spaceBetween}
+                        alignItems={AlignItems.center}
+                        className={
+                          classNames?.actions ?? "note-form__actions actions"
+                        }
+                      >
+                        <FlexBox
+                          justifyContent={JustifyContent.start}
+                          alignItems={AlignItems.baseline}
+                          className={classNames?.options ?? "actions__options"}
+                        >
+                          {Object.values(BaseFormOptions).map(
+                            (option: string) => (
+                              <RadioButtonsInputField
+                                key={option}
+                                name="currentOption"
+                                radioClassName="options__item"
+                                value={option}
+                                labelProps={{
+                                  iconName: option as IconProp
+                                }}
                               />
+                            )
+                          )}
+                        </FlexBox>
 
-                              <LinkButton
-                                text="Close"
-                                type="button"
-                                disabled={false}
-                                onClick={ onCancel }
-                              />
-                            </FlexBox>
-                          </FlexBox>
+                        <FlexBox
+                          justifyContent={JustifyContent.end}
+                          alignItems={AlignItems.center}
+                          className={classNames?.buttons ?? "actions__buttons"}
+                        >
+                          <LinkButton
+                            text={submitButtonName}
+                            type="submit"
+                            disabled={isDisable}
+                          />
 
-                          <FlexBox
-                            justifyContent={JustifyContent.spaceBetween}
-                            className="note-form__extra-fields"
-                          >
-                            { getFormOptions }
-                          </FlexBox>
-                        </>
-                      )
-                    }
-                  </>
-                </form>
-              </>
-            );
-          }
-        }
+                          <LinkButton
+                            text="Close"
+                            type="button"
+                            disabled={false}
+                            onClick={onCancel}
+                          />
+                        </FlexBox>
+                      </FlexBox>
+
+                      <FlexBox
+                        justifyContent={JustifyContent.spaceBetween}
+                        className="note-form__extra-fields"
+                      >
+                        {getFormOptions}
+                      </FlexBox>
+                    </>
+                  )}
+                </>
+              </form>
+            </>
+          );
+        }}
       </Form>
     );
   }

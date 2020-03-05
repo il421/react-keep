@@ -13,12 +13,9 @@ const FieldAdapter: React.FunctionComponent<FieldAdapterProps> = ({
 }) => {
   return (
     <div className={className}>
-      <Dropzone {...input}
-      >
+      <Dropzone {...input}>
         {({ getRootProps, getInputProps }) => (
-          <div
-            {...getRootProps()}
-          >
+          <div {...getRootProps()}>
             <input {...getInputProps()} />
             <p>hihi</p>
           </div>
@@ -29,10 +26,12 @@ const FieldAdapter: React.FunctionComponent<FieldAdapterProps> = ({
   );
 };
 
-export const FileFormField: React.FunctionComponent<ExposedFieldProps<string, HTMLElement>
-  & {
-  className: string,
-}> = (props) => (
+export const FileFormField: React.FunctionComponent<ExposedFieldProps<
+  string,
+  HTMLElement
+> & {
+  className: string;
+}> = props => (
   <Field
     {...props}
     name={props.name}

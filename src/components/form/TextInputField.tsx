@@ -13,37 +13,37 @@ const FieldAdapter: React.FunctionComponent<FieldAdapterProps> = ({
 }) => {
   return (
     <div className={className}>
-      {
-        isTextArea ? (
-          <TextareaAutosize
-            {...input}
-            {...rest}
-            spellCheck="false"
-            autoComplete="new-password"
-            autoFocus={autoFocus}
-          />
-        ) : (
-          <input
-            {...input}
-            {...rest}
-            autoComplete="new-password"
-            autoFocus={autoFocus}
-          />
-        )
-      }
+      {isTextArea ? (
+        <TextareaAutosize
+          {...input}
+          {...rest}
+          spellCheck="false"
+          autoComplete="new-password"
+          autoFocus={autoFocus}
+        />
+      ) : (
+        <input
+          {...input}
+          {...rest}
+          autoComplete="new-password"
+          autoFocus={autoFocus}
+        />
+      )}
       {meta.error && meta.touched && <span>{meta.error}</span>}
     </div>
   );
 };
 
-export const TextInputField: React.FunctionComponent<ExposedFieldProps<string, HTMLElement>
-  & {
+export const TextInputField: React.FunctionComponent<ExposedFieldProps<
+  string,
+  HTMLElement
+> & {
   type?: string;
-  placeholder: string,
-  className: string,
-  isTextArea?: boolean,
-  autoFocus?: boolean
-}> = (props) => (
+  placeholder: string;
+  className: string;
+  isTextArea?: boolean;
+  autoFocus?: boolean;
+}> = props => (
   <Field
     {...props}
     name={props.name}
