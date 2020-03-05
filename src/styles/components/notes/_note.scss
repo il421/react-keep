@@ -40,8 +40,7 @@
     top: 0;
     left: 0;
 
-    background-color: $grey-light;
-    opacity: 0.7;
+    background-color: rgba($grey-light, 0.8);
   }
 
   &--animation {

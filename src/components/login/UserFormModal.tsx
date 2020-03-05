@@ -7,7 +7,7 @@ import { JustifyContent } from "../../common/variables";
 import { AuthStoreState, Store, UpdateUser } from "../../store/store.types";
 import { isModal, nameOf, Placeholders } from "../../common";
 import { updateUserData } from "../../actions/auth";
-import { ContentContainer, LoginButton, FlexBox } from "../ui-components";
+import { ContentContainer, ConfirmButton, FlexBox } from "../ui-components";
 import { BaseForm, TextInputField, FileFormField } from "../form";
 import "../../styles/components/login/_user-form.scss";
 
@@ -44,7 +44,7 @@ class UserFormModal extends React.PureComponent<UserFormModalProps> {
 
   private getButtons = (isDisable: boolean) => {
     return (
-      <LoginButton
+      <ConfirmButton
         text="Update"
         loading={ this.props.auth.loading }
         disabled={ isDisable }

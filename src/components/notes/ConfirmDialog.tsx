@@ -1,36 +1,47 @@
-import React, { Dispatch } from "react";
-import { connect } from "react-redux";
-import { handleRemoveNote } from "../../actions/notes";
+import React from "react";
+import { ConfirmButton } from "../ui-components/ConfirmButton";
+import { FlexBox } from "../ui-components/FlexBox";
+import { AlignItems, JustifyContent } from "../../common/variables";
+import "../../styles/components/notes/_confirm-dialog.scss";
 
 /**
  * This component works only as a part of Note for now.
  */
 
 interface ConfirmDialogProps extends Pick<HTMLElement, "className">{
-  id: string;
-  removeNote: (id: string) => void;
+  removeNote: () => void;
   closeDialog: () => void;
 }
 
-const ConfirmDialog: React.FunctionComponent<ConfirmDialogProps> = ({ className, closeDialog, removeNote, id }) => {
+const ConfirmDialog: React.FunctionComponent<ConfirmDialogProps> = ({
+  className, closeDialog, removeNote
+}) => {
   return (
-    <div className={className}>
-      <button type="button"
-        onClick={() => {
-          removeNote(id);
-          closeDialog();
-        }
-        }
-      >Yes</button>
-      <button type="button" onClick={closeDialog}>No</button>
-    </div>
+    <FlexBox
+      className={`${className} confirm-dialog`}
+      justifyContent={ JustifyContent.center }
+      alignItems={ AlignItems.center }
+    >
+      <FlexBox
+        className="confirm-dialog__wrapper"
+        justifyContent={ JustifyContent.spaceAround }
+      >
+        <ConfirmButton
+          type="button"
+          text="Delete"
+          wrapperClassName="confirm-dialog__button"
+          onCLick={ removeNote }
+        />
+
+        <ConfirmButton
+          type="button"
+          text="Don't"
+          wrapperClassName="confirm-dialog__button"
+          onCLick={ closeDialog }
+        />
+      </FlexBox>
+    </FlexBox>
   );
 };
 
-
-const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
-  removeNote: (id: string) => dispatch(handleRemoveNote(id))
-});
-
-
-export default connect(undefined, mapDispatchToProps)(ConfirmDialog);
+export default ConfirmDialog;

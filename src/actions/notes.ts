@@ -45,7 +45,7 @@ const updateNote = (id: string, updates: Note): UpdateNoteAction => ({
 
 const changeImportance = (id: string): ToggleImportantAction => ({
   type: NotesActionsTypes.toggleImportance,
-  id,
+  id
 });
 
 const removeTag = (tagId: string): RemoveNoteTagAction => ({

@@ -48,6 +48,6 @@ export const TextInputField: React.FunctionComponent<ExposedFieldProps<string, H
     {...props}
     name={props.name}
     component={FieldAdapter}
-    parse={(value: string) => value.trim() ?? ""}
+    parse={(value: string) => value ?? ""}
   />
 );

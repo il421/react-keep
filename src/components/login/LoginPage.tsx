@@ -7,7 +7,7 @@ import { Store } from "../../store/store.types";
 import { nameOf, Errors, emailRegEx, Placeholders } from "../../common";
 import "../../styles/components/login/_login-page.scss";
 import { BaseForm, CheckboxInputField, TextInputField } from "../form";
-import { LoginButton } from "../ui-components";
+import { ConfirmButton } from "../ui-components";
 
 interface LoginPageProps {
   startLogin: (email: string, password: string) => void;
@@ -32,7 +32,7 @@ export class LoginPage extends React.PureComponent<LoginPageProps> {
 
   private getButtons = (isDisable: boolean, isSubmitting: boolean, values: LoginFormValues) => {
     return (
-      <LoginButton
+      <ConfirmButton
         text={values.isNew ? "Sign Up" : "Log In"}
         loading={this.props.loading}
         disabled={isDisable}

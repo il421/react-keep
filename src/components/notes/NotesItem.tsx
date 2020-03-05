@@ -3,14 +3,16 @@ import moment from "moment";
 import { Note } from "../../store/store.types";
 import { ContentContainer, FlexBox, IconButton } from "../ui-components";
 import { AlignItems, Colors, JustifyContent } from "../../common/variables";
-import "../../styles/components/notes/_note.scss";
 import ConfirmDialog from "./ConfirmDialog";
+import "../../styles/components/notes/_note.scss";
 
-export interface NoteProps {
-  note: Note
+interface NoteProps {
+  note: Note;
+  removeNote: (id: string) => void,
+  toggleImportance: (id: string) => void;
 }
 
-export const NotesItem:React.FunctionComponent<NoteProps> = ({ note }): JSX.Element => {
+const NotesItem:React.FunctionComponent<NoteProps> = ({ note, removeNote, toggleImportance }): JSX.Element => {
 
   const [isConfirm, setIsConfirm] = useState<boolean>(false);
 
@@ -20,7 +22,7 @@ export const NotesItem:React.FunctionComponent<NoteProps> = ({ note }): JSX.Elem
         {/*actions*/}
         <FlexBox className="note__actions" justifyContent={JustifyContent.spaceBetween} alignItems={AlignItems.center}>
           <IconButton
-            onClick={() => {}}
+            onClick={() => toggleImportance(note.id)}
             icon="bookmark"
             color={ note.important ? Colors.varmillion : Colors.lightGray }
           />
@@ -34,7 +36,11 @@ export const NotesItem:React.FunctionComponent<NoteProps> = ({ note }): JSX.Elem
         </FlexBox>
 
         {/*date nad tags*/}
-        <FlexBox className="note__details details"  vertical justifyContent={JustifyContent.spaceBetween}>
+        <FlexBox
+          className="note__details details"
+          vertical
+          justifyContent={ JustifyContent.spaceBetween }
+        >
           <div className="details__date">{ moment(note.updatedAt).format("MMMM Do, YYYY") }</div>
 
           <FlexBox className="details__tags" justifyContent={JustifyContent.start}>
@@ -45,9 +51,17 @@ export const NotesItem:React.FunctionComponent<NoteProps> = ({ note }): JSX.Elem
 
       {
         isConfirm && (
-          <ConfirmDialog className="note__confirm" id={ note.id } closeDialog={ () => setIsConfirm(false) } />
+          <ConfirmDialog
+            key={ Math.random() }
+            className="note__confirm"
+            closeDialog={ () => setIsConfirm(false) }
+            removeNote={() => removeNote(note.id)}
+          />
         )
       }
     </ContentContainer>
   );
 };
+
+export default NotesItem;
+
