@@ -9,7 +9,7 @@ interface LoginButtonProps
   text: string;
   loading?: boolean;
   type?: "submit" | "button";
-  onCLick?: () => void;
+  onCLick?: (evt?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   wrapperClassName?: string;
 }
 

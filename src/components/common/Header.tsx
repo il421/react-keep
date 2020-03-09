@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { stringify } from "query-string";
 import { AuthStoreState, Store } from "../../store/store.types";
-import { QueryKeys } from "../../routers/Routing";
+import { QueryKeys, RouteActions } from "../../routers/Routing";
 import { startLogout } from "../../actions/auth";
 import Search from "./Search";
 import { Controllers } from "./Controllers";
@@ -41,7 +41,7 @@ const Header: React.FunctionComponent<Props> = ({
 
   const onClickHandler = (key: keyof typeof QueryKeys) => {
     const query = stringify({
-      [key]: "edit"
+      [key]: RouteActions.edit
     });
     history.push(`${history.location.pathname}?${query}`);
   };

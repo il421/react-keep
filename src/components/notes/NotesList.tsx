@@ -7,6 +7,7 @@ import { ContentContainer } from "../ui-components/ContentContainer";
 import NotesItem from "./NotesItem";
 import { ThunkDispatch } from "redux-thunk";
 import { changeNoteImportance, handleRemoveNote } from "../../actions/notes";
+import { QueryKeys } from "../../routers/Routing";
 
 interface StateProps {
   notes: Note[];
@@ -17,14 +18,18 @@ interface DispatchProps {
   toggleImportance: (id: string) => void;
 }
 
-type NotesListProp = StateProps & DispatchProps;
+interface NotesListProp {
+  onNoteSelected: (key: keyof typeof QueryKeys, id: string) => void;
+}
 
-const NotesList: React.FunctionComponent<NotesListProp> = ({
+type Props = StateProps & DispatchProps & NotesListProp;
+
+const NotesList: React.FunctionComponent<Props> = ({
   notes,
   removeNote,
-  toggleImportance
+  toggleImportance,
+  onNoteSelected
 }): JSX.Element => {
-  // console.log(notes)
   return (
     <ContentContainer>
       {notes.map((note: Note, index: number) => (
@@ -33,6 +38,7 @@ const NotesList: React.FunctionComponent<NotesListProp> = ({
           note={note}
           toggleImportance={toggleImportance}
           removeNote={removeNote}
+          onNoteSelected={onNoteSelected}
         />
       ))}
     </ContentContainer>
@@ -50,7 +56,7 @@ const mapDispatchToProps = (
   toggleImportance: (id: string) => dispatch(changeNoteImportance(id))
 });
 
-export default connect<StateProps, DispatchProps, {}, Store>(
+export default connect<StateProps, DispatchProps, NotesListProp, Store>(
   mapStateToProps,
   mapDispatchToProps
 )(NotesList);

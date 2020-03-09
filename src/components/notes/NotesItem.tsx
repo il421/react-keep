@@ -5,17 +5,20 @@ import { ContentContainer, FlexBox, IconButton } from "../ui-components";
 import { AlignItems, Colors, JustifyContent } from "../../common/variables";
 import ConfirmDialog from "./ConfirmDialog";
 import "../../styles/components/notes/_note.scss";
+import { QueryKeys } from "../../routers/Routing";
 
 interface NoteProps {
   note: Note;
   removeNote: (id: string) => void;
   toggleImportance: (id: string) => void;
+  onNoteSelected: (key: keyof typeof QueryKeys, id: string) => void;
 }
 
 const NotesItem: React.FunctionComponent<NoteProps> = ({
   note,
   removeNote,
-  toggleImportance
+  toggleImportance,
+  onNoteSelected
 }): JSX.Element => {
   const [isConfirm, setIsConfirm] = useState<boolean>(false);
 
@@ -23,6 +26,7 @@ const NotesItem: React.FunctionComponent<NoteProps> = ({
     <ContentContainer
       className="note note--animation"
       style={{ backgroundColor: note.color }}
+      onClick={() => onNoteSelected(QueryKeys.text, note.id)}
     >
       <FlexBox vertical justifyContent={JustifyContent.spaceBetween}>
         {/*actions*/}
@@ -32,11 +36,20 @@ const NotesItem: React.FunctionComponent<NoteProps> = ({
           alignItems={AlignItems.center}
         >
           <IconButton
-            onClick={() => toggleImportance(note.id)}
+            onButtonClick={evt => {
+              evt?.stopPropagation();
+              toggleImportance(note.id);
+            }}
             icon="bookmark"
             color={note.important ? Colors.varmillion : Colors.lightGray}
           />
-          <IconButton onClick={() => setIsConfirm(true)} icon="times" />
+          <IconButton
+            onButtonClick={evt => {
+              evt?.stopPropagation();
+              setIsConfirm(true);
+            }}
+            icon="times"
+          />
         </FlexBox>
 
         {/*title and content*/}

@@ -15,7 +15,7 @@ export class SideBar extends React.PureComponent<SideBarProp> {
           <div className="sidebar__close">
             <IconButton
               className="sidebar__close-button"
-              onClick={() => this.props.setShowSidebar(false)}
+              onButtonClick={() => this.props.setShowSidebar(false)}
               icon="times"
               size="2x"
             />

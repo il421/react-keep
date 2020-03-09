@@ -1,5 +1,5 @@
 import React from "react";
-import { QueryKeys } from "../../routers/Routing";
+import { QueryKeys, RouteActions } from "../../routers/Routing";
 import { useHistory } from "react-router-dom";
 import { stringify } from "query-string";
 import { AlignItems, JustifyContent } from "../../common/variables";
@@ -18,7 +18,7 @@ export const Controllers: React.FunctionComponent<Controllers> = ({
 
   const onClickHandler = (key: keyof typeof QueryKeys) => {
     const query = stringify({
-      [key]: "new"
+      [key]: RouteActions.add
     });
     history.push(`${history.location.pathname}?${query}`);
   };

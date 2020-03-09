@@ -32,14 +32,20 @@ const ConfirmDialog: React.FunctionComponent<ConfirmDialogProps> = ({
           type="button"
           text="Delete"
           wrapperClassName="confirm-dialog__button"
-          onCLick={removeNote}
+          onCLick={evt => {
+            evt?.stopPropagation();
+            removeNote();
+          }}
         />
 
         <ConfirmButton
           type="button"
           text="Don't"
           wrapperClassName="confirm-dialog__button"
-          onCLick={closeDialog}
+          onCLick={evt => {
+            evt?.stopPropagation();
+            closeDialog();
+          }}
         />
       </FlexBox>
     </FlexBox>

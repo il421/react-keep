@@ -11,6 +11,8 @@ import "../../styles/components/common/_dashboard.scss";
 import "../../styles/components/notes/_note-modal.scss";
 import TextNoteFormModal from "../notes/TextNoteFormModal";
 import NotesList from "../notes/NotesList";
+import { QueryKeys } from "../../routers/Routing";
+import { stringify } from "query-string";
 
 interface DashboardPageProps {
   history: History;
@@ -21,6 +23,13 @@ export const DashboardPage: React.FunctionComponent<DashboardPageProps> = ({
 }): JSX.Element => {
   const [showBar, setShowSidebar] = useState<boolean>(false);
 
+  const onNoteSelected = (key: keyof typeof QueryKeys, id: string) => {
+    const query = stringify({
+      [key]: id
+    });
+    history.push(`${history.location.pathname}?${query}`);
+  };
+
   return (
     <FlexBox
       vertical={true}
@@ -29,7 +38,7 @@ export const DashboardPage: React.FunctionComponent<DashboardPageProps> = ({
     >
       <Header showSidebar={setShowSidebar} />
       {/*<NoteSelection className="content-container"/>*/}
-      <NotesList />
+      <NotesList onNoteSelected={onNoteSelected} />
 
       <SideBar showBar={showBar} setShowSidebar={setShowSidebar}>
         test

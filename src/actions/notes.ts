@@ -9,7 +9,7 @@ import {
   SetNotesAction,
   Store,
   Tag,
-  ToggleImportantAction,
+  ToggleImportantAction, UpdateNote,
   UpdateNoteAction
 } from "../store/store.types";
 import { Dispatch } from "redux";
@@ -40,7 +40,7 @@ const removeNote = (id: string): RemoveNoteAction => ({
   id
 });
 
-const updateNote = (id: string, updates: Note): UpdateNoteAction => ({
+const updateNote = (id: string, updates: UpdateNote): UpdateNoteAction => ({
   type: NotesActionsTypes.updateNote,
   id,
   updates
@@ -124,7 +124,7 @@ export const handleRemoveNote = (id: string) => {
   };
 };
 
-export const handleUpdateNote = (id: string, updates: Note) => {
+export const handleUpdateNote = (id: string, updates: UpdateNote) => {
   return async (dispatch: Dispatch, getState: () => Store) => {
     const uid = getState().auth.uid;
 

@@ -5,6 +5,11 @@ export enum QueryKeys {
   user = "user"
 }
 
+export enum RouteActions {
+  add = "add",
+  edit = "edit"
+}
+
 export enum PathNames {
   base = "/dashboard"
 }

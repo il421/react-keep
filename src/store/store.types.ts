@@ -64,6 +64,9 @@ export interface Note {
 export interface AddNote
   extends Omit<Note, "id" | "important" | "createdAt" | "updatedAt"> {}
 
+export interface UpdateNote
+  extends Omit<Note, "id"> {}
+
 export interface ListItem {
   id: string;
   content: string;
@@ -85,7 +88,7 @@ export interface RemoveNoteAction extends Pick<Note, "id"> {
 
 export interface UpdateNoteAction extends Pick<Note, "id"> {
   type: NotesActionsTypes.updateNote;
-  updates: Note;
+  updates: UpdateNote;
 }
 
 export interface ToggleImportantAction extends Pick<Note, "id"> {
