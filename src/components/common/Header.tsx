@@ -54,7 +54,7 @@ const Header: React.FunctionComponent<Props> = ({
             className="header__bar"
             icon="bars"
             size="2x"
-            onClick={() => showSidebar(true)}
+            onButtonClick={() => showSidebar(true)}
           />
 
           <h1 className="header__title">Keep Me</h1>
@@ -82,7 +82,7 @@ const Header: React.FunctionComponent<Props> = ({
               className="user-box__logout"
               icon="sign-out-alt"
               size="lg"
-              onClick={startLogout}
+              onButtonClick={startLogout}
             />
           </div>
         </div>

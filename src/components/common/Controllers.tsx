@@ -35,21 +35,21 @@ export const Controllers: React.FunctionComponent<Controllers> = ({
       >
         <IconButton
           className="controllers__text"
-          onClick={() => onClickHandler(QueryKeys.text)}
+          onButtonClick={() => onClickHandler(QueryKeys.text)}
           icon="align-left"
           size="2x"
         />
 
         <IconButton
           className="controllers__list"
-          onClick={() => onClickHandler(QueryKeys.list)}
+          onButtonClick={() => onClickHandler(QueryKeys.list)}
           icon="check-square"
           size="2x"
         />
 
         <IconButton
           className="controllers__image"
-          onClick={() => onClickHandler(QueryKeys.image)}
+          onButtonClick={() => onClickHandler(QueryKeys.image)}
           icon="image"
           size="2x"
         />
