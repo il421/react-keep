@@ -24,7 +24,7 @@ const NotesItem: React.FunctionComponent<NoteProps> = ({
 
   return (
     <ContentContainer
-      className="note note--animation"
+      className="note"
       style={{ backgroundColor: note.color }}
       onClick={() => onNoteSelected(QueryKeys.text, note.id)}
     >

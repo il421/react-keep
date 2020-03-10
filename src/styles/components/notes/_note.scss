@@ -70,10 +70,12 @@
     padding: $s-size 0;
     font-size: $font-size-small;
     line-height: 2rem;
+
+    white-space:pre-wrap;
   }
 
   &__title {
-    margin-top: $m-size;
+    margin: 0;
 
     font-size: $font-size-large;
     font-weight: bold;
@@ -82,19 +84,14 @@
 }
 
 .details {
+  &__date {
+    font-size: $font-size-xsmall;
+  }
+
   &__tags {
     display: flex;
     flex-wrap: wrap;
     justify-content: start;
-  }
-
-  &__tags div {
-    margin: calc(#{$s-size} / 3);
-    padding: 0.2rem 0.7rem;
-
-    background-color: $grey-light;
-    border-radius: 1rem;
-    color: $white;
   }
 }
 
