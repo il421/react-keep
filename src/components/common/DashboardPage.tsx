@@ -13,6 +13,7 @@ import TextNoteFormModal from "../notes/TextNoteFormModal";
 import NotesList from "../notes/NotesList";
 import { QueryKeys } from "../../routers/Routing";
 import { stringify } from "query-string";
+import ListNoteFormModal from "../notes/ListNoteFormModal";
 
 interface DashboardPageProps {
   history: History;
@@ -44,7 +45,8 @@ export const DashboardPage: React.FunctionComponent<DashboardPageProps> = ({
         test
       </SideBar>
 
-      <TextNoteFormModal />
+      <TextNoteFormModal history={history} />
+      <ListNoteFormModal history={history} />
       <UserFormModal history={history} />
       <Controllers isMobile />
 

@@ -70,6 +70,8 @@ export interface UpdateNote
 export interface ListItem {
   id: string;
   content: string;
+  checked: boolean;
+  position?: number;
 }
 
 export interface SetNotesAction {

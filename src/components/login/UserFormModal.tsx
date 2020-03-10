@@ -74,12 +74,17 @@ class UserFormModal extends React.PureComponent<Props> {
   };
 
   render() {
+    if (
+      !isModal({
+        query: this.props.history.location.search,
+        type: QueryKeys.user
+      })
+    ) {
+      return null;
+    }
     return (
       <Modal
-        isOpen={isModal({
-          query: this.props.history.location.search,
-          type: QueryKeys.user
-        })}
+        isOpen={true}
         onRequestClose={() => this.props.history.push(PathNames.base)}
         closeTimeoutMS={200}
         className="user-modal"
