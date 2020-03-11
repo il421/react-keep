@@ -85,10 +85,12 @@ const NotesItem: React.FunctionComponent<NoteProps> = ({
 
       {isConfirm && (
         <ConfirmDialog
-          key={Math.random()}
           className="note__confirm"
           closeDialog={() => setIsConfirm(false)}
-          removeNote={() => removeNote(note.id)}
+          removeNote={() => {
+            removeNote(note.id);
+            setIsConfirm(false);
+          }}
         />
       )}
     </ContentContainer>

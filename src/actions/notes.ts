@@ -115,8 +115,8 @@ export const handleRemoveNote = (id: string) => {
 
     const docRef = initDocumentRef(uid);
     try {
-      await dispatch(removeNote(id));
       await docRef.doc(id).delete();
+      dispatch(removeNote(id));
     } catch (e) {
       console.log(e.message);
       toast.error(e.message);
@@ -130,8 +130,8 @@ export const handleUpdateNote = (id: string, updates: UpdateNote) => {
 
     const docRef = initDocumentRef(uid);
     try {
-      dispatch(updateNote(id, updates));
       await docRef.doc(id).set(updates);
+      dispatch(updateNote(id, updates));
     } catch (e) {
       console.log(e);
       toast.error(e.message);

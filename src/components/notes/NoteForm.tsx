@@ -73,7 +73,7 @@ class NoteForm extends React.Component<Props> {
     content: this.getDefaultContent(),
     tags: [],
     color: PickerColors.white,
-    currentOption: BaseFormOptions.times
+    currentOption: BaseFormOptions.none
   };
 
   private nameOf = nameOf<NoteFormValues<string | ListItem[]>>();

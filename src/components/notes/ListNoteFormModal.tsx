@@ -9,6 +9,8 @@ import NoteForm from "./NoteForm";
 import { History } from "history";
 import { FieldArray } from "react-final-form-arrays";
 
+import { ListNoteFromItem } from "./ListNoteFromItem";
+
 interface ListNoteFormModalProps {
   history: History;
 }
@@ -34,9 +36,15 @@ class ListNoteFormModal extends React.Component<ListNoteFormModalProps> {
       >
         <NoteForm type={NoteType.list}>
           <FieldArray name={this.nameOf("content")}>
-            {({ fields }) =>
-              fields.map((name, index) => <div key={index}>{name}</div>)
-            }
+            {({ fields }) => {
+              return fields.map((name, index) => (
+                <ListNoteFromItem
+                  name={name}
+                  key={index}
+                  onRemove={() => fields.remove(index)}
+                />
+              ));
+            }}
           </FieldArray>
         </NoteForm>
       </Modal>

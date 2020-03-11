@@ -9,9 +9,9 @@ export interface ExposedFieldProps<FieldValue, T extends HTMLElement>
 export type FieldAdapterProps = FieldRenderProps<string, HTMLElement>;
 
 // value is an icon name from @fontawesome/react-fontawesome"
-// "times" is default or none value
+// "none" is default or none value
 export enum BaseFormOptions {
-  times = "times",
+  none = "none",
   palette = "palette",
   tags = "tags"
 }

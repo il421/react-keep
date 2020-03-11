@@ -26,6 +26,7 @@ import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons/faMapMarkerAlt
 import { faBookmark } from "@fortawesome/free-solid-svg-icons/faBookmark";
 import { faTags } from "@fortawesome/free-solid-svg-icons/faTags";
 import { faEdit } from "@fortawesome/free-solid-svg-icons/faEdit";
+import { faTh } from "@fortawesome/free-solid-svg-icons/faTh";
 import { faCheckSquare } from "@fortawesome/free-solid-svg-icons/faCheckSquare";
 import { faAlignLeft } from "@fortawesome/free-solid-svg-icons/faAlignLeft";
 import { faImage } from "@fortawesome/free-solid-svg-icons/faImage";
@@ -43,7 +44,8 @@ library.add(
   faEdit,
   faCheckSquare,
   faAlignLeft,
-  faImage
+  faImage,
+  faTh
 );
 
 const store = configStore();
