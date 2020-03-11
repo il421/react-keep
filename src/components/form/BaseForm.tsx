@@ -102,17 +102,18 @@ export class BaseForm<FormValues> extends React.PureComponent<
                           className={classNames?.options ?? "actions__options"}
                         >
                           {Object.values(BaseFormOptions).map(
-                            (option: string) => (
-                              <RadioButtonsInputField
-                                key={option}
-                                name="currentOption"
-                                radioClassName="options__item"
-                                value={option}
-                                labelProps={{
-                                  iconName: option as IconProp
-                                }}
-                              />
-                            )
+                            (option: string) =>
+                              option === BaseFormOptions.none ? null : (
+                                <RadioButtonsInputField
+                                  key={option}
+                                  name="currentOption"
+                                  radioClassName="options__item"
+                                  value={option}
+                                  labelProps={{
+                                    iconName: option as IconProp
+                                  }}
+                                />
+                              )
                           )}
                         </FlexBox>
 

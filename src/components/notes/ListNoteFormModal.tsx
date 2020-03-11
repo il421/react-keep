@@ -4,16 +4,33 @@ import { ListItem } from "../../store/store.types";
 import { NoteFormValues, NoteType } from "./notes.types";
 import { isModal, nameOf } from "../../common";
 import { PathNames, QueryKeys } from "../../routers/Routing";
-import "../../styles/components/notes/_note-form.scss";
 import NoteForm from "./NoteForm";
 import { History } from "history";
 import { FieldArray } from "react-final-form-arrays";
 
+import { ListNoteFromItem } from "./ListNoteFromItem";
+import { FormSpy } from "react-final-form";
+import { IconButton } from "../ui-components/IconButton";
+import { FormApi } from "final-form";
+import { FlexBox } from "../ui-components/FlexBox";
+import { AlignItems, JustifyContent } from "../../common/variables";
+import { getDefaultContent } from "./utils";
+
 interface ListNoteFormModalProps {
   history: History;
 }
+
+interface FormSpyProps {
+  form: FormApi;
+  values: NoteFormValues<ListItem[]>;
+}
+
 class ListNoteFormModal extends React.Component<ListNoteFormModalProps> {
   private nameOf = nameOf<NoteFormValues<ListItem[]>>();
+
+  private getCheckedItems = (content: ListItem[]) => {
+    return `${content.length}/${content.filter(c => c.checked).length}`;
+  };
 
   render() {
     if (
@@ -33,10 +50,40 @@ class ListNoteFormModal extends React.Component<ListNoteFormModalProps> {
         ariaHideApp={false}
       >
         <NoteForm type={NoteType.list}>
+          <>
+            <FormSpy>
+              {({ form, values }: FormSpyProps) => {
+                return (
+                  <FlexBox
+                    justifyContent={JustifyContent.spaceBetween}
+                    alignItems={AlignItems.center}
+                  >
+                    <div>Checked: {this.getCheckedItems(values.content)}</div>
+                    <IconButton
+                      onButtonClick={() =>
+                        form.change(this.nameOf("content"), [
+                          getDefaultContent(NoteType.list)[0],
+                          ...values.content
+                        ])
+                      }
+                      icon="plus-circle"
+                      text="Add line"
+                    />
+                  </FlexBox>
+                );
+              }}
+            </FormSpy>
+          </>
           <FieldArray name={this.nameOf("content")}>
-            {({ fields }) =>
-              fields.map((name, index) => <div key={index}>{name}</div>)
-            }
+            {({ fields }) => {
+              return fields.map((name, index) => (
+                <ListNoteFromItem
+                  name={name}
+                  key={index}
+                  onRemove={() => fields.remove(index)}
+                />
+              ));
+            }}
           </FieldArray>
         </NoteForm>
       </Modal>

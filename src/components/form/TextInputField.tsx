@@ -39,7 +39,7 @@ export const TextInputField: React.FunctionComponent<ExposedFieldProps<
   HTMLElement
 > & {
   type?: string;
-  placeholder: string;
+  placeholder?: string;
   className: string;
   isTextArea?: boolean;
   autoFocus?: boolean;

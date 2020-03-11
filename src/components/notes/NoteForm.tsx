@@ -25,8 +25,11 @@ import { handleAddNote, handleUpdateNote } from "../../actions/notes";
 import "../../styles/components/notes/_note-form.scss";
 import { ThunkDispatch } from "redux-thunk";
 import moment from "moment";
-import { getInitialsFormValues, getSelectedNote } from "./utils";
-import { v4 as uuidv4 } from "uuid";
+import {
+  getDefaultContent,
+  getInitialsFormValues,
+  getSelectedNote
+} from "./utils";
 import { ContentContainer } from "../ui-components/ContentContainer";
 
 interface StateProps {
@@ -50,30 +53,13 @@ interface TextNoteFormModalState {
 type Props = RouteComponentProps & DispatchProps & StateProps & NoteFormProps;
 
 class NoteForm extends React.Component<Props> {
-  private getDefaultContent = (): string | ListItem[] => {
-    switch (this.props.type) {
-      case NoteType.text:
-        return "";
-      case NoteType.list:
-        return [
-          {
-            id: uuidv4(),
-            content: "",
-            checked: false,
-            position: 0
-          }
-        ];
-      default:
-        return "";
-    }
-  };
   private defaultNote: NoteFormValues<string | ListItem[]> = {
     type: this.props.type,
     title: "",
-    content: this.getDefaultContent(),
+    content: getDefaultContent(this.props.type),
     tags: [],
     color: PickerColors.white,
-    currentOption: BaseFormOptions.times
+    currentOption: BaseFormOptions.none
   };
 
   private nameOf = nameOf<NoteFormValues<string | ListItem[]>>();

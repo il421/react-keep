@@ -1,0 +1,47 @@
+@import "../../mixins/mixins";
+@import "../../base/variables";
+
+.list-note-form-item {
+  padding: $s-size 0;
+
+  &:focus {
+    border-bottom: 1px solid $grey-light;
+    border-top: 1px solid $grey-light;
+    padding-top: 11px;
+    padding-bottom: 11px;
+  }
+
+  &:hover > * {
+    visibility: visible;
+  }
+
+  &__remove {
+    visibility: hidden;
+    padding: 0;
+    margin-right: 14px;
+  }
+
+  &__text {
+    width: 80%;
+    & textarea {
+      width: 100%;
+
+      border: none;
+      background-color: inherit;
+      font-size: $font-size-medium;
+
+      margin: 0;
+      padding: 0;
+
+      outline: none;
+      resize: none;
+      overflow: hidden;
+      cursor: text;
+    }
+  }
+
+  &__check {
+    @include checkbox-field;
+    width: 20px;
+  }
+}

@@ -9,7 +9,7 @@ import { handleSetNotes } from "./actions/notes";
 import { handleSetTags } from "./actions/tags";
 
 import "normalize.css/normalize.css";
-import "./styles/styles.scss";
+import "./styles/base/_base.scss";
 import "./styles/components/common/_modal.scss";
 import "react-toastify/dist/ReactToastify.css";
 import * as serviceWorker from "./serviceWorker";
@@ -26,9 +26,11 @@ import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons/faMapMarkerAlt
 import { faBookmark } from "@fortawesome/free-solid-svg-icons/faBookmark";
 import { faTags } from "@fortawesome/free-solid-svg-icons/faTags";
 import { faEdit } from "@fortawesome/free-solid-svg-icons/faEdit";
+import { faTh } from "@fortawesome/free-solid-svg-icons/faTh";
 import { faCheckSquare } from "@fortawesome/free-solid-svg-icons/faCheckSquare";
 import { faAlignLeft } from "@fortawesome/free-solid-svg-icons/faAlignLeft";
 import { faImage } from "@fortawesome/free-solid-svg-icons/faImage";
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons/faPlusCircle";
 import { LoginAction } from "./store/store.types";
 import { PathNames } from "./routers/Routing";
 
@@ -43,7 +45,9 @@ library.add(
   faEdit,
   faCheckSquare,
   faAlignLeft,
-  faImage
+  faImage,
+  faTh,
+  faPlusCircle
 );
 
 const store = configStore();

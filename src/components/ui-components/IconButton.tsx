@@ -11,6 +11,7 @@ interface IconButtonProps extends FontAwesomeIconProps {
   ) => void;
   className?: string;
   disabled?: boolean;
+  text?: string;
 }
 
 export class IconButton extends React.PureComponent<IconButtonProps> {
@@ -18,10 +19,12 @@ export class IconButton extends React.PureComponent<IconButtonProps> {
     const { onButtonClick, className, disabled, ...rest } = this.props;
     return (
       <button
-        className={`${className} icon-button`}
+        className={`icon-button ${className} `}
         onClick={onButtonClick}
         disabled={disabled}
+        type="button"
       >
+        <div className="icon-button__text">{this.props.text}</div>
         <FontAwesomeIcon {...rest} />
       </button>
     );

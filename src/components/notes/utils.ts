@@ -3,6 +3,7 @@ import { RouteActions } from "../../routers/Routing";
 import { ListItem, Note } from "../../store/store.types";
 import { NoteFormValues, NoteType } from "./notes.types";
 import { BaseFormOptions } from "../form/BaseForm.types";
+import { v4 as uuidv4 } from "uuid";
 
 /**
  * Method returns selected noted by route query
@@ -39,8 +40,27 @@ export const getInitialsFormValues = <T extends string | ListItem[]>(options: {
       content: content as T,
       tags,
       color,
-      currentOption: BaseFormOptions.times
+      currentOption: BaseFormOptions.none
     } as NoteFormValues<T>;
   }
   return options.defaultValues;
+};
+
+
+export const getDefaultContent = (type: NoteType): string | ListItem[] => {
+  switch (type) {
+  case NoteType.text:
+    return "";
+  case NoteType.list:
+    return [
+      {
+        id: uuidv4(),
+        content: "",
+        checked: false,
+        position: 0
+      }
+    ];
+  default:
+    return "";
+  }
 };

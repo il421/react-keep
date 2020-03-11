@@ -32,6 +32,12 @@
   align-items: center;
 }
 
+@mixin flex-row-end-center {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
 @mixin button {
   background: $sunshine;
   color: $white;
@@ -43,4 +49,48 @@
   text-decoration: none;
   line-height: 1;
   cursor: pointer;
+}
+
+@mixin checkbox-field {
+  position: relative;
+  label {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 20px;
+    height: 20px;
+    margin: 0;
+
+    background: transparent;
+    box-shadow: inset 0 1px 1px $grey-light, 0 1px 3px rgba(0, 0, 0, 0.5);
+
+    cursor: pointer;
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: 4px;
+      left: 4px;
+
+      width: 10px;
+      height: 6px;
+
+      border: 3px solid #333;
+      border-top: none;
+      border-right: none;
+      background: transparent;
+      opacity: 0;
+      transform: rotate(-45deg);
+    }
+    &:hover::after {
+      opacity: 0;
+    }
+  }
+  input[type="checkbox"] {
+    visibility: hidden;
+    &:checked + label:after {
+      opacity: 1;
+    }
+  }
 }

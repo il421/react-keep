@@ -3,10 +3,17 @@
 
 .icon-button {
   @include button;
+  @include flex-row-end-center;
 
   background: none;
   color: $grey-light;
   transition: color 500ms ease;
+
+  &__text {
+    padding-right: $s-size;
+
+    font-size: $font-size-small;
+  }
 
   &:hover {
     color: lighten($grey-light, 20%);
