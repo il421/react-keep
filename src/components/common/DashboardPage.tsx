@@ -14,6 +14,7 @@ import NotesList from "../notes/NotesList";
 import { QueryKeys } from "../../routers/Routing";
 import { stringify } from "query-string";
 import ListNoteFormModal from "../notes/ListNoteFormModal";
+import { NoteType } from "../notes/notes.types";
 
 interface DashboardPageProps {
   history: History;
@@ -24,7 +25,19 @@ export const DashboardPage: React.FunctionComponent<DashboardPageProps> = ({
 }): JSX.Element => {
   const [showBar, setShowSidebar] = useState<boolean>(false);
 
-  const onNoteSelected = (key: keyof typeof QueryKeys, id: string) => {
+  const onNoteSelected = (type: NoteType, id: string) => {
+    let key: keyof typeof QueryKeys;
+    switch (type) {
+      case NoteType.text:
+        key = QueryKeys.text;
+        break;
+      case NoteType.list:
+        key = QueryKeys.list;
+        break;
+      default:
+        key = QueryKeys.image;
+    }
+
     const query = stringify({
       [key]: id
     });

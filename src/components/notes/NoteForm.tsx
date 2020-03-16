@@ -105,7 +105,7 @@ class NoteForm extends React.Component<Props> {
       >
         <BaseForm<NoteFormValues<string | ListItem[]>>
           initialValues={getInitialsFormValues({
-            type: NoteType.text,
+            type: this.props.type,
             currentNote: this.state.currentNote,
             defaultValues: this.defaultNote
           })}

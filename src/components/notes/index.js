@@ -5,4 +5,5 @@ export * from "./TextNoteFormModal";
 export * from "./ListNoteFormModal";
 export * from "./ListNoteFromItem";
 export * from "./NoteForm";
+export * from "./NoteContent";
 export * from "./options/ColorsPickerField";

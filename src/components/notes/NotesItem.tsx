@@ -5,13 +5,14 @@ import { ContentContainer, FlexBox, IconButton } from "../ui-components";
 import { AlignItems, Colors, JustifyContent } from "../../common/variables";
 import ConfirmDialog from "./ConfirmDialog";
 import "../../styles/components/notes/_note.scss";
-import { QueryKeys } from "../../routers/Routing";
+import NoteContent from "./NoteContent";
+import { NoteType } from "./notes.types";
 
 interface NoteProps {
   note: Note;
   removeNote: (id: string) => void;
   toggleImportance: (id: string) => void;
-  onNoteSelected: (key: keyof typeof QueryKeys, id: string) => void;
+  onNoteSelected: (type: NoteType, id: string) => void;
 }
 
 const NotesItem: React.FunctionComponent<NoteProps> = ({
@@ -26,7 +27,7 @@ const NotesItem: React.FunctionComponent<NoteProps> = ({
     <ContentContainer
       className="note"
       style={{ backgroundColor: note.color }}
-      onClick={() => onNoteSelected(QueryKeys.text, note.id)}
+      onClick={() => onNoteSelected(note.type, note.id)}
     >
       <FlexBox vertical justifyContent={JustifyContent.spaceBetween}>
         {/*actions*/}
@@ -61,7 +62,7 @@ const NotesItem: React.FunctionComponent<NoteProps> = ({
           {!!note.title.trim() && (
             <h2 className="content__title">{note.title}</h2>
           )}
-          <div className="content__text">{note.content}</div>
+          <NoteContent type={note.type} content={note.content} />
         </FlexBox>
 
         {/*date nad tags*/}

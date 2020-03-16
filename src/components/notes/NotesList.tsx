@@ -7,7 +7,7 @@ import { ContentContainer } from "../ui-components/ContentContainer";
 import NotesItem from "./NotesItem";
 import { ThunkDispatch } from "redux-thunk";
 import { changeNoteImportance, handleRemoveNote } from "../../actions/notes";
-import { QueryKeys } from "../../routers/Routing";
+import { NoteType } from "./notes.types";
 
 interface StateProps {
   notes: Note[];
@@ -19,7 +19,7 @@ interface DispatchProps {
 }
 
 interface NotesListProp {
-  onNoteSelected: (key: keyof typeof QueryKeys, id: string) => void;
+  onNoteSelected: (type: NoteType, id: string) => void;
 }
 
 type Props = StateProps & DispatchProps & NotesListProp;

@@ -24,7 +24,9 @@ export class IconButton extends React.PureComponent<IconButtonProps> {
         disabled={disabled}
         type="button"
       >
-        <div className="icon-button__text">{this.props.text}</div>
+        {this.props.text && (
+          <div className="icon-button__text">{this.props.text}</div>
+        )}
         <FontAwesomeIcon {...rest} />
       </button>
     );
