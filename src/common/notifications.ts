@@ -6,7 +6,6 @@ export enum Message {
   noteSaved,
   noteUpdated,
   noteRemoved
-
 }
 
 export const getMessage = (message: Message, data?: string | number) => {

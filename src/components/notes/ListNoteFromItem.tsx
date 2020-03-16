@@ -1,6 +1,7 @@
 import React from "react";
 import { FlexBox } from "../ui-components/FlexBox";
 import { AlignItems, JustifyContent } from "../../common/variables";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CheckboxInputField } from "../form/CheckboxInputField";
 import { TextInputField } from "../form/TextInputField";
 import { IconButton } from "../ui-components/IconButton";
@@ -31,6 +32,15 @@ export const ListNoteFromItem: React.FunctionComponent<ListNoteFromItemProps> = 
         name={`${name}.checked`}
         className="list-note-form-item__check"
         id={`${name}.checked`}
+      />
+      <FontAwesomeIcon
+        icon={"th"}
+        className="list-note-form-item__mover"
+        size="lg"
+      />
+      <CheckboxInputField
+        name={`${name}.checked`}
+        className="list-note-form-item__check"
       />
       <TextInputField
         isTextArea={true}

@@ -46,21 +46,20 @@ export const getInitialsFormValues = <T extends string | ListItem[]>(options: {
   return options.defaultValues;
 };
 
-
 export const getDefaultContent = (type: NoteType): string | ListItem[] => {
   switch (type) {
-  case NoteType.text:
-    return "";
-  case NoteType.list:
-    return [
-      {
-        id: uuidv4(),
-        content: "",
-        checked: false,
-        position: 0
-      }
-    ];
-  default:
-    return "";
+    case NoteType.text:
+      return "";
+    case NoteType.list:
+      return [
+        {
+          id: uuidv4(),
+          content: "",
+          checked: false,
+          position: 0
+        }
+      ];
+    default:
+      return "";
   }
 };

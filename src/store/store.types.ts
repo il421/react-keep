@@ -64,8 +64,7 @@ export interface Note {
 export interface AddNote
   extends Omit<Note, "id" | "important" | "createdAt" | "updatedAt"> {}
 
-export interface UpdateNote
-  extends Omit<Note, "id"> {}
+export interface UpdateNote extends Omit<Note, "id"> {}
 
 export interface ListItem {
   id: string;

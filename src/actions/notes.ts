@@ -9,7 +9,8 @@ import {
   SetNotesAction,
   Store,
   Tag,
-  ToggleImportantAction, UpdateNote,
+  ToggleImportantAction,
+  UpdateNote,
   UpdateNoteAction
 } from "../store/store.types";
 import { Dispatch } from "redux";
