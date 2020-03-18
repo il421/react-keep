@@ -16,9 +16,14 @@ const NoteContent: React.FunctionComponent<NoteContentProps> = ({
       {type === NoteType.text ? (
         <div className="content__text">{content}</div>
       ) : (
-        <ul>
+        <ul className={"content__list list"}>
           {(content as ListItem[]).map((item, index) => (
-            <li key={index}>{item.content}</li>
+            <li key={index}>
+              <div
+                className={`list__box ${item.checked && "list__box--checked"}`}
+              />
+              <span className="list__text">{item.content}</span>
+            </li>
           ))}
         </ul>
       )}

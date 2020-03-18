@@ -74,6 +74,33 @@
     white-space: pre-wrap;
   }
 
+  &__list {
+    padding-left: 0;
+    list-style: none;
+
+    & li {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    & li .list__text {
+      padding-left: $s-size;
+    }
+
+    & li .list__box {
+      min-width: 15px;
+      height: 15px;
+
+      margin-top: 3px;
+
+      border: 2px solid $grey-light;
+      border-radius: 50%;
+    }
+    .list__box--checked {
+      background-color: $grey-light;
+    }
+  }
+
   &__title {
     margin: 0;
 

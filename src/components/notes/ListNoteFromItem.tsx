@@ -22,25 +22,10 @@ export const ListNoteFromItem: React.FunctionComponent<ListNoteFromItemProps> = 
       alignItems={AlignItems.start}
       className="list-note-form-item"
     >
-      {/* @TODO for drag and drop */}
-      {/*<FontAwesomeIcon*/}
-      {/*  icon={"th"}*/}
-      {/*  className="list-note-form-item__mover"*/}
-      {/*  size="lg"*/}
-      {/*/>*/}
       <CheckboxInputField
         name={`${name}.checked`}
         className="list-note-form-item__check"
         id={`${name}.checked`}
-      />
-      <FontAwesomeIcon
-        icon={"th"}
-        className="list-note-form-item__mover"
-        size="lg"
-      />
-      <CheckboxInputField
-        name={`${name}.checked`}
-        className="list-note-form-item__check"
       />
       <TextInputField
         isTextArea={true}
