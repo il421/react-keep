@@ -3,21 +3,14 @@
 .note {
   position: relative;
 
-  width: 45%;
+  width: 240px;
   height: inherit;
 
-  margin: 0.8rem;
   padding: $s-size;
 
   box-shadow: 0 1px 1px 0 rgba(65, 69, 73, 0.3),
     0 1px 3px 1px rgba(65, 69, 73, 0.15);
   word-break: break-word;
-
-  @media (min-width: $tablet-widths) {
-    & {
-      width: 240px;
-    }
-  }
 
   &:hover {
     box-shadow: 0 4px 4px 0 rgba(65, 69, 73, 0.3),

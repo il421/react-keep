@@ -8,6 +8,7 @@ import NotesItem from "./NotesItem";
 import { ThunkDispatch } from "redux-thunk";
 import { changeNoteImportance, handleRemoveNote } from "../../actions/notes";
 import { NoteType } from "./notes.types";
+import Masonry from "react-masonry-css";
 
 interface StateProps {
   notes: Note[];
@@ -30,17 +31,30 @@ const NotesList: React.FunctionComponent<Props> = ({
   toggleImportance,
   onNoteSelected
 }): JSX.Element => {
+  const breakpointColumnsObj = {
+    default: 4,
+    991: 3,
+    794: 2,
+    615: 1
+  };
+
   return (
     <ContentContainer>
-      {notes.map((note: Note, index: number) => (
-        <NotesItem
-          key={index}
-          note={note}
-          toggleImportance={toggleImportance}
-          removeNote={removeNote}
-          onNoteSelected={onNoteSelected}
-        />
-      ))}
+      <Masonry
+        breakpointCols={breakpointColumnsObj}
+        className="my-masonry-grid"
+        columnClassName="my-masonry-grid_column"
+      >
+        {notes.map((note: Note, index: number) => (
+          <NotesItem
+            key={index}
+            note={note}
+            toggleImportance={toggleImportance}
+            removeNote={removeNote}
+            onNoteSelected={onNoteSelected}
+          />
+        ))}
+      </Masonry>
     </ContentContainer>
   );
 };
