@@ -6,10 +6,7 @@
     "unused-imports/no-unused-imports": 2,
     "unused-imports/no-unused-vars": 2,
     "object-curly-spacing": ["error", "always"],
-    "indent": [
-      "error",
-      2
-    ],
+    "indent": ["error", 2, { "SwitchCase": 1 }],
     "linebreak-style": [
       "error",
       "unix"

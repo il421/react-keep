@@ -1,5 +1,4 @@
 import { parse } from "query-string";
-import { RouteActions } from "../../routers/Routing";
 import { ListItem, Note } from "../../store/store.types";
 import { NoteFormValues, NoteType } from "./notes.types";
 import { BaseFormOptions } from "../form/BaseForm.types";
@@ -10,13 +9,11 @@ import { v4 as uuidv4 } from "uuid";
  * @param search - as history -> location prop
  * @param notes - list of notes
  */
-export const getSelectedNote = (search: any, notes: Note[]) => {
-  const id = parse(search).text;
-  if (id && id !== RouteActions.add) {
-    return notes.filter((n: Note) => n.id === id)[0];
-  }
+export const getSelectedNote = (search: string, notes: Note[]) => {
+  const textId = parse(search).text;
+  const listId = parse(search).list;
 
-  return null;
+  return notes.filter((n: Note) => n.id === (textId ?? listId))[0];
 };
 
 /**
