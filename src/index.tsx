@@ -31,6 +31,7 @@ import { faCheckSquare } from "@fortawesome/free-solid-svg-icons/faCheckSquare";
 import { faAlignLeft } from "@fortawesome/free-solid-svg-icons/faAlignLeft";
 import { faImage } from "@fortawesome/free-solid-svg-icons/faImage";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons/faPlusCircle";
+import { faUsersCog } from "@fortawesome/free-solid-svg-icons/faUsersCog";
 import { LoginAction } from "./store/store.types";
 import { PathNames } from "./routers/Routing";
 
@@ -47,7 +48,8 @@ library.add(
   faAlignLeft,
   faImage,
   faTh,
-  faPlusCircle
+  faPlusCircle,
+  faUsersCog
 );
 
 const store = configStore();

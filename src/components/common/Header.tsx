@@ -57,7 +57,7 @@ const Header: React.FunctionComponent<Props> = ({
             onButtonClick={() => showSidebar(true)}
           />
 
-          <h1 className="header__title">Keep Me</h1>
+          <h1 className="header__title">KEEP ME</h1>
 
           <Search wrapperClass="header__search" />
 
@@ -72,12 +72,24 @@ const Header: React.FunctionComponent<Props> = ({
                 width={50}
               />
             )}
-            <LinkButton
-              text={auth.name ?? "Update profile"}
-              type="button"
-              className="user-box__link"
-              onClick={() => onClickHandler(QueryKeys.user)}
-            />
+
+            {/* show one of components depending on screen */}
+            <>
+              <LinkButton
+                text={auth.name ?? "Update profile"}
+                type="button"
+                className="user-box__link"
+                onClick={() => onClickHandler(QueryKeys.user)}
+              />
+
+              <IconButton
+                className="user-box__icon"
+                icon="users-cog"
+                size="lg"
+                onButtonClick={() => onClickHandler(QueryKeys.user)}
+              />
+            </>
+
             <IconButton
               className="user-box__logout"
               icon="sign-out-alt"

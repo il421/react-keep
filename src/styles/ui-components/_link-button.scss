@@ -5,5 +5,12 @@
   @include button;
 
   background: none;
-  color: $black;
+
+  color: $grey-light;
+  transition: color 500ms ease;
+
+  &:hover {
+    color: lighten($grey-light, 20%);
+    transition: color 500ms ease;
+  }
 }
