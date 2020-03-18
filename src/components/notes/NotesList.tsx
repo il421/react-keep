@@ -33,15 +33,16 @@ const NotesList: React.FunctionComponent<Props> = ({
   onNoteSelected
 }): JSX.Element => {
   const breakpointColumnsObj = {
-    default: 4,
+    default: 5,
+    1400: 4,
     991: 3,
     794: 2,
     615: 1
   };
 
   return (
-    <ContentContainer style={{ margin: 0 }}>
-      <FlexBox justifyContent={JustifyContent.center}>
+    <ContentContainer style={{ margin: "0 50px" }}>
+      <FlexBox justifyContent={JustifyContent.center} className="note-list">
         <Masonry
           breakpointCols={breakpointColumnsObj}
           className="my-masonry-grid"
