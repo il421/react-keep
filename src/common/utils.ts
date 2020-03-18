@@ -1,6 +1,6 @@
 import { QueryKeys } from "../routers/Routing";
 import { parse } from "query-string";
-import { ListItem, Note, Tag } from "../store/store.types";
+import { ListItem, Note } from "../store/store.types";
 import { NoteType } from "../components/notes/notes.types";
 
 export const nameOf = <T>() => (name: keyof T & string) => name;
@@ -55,6 +55,5 @@ export const getShortText = (text: string) => {
     text = text.slice(0, MAX_LENGTH) + "...";
   }
 
-  // replace all new lines to <br />
-  return text.replace(/\n/g, "<br />");
+  return text;
 };
