@@ -10,12 +10,12 @@
   cursor: pointer;
 
   &:hover {
-    color: lighten($varmillion, 20%);
+    color: lighten($red, 20%);
 
     transition: color 500ms ease;
   }
 
   &--checked {
-    color: $varmillion;
+    color: $red;
   }
 }

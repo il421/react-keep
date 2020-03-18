@@ -12,6 +12,12 @@
     0 1px 3px 1px rgba(65, 69, 73, 0.15);
   word-break: break-word;
 
+  @media (min-width: $tablet-widths) {
+    & {
+      width: 100%;
+    }
+  }
+
   &:hover {
     box-shadow: 0 4px 4px 0 rgba(65, 69, 73, 0.3),
       0 4px 12px 4px rgba(65, 69, 73, 0.15);
@@ -46,7 +52,7 @@
 
 .actions {
   &--important {
-    color: $varmillion;
+    color: $red;
   }
 
   &--casual {

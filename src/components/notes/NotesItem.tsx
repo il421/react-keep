@@ -42,7 +42,7 @@ const NotesItem: React.FunctionComponent<NoteProps> = ({
               toggleImportance(note.id);
             }}
             icon="bookmark"
-            color={note.important ? Colors.varmillion : Colors.lightGray}
+            color={note.important ? Colors.red : Colors.lightGray}
           />
           <IconButton
             onButtonClick={evt => {

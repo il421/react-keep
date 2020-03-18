@@ -3,3 +3,4 @@ export * from "./validationErrors";
 export * from "./notifications";
 export * from "./regEx";
 export * from "./placeholders";
+export * from "./variables";

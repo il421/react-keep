@@ -1,14 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Store } from "../../store/store.types";
-import { Note } from "../../store/store.types";
-
-import { ContentContainer } from "../ui-components/ContentContainer";
+import { Note, Store } from "../../store/store.types";
 import NotesItem from "./NotesItem";
 import { ThunkDispatch } from "redux-thunk";
 import { changeNoteImportance, handleRemoveNote } from "../../actions/notes";
 import { NoteType } from "./notes.types";
 import Masonry from "react-masonry-css";
+import { getFilteredNotes } from "../../common/utils";
+import { FlexBox } from "../ui-components/FlexBox";
+import { JustifyContent } from "../../common/variables";
+import { ContentContainer } from "../ui-components/ContentContainer";
 
 interface StateProps {
   notes: Note[];
@@ -39,28 +40,33 @@ const NotesList: React.FunctionComponent<Props> = ({
   };
 
   return (
-    <ContentContainer>
-      <Masonry
-        breakpointCols={breakpointColumnsObj}
-        className="my-masonry-grid"
-        columnClassName="my-masonry-grid_column"
-      >
-        {notes.map((note: Note, index: number) => (
-          <NotesItem
-            key={index}
-            note={note}
-            toggleImportance={toggleImportance}
-            removeNote={removeNote}
-            onNoteSelected={onNoteSelected}
-          />
-        ))}
-      </Masonry>
+    <ContentContainer style={{ margin: 0 }}>
+      <FlexBox justifyContent={JustifyContent.center}>
+        <Masonry
+          breakpointCols={breakpointColumnsObj}
+          className="my-masonry-grid"
+          columnClassName="my-masonry-grid_column"
+        >
+          {notes.map((note: Note, index: number) => (
+            <NotesItem
+              key={index}
+              note={note}
+              toggleImportance={toggleImportance}
+              removeNote={removeNote}
+              onNoteSelected={onNoteSelected}
+            />
+          ))}
+        </Masonry>
+      </FlexBox>
     </ContentContainer>
   );
 };
 
 const mapStateToProps = (state: Store): StateProps => ({
-  notes: state.notes
+  notes: getFilteredNotes(state.notes, {
+    searchText: state.filters.search,
+    tags: state.filters.tagFilters
+  })
 });
 
 const mapDispatchToProps = (

@@ -2,7 +2,6 @@ import React from "react";
 import Modal from "react-modal";
 import { ListItem } from "../../store/store.types";
 import { NoteFormValues, NoteType } from "./notes.types";
-import { isModal, nameOf } from "../../common";
 import { PathNames, QueryKeys } from "../../routers/Routing";
 import NoteForm from "./NoteForm";
 import { History } from "history";
@@ -15,6 +14,7 @@ import { FormApi } from "final-form";
 import { FlexBox } from "../ui-components/FlexBox";
 import { AlignItems, JustifyContent } from "../../common/variables";
 import { getDefaultContent } from "./utils";
+import { isModal, nameOf } from "../../common/utils";
 
 interface ListNoteFormModalProps {
   history: History;

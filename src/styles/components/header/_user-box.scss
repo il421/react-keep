@@ -9,12 +9,11 @@
     font-size: $font-size-xlarge;
 
     text-decoration: underline;
-    @extend .hide-for-mobile
+    @extend .hide-for-mobile;
   }
 
-  &__icon{
-    @extend .hide-for-desktop
-
+  &__icon {
+    @extend .hide-for-desktop;
   }
 
   &__photo {
