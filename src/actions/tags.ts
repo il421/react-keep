@@ -1,7 +1,6 @@
 import database from "../firebase/firebase";
 import {
   AddTagAction,
-  DisplayTagsModalAction,
   RemoveTagAction,
   SetTagsAction,
   Store,
@@ -42,13 +41,6 @@ export const updateTag = (id: string, update: Tag): UpdateTagAction => ({
   update
 });
 
-export const handleDisplayTagsModal = (
-  displayTagsModal: boolean
-): DisplayTagsModalAction => ({
-  type: TagsActionsTypes.displayTagsModal,
-  displayTagsModal
-});
-
 export const handleSetTags = () => {
   return async (dispatch: Dispatch, getState: () => Store) => {
     let tags: Tag[] = [];
@@ -73,18 +65,16 @@ export const handleSetTags = () => {
   };
 };
 
-export const handleAddTag = (value: Tag) => {
+export const handleAddTag = (value: string) => {
   return async (dispatch: Dispatch, getState: () => Store) => {
     const uid = getState().auth.uid;
 
-    const tag = { ...value };
-
     try {
-      const docRef = await initDocumentRef(uid).add(tag);
+      const docRef = await initDocumentRef(uid).add({ value });
       dispatch(
         addTag({
           id: docRef.id,
-          ...tag
+          value
         })
       );
     } catch (e) {

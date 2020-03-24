@@ -1,6 +1,8 @@
 import React from "react";
 import { IconButton } from "../ui-components/IconButton";
 import "../../styles/components/common/_sidebar.scss";
+import { FlexBox } from "../ui-components/FlexBox";
+import { JustifyContent } from "../../common/variables";
 
 interface SideBarProp {
   showBar: boolean;
@@ -12,14 +14,14 @@ export class SideBar extends React.PureComponent<SideBarProp> {
     return (
       <>
         <div className={`sidebar ${this.props.showBar && "sidebar--show"}`}>
-          <div className="sidebar__close">
+          <FlexBox justifyContent={JustifyContent.end}>
             <IconButton
               className="sidebar__close-button"
               onButtonClick={() => this.props.setShowSidebar(false)}
               icon="times"
               size="2x"
             />
-          </div>
+          </FlexBox>
 
           {this.props.children}
         </div>

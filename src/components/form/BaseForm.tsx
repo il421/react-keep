@@ -38,6 +38,7 @@ interface BaseFormProps<FormValues> {
   classNames?: BaseFormClassNames;
   validate?: (values: FormValues) => ValidationErrors;
   mutators?: { [key: string]: Mutator<FormValues> };
+  resetAfterSubmitting?: boolean;
 }
 
 interface BaseFormClassNames {
@@ -59,6 +60,7 @@ export class BaseForm<FormValues> extends React.PureComponent<
       onCancel,
       getButtons,
       getFormOptions,
+      resetAfterSubmitting = false,
       submitButtonName = "Keep"
     } = this.props;
     return (
@@ -71,8 +73,9 @@ export class BaseForm<FormValues> extends React.PureComponent<
         }}
       >
         {(props: FormRenderProps<FormValues>) => {
-          const { dirty, values, submitting } = props;
-          const isDisable: boolean = !dirty;
+          const { dirty, values, submitting, submitSucceeded, form } = props;
+          // reset form if form is submitted successfully
+          resetAfterSubmitting && submitSucceeded && form.reset();
 
           return (
             <>
@@ -86,7 +89,7 @@ export class BaseForm<FormValues> extends React.PureComponent<
                   {// if getButtons = true, use custom buttons if the form is not user
                   // for notes (like login form), otherwise render original buttons
                   getButtons ? (
-                    getButtons(isDisable, submitting, values)
+                    getButtons(!dirty, submitting, values)
                   ) : (
                     <>
                       <FlexBox
@@ -125,7 +128,7 @@ export class BaseForm<FormValues> extends React.PureComponent<
                           <LinkButton
                             text={submitButtonName}
                             type="submit"
-                            disabled={isDisable}
+                            disabled={!dirty}
                           />
 
                           <LinkButton
@@ -137,12 +140,14 @@ export class BaseForm<FormValues> extends React.PureComponent<
                         </FlexBox>
                       </FlexBox>
 
-                      <FlexBox
-                        justifyContent={JustifyContent.spaceBetween}
-                        className="note-form__extra-fields"
-                      >
-                        {getFormOptions}
-                      </FlexBox>
+                      {getFormOptions && (
+                        <FlexBox
+                          justifyContent={JustifyContent.spaceBetween}
+                          className="note-form__extra-fields"
+                        >
+                          {getFormOptions}
+                        </FlexBox>
+                      )}
                     </>
                   )}
                 </>

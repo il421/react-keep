@@ -102,10 +102,7 @@ export interface RemoveNoteTagAction {
 }
 
 // TAGS
-export interface TagsStoreState {
-  list: Tag[];
-  displayTagsModal: boolean;
-}
+export interface TagsStoreState  extends Tag {}
 
 export interface Tag {
   id: string;
@@ -129,11 +126,6 @@ export interface RemoveTagAction extends Pick<Tag, "id"> {
 export interface UpdateTagAction extends Pick<Tag, "id"> {
   update: Tag;
   type: TagsActionsTypes.updateTag;
-}
-
-export interface DisplayTagsModalAction {
-  type: TagsActionsTypes.displayTagsModal;
-  displayTagsModal: boolean;
 }
 
 export enum AuthActionsTypes {

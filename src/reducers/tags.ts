@@ -1,6 +1,5 @@
 import {
   AddTagAction,
-  DisplayTagsModalAction,
   RemoveTagAction,
   SetTagsAction,
   TagsActionsTypes,
@@ -8,58 +7,39 @@ import {
   UpdateTagAction
 } from "../store/store.types";
 
-const tagsReducerDefaultState: TagsStoreState = {
-  list: [],
-  displayTagsModal: false
-};
+const tagsReducerDefaultState: TagsStoreState[] = [];
 
 type TagsAction =
   | SetTagsAction
   | AddTagAction
   | RemoveTagAction
-  | UpdateTagAction
-  | DisplayTagsModalAction;
+  | UpdateTagAction;
 
 export default (
-  state: TagsStoreState = tagsReducerDefaultState,
+  state: TagsStoreState[] = tagsReducerDefaultState,
   action: TagsAction
 ) => {
   switch (action.type) {
     case TagsActionsTypes.addTag:
-      return {
-        ...state,
-        list: [action.tag, ...state.list]
-      };
+      return [action.tag, ...state];
 
     case TagsActionsTypes.setTags:
       return action.tags ?? [];
 
     case TagsActionsTypes.removeTag:
-      return {
-        ...state,
-        list: state.list.filter(tag => tag.id !== action.id)
-      };
+      return state.filter(tag => tag.id !== action.id);
 
     case TagsActionsTypes.updateTag:
-      return {
-        ...state,
-        list: state.list.map(tag => {
-          if (tag.id === action.id) {
-            return {
-              ...tag,
-              value: action.update
-            };
-          } else {
-            return tag;
-          }
-        })
-      };
-
-    case TagsActionsTypes.displayTagsModal:
-      return {
-        ...state,
-        displayTagsModal: action.displayTagsModal
-      };
+      return state.map(tag => {
+        if (tag.id === action.id) {
+          return {
+            ...tag,
+            ...action.update
+          };
+        } else {
+          return tag;
+        }
+      });
 
     default:
       return state;

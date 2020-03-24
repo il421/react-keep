@@ -5,10 +5,11 @@
   padding: $s-size 0;
 
   &:focus {
-    border-bottom: 1px solid $grey-light;
-    border-top: 1px solid $grey-light;
     padding-top: 11px;
     padding-bottom: 11px;
+
+    border-bottom: 1px solid $grey-light;
+    border-top: 1px solid $grey-light;
   }
 
   &:hover > * {
@@ -26,12 +27,13 @@
     & textarea {
       width: 100%;
 
-      border: none;
-      background-color: inherit;
-      font-size: $font-size-medium;
-
       margin: 0;
       padding: 0;
+
+      font-size: $font-size-medium;
+
+      border: none;
+      background-color: inherit;
 
       outline: none;
       resize: none;
