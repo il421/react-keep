@@ -1,55 +1,61 @@
 import React from "react";
-import "../../styles/components/tags/_tags-list.scss";
 import { FlexBox } from "../ui-components/FlexBox";
 import { JustifyContent } from "../../common/variables";
-import { Store, TagsStoreState, UpdateUser } from "../../store/store.types";
+import {
+  FiltersStoreState,
+  Store,
+  TagsStoreState
+} from "../../store/store.types";
 import { ThunkDispatch } from "redux-thunk";
-import { updateUserData } from "../../actions/auth";
 import { connect } from "react-redux";
-import TagForm from "./TagForm";
+import TagsItem from "./TagsItem";
+import { handleRemoveTag } from "../../actions/tags";
+import { setTagsFilter } from "../../actions/filters";
 
 interface TagsListProps {}
 
 interface StateProps {
   tags: TagsStoreState[];
+  filters: FiltersStoreState;
 }
 
 interface DispatchProps {
-  updateUserData: (data: UpdateUser) => void;
+  removeTag: (id: string) => void;
+  toggleTag: (id: string) => void;
 }
 
-type Props = TagsListProps & StateProps & DispatchProps;
+type Props = TagsListProps & DispatchProps & StateProps;
 
 class TagsList extends React.PureComponent<Props> {
   render() {
     return (
-      <>
-        <FlexBox justifyContent={JustifyContent.spaceBetween}>
-          <h2 className="tags-list__title">Tag List</h2>
-        </FlexBox>
-
-        <FlexBox vertical justifyContent={JustifyContent.start}>
-          {this.props.tags.map(tag => (
-            <div key={tag.id}>{tag.value}</div>
-          ))}
-        </FlexBox>
-
-        <TagForm tags={this.props.tags} />
-      </>
+      <FlexBox vertical justifyContent={JustifyContent.start}>
+        {this.props.tags.map(tag => (
+          <TagsItem
+            key={tag.id}
+            tag={tag}
+            removeTag={this.props.removeTag}
+            checked={this.props.filters.tagFilters.includes(tag.id)}
+            onChange={this.props.toggleTag}
+          />
+        ))}
+      </FlexBox>
     );
   }
 }
 
 const mapStateToProps = (state: Store): StateProps => {
   return {
-    tags: state.tags
+    tags: state.tags,
+    filters: state.filters
   };
 };
 
 const mapDispatchToProps = (
   dispatch: ThunkDispatch<{}, {}, any>
 ): DispatchProps => ({
-  updateUserData: (data: UpdateUser) => dispatch(updateUserData(data))
+  removeTag: (id: string) => dispatch(handleRemoveTag(id)),
+  toggleTag: (id: string) => dispatch(setTagsFilter(id))
 });
 
 export default connect<StateProps, DispatchProps, TagsListProps, Store>(

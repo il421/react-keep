@@ -1,6 +1,5 @@
 import React from "react";
-import "../../styles/components/tags/_tags-list.scss";
-import { Tag } from "../../store/store.types";
+import { Store, TagsStoreState } from "../../store/store.types";
 import { ThunkDispatch } from "redux-thunk";
 import { connect } from "react-redux";
 import { BaseForm } from "../form/BaseForm";
@@ -12,14 +11,16 @@ import { IconButton } from "../ui-components/IconButton";
 import { ValidationErrors } from "final-form";
 import { Errors } from "../../common/validationErrors";
 
-interface TagFormProps {
-  tags: Tag[];
+interface TagFormProps {}
+
+interface StateProps {
+  tags: TagsStoreState[];
 }
 
 interface DispatchProps {
   addTag: (value: string) => void;
 }
-type Props = TagFormProps & DispatchProps;
+type Props = TagFormProps & DispatchProps & StateProps;
 
 interface TagFormValues {
   value: string | undefined;
@@ -75,13 +76,19 @@ class TagForm extends React.PureComponent<Props> {
   }
 }
 
+const mapStateToProps = (state: Store): StateProps => {
+  return {
+    tags: state.tags
+  };
+};
+
 const mapDispatchToProps = (
   dispatch: ThunkDispatch<{}, {}, any>
 ): DispatchProps => ({
   addTag: (value: string) => dispatch(handleAddTag(value))
 });
 
-export default connect<{}, DispatchProps, TagFormProps>(
-  undefined,
+export default connect<StateProps, DispatchProps, TagFormProps, Store>(
+  mapStateToProps,
   mapDispatchToProps
 )(TagForm);

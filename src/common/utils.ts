@@ -18,14 +18,13 @@ interface Filters {
   tags: string[];
 }
 export const getFilteredNotes = (notes: Note[], filters: Filters) => {
-  const { searchText } = filters;
+  const { searchText, tags } = filters;
   return notes.filter(note => {
-    // filter by search query
     let contentMatch: boolean = true;
-
     const titleMatch: boolean = note.title
       .toLowerCase()
       .includes(searchText.toLowerCase());
+    let tagsMatch: boolean = true;
 
     switch (note.type) {
       case NoteType.text:
@@ -40,12 +39,11 @@ export const getFilteredNotes = (notes: Note[], filters: Filters) => {
         break;
     }
 
-    // filter by tags
-    // if (tags.length > 0) {
-    //   tagsMatch = !note.tags.some(id => tags.includes(id) );
-    // }
+    if (tags.length > 0) {
+      tagsMatch = !note.tags.some(id => tags.includes(id));
+    }
 
-    return contentMatch || titleMatch;
+    return contentMatch || titleMatch || tagsMatch;
   });
 };
 

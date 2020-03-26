@@ -1,8 +1,8 @@
 @import "../../mixins/mixins";
 @import "../../base/variables";
 
-.tags-list {
-  .tags-list__title {
+.tags {
+  .tags__title {
     font-size: $font-size-large;
     font-weight: bold;
   }

@@ -1,5 +1,4 @@
 import {
-  Filters,
   FiltersActionsTypes,
   FiltersStoreState,
   SearchFilterAction,
@@ -24,10 +23,12 @@ export default (
         search: action.search
       };
 
-    case FiltersActionsTypes.setTagsFilter:
+    case FiltersActionsTypes.setTagFilter:
       return {
         ...state,
-        tagFilters: action.tagFilters
+        tagFilters: state.tagFilters.includes(action.tag)
+          ? state.tagFilters.filter(i => i !== action.tag)
+          : [ ...state.tagFilters, action.tag ]
       };
 
     default:

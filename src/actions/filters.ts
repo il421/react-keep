@@ -9,7 +9,7 @@ export const setSearchFilter = (search: string): SearchFilterAction => ({
   search
 });
 
-export const setTagsFilter = (tagFilters: string[]): TagsFilterAction => ({
-  type: FiltersActionsTypes.setTagsFilter,
-  tagFilters
+export const setTagsFilter = (tag: string): TagsFilterAction => ({
+  type: FiltersActionsTypes.setTagFilter,
+  tag
 });

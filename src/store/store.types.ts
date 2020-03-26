@@ -42,8 +42,9 @@ export interface SearchFilterAction extends Pick<Filters, "search"> {
   type: FiltersActionsTypes.setSearchFilter;
 }
 
-export interface TagsFilterAction extends Pick<Filters, "tagFilters"> {
-  type: FiltersActionsTypes.setTagsFilter;
+export interface TagsFilterAction {
+  type: FiltersActionsTypes.setTagFilter;
+  tag: string;
 }
 
 // NOTES
@@ -136,7 +137,7 @@ export enum AuthActionsTypes {
 
 export enum FiltersActionsTypes {
   setSearchFilter = "setSearchFilter",
-  setTagsFilter = "setTagsFilter"
+  setTagFilter = "setTagFilter"
 }
 
 export enum NotesActionsTypes {
