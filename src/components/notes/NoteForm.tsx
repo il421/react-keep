@@ -6,7 +6,9 @@ import {
   AddNote,
   ListItem,
   Note,
+  NotesStoreState,
   Store,
+  TagsStoreState,
   UpdateNote
 } from "../../store/store.types";
 import { NoteFormValues, NoteType } from "./notes.types";
@@ -31,9 +33,11 @@ import {
   getSelectedNote
 } from "./utils";
 import { ContentContainer } from "../ui-components/ContentContainer";
+import TagsPickerField from "./options/TagsPickerField";
 
 interface StateProps {
-  notes: Note[];
+  notes: NotesStoreState[];
+  tags: TagsStoreState[];
 }
 
 interface NoteFormProps {
@@ -120,6 +124,8 @@ class NoteForm extends React.Component<Props> {
                 switch (values.currentOption) {
                   case BaseFormOptions.palette:
                     return <ColorsPickerField />;
+                  case BaseFormOptions.tags:
+                    return <TagsPickerField tags={this.props.tags} />;
                   default:
                     return null;
                 }
@@ -155,7 +161,8 @@ class NoteForm extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: Store): StateProps => ({
-  notes: state.notes
+  notes: state.notes,
+  tags: state.tags
 });
 
 const mapDispatchToProps = (

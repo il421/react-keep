@@ -38,3 +38,11 @@ export enum JustifyContent {
   spaceBetween = "space-between",
   spaceAround = "space-around"
 }
+
+export enum FlexWrap {
+  wrap = "wrap",
+  nowrap = "nowrap",
+  inherit = "inherit",
+  unset = "unset",
+  wrapReverse = "wrap-reverse"
+}

@@ -1,10 +1,11 @@
 import React, { CSSProperties } from "react";
-import { AlignItems, JustifyContent } from "../../common/variables";
+import { AlignItems, FlexWrap, JustifyContent } from "../../common/variables";
 
 interface FlexBoxProps extends Partial<Pick<HTMLElement, "className">> {
   vertical?: boolean;
   justifyContent: JustifyContent;
   alignItems?: AlignItems;
+  flexWrap?: FlexWrap;
   width?: string;
 }
 
@@ -19,7 +20,8 @@ export class FlexBox extends React.PureComponent<FlexBoxProps> {
     width: this.props.width,
     flexDirection: this.props.vertical ? "column" : "row",
     justifyContent: this.props.justifyContent,
-    alignItems: this.props.alignItems ?? AlignItems.inherit
+    alignItems: this.props.alignItems ?? AlignItems.inherit,
+    flexWrap: this.props.flexWrap ?? FlexWrap.inherit
   };
 
   render() {
