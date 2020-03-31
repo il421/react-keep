@@ -1,10 +1,14 @@
 import React from "react";
 import { FlexBox } from "../../ui-components";
-import { JustifyContent, PickerColors } from "../../../common/variables";
+import { JustifyContent, PickerColors, nameOf } from "../../../common";
 import { RadioButtonsInputField } from "../../form";
 import "../../../styles/components/notes/_colors-picker.scss";
+import { NoteFormValues } from "../notes.types";
+import { ListItem } from "../../../store/store.types";
 
 class ColorsPickerField extends React.PureComponent {
+  private nameOf = nameOf<NoteFormValues<string | ListItem[]>>();
+
   render() {
     return (
       <FlexBox
@@ -14,7 +18,7 @@ class ColorsPickerField extends React.PureComponent {
         {Object.values(PickerColors).map((color: string) => (
           <RadioButtonsInputField
             key={color}
-            name="color"
+            name={this.nameOf("color")}
             radioClassName="colors-picker__item"
             value={color}
             labelProps={{

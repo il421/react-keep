@@ -6,7 +6,7 @@ export interface ExposedFieldProps<FieldValue, T extends HTMLElement>
     "name" | "subscription" | "validate" | "value" | "defaultValue"
   > {}
 
-export type FieldAdapterProps = FieldRenderProps<string, HTMLElement>;
+export type FieldAdapterProps<T = string> = FieldRenderProps<T, HTMLElement>;
 
 // value is an icon name from @fontawesome/react-fontawesome"
 // "none" is default or none value
