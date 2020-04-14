@@ -35,6 +35,7 @@ export const removeTag = (id: string): RemoveTagAction => ({
   id
 });
 
+// unused now
 export const updateTag = (id: string, update: Tag): UpdateTagAction => ({
   type: TagsActionsTypes.updateTag,
   id,
@@ -99,6 +100,7 @@ export const handleRemoveTag = (id: string) => {
   };
 };
 
+// unused now
 export const handleUpdateTag = (id: string, update: Tag) => {
   return async (dispatch: Dispatch, getState: () => Store) => {
     const uid = getState().auth.uid;

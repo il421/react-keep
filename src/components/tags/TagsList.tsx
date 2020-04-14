@@ -4,13 +4,14 @@ import { JustifyContent } from "../../common/variables";
 import {
   FiltersStoreState,
   Store,
-  TagsStoreState
+  TagsStoreState,
 } from "../../store/store.types";
 import { ThunkDispatch } from "redux-thunk";
 import { connect } from "react-redux";
 import TagsItem from "./TagsItem";
 import { handleRemoveTag } from "../../actions/tags";
 import { setTagsFilter } from "../../actions/filters";
+import { removeTagFromNotes } from "../../actions/notes";
 
 interface TagsListProps {}
 
@@ -22,6 +23,7 @@ interface StateProps {
 interface DispatchProps {
   removeTag: (id: string) => void;
   toggleTag: (id: string) => void;
+  removeTagFromNotes: (id: string) => void;
 }
 
 type Props = TagsListProps & DispatchProps & StateProps;
@@ -30,11 +32,14 @@ class TagsList extends React.PureComponent<Props> {
   render() {
     return (
       <FlexBox vertical justifyContent={JustifyContent.start}>
-        {this.props.tags.map(tag => (
+        {this.props.tags.map((tag) => (
           <TagsItem
             key={tag.id}
             tag={tag}
-            removeTag={this.props.removeTag}
+            removeTag={(id: string) => {
+              this.props.removeTag(id);
+              this.props.removeTagFromNotes(id);
+            }}
             checked={this.props.filters.tagFilters.includes(tag.id)}
             onChange={this.props.toggleTag}
           />
@@ -47,7 +52,7 @@ class TagsList extends React.PureComponent<Props> {
 const mapStateToProps = (state: Store): StateProps => {
   return {
     tags: state.tags,
-    filters: state.filters
+    filters: state.filters,
   };
 };
 
@@ -55,7 +60,8 @@ const mapDispatchToProps = (
   dispatch: ThunkDispatch<{}, {}, any>
 ): DispatchProps => ({
   removeTag: (id: string) => dispatch(handleRemoveTag(id)),
-  toggleTag: (id: string) => dispatch(setTagsFilter(id))
+  toggleTag: (id: string) => dispatch(setTagsFilter(id)),
+  removeTagFromNotes: (id: string) => dispatch(removeTagFromNotes(id)),
 });
 
 export default connect<StateProps, DispatchProps, TagsListProps, Store>(

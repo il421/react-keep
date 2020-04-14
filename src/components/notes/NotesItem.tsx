@@ -2,11 +2,17 @@ import React, { useState } from "react";
 import moment from "moment";
 import { Note } from "../../store/store.types";
 import { ContentContainer, FlexBox, IconButton } from "../ui-components";
-import { AlignItems, Colors, JustifyContent } from "../../common/variables";
+import {
+  AlignItems,
+  Colors,
+  FlexWrap,
+  JustifyContent,
+} from "../../common/variables";
 import ConfirmDialog from "./ConfirmDialog";
 import "../../styles/components/notes/_note.scss";
 import NoteContent from "./NoteContent";
 import { NoteType } from "./notes.types";
+import NoteTag from "./NoteTag";
 
 interface NoteProps {
   note: Note;
@@ -19,7 +25,7 @@ const NotesItem: React.FunctionComponent<NoteProps> = ({
   note,
   removeNote,
   toggleImportance,
-  onNoteSelected
+  onNoteSelected,
 }): JSX.Element => {
   const [isConfirm, setIsConfirm] = useState<boolean>(false);
 
@@ -37,7 +43,7 @@ const NotesItem: React.FunctionComponent<NoteProps> = ({
           alignItems={AlignItems.center}
         >
           <IconButton
-            onButtonClick={evt => {
+            onButtonClick={(evt) => {
               evt?.stopPropagation();
               toggleImportance(note.id);
             }}
@@ -45,7 +51,7 @@ const NotesItem: React.FunctionComponent<NoteProps> = ({
             color={note.important ? Colors.red : Colors.lightGray}
           />
           <IconButton
-            onButtonClick={evt => {
+            onButtonClick={(evt) => {
               evt?.stopPropagation();
               setIsConfirm(true);
             }}
@@ -65,7 +71,7 @@ const NotesItem: React.FunctionComponent<NoteProps> = ({
           <NoteContent type={note.type} content={note.content} />
         </FlexBox>
 
-        {/*date nad tags*/}
+        {/*date and tags*/}
         <FlexBox
           className="note__details details"
           vertical
@@ -78,8 +84,11 @@ const NotesItem: React.FunctionComponent<NoteProps> = ({
           <FlexBox
             className="details__tags"
             justifyContent={JustifyContent.start}
+            flexWrap={FlexWrap.wrap}
           >
-            tags
+            {note.tags.map((tagId, index) => (
+              <NoteTag key={index} tagId={tagId} />
+            ))}
           </FlexBox>
         </FlexBox>
       </FlexBox>

@@ -24,7 +24,7 @@ export class CheckboxGroup extends React.PureComponent<CheckboxGroupProps> {
 
     const isAlreadySelected = selectedKeys.includes(selectedKey);
     if (isAlreadySelected) {
-      selectedKeys = selectedKeys.filter(x => x !== selectedKey);
+      selectedKeys = selectedKeys.filter((x) => x !== selectedKey);
     } else {
       selectedKeys = [...selectedKeys, selectedKey];
     }
@@ -49,11 +49,11 @@ export class CheckboxGroup extends React.PureComponent<CheckboxGroupProps> {
             >
               <div className={classNames?.checkbox}>
                 <input
+                  ref={o.id}
                   id={o.id}
                   value={o.id}
                   type="checkbox"
                   checked={checked}
-                  onChange={() => this.handleOnChange(o.id)}
                 />
                 <label
                   htmlFor={o.id}

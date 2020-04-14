@@ -23,12 +23,13 @@ class TagsItem extends React.PureComponent<TagsItemProps> {
         <FlexBox justifyContent={JustifyContent.start}>
           <div className="tags-item__checkbox">
             <input
-              id={this.props.tag.id}
+              ref={`${this.props.tag.id}-list`}
+              id={`${this.props.tag.id}-list`}
               type="checkbox"
               checked={this.props.checked}
               onChange={() => this.props.onChange(this.props.tag.id)}
             />
-            <label htmlFor={this.props.tag.id} />
+            <label htmlFor={`${this.props.tag.id}-list`} />
           </div>
           <div className="tags-item__value">{this.props.tag.value}</div>
         </FlexBox>

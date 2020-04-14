@@ -40,10 +40,10 @@ export const getFilteredNotes = (notes: Note[], filters: Filters) => {
     }
 
     if (tags.length > 0) {
-      tagsMatch = !note.tags.some(id => tags.includes(id));
+      tagsMatch = note.tags.some(id => tags.includes(id));
     }
 
-    return contentMatch || titleMatch || tagsMatch;
+    return (contentMatch || titleMatch) && tagsMatch;
   });
 };
 

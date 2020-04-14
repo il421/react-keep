@@ -178,7 +178,7 @@ export const removeTagFromNotes = (id: string) => {
           let data = doc.data();
 
           if (data.tags.length > 0) {
-            let updatedTags = data.tags.filter((tag: Tag) => tag.id !== id);
+            let updatedTags = data.tags.filter((tagId: string) => tagId !== id);
             docRef.doc(doc.id).update({
               tags: updatedTags
             });
