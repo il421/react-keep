@@ -29,14 +29,14 @@ class ListNoteFormModal extends React.Component<ListNoteFormModalProps> {
   private nameOf = nameOf<NoteFormValues<ListItem[]>>();
 
   private getCheckedItems = (content: ListItem[]) => {
-    return `${content.length}/${content.filter(c => c.checked).length}`;
+    return `${content.length}/${content.filter((c) => c.checked).length}`;
   };
 
   render() {
     if (
       !isModal({
         query: this.props.history.location.search,
-        type: QueryKeys.list
+        type: QueryKeys.list,
       })
     ) {
       return null;
@@ -63,7 +63,7 @@ class ListNoteFormModal extends React.Component<ListNoteFormModalProps> {
                       onButtonClick={() =>
                         form.change(this.nameOf("content"), [
                           getDefaultContent(NoteType.list)[0],
-                          ...values.content
+                          ...values.content,
                         ])
                       }
                       icon="plus-circle"

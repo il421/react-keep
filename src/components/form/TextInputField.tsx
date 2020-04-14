@@ -34,16 +34,15 @@ const FieldAdapter: React.FunctionComponent<FieldAdapterProps> = ({
   );
 };
 
-export const TextInputField: React.FunctionComponent<ExposedFieldProps<
-  string,
-  HTMLElement
-> & {
-  type?: string;
-  placeholder?: string;
-  className: string;
-  isTextArea?: boolean;
-  autoFocus?: boolean;
-}> = props => (
+export const TextInputField: React.FunctionComponent<
+  ExposedFieldProps<string, HTMLElement> & {
+    type?: string;
+    placeholder?: string;
+    className: string;
+    isTextArea?: boolean;
+    autoFocus?: boolean;
+  }
+> = (props) => (
   <Field
     {...props}
     name={props.name}

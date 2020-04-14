@@ -3,7 +3,7 @@ import {
   AuthStoreState,
   LoadingAction,
   LoginAction,
-  LogoutAction
+  LogoutAction,
 } from "../store/store.types";
 
 type AuthAction = LoginAction | LogoutAction | LoadingAction;
@@ -18,7 +18,7 @@ export default (
         ...state,
         uid: action.uid,
         name: action.name,
-        url: action.url
+        url: action.url,
       } as AuthStoreState;
 
     case AuthActionsTypes.logout:
@@ -27,7 +27,7 @@ export default (
     case AuthActionsTypes.loading:
       return {
         ...state,
-        loading: action.loading
+        loading: action.loading,
       } as AuthStoreState;
 
     default:

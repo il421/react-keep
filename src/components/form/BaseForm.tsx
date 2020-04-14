@@ -61,7 +61,7 @@ export class BaseForm<FormValues> extends React.PureComponent<
       getButtons,
       getFormOptions,
       resetAfterSubmitting = false,
-      submitButtonName = "Keep"
+      submitButtonName = "Keep",
     } = this.props;
     return (
       <Form
@@ -69,7 +69,7 @@ export class BaseForm<FormValues> extends React.PureComponent<
         onSubmit={onSubmit}
         validate={validate}
         mutators={{
-          ...arrayMutators
+          ...arrayMutators,
         }}
       >
         {(props: FormRenderProps<FormValues>) => {
@@ -86,70 +86,76 @@ export class BaseForm<FormValues> extends React.PureComponent<
               >
                 {this.props.children}
                 <>
-                  {// if getButtons = true, use custom buttons if the form is not user
-                  // for notes (like login form), otherwise render original buttons
-                  getButtons ? (
-                    getButtons(!dirty, submitting, values)
-                  ) : (
-                    <>
-                      <FlexBox
-                        justifyContent={JustifyContent.spaceBetween}
-                        alignItems={AlignItems.center}
-                        className={
-                          classNames?.actions ?? "note-form__actions actions"
-                        }
-                      >
-                        <FlexBox
-                          justifyContent={JustifyContent.start}
-                          alignItems={AlignItems.baseline}
-                          className={classNames?.options ?? "actions__options"}
-                        >
-                          {Object.values(BaseFormOptions).map(
-                            (option: string) =>
-                              option === BaseFormOptions.none ? null : (
-                                <RadioButtonsInputField
-                                  key={option}
-                                  name="currentOption"
-                                  radioClassName="options__item"
-                                  value={option}
-                                  labelProps={{
-                                    iconName: option as IconProp
-                                  }}
-                                />
-                              )
-                          )}
-                        </FlexBox>
-
-                        <FlexBox
-                          justifyContent={JustifyContent.end}
-                          alignItems={AlignItems.center}
-                          className={classNames?.buttons ?? "actions__buttons"}
-                        >
-                          <LinkButton
-                            text={submitButtonName}
-                            type="submit"
-                            disabled={!dirty}
-                          />
-
-                          <LinkButton
-                            text="Close"
-                            type="button"
-                            disabled={false}
-                            onClick={onCancel}
-                          />
-                        </FlexBox>
-                      </FlexBox>
-
-                      {getFormOptions && (
+                  {
+                    // if getButtons = true, use custom buttons if the form is not user
+                    // for notes (like login form), otherwise render original buttons
+                    getButtons ? (
+                      getButtons(!dirty, submitting, values)
+                    ) : (
+                      <>
                         <FlexBox
                           justifyContent={JustifyContent.spaceBetween}
-                          className="note-form__extra-fields"
+                          alignItems={AlignItems.center}
+                          className={
+                            classNames?.actions ?? "note-form__actions actions"
+                          }
                         >
-                          {getFormOptions}
+                          <FlexBox
+                            justifyContent={JustifyContent.start}
+                            alignItems={AlignItems.baseline}
+                            className={
+                              classNames?.options ?? "actions__options"
+                            }
+                          >
+                            {Object.values(BaseFormOptions).map(
+                              (option: string) =>
+                                option === BaseFormOptions.none ? null : (
+                                  <RadioButtonsInputField
+                                    key={option}
+                                    name="currentOption"
+                                    radioClassName="options__item"
+                                    value={option}
+                                    labelProps={{
+                                      iconName: option as IconProp,
+                                    }}
+                                  />
+                                )
+                            )}
+                          </FlexBox>
+
+                          <FlexBox
+                            justifyContent={JustifyContent.end}
+                            alignItems={AlignItems.center}
+                            className={
+                              classNames?.buttons ?? "actions__buttons"
+                            }
+                          >
+                            <LinkButton
+                              text={submitButtonName}
+                              type="submit"
+                              disabled={!dirty}
+                            />
+
+                            <LinkButton
+                              text="Close"
+                              type="button"
+                              disabled={false}
+                              onClick={onCancel}
+                            />
+                          </FlexBox>
                         </FlexBox>
-                      )}
-                    </>
-                  )}
+
+                        {getFormOptions && (
+                          <FlexBox
+                            justifyContent={JustifyContent.spaceBetween}
+                            className="note-form__extra-fields"
+                          >
+                            {getFormOptions}
+                          </FlexBox>
+                        )}
+                      </>
+                    )
+                  }
                 </>
               </form>
             </>

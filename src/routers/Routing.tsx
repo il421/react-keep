@@ -2,14 +2,14 @@ export enum QueryKeys {
   text = "text",
   list = "list",
   image = "image",
-  user = "user"
+  user = "user",
 }
 
 export enum RouteActions {
   add = "add",
-  edit = "edit"
+  edit = "edit",
 }
 
 export enum PathNames {
-  base = "/dashboard"
+  base = "/dashboard",
 }

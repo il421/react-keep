@@ -22,12 +22,9 @@ interface LabelProps {
   style?: CSSProperties;
 }
 
-const FieldAdapter: React.FunctionComponent<FieldAdapterProps &
-  RadioButtonsInputProps> = ({
-  radioClassName,
-  labelProps,
-  input: { value, ...input }
-}) => {
+const FieldAdapter: React.FunctionComponent<
+  FieldAdapterProps & RadioButtonsInputProps
+> = ({ radioClassName, labelProps, input: { value, ...input } }) => {
   return (
     <div className={radioClassName}>
       <input id={value} {...input} type="radio" value={value} />
@@ -44,10 +41,8 @@ const FieldAdapter: React.FunctionComponent<FieldAdapterProps &
   );
 };
 
-export const RadioButtonsInputField: React.FunctionComponent<ExposedFieldProps<
-  string,
-  HTMLElement
-> &
-  RadioButtonsInputProps> = (props: ExposedFieldProps<string, HTMLElement>) => (
+export const RadioButtonsInputField: React.FunctionComponent<
+  ExposedFieldProps<string, HTMLElement> & RadioButtonsInputProps
+> = (props: ExposedFieldProps<string, HTMLElement>) => (
   <Field {...props} type="radio" component={FieldAdapter} />
 );

@@ -12,21 +12,22 @@ interface Controllers extends Partial<Pick<HTMLElement, "className">> {
 
 export const Controllers: React.FunctionComponent<Controllers> = ({
   className,
-  isMobile = false
+  isMobile = false,
 }) => {
   const history = useHistory();
 
   const onClickHandler = (key: keyof typeof QueryKeys) => {
     const query = stringify({
-      [key]: RouteActions.add
+      [key]: RouteActions.add,
     });
     history.push(`${history.location.pathname}?${query}`);
   };
 
   return (
     <div
-      className={`controllers  ${isMobile &&
-        "controllers--mobile"} ${className}`}
+      className={`controllers  ${
+        isMobile && "controllers--mobile"
+      } ${className}`}
     >
       <FlexBox
         vertical={isMobile}

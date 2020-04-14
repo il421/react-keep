@@ -5,7 +5,7 @@ export enum Message {
   errorNoSuchDoc,
   noteSaved,
   noteUpdated,
-  noteRemoved
+  noteRemoved,
 }
 
 export const getMessage = (message: Message, data?: string | number) => {
@@ -16,7 +16,7 @@ export const getMessage = (message: Message, data?: string | number) => {
     [Message.errorNoSuchDoc]: "There is no such a document",
     [Message.noteSaved]: "The note has been saved",
     [Message.noteUpdated]: "The note has been updated",
-    [Message.noteRemoved]: "The note has been removed"
+    [Message.noteRemoved]: "The note has been removed",
   };
 
   return notifications[message];

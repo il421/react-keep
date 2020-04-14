@@ -26,13 +26,15 @@ export class SideBar extends React.PureComponent<SideBarProp> {
           {this.props.children}
         </div>
 
-        {// handle click on cover to close the sidebar
-        this.props.showBar && (
-          <div
-            className="sidebar__cover"
-            onClick={() => this.props.setShowSidebar(false)}
-          />
-        )}
+        {
+          // handle click on cover to close the sidebar
+          this.props.showBar && (
+            <div
+              className="sidebar__cover"
+              onClick={() => this.props.setShowSidebar(false)}
+            />
+          )
+        }
       </>
     );
   }

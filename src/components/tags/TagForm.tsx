@@ -51,7 +51,7 @@ class TagForm extends React.PureComponent<Props> {
         }
         onCancel={() => {}}
         classNames={{
-          form: "tags-form"
+          form: "tags-form",
         }}
         validate={this.getValidationErrors}
         resetAfterSubmitting={true}
@@ -78,14 +78,14 @@ class TagForm extends React.PureComponent<Props> {
 
 const mapStateToProps = (state: Store): StateProps => {
   return {
-    tags: state.tags
+    tags: state.tags,
   };
 };
 
 const mapDispatchToProps = (
   dispatch: ThunkDispatch<{}, {}, any>
 ): DispatchProps => ({
-  addTag: (value: string) => dispatch(handleAddTag(value))
+  addTag: (value: string) => dispatch(handleAddTag(value)),
 });
 
 export default connect<StateProps, DispatchProps, TagFormProps, Store>(

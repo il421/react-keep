@@ -6,14 +6,14 @@ import {
   LoginAction,
   LogoutAction,
   Store,
-  UpdateUser
+  UpdateUser,
 } from "../store/store.types";
 import { Dispatch } from "redux";
 import { getMessage, Message } from "../common";
 
 export const loading = (loading: boolean): LoadingAction => ({
   type: AuthActionsTypes.loading,
-  loading
+  loading,
 });
 
 export const login = (
@@ -24,11 +24,11 @@ export const login = (
   type: AuthActionsTypes.login,
   uid,
   name,
-  url
+  url,
 });
 
 export const logout = (): LogoutAction => ({
-  type: AuthActionsTypes.logout
+  type: AuthActionsTypes.logout,
 });
 
 export const startLogin = (email: string, password: string) => {
@@ -85,7 +85,7 @@ export const updateUserData = (data: UpdateUser) => {
 
         await currentUser.updateProfile({
           displayName: data.displayName,
-          photoURL: data.photoURL
+          photoURL: data.photoURL,
         });
         dispatch(login(auth.uid, data.displayName, auth.url));
       }

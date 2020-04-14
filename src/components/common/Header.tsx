@@ -11,7 +11,7 @@ import {
   IconButton,
   UserPhoto,
   ContentContainer,
-  LinkButton
+  LinkButton,
 } from "../ui-components";
 import "../../styles/components/header/_header.scss";
 import "../../styles/components/header/_user-box.scss";
@@ -35,19 +35,19 @@ type Props = HeaderProps & DispatchProps & StateProps;
 const Header: React.FunctionComponent<Props> = ({
   startLogout,
   auth,
-  showSidebar
+  showSidebar,
 }) => {
   const history = useHistory();
 
   const onClickHandler = (key: keyof typeof QueryKeys) => {
     const query = stringify({
-      [key]: RouteActions.edit
+      [key]: RouteActions.edit,
     });
     history.push(`${history.location.pathname}?${query}`);
   };
 
   return (
-    <header className="header" onClick={evt => evt.stopPropagation()}>
+    <header className="header" onClick={(evt) => evt.stopPropagation()}>
       <ContentContainer>
         <div className="header__content">
           <IconButton
@@ -106,12 +106,12 @@ const Header: React.FunctionComponent<Props> = ({
 const mapDispatchToProps = (
   dispatch: ThunkDispatch<{}, {}, any>
 ): DispatchProps => ({
-  startLogout: () => dispatch(startLogout())
+  startLogout: () => dispatch(startLogout()),
 });
 
 const mapStateToProps = (state: Store): StateProps => {
   return {
-    auth: state.auth
+    auth: state.auth,
   };
 };
 

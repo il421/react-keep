@@ -16,7 +16,7 @@ interface ConfirmDialogProps extends Pick<HTMLElement, "className"> {
 const ConfirmDialog: React.FunctionComponent<ConfirmDialogProps> = ({
   className,
   closeDialog,
-  removeNote
+  removeNote,
 }) => {
   return (
     <FlexBox
@@ -32,7 +32,7 @@ const ConfirmDialog: React.FunctionComponent<ConfirmDialogProps> = ({
           type="button"
           text="Delete"
           wrapperClassName="confirm-dialog__button"
-          onCLick={evt => {
+          onCLick={(evt) => {
             evt?.stopPropagation();
             removeNote();
           }}
@@ -42,7 +42,7 @@ const ConfirmDialog: React.FunctionComponent<ConfirmDialogProps> = ({
           type="button"
           text="Don't"
           wrapperClassName="confirm-dialog__button"
-          onCLick={evt => {
+          onCLick={(evt) => {
             evt?.stopPropagation();
             closeDialog();
           }}

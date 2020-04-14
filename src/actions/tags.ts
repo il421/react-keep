@@ -6,7 +6,7 @@ import {
   Store,
   Tag,
   TagsActionsTypes,
-  UpdateTagAction
+  UpdateTagAction,
 } from "../store/store.types";
 import { Dispatch } from "redux";
 import { toast } from "react-toastify";
@@ -14,32 +14,29 @@ import { getMessage, Message } from "../common";
 
 const initDocumentRef = (uid: string) => {
   const USERS_NOTES_DATABASE = "users";
-  return database
-    .collection(USERS_NOTES_DATABASE)
-    .doc(uid)
-    .collection("tags");
+  return database.collection(USERS_NOTES_DATABASE).doc(uid).collection("tags");
 };
 
 export const setTags = (tags: Tag[]): SetTagsAction => ({
   type: TagsActionsTypes.setTags,
-  tags
+  tags,
 });
 
 export const addTag = (tag: Tag): AddTagAction => ({
   type: TagsActionsTypes.addTag,
-  tag
+  tag,
 });
 
 export const removeTag = (id: string): RemoveTagAction => ({
   type: TagsActionsTypes.removeTag,
-  id
+  id,
 });
 
 // unused now
 export const updateTag = (id: string, update: Tag): UpdateTagAction => ({
   type: TagsActionsTypes.updateTag,
   id,
-  update
+  update,
 });
 
 export const handleSetTags = () => {
@@ -50,7 +47,7 @@ export const handleSetTags = () => {
 
     try {
       const snapshot = await docRef.get();
-      snapshot.forEach(doc => {
+      snapshot.forEach((doc) => {
         if (doc.exists) {
           tags.unshift({ id: doc.id, ...(doc.data() as Tag) });
         } else {
@@ -75,7 +72,7 @@ export const handleAddTag = (value: string) => {
       dispatch(
         addTag({
           id: docRef.id,
-          value
+          value,
         })
       );
     } catch (e) {
@@ -109,7 +106,7 @@ export const handleUpdateTag = (id: string, update: Tag) => {
     try {
       dispatch(updateTag(id, update));
       await docRef.doc(id).update({
-        value: update
+        value: update,
       });
     } catch (e) {
       console.log(e.message);

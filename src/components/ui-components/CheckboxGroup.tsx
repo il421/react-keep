@@ -53,7 +53,7 @@ export class CheckboxGroup extends React.PureComponent<CheckboxGroupProps> {
                   id={o.id}
                   value={o.id}
                   type="checkbox"
-                  checked={checked}
+                  defaultChecked={checked}
                 />
                 <label
                   htmlFor={o.id}

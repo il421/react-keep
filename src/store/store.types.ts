@@ -103,7 +103,7 @@ export interface RemoveNoteTagAction {
 }
 
 // TAGS
-export interface TagsStoreState  extends Tag {}
+export interface TagsStoreState extends Tag {}
 
 export interface Tag {
   id: string;
@@ -132,12 +132,12 @@ export interface UpdateTagAction extends Pick<Tag, "id"> {
 export enum AuthActionsTypes {
   login = "login",
   logout = "logout",
-  loading = "loading"
+  loading = "loading",
 }
 
 export enum FiltersActionsTypes {
   setSearchFilter = "setSearchFilter",
-  setTagFilter = "setTagFilter"
+  setTagFilter = "setTagFilter",
 }
 
 export enum NotesActionsTypes {
@@ -146,12 +146,12 @@ export enum NotesActionsTypes {
   removeNote = "removeNote",
   updateNote = "updateNote",
   toggleImportance = "toggleImportance",
-  removeTagFromNote = "removeTagFromNote"
+  removeTagFromNote = "removeTagFromNote",
 }
 export enum TagsActionsTypes {
   addTag = "addTag",
   setTags = "setTags",
   removeTag = "removeTag",
   updateTag = "updateTag",
-  displayTagsModal = "displayTagsModal"
+  displayTagsModal = "displayTagsModal",
 }

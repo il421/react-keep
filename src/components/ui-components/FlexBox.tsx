@@ -21,7 +21,7 @@ export class FlexBox extends React.PureComponent<FlexBoxProps> {
     flexDirection: this.props.vertical ? "column" : "row",
     justifyContent: this.props.justifyContent,
     alignItems: this.props.alignItems ?? AlignItems.inherit,
-    flexWrap: this.props.flexWrap ?? FlexWrap.inherit
+    flexWrap: this.props.flexWrap ?? FlexWrap.inherit,
   };
 
   render() {

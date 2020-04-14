@@ -31,7 +31,7 @@ export class LoginPage extends React.PureComponent<Props> {
   private initialValues: LoginFormValues = {
     email: "",
     password: "",
-    isNew: false
+    isNew: false,
   };
 
   private nameOf = nameOf<LoginFormValues>();
@@ -89,7 +89,7 @@ export class LoginPage extends React.PureComponent<Props> {
           <BaseForm<LoginFormValues>
             initialValues={this.initialValues}
             classNames={{
-              form: "login-box__form login-form"
+              form: "login-box__form login-form",
             }}
             onSubmit={this.submitLoginForm}
             validate={this.getValidationErrors}
@@ -126,7 +126,7 @@ export class LoginPage extends React.PureComponent<Props> {
 
 const mapStateToProps = (state: Store): StateProps => {
   return {
-    loading: state.auth.loading
+    loading: state.auth.loading,
   };
 };
 
@@ -136,7 +136,7 @@ const mapDispatchToProps = (
   startLogin: (email: string, password: string) =>
     dispatch(startLogin(email, password)),
   startSignUp: (email: string, password: string) =>
-    dispatch(startSignUp(email, password))
+    dispatch(startSignUp(email, password)),
 });
 
 export default connect<StateProps, DispatchProps, {}, Store>(

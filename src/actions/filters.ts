@@ -1,15 +1,15 @@
 import {
   FiltersActionsTypes,
   SearchFilterAction,
-  TagsFilterAction
+  TagsFilterAction,
 } from "../store/store.types";
 
 export const setSearchFilter = (search: string): SearchFilterAction => ({
   type: FiltersActionsTypes.setSearchFilter,
-  search
+  search,
 });
 
 export const setTagsFilter = (tag: string): TagsFilterAction => ({
   type: FiltersActionsTypes.setTagFilter,
-  tag
+  tag,
 });

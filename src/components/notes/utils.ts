@@ -37,7 +37,7 @@ export const getInitialsFormValues = <T extends string | ListItem[]>(options: {
       content: content as T,
       tags,
       color,
-      currentOption: BaseFormOptions.none
+      currentOption: BaseFormOptions.none,
     } as NoteFormValues<T>;
   }
   return options.defaultValues;
@@ -53,8 +53,8 @@ export const getDefaultContent = (type: NoteType): string | ListItem[] => {
           id: uuidv4(),
           content: "",
           checked: false,
-          position: 0
-        }
+          position: 0,
+        },
       ];
     default:
       return "";

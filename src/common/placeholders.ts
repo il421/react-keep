@@ -7,5 +7,5 @@ export enum Placeholders {
   firstName = "First name",
   lastName = "Last name",
   newPassword = "New password",
-  newTag = "New tag"
+  newTag = "New tag",
 }

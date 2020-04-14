@@ -4,7 +4,7 @@ export enum Colors {
   red = "#fc4a1a",
   lightGray = "#7A7A7A",
   white = "#fff",
-  black = "#000"
+  black = "#000",
 }
 
 // for color picker
@@ -16,7 +16,7 @@ export enum PickerColors {
   green = "#ccff90",
   brown = "#e6c9a8",
   gray = "#e8eaed",
-  orange = "#fbbc04"
+  orange = "#fbbc04",
 }
 
 // FlexBox variables
@@ -26,7 +26,7 @@ export enum AlignItems {
   end = "fle-end",
   start = "flex-start",
   stretch = "stretch",
-  inherit = "inherit"
+  inherit = "inherit",
 }
 
 export enum JustifyContent {
@@ -36,7 +36,7 @@ export enum JustifyContent {
   start = "flex-start",
   stretch = "stretch",
   spaceBetween = "space-between",
-  spaceAround = "space-around"
+  spaceAround = "space-around",
 }
 
 export enum FlexWrap {
@@ -44,5 +44,5 @@ export enum FlexWrap {
   nowrap = "nowrap",
   inherit = "inherit",
   unset = "unset",
-  wrapReverse = "wrap-reverse"
+  wrapReverse = "wrap-reverse",
 }

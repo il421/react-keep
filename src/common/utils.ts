@@ -19,7 +19,7 @@ interface Filters {
 }
 export const getFilteredNotes = (notes: Note[], filters: Filters) => {
   const { searchText, tags } = filters;
-  return notes.filter(note => {
+  return notes.filter((note) => {
     let contentMatch: boolean = true;
     const titleMatch: boolean = note.title
       .toLowerCase()
@@ -33,14 +33,14 @@ export const getFilteredNotes = (notes: Note[], filters: Filters) => {
           .includes(searchText.toLowerCase());
         break;
       case NoteType.list:
-        contentMatch = (note.content as ListItem[]).some(item =>
+        contentMatch = (note.content as ListItem[]).some((item) =>
           item.content.toLowerCase().includes(searchText.toLowerCase())
         );
         break;
     }
 
     if (tags.length > 0) {
-      tagsMatch = note.tags.some(id => tags.includes(id));
+      tagsMatch = note.tags.some((id) => tags.includes(id));
     }
 
     return (contentMatch || titleMatch) && tagsMatch;

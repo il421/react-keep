@@ -22,7 +22,7 @@ export class ConfirmButton extends React.PureComponent<LoginButtonProps> {
       text,
       disabled = false,
       onCLick,
-      wrapperClassName
+      wrapperClassName,
     } = this.props;
     return (
       <FlexBox

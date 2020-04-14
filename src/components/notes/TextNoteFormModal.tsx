@@ -18,7 +18,7 @@ class TextNoteFormModal extends React.Component<TextNoteFormModalProps> {
     if (
       !isModal({
         query: this.props.history.location.search,
-        type: QueryKeys.text
+        type: QueryKeys.text,
       })
     ) {
       return null;

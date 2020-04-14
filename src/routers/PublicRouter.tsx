@@ -34,7 +34,7 @@ const PublicRouter: React.FunctionComponent<Prop> = ({
 );
 
 const mapStateToProps = (state: Store): RouterStateProps => ({
-  isAuthenticated: !!state.auth.uid
+  isAuthenticated: !!state.auth.uid,
 });
 
 export default connect<RouterStateProps, {}, PublicRouterProps, Store>(

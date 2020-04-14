@@ -30,14 +30,14 @@ const NotesList: React.FunctionComponent<Props> = ({
   notes,
   removeNote,
   toggleImportance,
-  onNoteSelected
+  onNoteSelected,
 }): JSX.Element => {
   const breakpointColumnsObj = {
     default: 5,
     1400: 4,
     991: 3,
     794: 2,
-    615: 1
+    615: 1,
   };
 
   return (
@@ -66,15 +66,15 @@ const NotesList: React.FunctionComponent<Props> = ({
 const mapStateToProps = (state: Store): StateProps => ({
   notes: getFilteredNotes(state.notes, {
     searchText: state.filters.search,
-    tags: state.filters.tagFilters
-  })
+    tags: state.filters.tagFilters,
+  }),
 });
 
 const mapDispatchToProps = (
   dispatch: ThunkDispatch<{}, {}, any>
 ): DispatchProps => ({
   removeNote: (id: string) => dispatch(handleRemoveNote(id)),
-  toggleImportance: (id: string) => dispatch(changeNoteImportance(id))
+  toggleImportance: (id: string) => dispatch(changeNoteImportance(id)),
 });
 
 export default connect<StateProps, DispatchProps, NotesListProp, Store>(

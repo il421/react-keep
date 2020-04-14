@@ -43,14 +43,14 @@ class UserFormModal extends React.PureComponent<Props> {
       firstName = auth.name.split(" ")[0];
       lastName = auth.name
         .split(" ")
-        .filter(i => i !== firstName)
+        .filter((i) => i !== firstName)
         .join(" ");
     }
 
     return {
       firstName,
       lastName,
-      url: auth.url
+      url: auth.url,
     };
   };
 
@@ -69,7 +69,7 @@ class UserFormModal extends React.PureComponent<Props> {
     const displayName = `${values.firstName} ${values.lastName}`.trim();
     this.props.updateUserData({
       displayName: !!displayName ? displayName : null,
-      photoURL: values.url
+      photoURL: values.url,
     });
   };
 
@@ -77,7 +77,7 @@ class UserFormModal extends React.PureComponent<Props> {
     if (
       !isModal({
         query: this.props.history.location.search,
-        type: QueryKeys.user
+        type: QueryKeys.user,
       })
     ) {
       return null;
@@ -93,7 +93,7 @@ class UserFormModal extends React.PureComponent<Props> {
         <ContentContainer>
           <BaseForm<UserFormValues>
             classNames={{
-              form: "login-box__form login-form"
+              form: "login-box__form login-form",
             }}
             initialValues={this.getFormValues(this.props.auth)}
             onSubmit={this.onSubmit}
@@ -106,7 +106,7 @@ class UserFormModal extends React.PureComponent<Props> {
                 width: "100px",
                 height: "100px",
                 borderRadius: "50%",
-                background: "green"
+                background: "green",
               }}
             />
 
@@ -143,14 +143,14 @@ class UserFormModal extends React.PureComponent<Props> {
 
 const mapStateToProps = (state: Store): StateProps => {
   return {
-    auth: state.auth
+    auth: state.auth,
   };
 };
 
 const mapDispatchToProps = (
   dispatch: ThunkDispatch<{}, {}, any>
 ): DispatchProps => ({
-  updateUserData: (data: UpdateUser) => dispatch(updateUserData(data))
+  updateUserData: (data: UpdateUser) => dispatch(updateUserData(data)),
 });
 
 export default connect<StateProps, DispatchProps, UserFormModalProps, Store>(

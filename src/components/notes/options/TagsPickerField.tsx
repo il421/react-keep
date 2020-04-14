@@ -25,7 +25,7 @@ export class TagsPickerField extends React.PureComponent<TagsPickerFieldProps> {
           classNames={{
             option: "tags-picker__wrapper",
             checkbox: "tags-picker__checkbox",
-            label: "tags-picker__value"
+            label: "tags-picker__value",
           }}
         />
       </FlexBox>

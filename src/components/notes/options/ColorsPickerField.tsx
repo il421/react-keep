@@ -22,7 +22,7 @@ class ColorsPickerField extends React.PureComponent {
             radioClassName="colors-picker__item"
             value={color}
             labelProps={{
-              style: { backgroundColor: color, cursor: "pointer" }
+              style: { backgroundColor: color, cursor: "pointer" },
             }}
           />
         ))}

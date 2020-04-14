@@ -13,5 +13,5 @@ export type FieldAdapterProps<T = string> = FieldRenderProps<T, HTMLElement>;
 export enum BaseFormOptions {
   none = "none",
   palette = "palette",
-  tags = "tags"
+  tags = "tags",
 }

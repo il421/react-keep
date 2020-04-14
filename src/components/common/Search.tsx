@@ -23,7 +23,7 @@ class Search extends React.PureComponent<Props> {
         <input
           className="search"
           placeholder={Placeholders.search}
-          onInput={evt =>
+          onInput={(evt) =>
             this.props.setSearchFilter((evt.target as HTMLInputElement).value)
           }
         />
@@ -36,7 +36,7 @@ const mapDispatchToProps = (
   dispatch: Dispatch<SearchFilterAction>
 ): DispatchProps => {
   return {
-    setSearchFilter: (value: string) => dispatch(setSearchFilter(value))
+    setSearchFilter: (value: string) => dispatch(setSearchFilter(value)),
   };
 };
 

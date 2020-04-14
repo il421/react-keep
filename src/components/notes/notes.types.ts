@@ -4,7 +4,7 @@ import { BaseFormOptions } from "../form/BaseForm.types";
 export enum NoteType {
   text,
   list,
-  image
+  image,
 }
 
 export interface NoteFormValues<T>

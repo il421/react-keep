@@ -71,7 +71,7 @@ const renderApp = () => {
 ReactDOM.render(<LoadingPage />, document.getElementById("root"));
 
 // google authentication
-firebase.auth().onAuthStateChanged(async user => {
+firebase.auth().onAuthStateChanged(async (user) => {
   if (user) {
     store.dispatch<LoginAction>(
       login(user.uid, user.displayName, user.photoURL)

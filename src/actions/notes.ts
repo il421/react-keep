@@ -11,7 +11,7 @@ import {
   Tag,
   ToggleImportantAction,
   UpdateNote,
-  UpdateNoteAction
+  UpdateNoteAction,
 } from "../store/store.types";
 import { Dispatch } from "redux";
 import { getMessage, Message } from "../common";
@@ -20,41 +20,38 @@ import moment from "moment";
 
 const initDocumentRef = (uid: string) => {
   const USERS_NOTES_DATABASE = "users";
-  return database
-    .collection(USERS_NOTES_DATABASE)
-    .doc(uid)
-    .collection("notes");
+  return database.collection(USERS_NOTES_DATABASE).doc(uid).collection("notes");
 };
 
 const setNotes = (notes: Note[]): SetNotesAction => ({
   type: NotesActionsTypes.setNotes,
-  notes
+  notes,
 });
 
 const addNote = (note: Note): AddNoteAction => ({
   type: NotesActionsTypes.addNote,
-  note
+  note,
 });
 
 const removeNote = (id: string): RemoveNoteAction => ({
   type: NotesActionsTypes.removeNote,
-  id
+  id,
 });
 
 const updateNote = (id: string, updates: UpdateNote): UpdateNoteAction => ({
   type: NotesActionsTypes.updateNote,
   id,
-  updates
+  updates,
 });
 
 const changeImportance = (id: string): ToggleImportantAction => ({
   type: NotesActionsTypes.toggleImportance,
-  id
+  id,
 });
 
 const removeTag = (tagId: string): RemoveNoteTagAction => ({
   type: NotesActionsTypes.removeTagFromNote,
-  tagId
+  tagId,
 });
 
 export const handleSetNotes = () => {
@@ -65,7 +62,7 @@ export const handleSetNotes = () => {
 
     try {
       const snapshot = await docRef.get();
-      snapshot.forEach(doc => {
+      snapshot.forEach((doc) => {
         if (doc.exists) {
           notes.push({ id: doc.id, ...(doc.data() as Note) });
         } else {
@@ -93,14 +90,14 @@ export const handleAddNote = (note: AddNote) => {
       createdAt: moment().valueOf(),
       updatedAt: moment().valueOf(),
       important: false,
-      ...note
+      ...note,
     };
     try {
       const docRef = await initDocumentRef(uid).add(newNote);
       dispatch(
         addNote({
           id: docRef.id,
-          ...newNote
+          ...newNote,
         })
       );
     } catch (e) {
@@ -154,7 +151,7 @@ export const changeNoteImportance = (id: string) => {
         const impValue = note.important;
 
         await docRef.doc(id).update({
-          important: !impValue
+          important: !impValue,
         });
       }
     } catch (e) {
@@ -173,14 +170,14 @@ export const removeTagFromNotes = (id: string) => {
 
     try {
       const snapshot = await docRef.get();
-      snapshot.forEach(doc => {
+      snapshot.forEach((doc) => {
         if (doc.exists) {
           let data = doc.data();
 
           if (data.tags.length > 0) {
             let updatedTags = data.tags.filter((tagId: string) => tagId !== id);
             docRef.doc(doc.id).update({
-              tags: updatedTags
+              tags: updatedTags,
             });
           }
         }

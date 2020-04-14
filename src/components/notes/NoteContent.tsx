@@ -10,7 +10,7 @@ interface NoteContentProps {
 
 const NoteContent: React.FunctionComponent<NoteContentProps> = ({
   type,
-  content
+  content,
 }): JSX.Element => {
   return (
     <>
@@ -23,8 +23,9 @@ const NoteContent: React.FunctionComponent<NoteContentProps> = ({
             {(content as ListItem[]).slice(0, 10).map((item, index) => (
               <li key={index}>
                 <div
-                  className={`list__box ${item.checked &&
-                    "list__box--checked"}`}
+                  className={`list__box ${
+                    item.checked && "list__box--checked"
+                  }`}
                 />
                 <span className="list__text">{getShortText(item.content)}</span>
               </li>

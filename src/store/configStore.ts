@@ -13,7 +13,7 @@ export default () => {
       auth: authReducer,
       notes: notesReducer,
       tags: tagsReducer,
-      filters: filtersReducer
+      filters: filtersReducer,
     }),
     composeWithDevTools(applyMiddleware(thunk))
   );

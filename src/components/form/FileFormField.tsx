@@ -26,12 +26,11 @@ const FieldAdapter: React.FunctionComponent<FieldAdapterProps> = ({
   );
 };
 
-export const FileFormField: React.FunctionComponent<ExposedFieldProps<
-  string,
-  HTMLElement
-> & {
-  className: string;
-}> = props => (
+export const FileFormField: React.FunctionComponent<
+  ExposedFieldProps<string, HTMLElement> & {
+    className: string;
+  }
+> = (props) => (
   <Field
     {...props}
     name={props.name}

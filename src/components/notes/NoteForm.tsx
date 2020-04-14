@@ -9,7 +9,7 @@ import {
   NotesStoreState,
   Store,
   TagsStoreState,
-  UpdateNote
+  UpdateNote,
 } from "../../store/store.types";
 import { NoteFormValues, NoteType } from "./notes.types";
 import { PickerColors } from "../../common/variables";
@@ -20,7 +20,7 @@ import {
   BaseForm,
   BaseFormOptions,
   FieldSpy,
-  TextInputField
+  TextInputField,
 } from "../form/index";
 import { FormRenderProps, FormSpy } from "react-final-form";
 import { handleAddNote, handleUpdateNote } from "../../actions/notes";
@@ -30,7 +30,7 @@ import moment from "moment";
 import {
   getDefaultContent,
   getInitialsFormValues,
-  getSelectedNote
+  getSelectedNote,
 } from "./utils";
 import { ContentContainer } from "../ui-components/ContentContainer";
 import TagsPickerField from "./options/TagsPickerField";
@@ -63,7 +63,7 @@ class NoteForm extends React.Component<Props> {
     content: getDefaultContent(this.props.type),
     tags: [],
     color: PickerColors.white,
-    currentOption: BaseFormOptions.none
+    currentOption: BaseFormOptions.none,
   };
 
   private nameOf = nameOf<NoteFormValues<string | ListItem[]>>();
@@ -75,7 +75,7 @@ class NoteForm extends React.Component<Props> {
     ),
     currentNoteColor:
       getSelectedNote(this.props.history.location.search, this.props.notes)
-        ?.color ?? this.defaultNote.color
+        ?.color ?? this.defaultNote.color,
   } as TextNoteFormModalState;
 
   private onSubmitAction = async (
@@ -88,7 +88,7 @@ class NoteForm extends React.Component<Props> {
       const update: UpdateNote = {
         ...this.state.currentNote,
         ...note,
-        updatedAt: moment().valueOf()
+        updatedAt: moment().valueOf(),
       };
 
       await this.props.updateNote(this.state.currentNote.id, update);
@@ -104,14 +104,14 @@ class NoteForm extends React.Component<Props> {
       <ContentContainer
         className="note-modal__container"
         style={{
-          backgroundColor: this.state.currentNoteColor
+          backgroundColor: this.state.currentNoteColor,
         }}
       >
         <BaseForm<NoteFormValues<string | ListItem[]>>
           initialValues={getInitialsFormValues({
             type: this.props.type,
             currentNote: this.state.currentNote,
-            defaultValues: this.defaultNote
+            defaultValues: this.defaultNote,
           })}
           onSubmit={this.onSubmitAction}
           onCancel={() => this.props.history.push(PathNames.base)}
@@ -119,7 +119,7 @@ class NoteForm extends React.Component<Props> {
           getFormOptions={
             <FormSpy>
               {({
-                values
+                values,
               }: FormRenderProps<NoteFormValues<string | ListItem[]>>) => {
                 switch (values.currentOption) {
                   case BaseFormOptions.palette:
@@ -162,7 +162,7 @@ class NoteForm extends React.Component<Props> {
 
 const mapStateToProps = (state: Store): StateProps => ({
   notes: state.notes,
-  tags: state.tags
+  tags: state.tags,
 });
 
 const mapDispatchToProps = (
@@ -170,7 +170,7 @@ const mapDispatchToProps = (
 ): DispatchProps => ({
   addNote: (note: AddNote) => dispatch(handleAddNote(note)),
   updateNote: (id: string, note: UpdateNote) =>
-    dispatch(handleUpdateNote(id, note))
+    dispatch(handleUpdateNote(id, note)),
 });
 
 export default withRouter(

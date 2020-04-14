@@ -1,7 +1,7 @@
 import React from "react";
 import {
   FontAwesomeIcon,
-  FontAwesomeIconProps
+  FontAwesomeIconProps,
 } from "@fortawesome/react-fontawesome";
 import "../../styles/ui-components/_icon-button.scss";
 

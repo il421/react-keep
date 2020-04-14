@@ -22,7 +22,7 @@ interface DashboardPageProps {
 }
 
 export const DashboardPage: React.FunctionComponent<DashboardPageProps> = ({
-  history
+  history,
 }): JSX.Element => {
   const [showBar, setShowSidebar] = useState<boolean>(false);
 
@@ -40,7 +40,7 @@ export const DashboardPage: React.FunctionComponent<DashboardPageProps> = ({
     }
 
     const query = stringify({
-      [key]: id
+      [key]: id,
     });
     history.push(`${history.location.pathname}?${query}`);
   };

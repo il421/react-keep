@@ -14,7 +14,7 @@ interface ListNoteFromItemProps {
 
 export const ListNoteFromItem: React.FunctionComponent<ListNoteFromItemProps> = ({
   name,
-  onRemove
+  onRemove,
 }) => {
   return (
     <FlexBox
