@@ -5,6 +5,7 @@ import {
   RemoveNoteAction,
   RemoveNoteTagAction,
   SetNotesAction,
+  ToggleArchiveAction,
   ToggleImportantAction,
   UpdateNoteAction,
 } from "../store/store.types";
@@ -15,7 +16,8 @@ type NotesAction =
   | RemoveNoteAction
   | RemoveNoteTagAction
   | UpdateNoteAction
-  | ToggleImportantAction;
+  | ToggleImportantAction
+  | ToggleArchiveAction;
 
 const notesReducerDefaultState: NotesStoreState[] = [];
 
@@ -49,6 +51,14 @@ export default (
       return state.map((note) => {
         if (note.id === action.id) {
           note.important = !note.important;
+        }
+        return note;
+      });
+
+    case NotesActionsTypes.toggleArchive:
+      return state.map((note) => {
+        if (note.id === action.id) {
+          note.archive = !note.archive;
         }
         return note;
       });

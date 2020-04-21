@@ -10,7 +10,7 @@ export enum NoteType {
 export interface NoteFormValues<T>
   extends Omit<
     Note,
-    "id" | "important" | "createdAt" | "updatedAt" | "content"
+    "id" | "important" | "archive" | "createdAt" | "updatedAt" | "content"
   > {
   content: T;
   currentOption: BaseFormOptions;

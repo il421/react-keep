@@ -7,11 +7,10 @@ import {
   RemoveNoteAction,
   RemoveNoteTagAction,
   SetNotesAction,
-  Store,
-  Tag,
+  Store, ToggleArchiveAction,
   ToggleImportantAction,
   UpdateNote,
-  UpdateNoteAction,
+  UpdateNoteAction
 } from "../store/store.types";
 import { Dispatch } from "redux";
 import { getMessage, Message } from "../common";
@@ -46,6 +45,11 @@ const updateNote = (id: string, updates: UpdateNote): UpdateNoteAction => ({
 
 const changeImportance = (id: string): ToggleImportantAction => ({
   type: NotesActionsTypes.toggleImportance,
+  id,
+});
+
+const changeArchive= (id: string): ToggleArchiveAction => ({
+  type: NotesActionsTypes.toggleArchive,
   id,
 });
 
@@ -90,6 +94,7 @@ export const handleAddNote = (note: AddNote) => {
       createdAt: moment().valueOf(),
       updatedAt: moment().valueOf(),
       important: false,
+      archive: false,
       ...note,
     };
     try {
@@ -152,6 +157,30 @@ export const changeNoteImportance = (id: string) => {
 
         await docRef.doc(id).update({
           important: !impValue,
+        });
+      }
+    } catch (e) {
+      console.log(e.message);
+      toast.error(e.message);
+    }
+  };
+};
+
+export const changeNoteArchiveStatus = (id: string) => {
+  return async (dispatch: Dispatch, getState: () => Store) => {
+    const uid = getState().auth.uid;
+    const docRef = initDocumentRef(uid);
+
+    try {
+      dispatch(changeArchive(id));
+
+      const doc = await docRef.doc(id).get();
+      if (doc.exists) {
+        const note = doc.data() as Note;
+        const archiveValue = note.archive;
+
+        await docRef.doc(id).update({
+          archive: !archiveValue,
         });
       }
     } catch (e) {

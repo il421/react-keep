@@ -77,9 +77,17 @@ const NotesItem: React.FunctionComponent<NoteProps> = ({
           vertical
           justifyContent={JustifyContent.spaceBetween}
         >
-          <div className="details__date">
-            {moment(note.updatedAt).format("MMMM Do, YYYY")}
-          </div>
+          <FlexBox
+            className="details__date"
+            justifyContent={JustifyContent.spaceBetween}
+          >
+            <div>
+              <b>Created:</b> {moment(note.createdAt).format("MMMM Do, YYYY")}
+            </div>
+            <div>
+              <b>Edited:</b> {moment(note.updatedAt).format("MMMM Do, YYYY")}
+            </div>
+          </FlexBox>
 
           <FlexBox
             className="details__tags"

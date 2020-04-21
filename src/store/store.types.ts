@@ -58,12 +58,13 @@ export interface Note {
   tags: string[];
   color: string;
   important: boolean;
+  archive: boolean;
   createdAt: number;
   updatedAt: number;
 }
 
 export interface AddNote
-  extends Omit<Note, "id" | "important" | "createdAt" | "updatedAt"> {}
+  extends Omit<Note, "id" | "important" | "archive" | "createdAt" | "updatedAt"> {}
 
 export interface UpdateNote extends Omit<Note, "id"> {}
 
@@ -91,6 +92,10 @@ export interface RemoveNoteAction extends Pick<Note, "id"> {
 export interface UpdateNoteAction extends Pick<Note, "id"> {
   type: NotesActionsTypes.updateNote;
   updates: UpdateNote;
+}
+
+export interface ToggleArchiveAction extends Pick<Note, "id"> {
+  type: NotesActionsTypes.toggleArchive;
 }
 
 export interface ToggleImportantAction extends Pick<Note, "id"> {
@@ -146,6 +151,7 @@ export enum NotesActionsTypes {
   removeNote = "removeNote",
   updateNote = "updateNote",
   toggleImportance = "toggleImportance",
+  toggleArchive = "toggleArchive",
   removeTagFromNote = "removeTagFromNote",
 }
 export enum TagsActionsTypes {
