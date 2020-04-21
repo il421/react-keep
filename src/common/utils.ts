@@ -19,7 +19,7 @@ interface Filters {
 }
 export const getFilteredNotes = (notes: Note[], filters: Filters) => {
   const { searchText, tags } = filters;
-  return notes.filter((note) => {
+  const filteredNotes = notes.filter((note) => {
     let contentMatch: boolean = true;
     const titleMatch: boolean = note.title
       .toLowerCase()
@@ -45,6 +45,13 @@ export const getFilteredNotes = (notes: Note[], filters: Filters) => {
 
     return (contentMatch || titleMatch) && tagsMatch;
   });
+
+  return filteredNotes.reduce((acc: Note[], note: Note) => {
+    if (note.important) {
+      return [note, ...acc];
+    }
+    return [...acc, note];
+  }, []);
 };
 
 export const getShortText = (text: string) => {
