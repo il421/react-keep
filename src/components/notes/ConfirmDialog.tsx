@@ -9,14 +9,19 @@ import "../../styles/components/notes/_confirm-dialog.scss";
  */
 
 interface ConfirmDialogProps extends Pick<HTMLElement, "className"> {
-  removeNote: () => void;
+  handleConfirm: () => void;
   closeDialog: () => void;
+  buttonsProps?: {
+    confirmButtonText?: string;
+    cancelButtonText?: string;
+  };
 }
 
 const ConfirmDialog: React.FunctionComponent<ConfirmDialogProps> = ({
   className,
   closeDialog,
-  removeNote,
+  handleConfirm,
+  buttonsProps,
 }) => {
   return (
     <FlexBox
@@ -30,17 +35,17 @@ const ConfirmDialog: React.FunctionComponent<ConfirmDialogProps> = ({
       >
         <ConfirmButton
           type="button"
-          text="Delete"
+          text={buttonsProps?.confirmButtonText! ?? "Delete"}
           wrapperClassName="confirm-dialog__button"
           onCLick={(evt) => {
             evt?.stopPropagation();
-            removeNote();
+            handleConfirm();
           }}
         />
 
         <ConfirmButton
           type="button"
-          text="Don't"
+          text={buttonsProps?.cancelButtonText! ?? "Don't"}
           wrapperClassName="confirm-dialog__button"
           onCLick={(evt) => {
             evt?.stopPropagation();

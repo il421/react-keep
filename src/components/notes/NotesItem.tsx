@@ -17,17 +17,21 @@ import NoteTag from "./NoteTag";
 interface NoteProps {
   note: Note;
   removeNote: (id: string) => void;
+  moveToArchive: (id: string) => void;
   toggleImportance: (id: string) => void;
   onNoteSelected: (type: NoteType, id: string) => void;
 }
 
+type Confirm = "del" | "arch" | null;
+
 const NotesItem: React.FunctionComponent<NoteProps> = ({
   note,
   removeNote,
+  moveToArchive,
   toggleImportance,
   onNoteSelected,
 }): JSX.Element => {
-  const [isConfirm, setIsConfirm] = useState<boolean>(false);
+  const [isConfirm, setIsConfirm] = useState<Confirm>(null);
 
   return (
     <ContentContainer
@@ -50,13 +54,26 @@ const NotesItem: React.FunctionComponent<NoteProps> = ({
             icon="bookmark"
             color={note.important ? Colors.red : Colors.lightGray}
           />
-          <IconButton
-            onButtonClick={(evt) => {
-              evt?.stopPropagation();
-              setIsConfirm(true);
-            }}
-            icon="times"
-          />
+          <FlexBox
+            justifyContent={JustifyContent.start}
+            alignItems={AlignItems.center}
+          >
+            <IconButton
+              onButtonClick={(evt) => {
+                evt?.stopPropagation();
+                setIsConfirm("arch");
+              }}
+              icon="archive"
+            />
+
+            <IconButton
+              onButtonClick={(evt) => {
+                evt?.stopPropagation();
+                setIsConfirm("del");
+              }}
+              icon="times"
+            />
+          </FlexBox>
         </FlexBox>
 
         {/*title and content*/}
@@ -104,10 +121,17 @@ const NotesItem: React.FunctionComponent<NoteProps> = ({
       {isConfirm && (
         <ConfirmDialog
           className="note__confirm"
-          closeDialog={() => setIsConfirm(false)}
-          removeNote={() => {
-            removeNote(note.id);
-            setIsConfirm(false);
+          closeDialog={() => setIsConfirm(null)}
+          buttonsProps={{
+            confirmButtonText: isConfirm === "arch" ? "To archive" : undefined,
+          }}
+          handleConfirm={() => {
+            if (isConfirm === "del") {
+              removeNote(note.id);
+            } else if (isConfirm === "arch") {
+              moveToArchive(note.id);
+            }
+            setIsConfirm(null);
           }}
         />
       )}

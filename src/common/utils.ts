@@ -20,6 +20,11 @@ interface Filters {
 export const getFilteredNotes = (notes: Note[], filters: Filters) => {
   const { searchText, tags } = filters;
   const filteredNotes = notes.filter((note) => {
+    // dont show archived notes
+    if (note.archive) {
+      return false;
+    }
+
     let contentMatch: boolean = true;
     const titleMatch: boolean = note.title
       .toLowerCase()
@@ -62,3 +67,6 @@ export const getShortText = (text: string) => {
 
   return text;
 };
+
+export const toggleArrayElement = (arr: any[], item: any): any[]  =>
+  arr.includes(item) ? arr.filter((i) => i !== item) : [...arr, item];

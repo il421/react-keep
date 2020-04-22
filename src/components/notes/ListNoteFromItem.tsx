@@ -1,7 +1,6 @@
 import React from "react";
 import { FlexBox } from "../ui-components/FlexBox";
 import { AlignItems, JustifyContent } from "../../common/variables";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CheckboxInputField } from "../form/CheckboxInputField";
 import { TextInputField } from "../form/TextInputField";
 import { IconButton } from "../ui-components/IconButton";

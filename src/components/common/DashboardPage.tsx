@@ -15,16 +15,24 @@ import { QueryKeys } from "../../routers/Routing";
 import { stringify } from "query-string";
 import ListNoteFormModal from "../notes/ListNoteFormModal";
 import { NoteType } from "../notes/notes.types";
+import { IconButton } from "../ui-components/IconButton";
+import { toggleArrayElement } from "../../common/utils";
 import Tags from "../tags/Tags";
 
 interface DashboardPageProps {
   history: History;
 }
 
+enum CollapseType {
+  "tags",
+  "arch",
+}
+
 export const DashboardPage: React.FunctionComponent<DashboardPageProps> = ({
   history,
 }): JSX.Element => {
   const [showBar, setShowSidebar] = useState<boolean>(false);
+  const [collapsed, setCollapsed] = useState<CollapseType[]>([]);
 
   const onNoteSelected = (type: NoteType, id: string) => {
     let key: keyof typeof QueryKeys;
@@ -52,11 +60,42 @@ export const DashboardPage: React.FunctionComponent<DashboardPageProps> = ({
       className="dashboard"
     >
       <Header showSidebar={setShowSidebar} />
-      {/*<NoteSelection className="content-container"/>*/}
       <NotesList onNoteSelected={onNoteSelected} />
 
       <SideBar showBar={showBar} setShowSidebar={setShowSidebar}>
-        <Tags />
+        <div className="dashboard__sidebar">
+          <>
+            <IconButton
+              icon="tags"
+              text="Tags list"
+              onButtonClick={() => {
+                setCollapsed(toggleArrayElement(collapsed, CollapseType.tags));
+              }}
+              className={
+                collapsed.includes(CollapseType.tags)
+                  ? "icon-button--collapsed"
+                  : ""
+              }
+            />
+            {collapsed.includes(CollapseType.tags) && <Tags />}
+          </>
+
+          <>
+            <IconButton
+              icon="archive"
+              text="Archived notes"
+              onButtonClick={() => {
+                setCollapsed(toggleArrayElement(collapsed, CollapseType.arch));
+              }}
+              className={
+                collapsed.includes(CollapseType.arch)
+                  ? "icon-button--collapsed"
+                  : ""
+              }
+            />
+            {collapsed.includes(CollapseType.arch) && <div>Archived items</div>}
+          </>
+        </div>
       </SideBar>
 
       <TextNoteFormModal history={history} />

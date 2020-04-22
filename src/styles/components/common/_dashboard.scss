@@ -1,3 +1,18 @@
+@import "../../base/variables";
 .dashboard {
   position: relative;
+
+  &__sidebar {
+    .icon-button__text {
+      font-size: $font-size-large;
+    }
+
+    .icon-button--collapsed {
+      color: $red;
+    }
+
+    button {
+      padding-left: 0;
+    }
+  }
 }
