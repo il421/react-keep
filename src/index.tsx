@@ -33,6 +33,7 @@ import { faImage } from "@fortawesome/free-solid-svg-icons/faImage";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons/faPlusCircle";
 import { faUsersCog } from "@fortawesome/free-solid-svg-icons/faUsersCog";
 import { faArchive } from "@fortawesome/free-solid-svg-icons/faArchive";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons/faArrowRight";
 import { LoginAction } from "./store/store.types";
 import { PathNames } from "./routers/Routing";
 
@@ -51,7 +52,8 @@ library.add(
   faArchive,
   faTh,
   faPlusCircle,
-  faUsersCog
+  faUsersCog,
+  faArrowRight
 );
 
 const store = configStore();

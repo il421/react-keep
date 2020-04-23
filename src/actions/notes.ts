@@ -7,10 +7,11 @@ import {
   RemoveNoteAction,
   RemoveNoteTagAction,
   SetNotesAction,
-  Store, ToggleArchiveAction,
+  Store,
+  ToggleArchiveAction,
   ToggleImportantAction,
   UpdateNote,
-  UpdateNoteAction
+  UpdateNoteAction,
 } from "../store/store.types";
 import { Dispatch } from "redux";
 import { getMessage, Message } from "../common";
@@ -48,7 +49,7 @@ const changeImportance = (id: string): ToggleImportantAction => ({
   id,
 });
 
-const changeArchive= (id: string): ToggleArchiveAction => ({
+const changeArchive = (id: string): ToggleArchiveAction => ({
   type: NotesActionsTypes.toggleArchive,
   id,
 });

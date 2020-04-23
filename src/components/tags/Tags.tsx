@@ -8,10 +8,10 @@ interface TagsProps {}
 class Tags extends React.PureComponent<TagsProps> {
   render() {
     return (
-      <>
+      <div className="tags">
         <TagForm />
         <TagsList />
-      </>
+      </div>
     );
   }
 }

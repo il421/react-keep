@@ -18,6 +18,7 @@ import { NoteType } from "../notes/notes.types";
 import { IconButton } from "../ui-components/IconButton";
 import { toggleArrayElement } from "../../common/utils";
 import Tags from "../tags/Tags";
+import ArchiveList from "../archive/ArchiveList";
 
 interface DashboardPageProps {
   history: History;
@@ -93,7 +94,7 @@ export const DashboardPage: React.FunctionComponent<DashboardPageProps> = ({
                   : ""
               }
             />
-            {collapsed.includes(CollapseType.arch) && <div>Archived items</div>}
+            {collapsed.includes(CollapseType.arch) && <ArchiveList />}
           </>
         </div>
       </SideBar>

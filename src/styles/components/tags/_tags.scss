@@ -2,4 +2,6 @@
 @import "../../base/variables";
 
 .tags {
+  max-height: 30vh;
+  overflow-y: auto;
 }

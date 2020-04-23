@@ -64,7 +64,10 @@ export interface Note {
 }
 
 export interface AddNote
-  extends Omit<Note, "id" | "important" | "archive" | "createdAt" | "updatedAt"> {}
+  extends Omit<
+    Note,
+    "id" | "important" | "archive" | "createdAt" | "updatedAt"
+  > {}
 
 export interface UpdateNote extends Omit<Note, "id"> {}
 

@@ -59,8 +59,8 @@ export const getFilteredNotes = (notes: Note[], filters: Filters) => {
   }, []);
 };
 
-export const getShortText = (text: string) => {
-  const MAX_LENGTH = 100;
+export const getShortText = (text: string, maxLength?: number) => {
+  const MAX_LENGTH = maxLength ?? 100;
   if (text.length > MAX_LENGTH) {
     text = text.slice(0, MAX_LENGTH) + "...";
   }
@@ -68,5 +68,5 @@ export const getShortText = (text: string) => {
   return text;
 };
 
-export const toggleArrayElement = (arr: any[], item: any): any[]  =>
+export const toggleArrayElement = (arr: any[], item: any): any[] =>
   arr.includes(item) ? arr.filter((i) => i !== item) : [...arr, item];
