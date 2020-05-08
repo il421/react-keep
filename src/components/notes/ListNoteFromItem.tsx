@@ -9,11 +9,13 @@ import "../../styles/components/notes/_list-note-form-item.scss";
 interface ListNoteFromItemProps {
   name: string;
   onRemove: () => void;
+  autoFocus: boolean;
 }
 
 export const ListNoteFromItem: React.FunctionComponent<ListNoteFromItemProps> = ({
   name,
   onRemove,
+  autoFocus,
 }) => {
   return (
     <FlexBox
@@ -31,6 +33,7 @@ export const ListNoteFromItem: React.FunctionComponent<ListNoteFromItemProps> = 
         name={`${name}.content`}
         placeholder="Type something ..."
         className="list-note-form-item__text"
+        autoFocus={autoFocus}
       />
       <IconButton
         onButtonClick={onRemove}

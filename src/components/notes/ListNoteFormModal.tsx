@@ -79,8 +79,9 @@ class ListNoteFormModal extends React.Component<ListNoteFormModalProps> {
               return fields.map((name, index) => (
                 <ListNoteFromItem
                   name={name}
-                  key={index}
+                  key={Math.random()}
                   onRemove={() => fields.remove(index)}
+                  autoFocus={index === 0}
                 />
               ));
             }}
