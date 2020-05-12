@@ -1,4 +1,3 @@
-import database from "../firebase/firebase";
 import {
   AddNote,
   AddNoteAction,
@@ -17,6 +16,7 @@ import { Dispatch } from "redux";
 import { getMessage, Message } from "../common";
 import { toast } from "react-toastify";
 import moment from "moment";
+import database from "../firebase/firebase";
 
 const initDocumentRef = (uid: string) => {
   const USERS_NOTES_DATABASE = "users";

@@ -28,7 +28,9 @@ export interface LoadingAction extends Pick<AuthStoreState, "loading"> {
   type: AuthActionsTypes.loading;
 }
 
-export interface UpdateUser extends Pick<User, "displayName" | "photoURL"> {}
+export interface UpdateUser extends Pick<User, "displayName" | "photoURL"> {
+  photoFile?: File;
+}
 
 // FILTER
 export interface FiltersStoreState extends Filters {}

@@ -1,4 +1,4 @@
-import { firebase } from "../firebase/firebase";
+import { firebase, storage } from "../firebase/firebase";
 import { toast } from "react-toastify";
 import {
   AuthActionsTypes,
@@ -10,6 +10,13 @@ import {
 } from "../store/store.types";
 import { Dispatch } from "redux";
 import { getMessage, Message } from "../common";
+
+const AVATARS = "avatars";
+
+const initStorageAvatarRef = (name: string): firebase.storage.Reference => {
+  const ref = storage.ref();
+  return ref.child(`${AVATARS}/${name}`);
+};
 
 export const loading = (loading: boolean): LoadingAction => ({
   type: AuthActionsTypes.loading,
@@ -77,17 +84,28 @@ export const startLogout = () => {
 
 export const updateUserData = (data: UpdateUser) => {
   return async (dispatch: Dispatch, getState: () => Store) => {
+    const auth = getState().auth;
     try {
+      let photoURL: string | null = null;
       dispatch(loading(true));
+      const ref = initStorageAvatarRef(auth.name!);
+
+      if (data.photoFile) {
+        const snapshot = await ref.put(data.photoFile);
+        if (snapshot) {
+          photoURL = await snapshot.ref.getDownloadURL();
+        }
+      } else if (data.photoURL === null && !!data.photoFile) {
+        await ref.delete();
+      }
+
       const currentUser = await firebase.auth().currentUser;
       if (currentUser) {
-        const auth = getState().auth;
-
         await currentUser.updateProfile({
           displayName: data.displayName,
-          photoURL: data.photoURL,
+          photoURL,
         });
-        dispatch(login(auth.uid, data.displayName, auth.url));
+        dispatch(login(auth.uid, data.displayName, photoURL));
       }
 
       toast.success(getMessage(Message.successUpdated));

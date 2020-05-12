@@ -3,23 +3,34 @@ import { connect } from "react-redux";
 import { History } from "history";
 import Modal from "react-modal";
 import { PathNames, QueryKeys } from "../../routers/Routing";
-import { JustifyContent } from "../../common/variables";
+import { AlignItems, JustifyContent } from "../../common/variables";
 import { AuthStoreState, Store, UpdateUser } from "../../store/store.types";
 import { isModal, nameOf, Placeholders } from "../../common";
 import { updateUserData } from "../../actions/auth";
 import { ContentContainer, ConfirmButton, FlexBox } from "../ui-components";
-import { BaseForm, TextInputField, FileFormField } from "../form";
+import { BaseForm, TextInputField } from "../form";
 import "../../styles/components/login/_user-form.scss";
 import { ThunkDispatch } from "redux-thunk";
+import { IconButton } from "../ui-components/IconButton";
+import { Field, FormSpy } from "react-final-form";
+import { FileFormField } from "../form/FileFormField";
+import { FormApi } from "final-form";
 
 interface UserFormValues {
   firstName: string;
   lastName: string;
-  url: any;
+  photoUrl: string | null;
+  uploadingPhoto?: File;
 }
 
 interface StateProps {
   auth: AuthStoreState;
+}
+
+interface FormSpyProps {
+  form: FormApi;
+  values: UserFormValues;
+  initialValues: UserFormValues;
 }
 
 interface DispatchProps {
@@ -50,7 +61,7 @@ class UserFormModal extends React.PureComponent<Props> {
     return {
       firstName,
       lastName,
-      url: auth.url,
+      photoUrl: auth.url,
     };
   };
 
@@ -69,8 +80,15 @@ class UserFormModal extends React.PureComponent<Props> {
     const displayName = `${values.firstName} ${values.lastName}`.trim();
     this.props.updateUserData({
       displayName: !!displayName ? displayName : null,
-      photoURL: values.url,
+      photoFile: values.uploadingPhoto,
+      photoURL: values.photoUrl,
     });
+    this.props.history.push(PathNames.base);
+  };
+
+  private handleUploadClick = () => {
+    const fileInput = document.getElementById("file");
+    fileInput && fileInput.click();
   };
 
   render() {
@@ -100,20 +118,78 @@ class UserFormModal extends React.PureComponent<Props> {
             onCancel={() => this.props.history.push(PathNames.base)}
             getButtons={this.getButtons}
           >
-            {/*// @TODO change to a component*/}
-            <div
-              style={{
-                width: "100px",
-                height: "100px",
-                borderRadius: "50%",
-                background: "green",
-              }}
-            />
-
-            <FileFormField
-              name={this.nameOf("url")}
-              className="user-form__avatar"
-            />
+            <FlexBox
+              justifyContent={JustifyContent.start}
+              alignItems={AlignItems.center}
+              className="user-form__avatar avatar"
+            >
+              <FormSpy>
+                {({ form, values, initialValues }: FormSpyProps) => {
+                  return (
+                    <>
+                      <Field name={this.nameOf("photoUrl")}>
+                        {() => (
+                          <img
+                            className="avatar__img"
+                            src={
+                              values.photoUrl && !values.uploadingPhoto
+                                ? values.photoUrl
+                                : values.uploadingPhoto
+                                ? URL.createObjectURL(values.uploadingPhoto)
+                                : "img/no_avatar.png"
+                            }
+                            width="95"
+                            height="95"
+                            alt="User photo"
+                          />
+                        )}
+                      </Field>
+                      <FlexBox
+                        justifyContent={JustifyContent.spaceBetween}
+                        alignItems={AlignItems.center}
+                        vertical
+                      >
+                        <IconButton
+                          className="avatar__btn"
+                          icon="upload"
+                          onButtonClick={() => {
+                            this.handleUploadClick();
+                          }}
+                        />
+                        <IconButton
+                          className="avatar__btn"
+                          icon="times"
+                          onButtonClick={() => {
+                            form.change(
+                              this.nameOf("uploadingPhoto"),
+                              undefined
+                            );
+                          }}
+                        />
+                        {initialValues.photoUrl && (
+                          <IconButton
+                            className="avatar__btn"
+                            icon="trash"
+                            onButtonClick={() => {
+                              form.change(this.nameOf("photoUrl"), null);
+                              form.change(
+                                this.nameOf("uploadingPhoto"),
+                                undefined
+                              );
+                            }}
+                          />
+                        )}
+                        <FileFormField
+                          id="file"
+                          name={this.nameOf("uploadingPhoto")}
+                          className="avatar__field"
+                        />
+                      </FlexBox>
+                    </>
+                  );
+                }}
+              </FormSpy>
+            </FlexBox>
             <FlexBox
               vertical
               justifyContent={JustifyContent.spaceBetween}

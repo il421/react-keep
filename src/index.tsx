@@ -36,9 +36,12 @@ import { faArchive } from "@fortawesome/free-solid-svg-icons/faArchive";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons/faArrowRight";
 import { LoginAction } from "./store/store.types";
 import { PathNames } from "./routers/Routing";
+import { faUpload } from "@fortawesome/free-solid-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons/faTrash";
 
 library.add(
   faBars,
+  faUpload,
   faSignOutAlt,
   faTimes,
   faPalette,
@@ -53,7 +56,8 @@ library.add(
   faTh,
   faPlusCircle,
   faUsersCog,
-  faArrowRight
+  faArrowRight,
+  faTrash
 );
 
 const store = configStore();
