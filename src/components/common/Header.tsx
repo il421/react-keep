@@ -46,6 +46,7 @@ const Header: React.FunctionComponent<Props> = ({
     history.push(`${history.location.pathname}?${query}`);
   };
 
+  console.log(auth);
   return (
     <header className="header" onClick={(evt) => evt.stopPropagation()}>
       <ContentContainer>
@@ -64,7 +65,7 @@ const Header: React.FunctionComponent<Props> = ({
           <Controllers className="hide-for-mobile" />
 
           <div className="header__user-box user-box">
-            {auth.name && auth.url && (
+            {auth.name && auth.url !== null && (
               <UserPhoto
                 className="user-box__photo"
                 src={auth.url}

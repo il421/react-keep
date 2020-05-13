@@ -11,10 +11,9 @@ import {
 import { Dispatch } from "redux";
 import { getMessage, Message } from "../common";
 
-const AVATARS = "avatars";
-
 const initStorageAvatarRef = (name: string): firebase.storage.Reference => {
   const ref = storage.ref();
+  const AVATARS = "avatars";
   return ref.child(`${AVATARS}/${name}`);
 };
 
@@ -88,7 +87,7 @@ export const updateUserData = (data: UpdateUser) => {
     try {
       let photoURL: string | null = null;
       dispatch(loading(true));
-      const ref = initStorageAvatarRef(auth.name!);
+      const ref = initStorageAvatarRef(auth.uid!);
 
       if (data.photoFile) {
         const snapshot = await ref.put(data.photoFile);

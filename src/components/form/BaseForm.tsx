@@ -9,6 +9,7 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import "../../styles/components/notes/_note-form.scss";
 import "../../styles/ui-components/_icon-button.scss";
 import arrayMutators from "final-form-arrays";
+import { ConfirmButton } from "../ui-components/ConfirmButton";
 
 /**
  * Base Form initially works with all types of notes, however also
@@ -130,16 +131,18 @@ export class BaseForm<FormValues> extends React.PureComponent<
                               classNames?.buttons ?? "actions__buttons"
                             }
                           >
-                            <LinkButton
+                            <ConfirmButton
+                              className="link-button"
                               text={submitButtonName}
                               type="submit"
                               disabled={!dirty}
+                              loading={submitting}
                             />
 
                             <LinkButton
                               text="Close"
                               type="button"
-                              disabled={false}
+                              disabled={submitting}
                               onClick={onCancel}
                             />
                           </FlexBox>

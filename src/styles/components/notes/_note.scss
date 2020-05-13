@@ -78,6 +78,12 @@
     white-space: pre-wrap;
   }
 
+  &__image {
+    & img {
+      width: 100%;
+    }
+  }
+
   &__list {
     padding-left: 0;
     list-style: none;

@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import {
   AddNote,
+  ImageItem,
   ListItem,
   Note,
   NotesStoreState,
@@ -57,7 +58,7 @@ interface TextNoteFormModalState {
 type Props = RouteComponentProps & DispatchProps & StateProps & NoteFormProps;
 
 class NoteForm extends React.Component<Props> {
-  private defaultNote: NoteFormValues<string | ListItem[]> = {
+  private defaultNote: NoteFormValues<string | ListItem[] | ImageItem> = {
     type: this.props.type,
     title: "",
     content: getDefaultContent(this.props.type),
@@ -79,7 +80,7 @@ class NoteForm extends React.Component<Props> {
   } as TextNoteFormModalState;
 
   private onSubmitAction = async (
-    values: NoteFormValues<string | ListItem[]>
+    values: NoteFormValues<string | ListItem[] | ImageItem>
   ): Promise<void> => {
     // eslint-disable-next-line
     const { currentOption, ...note } = values;
@@ -107,7 +108,7 @@ class NoteForm extends React.Component<Props> {
           backgroundColor: this.state.currentNoteColor,
         }}
       >
-        <BaseForm<NoteFormValues<string | ListItem[]>>
+        <BaseForm<NoteFormValues<string | ListItem[] | ImageItem>>
           initialValues={getInitialsFormValues({
             type: this.props.type,
             currentNote: this.state.currentNote,
@@ -120,7 +121,9 @@ class NoteForm extends React.Component<Props> {
             <FormSpy>
               {({
                 values,
-              }: FormRenderProps<NoteFormValues<string | ListItem[]>>) => {
+              }: FormRenderProps<
+                NoteFormValues<string | ListItem[] | ImageItem>
+              >) => {
                 switch (values.currentOption) {
                   case BaseFormOptions.palette:
                     return <ColorsPickerField />;

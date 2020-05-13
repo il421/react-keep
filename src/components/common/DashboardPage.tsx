@@ -19,6 +19,7 @@ import { IconButton } from "../ui-components/IconButton";
 import { toggleArrayElement } from "../../common/utils";
 import Tags from "../tags/Tags";
 import ArchiveList from "../archive/ArchiveList";
+import ImageNoteFormModal from "../notes/ImageNoteFormModal";
 
 interface DashboardPageProps {
   history: History;
@@ -101,6 +102,7 @@ export const DashboardPage: React.FunctionComponent<DashboardPageProps> = ({
 
       <TextNoteFormModal history={history} />
       <ListNoteFormModal history={history} />
+      <ImageNoteFormModal history={history} />
       <UserFormModal history={history} />
       <Controllers isMobile />
 

@@ -45,6 +45,8 @@ type Props = StateProps & UserFormModalProps & DispatchProps;
 
 class UserFormModal extends React.PureComponent<Props> {
   private nameOf = nameOf<UserFormValues>();
+  private readonly NO_AVATAR_URL: string = "img/no_avatar.png";
+  private readonly FIELD_ID: string = "avatar";
 
   private getFormValues = (auth: AuthStoreState): UserFormValues => {
     let firstName: string = "";
@@ -71,7 +73,7 @@ class UserFormModal extends React.PureComponent<Props> {
         text="Update"
         loading={this.props.auth.loading}
         disabled={isDisable}
-        className="user-form__button"
+        className="login-button user-form__button"
       />
     );
   };
@@ -82,12 +84,13 @@ class UserFormModal extends React.PureComponent<Props> {
       displayName: !!displayName ? displayName : null,
       photoFile: values.uploadingPhoto,
       photoURL: values.photoUrl,
+      tenantId: this.props.auth.uid,
     });
     this.props.history.push(PathNames.base);
   };
 
   private handleUploadClick = () => {
-    const fileInput = document.getElementById("file");
+    const fileInput = document.getElementById(this.FIELD_ID);
     fileInput && fileInput.click();
   };
 
@@ -136,7 +139,7 @@ class UserFormModal extends React.PureComponent<Props> {
                                 ? values.photoUrl
                                 : values.uploadingPhoto
                                 ? URL.createObjectURL(values.uploadingPhoto)
-                                : "img/no_avatar.png"
+                                : this.NO_AVATAR_URL
                             }
                             width="95"
                             height="95"
@@ -180,7 +183,7 @@ class UserFormModal extends React.PureComponent<Props> {
                           />
                         )}
                         <FileFormField
-                          id="file"
+                          id={this.FIELD_ID}
                           name={this.nameOf("uploadingPhoto")}
                           className="avatar__field"
                         />

@@ -1,5 +1,5 @@
 import { parse } from "query-string";
-import { ListItem, Note } from "../../store/store.types";
+import { ImageItem, ListItem, Note } from "../../store/store.types";
 import { NoteFormValues, NoteType } from "./notes.types";
 import { BaseFormOptions } from "../form/BaseForm.types";
 import { v4 as uuidv4 } from "uuid";
@@ -12,8 +12,9 @@ import { v4 as uuidv4 } from "uuid";
 export const getSelectedNote = (search: string, notes: Note[]) => {
   const textId = parse(search).text;
   const listId = parse(search).list;
+  const imageId = parse(search).image;
 
-  return notes.filter((n: Note) => n.id === (textId ?? listId))[0];
+  return notes.filter((n: Note) => n.id === (textId ?? listId ?? imageId))[0];
 };
 
 /**
@@ -24,7 +25,7 @@ export const getSelectedNote = (search: string, notes: Note[]) => {
  *   defaultValues - empty values
  * }
  */
-export const getInitialsFormValues = <T extends string | ListItem[]>(options: {
+export const getInitialsFormValues = <T extends string | ListItem[] | ImageItem>(options: {
   type: NoteType;
   currentNote: Note | null;
   defaultValues: NoteFormValues<T>;
@@ -43,10 +44,12 @@ export const getInitialsFormValues = <T extends string | ListItem[]>(options: {
   return options.defaultValues;
 };
 
-export const getDefaultContent = (type: NoteType): string | ListItem[] => {
+export const getDefaultContent = (
+  type: NoteType
+): string | ListItem[] | ImageItem => {
   switch (type) {
     case NoteType.text:
-      return "";
+      return "" as string;
     case NoteType.list:
       return [
         {
@@ -55,7 +58,12 @@ export const getDefaultContent = (type: NoteType): string | ListItem[] => {
           checked: false,
           position: 0,
         },
-      ];
+      ] as ListItem[];
+    case NoteType.image:
+      return {
+        content: "",
+        imageUrl: null,
+      } as ImageItem;
     default:
       return "";
   }

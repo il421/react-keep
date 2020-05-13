@@ -5,6 +5,7 @@
 
 html {
   font-size: 62.5%;
+  height: 100%;
 }
 
 body {
@@ -28,6 +29,10 @@ div:focus {
 textarea {
   padding: 0;
   margin: 0;
+}
+
+img {
+  width: 100%;
 }
 
 .pointer {

@@ -43,6 +43,7 @@ export class LoginPage extends React.PureComponent<Props> {
   ) => {
     return (
       <ConfirmButton
+        className="login-button"
         text={values.isNew ? "Sign Up" : "Log In"}
         loading={this.props.loading}
         disabled={isDisable}

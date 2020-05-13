@@ -28,7 +28,7 @@ export interface LoadingAction extends Pick<AuthStoreState, "loading"> {
   type: AuthActionsTypes.loading;
 }
 
-export interface UpdateUser extends Pick<User, "displayName" | "photoURL"> {
+export interface UpdateUser extends Pick<User, "displayName" | "photoURL" | "tenantId"> {
   photoFile?: File;
 }
 
@@ -56,7 +56,7 @@ export interface Note {
   type: NoteType;
   id: string;
   title: string;
-  content: string | ListItem[];
+  content: string | ListItem[] | ImageItem;
   tags: string[];
   color: string;
   important: boolean;
@@ -78,6 +78,12 @@ export interface ListItem {
   content: string;
   checked: boolean;
   position?: number;
+}
+
+export interface ImageItem {
+  content: string;
+  imageUrl: string | null;
+  uploadingImage?: File;
 }
 
 export interface SetNotesAction {

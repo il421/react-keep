@@ -9,7 +9,7 @@ import "../../styles/components/notes/_list-note-form-item.scss";
 interface ListNoteFromItemProps {
   name: string;
   onRemove: () => void;
-  autoFocus: boolean;
+  autoFocus?: boolean;
 }
 
 export const ListNoteFromItem: React.FunctionComponent<ListNoteFromItemProps> = ({

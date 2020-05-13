@@ -1,6 +1,7 @@
 import {
   AddNote,
   AddNoteAction,
+  ImageItem,
   Note,
   NotesActionsTypes,
   RemoveNoteAction,
@@ -16,7 +17,16 @@ import { Dispatch } from "redux";
 import { getMessage, Message } from "../common";
 import { toast } from "react-toastify";
 import moment from "moment";
-import database from "../firebase/firebase";
+import database, { firebase, storage } from "../firebase/firebase";
+import { NoteType } from "../components/notes/notes.types";
+import { v4 as uuidv4 } from "uuid";
+
+const initStorageAvatarRef = (name: string): firebase.storage.Reference => {
+  const IMAGES = "images";
+
+  const ref = storage.ref();
+  return ref.child(`${IMAGES}/${name}`);
+};
 
 const initDocumentRef = (uid: string) => {
   const USERS_NOTES_DATABASE = "users";
@@ -90,15 +100,33 @@ export const handleSetNotes = () => {
 export const handleAddNote = (note: AddNote) => {
   return async (dispatch: Dispatch, getState: () => Store) => {
     const uid = getState().auth.uid;
+    let imageUrl: string | null = null;
 
-    const newNote = {
-      createdAt: moment().valueOf(),
-      updatedAt: moment().valueOf(),
-      important: false,
-      archive: false,
-      ...note,
-    };
     try {
+      if (
+        note.type === NoteType.image &&
+        !!(note.content as ImageItem).uploadingImage
+      ) {
+        const ref = initStorageAvatarRef(uuidv4());
+        const snapshot = await ref.put(
+          (note.content as ImageItem).uploadingImage!
+        );
+        if (snapshot) {
+          imageUrl = await snapshot.ref.getDownloadURL();
+        }
+      }
+
+      const newNote: Omit<Note, "id"> = {
+        ...note,
+        content:
+          (note.type === NoteType.image)
+            ? { content: (note.content as ImageItem).content, imageUrl }
+            : note.content,
+        createdAt: moment().valueOf(),
+        updatedAt: moment().valueOf(),
+        important: false,
+        archive: false,
+      };
       const docRef = await initDocumentRef(uid).add(newNote);
       dispatch(
         addNote({
@@ -131,6 +159,7 @@ export const handleRemoveNote = (id: string) => {
 export const handleUpdateNote = (id: string, updates: UpdateNote) => {
   return async (dispatch: Dispatch, getState: () => Store) => {
     const uid = getState().auth.uid;
+    // @todo update
 
     const docRef = initDocumentRef(uid);
     try {

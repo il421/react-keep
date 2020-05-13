@@ -8,9 +8,8 @@ import { History } from "history";
 import { FieldArray } from "react-final-form-arrays";
 
 import { ListNoteFromItem } from "./ListNoteFromItem";
-import { FormSpy } from "react-final-form";
+import { FormRenderProps, FormSpy } from "react-final-form";
 import { IconButton } from "../ui-components/IconButton";
-import { FormApi } from "final-form";
 import { FlexBox } from "../ui-components/FlexBox";
 import { AlignItems, JustifyContent } from "../../common/variables";
 import { getDefaultContent } from "./utils";
@@ -18,11 +17,6 @@ import { isModal, nameOf } from "../../common/utils";
 
 interface ListNoteFormModalProps {
   history: History;
-}
-
-interface FormSpyProps {
-  form: FormApi;
-  values: NoteFormValues<ListItem[]>;
 }
 
 class ListNoteFormModal extends React.Component<ListNoteFormModalProps> {
@@ -52,7 +46,10 @@ class ListNoteFormModal extends React.Component<ListNoteFormModalProps> {
         <NoteForm type={NoteType.list}>
           <>
             <FormSpy>
-              {({ form, values }: FormSpyProps) => {
+              {({
+                form,
+                values,
+              }: FormRenderProps<NoteFormValues<ListItem[]>>) => {
                 return (
                   <FlexBox
                     justifyContent={JustifyContent.spaceBetween}
@@ -62,7 +59,7 @@ class ListNoteFormModal extends React.Component<ListNoteFormModalProps> {
                     <IconButton
                       onButtonClick={() =>
                         form.change(this.nameOf("content"), [
-                          getDefaultContent(NoteType.list)[0],
+                          (getDefaultContent(NoteType.list) as ListItem[])[0],
                           ...values.content,
                         ])
                       }
@@ -81,7 +78,6 @@ class ListNoteFormModal extends React.Component<ListNoteFormModalProps> {
                   name={name}
                   key={index}
                   onRemove={() => fields.remove(index)}
-                  autoFocus={index === 0}
                 />
               ));
             }}

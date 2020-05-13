@@ -21,6 +21,8 @@
   }
 
   &__photo img {
+    @extend .hide-for-mobile;
     border-radius: 50%;
+    width: 50px;
   }
 }

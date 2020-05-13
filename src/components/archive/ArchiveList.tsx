@@ -6,7 +6,7 @@ import { ThunkDispatch } from "redux-thunk";
 import { NotesStoreState, Store } from "../../store/store.types";
 import { connect } from "react-redux";
 import { changeNoteArchiveStatus } from "../../actions/notes";
-import { ArchiveItem } from "./ArchiveIem";
+import { ArchiveItem } from "./ArchiveItem";
 import "../../styles/components/archive/_archive-list.scss";
 
 interface StateProps {
@@ -30,9 +30,9 @@ const ArchiveList: React.FunctionComponent<Props> = ({
       justifyContent={JustifyContent.spaceBetween}
     >
       {notes
-        .filter((note) => note.archive)
-        .map((note) => (
-          <ArchiveItem note={note} unarchiveNote={unarchiveNote} />
+        .filter((note: NotesStoreState) => note.archive)
+        .map((note: NotesStoreState, index: number) => (
+          <ArchiveItem note={note} unarchiveNote={unarchiveNote} key={index} />
         ))}
     </FlexBox>
   );

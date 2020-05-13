@@ -4,7 +4,7 @@ import { Colors, JustifyContent } from "../../common/variables";
 import { FlexBox } from "./FlexBox";
 import "../../styles/ui-components/_login-button.scss";
 
-interface LoginButtonProps
+interface ConfirmButtonProps
   extends Partial<Pick<HTMLButtonElement, "disabled" | "className">> {
   text: string;
   loading?: boolean;
@@ -13,7 +13,7 @@ interface LoginButtonProps
   wrapperClassName?: string;
 }
 
-export class ConfirmButton extends React.PureComponent<LoginButtonProps> {
+export class ConfirmButton extends React.PureComponent<ConfirmButtonProps> {
   render() {
     const {
       type = "submit",
@@ -31,7 +31,7 @@ export class ConfirmButton extends React.PureComponent<LoginButtonProps> {
       >
         {!loading ? (
           <button
-            className={`login-button ${className}`}
+            className={className}
             type={type}
             disabled={disabled}
             onClick={onCLick}
@@ -39,7 +39,11 @@ export class ConfirmButton extends React.PureComponent<LoginButtonProps> {
             {text}
           </button>
         ) : (
-          <BeatLoader size={10} color={Colors.fresh} css={"height: 42px"} />
+          <BeatLoader
+            size={10}
+            color={Colors.fresh}
+            css={"height: 42px; display: flex; align-items: center"}
+          />
         )}
       </FlexBox>
     );

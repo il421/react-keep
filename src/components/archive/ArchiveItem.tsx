@@ -1,5 +1,5 @@
 import React from "react";
-import { ListItem, Note } from "../../store/store.types";
+import { ImageItem, ListItem, Note } from "../../store/store.types";
 import { FlexBox } from "../ui-components/FlexBox";
 import "../../styles/components/archive/_archive-item.scss";
 import { AlignItems, JustifyContent } from "../../common/variables";
@@ -8,15 +8,16 @@ import moment from "moment";
 import { NoteType } from "../notes/notes.types";
 import { getShortText } from "../../common/utils";
 
-interface ArchiveIemProps {
+interface ArchiveItemProps {
   note: Note;
   unarchiveNote: (id: string) => void;
 }
 
-export const ArchiveItem: React.FunctionComponent<ArchiveIemProps> = ({
+export const ArchiveItem: React.FunctionComponent<ArchiveItemProps> = ({
   note,
   unarchiveNote,
 }) => {
+  const NO_IMAGE_URL: string = "img/no_image.png";
   return (
     <FlexBox
       justifyContent={JustifyContent.spaceBetween}
@@ -48,7 +49,7 @@ export const ArchiveItem: React.FunctionComponent<ArchiveIemProps> = ({
             <div className="archive-item-content__value">
               {note.type === NoteType.text ? (
                 <div>{getShortText(note.content as string, 20)}</div>
-              ) : (
+              ) : note.type === NoteType.list ? (
                 <ul className="content__list list">
                   {/* show 3 lines */}
                   {(note.content as ListItem[])
@@ -66,6 +67,20 @@ export const ArchiveItem: React.FunctionComponent<ArchiveIemProps> = ({
                       </li>
                     ))}
                 </ul>
+              ) : (
+                <div>
+                  <div>
+                    {getShortText((note.content as ImageItem).content, 20)}
+                  </div>
+                  <img
+                    src={
+                      (note.content as ImageItem).imageUrl !== null
+                        ? (note.content as ImageItem).imageUrl!
+                        : NO_IMAGE_URL
+                    }
+                    alt="Picture of the note"
+                  />
+                </div>
               )}
             </div>
           </FlexBox>
