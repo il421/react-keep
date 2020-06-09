@@ -13,63 +13,68 @@ import {
   UpdateNote,
   UpdateNoteAction,
 } from "../store/store.types";
-import { Dispatch } from "redux";
+import { Action, Dispatch } from "redux";
 import { getMessage, Message } from "../common";
 import { toast } from "react-toastify";
 import moment from "moment";
 import database, { firebase, storage } from "../firebase/firebase";
 import { NoteType } from "../components/notes/notes.types";
 import { v4 as uuidv4 } from "uuid";
+import { Collections } from "../firebase/Collections";
+import { ThunkAction } from "redux-thunk";
 
 const initStorageAvatarRef = (name: string): firebase.storage.Reference => {
-  const IMAGES = "images";
-
   const ref = storage.ref();
-  return ref.child(`${IMAGES}/${name}`);
+  return ref.child(`${Collections.images}/${name}`);
 };
 
 const initDocumentRef = (uid: string) => {
-  const USERS_NOTES_DATABASE = "users";
-  return database.collection(USERS_NOTES_DATABASE).doc(uid).collection("notes");
+  return database
+    .collection(Collections.users)
+    .doc(uid)
+    .collection(Collections.notes);
 };
 
-const setNotes = (notes: Note[]): SetNotesAction => ({
+export const setNotes = (notes: Note[]): SetNotesAction => ({
   type: NotesActionsTypes.setNotes,
   notes,
 });
 
-const addNote = (note: Note): AddNoteAction => ({
+export const addNote = (note: Note): AddNoteAction => ({
   type: NotesActionsTypes.addNote,
   note,
 });
 
-const removeNote = (id: string): RemoveNoteAction => ({
+export const removeNote = (id: string): RemoveNoteAction => ({
   type: NotesActionsTypes.removeNote,
   id,
 });
 
-const updateNote = (id: string, updates: UpdateNote): UpdateNoteAction => ({
+export const updateNote = (
+  id: string,
+  updates: UpdateNote
+): UpdateNoteAction => ({
   type: NotesActionsTypes.updateNote,
   id,
   updates,
 });
 
-const changeImportance = (id: string): ToggleImportantAction => ({
+export const changeImportance = (id: string): ToggleImportantAction => ({
   type: NotesActionsTypes.toggleImportance,
   id,
 });
 
-const changeArchive = (id: string): ToggleArchiveAction => ({
+export const changeArchive = (id: string): ToggleArchiveAction => ({
   type: NotesActionsTypes.toggleArchive,
   id,
 });
 
-const removeTag = (tagId: string): RemoveNoteTagAction => ({
+export const removeTag = (tagId: string): RemoveNoteTagAction => ({
   type: NotesActionsTypes.removeTagFromNote,
   tagId,
 });
 
-export const handleSetNotes = () => {
+export const handleSetNotes = (): ThunkAction<any, Store, any, Action> => {
   return async (dispatch: Dispatch, getState: () => Store) => {
     const notes: Note[] = [];
     const uid = getState().auth.uid;
@@ -87,7 +92,7 @@ export const handleSetNotes = () => {
       });
 
       // sort notes by created day
-      notes.sort((a, b) => b.createdAt.valueOf() - a.createdAt.valueOf());
+      notes.sort((a: Note, b: Note) => b.createdAt.valueOf() - a.createdAt.valueOf());
 
       dispatch(setNotes(notes));
     } catch (e) {
@@ -97,7 +102,9 @@ export const handleSetNotes = () => {
   };
 };
 
-export const handleAddNote = (note: AddNote) => {
+export const handleAddNote = (
+  note: AddNote
+): ThunkAction<any, Store, any, Action> => {
   return async (dispatch: Dispatch, getState: () => Store) => {
     const uid = getState().auth.uid;
     let imageUrl: string | null = null;
@@ -119,7 +126,7 @@ export const handleAddNote = (note: AddNote) => {
       const newNote: Omit<Note, "id"> = {
         ...note,
         content:
-          (note.type === NoteType.image)
+          note.type === NoteType.image
             ? { content: (note.content as ImageItem).content, imageUrl }
             : note.content,
         createdAt: moment().valueOf(),
@@ -141,7 +148,9 @@ export const handleAddNote = (note: AddNote) => {
   };
 };
 
-export const handleRemoveNote = (id: string) => {
+export const handleRemoveNote = (
+  id: string
+): ThunkAction<any, Store, any, Action> => {
   return async (dispatch: Dispatch, getState: () => Store) => {
     const uid = getState().auth.uid;
 
@@ -156,11 +165,12 @@ export const handleRemoveNote = (id: string) => {
   };
 };
 
-export const handleUpdateNote = (id: string, updates: UpdateNote) => {
+export const handleUpdateNote = (
+  id: string,
+  updates: UpdateNote
+): ThunkAction<any, Store, any, Action> => {
   return async (dispatch: Dispatch, getState: () => Store) => {
     const uid = getState().auth.uid;
-    // @todo update
-
     const docRef = initDocumentRef(uid);
     try {
       await docRef.doc(id).set(updates);
@@ -172,7 +182,9 @@ export const handleUpdateNote = (id: string, updates: UpdateNote) => {
   };
 };
 
-export const changeNoteImportance = (id: string) => {
+export const changeNoteImportance = (
+  id: string
+): ThunkAction<any, Store, any, Action> => {
   return async (dispatch: Dispatch, getState: () => Store) => {
     const uid = getState().auth.uid;
     const docRef = initDocumentRef(uid);
@@ -196,7 +208,9 @@ export const changeNoteImportance = (id: string) => {
   };
 };
 
-export const changeNoteArchiveStatus = (id: string) => {
+export const changeNoteArchiveStatus = (
+  id: string
+): ThunkAction<any, Store, any, Action> => {
   return async (dispatch: Dispatch, getState: () => Store) => {
     const uid = getState().auth.uid;
     const docRef = initDocumentRef(uid);
@@ -220,7 +234,9 @@ export const changeNoteArchiveStatus = (id: string) => {
   };
 };
 
-export const removeTagFromNotes = (id: string) => {
+export const removeTagFromNotes = (
+  id: string
+): ThunkAction<any, Store, any, Action> => {
   return async (dispatch: Dispatch, getState: () => Store) => {
     const uid = getState().auth.uid;
     const docRef = initDocumentRef(uid);

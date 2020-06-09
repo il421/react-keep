@@ -29,18 +29,6 @@ export default (
     case TagsActionsTypes.removeTag:
       return state.filter((tag) => tag.id !== action.id);
 
-    case TagsActionsTypes.updateTag:
-      return state.map((tag) => {
-        if (tag.id === action.id) {
-          return {
-            ...tag,
-            ...action.update,
-          };
-        } else {
-          return tag;
-        }
-      });
-
     default:
       return state;
   }

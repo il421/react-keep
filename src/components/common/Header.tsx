@@ -46,7 +46,6 @@ const Header: React.FunctionComponent<Props> = ({
     history.push(`${history.location.pathname}?${query}`);
   };
 
-  console.log(auth);
   return (
     <header className="header" onClick={(evt) => evt.stopPropagation()}>
       <ContentContainer>

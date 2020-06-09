@@ -10,9 +10,7 @@ const FieldAdapter: React.FunctionComponent<FieldAdapterProps> = ({
   ...rest
 }) => {
   const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-    if (target.files) {
-      input.onChange(target.files![0]);
-    }
+    target.files && input.onChange(target.files[0]);
   };
 
   return (

@@ -2,19 +2,21 @@ import { firebase, storage } from "../firebase/firebase";
 import { toast } from "react-toastify";
 import {
   AuthActionsTypes,
+  AuthStoreState,
   LoadingAction,
   LoginAction,
   LogoutAction,
   Store,
   UpdateUser,
 } from "../store/store.types";
-import { Dispatch } from "redux";
+import { Action, Dispatch } from "redux";
 import { getMessage, Message } from "../common";
+import { ThunkAction } from "redux-thunk";
+import { Collections } from "../firebase/Collections";
 
 const initStorageAvatarRef = (name: string): firebase.storage.Reference => {
   const ref = storage.ref();
-  const AVATARS = "avatars";
-  return ref.child(`${AVATARS}/${name}`);
+  return ref.child(`${Collections.avatars}/${name}`);
 };
 
 export const loading = (loading: boolean): LoadingAction => ({
@@ -37,12 +39,14 @@ export const logout = (): LogoutAction => ({
   type: AuthActionsTypes.logout,
 });
 
-export const startLogin = (email: string, password: string) => {
+export const startLogin = (
+  email: string,
+  password: string
+): ThunkAction<any, Store, any, Action> => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(loading(true));
       await firebase.auth().signInWithEmailAndPassword(email, password);
-      console.log(getMessage(Message.successLoggedIn));
     } catch (e) {
       console.log(e);
       toast.error(e.message);
@@ -53,12 +57,14 @@ export const startLogin = (email: string, password: string) => {
   };
 };
 
-export const startSignUp = (email: string, password: string) => {
+export const startSignUp = (
+  email: string,
+  password: string
+): ThunkAction<any, Store, any, Action> => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(loading(true));
       await firebase.auth().createUserWithEmailAndPassword(email, password);
-      console.log(getMessage(Message.successLoggedIn));
     } catch (e) {
       console.log(e);
       toast.error(e.message);
@@ -69,11 +75,10 @@ export const startSignUp = (email: string, password: string) => {
   };
 };
 
-export const startLogout = () => {
+export const startLogout = (): (() => Promise<void>) => {
   return async () => {
     try {
       await firebase.auth().signOut();
-      console.log(getMessage(Message.successLoggedOut));
     } catch (e) {
       console.log(e);
       toast.error(e.message);
@@ -81,9 +86,11 @@ export const startLogout = () => {
   };
 };
 
-export const updateUserData = (data: UpdateUser) => {
+export const updateUserData = (
+  data: UpdateUser
+): ThunkAction<any, Store, any, Action> => {
   return async (dispatch: Dispatch, getState: () => Store) => {
-    const auth = getState().auth;
+    const auth: AuthStoreState = getState().auth;
     try {
       let photoURL: string | null = null;
       dispatch(loading(true));
@@ -105,10 +112,8 @@ export const updateUserData = (data: UpdateUser) => {
           photoURL,
         });
         dispatch(login(auth.uid, data.displayName, photoURL));
+        toast.success(getMessage(Message.successUpdated));
       }
-
-      toast.success(getMessage(Message.successUpdated));
-      console.log(getMessage(Message.successUpdated));
     } catch (e) {
       console.log(e);
       toast.error(e.message);

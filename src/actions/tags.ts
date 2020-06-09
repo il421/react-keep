@@ -6,15 +6,18 @@ import {
   Store,
   Tag,
   TagsActionsTypes,
-  UpdateTagAction,
 } from "../store/store.types";
-import { Dispatch } from "redux";
+import { Action, Dispatch } from "redux";
 import { toast } from "react-toastify";
 import { getMessage, Message } from "../common";
+import { Collections } from "../firebase/Collections";
+import { ThunkAction } from "redux-thunk";
 
 const initDocumentRef = (uid: string) => {
-  const USERS_NOTES_DATABASE = "users";
-  return database.collection(USERS_NOTES_DATABASE).doc(uid).collection("tags");
+  return database
+    .collection(Collections.users)
+    .doc(uid)
+    .collection(Collections.tags);
 };
 
 export const setTags = (tags: Tag[]): SetTagsAction => ({
@@ -32,14 +35,7 @@ export const removeTag = (id: string): RemoveTagAction => ({
   id,
 });
 
-// unused now
-export const updateTag = (id: string, update: Tag): UpdateTagAction => ({
-  type: TagsActionsTypes.updateTag,
-  id,
-  update,
-});
-
-export const handleSetTags = () => {
+export const handleSetTags = (): ThunkAction<any, Store, any, Action> => {
   return async (dispatch: Dispatch, getState: () => Store) => {
     let tags: Tag[] = [];
     const uid = getState().auth.uid;
@@ -63,7 +59,9 @@ export const handleSetTags = () => {
   };
 };
 
-export const handleAddTag = (value: string) => {
+export const handleAddTag = (
+  value: string
+): ThunkAction<any, Store, any, Action> => {
   return async (dispatch: Dispatch, getState: () => Store) => {
     const uid = getState().auth.uid;
 
@@ -82,7 +80,9 @@ export const handleAddTag = (value: string) => {
   };
 };
 
-export const handleRemoveTag = (id: string) => {
+export const handleRemoveTag = (
+  id: string
+): ThunkAction<any, Store, any, Action> => {
   return async (dispatch: Dispatch, getState: () => Store) => {
     const uid = getState().auth.uid;
 
@@ -90,24 +90,6 @@ export const handleRemoveTag = (id: string) => {
     try {
       dispatch(removeTag(id));
       await docRef.doc(id).delete();
-    } catch (e) {
-      console.log(e.message);
-      toast.error(e.message);
-    }
-  };
-};
-
-// unused now
-export const handleUpdateTag = (id: string, update: Tag) => {
-  return async (dispatch: Dispatch, getState: () => Store) => {
-    const uid = getState().auth.uid;
-
-    const docRef = initDocumentRef(uid);
-    try {
-      dispatch(updateTag(id, update));
-      await docRef.doc(id).update({
-        value: update,
-      });
     } catch (e) {
       console.log(e.message);
       toast.error(e.message);
