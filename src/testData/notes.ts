@@ -51,3 +51,25 @@ export const notes: Note[] = [
     updatedAt: 100005,
   },
 ];
+
+export const newNote: Omit<Note, "id" | "createdAt" | "updatedAt"> = {
+  color: "#cbf0f8",
+  important: false,
+  archive: false,
+  tags: [tags[0].id],
+  type: NoteType.text,
+  content: "Dont forget to make a call",
+  title: "Call",
+};
+
+export const updatedNote: Omit<Note, "id"> = {
+  color: "#cbf0f8",
+  important: false,
+  archive: false,
+  tags: [tags[0].id],
+  type: NoteType.text,
+  content: "Dont forget to make a call",
+  title: "Call",
+  createdAt: 54353534,
+  updatedAt: 43432432
+};
