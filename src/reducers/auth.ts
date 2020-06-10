@@ -6,10 +6,17 @@ import {
   LogoutAction,
 } from "../store/store.types";
 
-type AuthAction = LoginAction | LogoutAction | LoadingAction;
+export type AuthAction = LoginAction | LogoutAction | LoadingAction;
+
+export const defaultAuthStore = {
+  name: null,
+  url: null,
+  uid: "",
+  loading: false,
+};
 
 export default (
-  state = {} as AuthStoreState,
+  state = defaultAuthStore,
   action: AuthAction
 ): AuthStoreState | object => {
   switch (action.type) {
@@ -22,7 +29,7 @@ export default (
       } as AuthStoreState;
 
     case AuthActionsTypes.logout:
-      return {};
+      return defaultAuthStore;
 
     case AuthActionsTypes.loading:
       return {

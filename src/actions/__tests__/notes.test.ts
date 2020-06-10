@@ -290,6 +290,20 @@ describe("Tagging", () => {
   test("should remove tag from note in DB and store by id", (done) => {
     const store = createMockStore(defaultAuthState);
 
+    database
+      .collection(Collections.users)
+      .doc(user.uid)
+      .collection(Collections.notes)
+      .doc(notes[0].id)
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          expect((doc.data() as Note).tags.length).toBe(1);
+          expect((doc.data() as Note).tags[0]).toBe(tags[0].id);
+        }
+        done();
+      });
+
     store.dispatch<any>(removeTagFromNotes(tags[0].id)).then(() => {
       const actions = store.getActions();
       expect(actions[0]).toEqual({

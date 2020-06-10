@@ -72,8 +72,8 @@ const NotesList: React.FunctionComponent<Props> = ({
 
 const mapStateToProps = (state: Store): StateProps => ({
   notes: getFilteredNotes(state.notes, {
-    searchText: state.filters.search,
-    tags: state.filters.tagFilters,
+    search: state.filters.search,
+    tagFilters: state.filters.tagFilters,
   }),
 });
 

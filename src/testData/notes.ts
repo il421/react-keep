@@ -7,7 +7,7 @@ export const notes: Note[] = [
     type: NoteType.text,
     id: "1",
     title: "1",
-    content: "1",
+    content: "text",
     tags: [tags[0].id],
     color: "#1",
     important: false,
@@ -22,12 +22,12 @@ export const notes: Note[] = [
     content: [
       {
         id: "2-1",
-        content: "2-1",
+        content: "dog",
         checked: false,
       },
       {
         id: "2-2",
-        content: "2-2",
+        content: "cat",
         checked: true,
       },
     ],
@@ -42,7 +42,7 @@ export const notes: Note[] = [
     type: NoteType.image,
     id: "3",
     title: "3",
-    content: { content: "3-1", imageUrl: null },
+    content: { content: "text", imageUrl: null },
     tags: [tags[1].id],
     color: "#3",
     important: false,
@@ -71,5 +71,5 @@ export const updatedNote: Omit<Note, "id"> = {
   content: "Dont forget to make a call",
   title: "Call",
   createdAt: 54353534,
-  updatedAt: 43432432
+  updatedAt: 43432432,
 };

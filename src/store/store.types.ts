@@ -141,11 +141,6 @@ export interface RemoveTagAction extends Pick<Tag, "id"> {
   type: TagsActionsTypes.removeTag;
 }
 
-export interface UpdateTagAction extends Pick<Tag, "id"> {
-  update: Tag;
-  type: TagsActionsTypes.updateTag;
-}
-
 export enum AuthActionsTypes {
   login = "login",
   logout = "logout",
@@ -171,5 +166,4 @@ export enum TagsActionsTypes {
   setTags = "setTags",
   removeTag = "removeTag",
   updateTag = "updateTag",
-  displayTagsModal = "displayTagsModal",
 }

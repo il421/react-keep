@@ -92,7 +92,9 @@ export const handleSetNotes = (): ThunkAction<any, Store, any, Action> => {
       });
 
       // sort notes by created day
-      notes.sort((a: Note, b: Note) => b.createdAt.valueOf() - a.createdAt.valueOf());
+      notes.sort(
+        (a: Note, b: Note) => b.createdAt.valueOf() - a.createdAt.valueOf()
+      );
 
       dispatch(setNotes(notes));
     } catch (e) {

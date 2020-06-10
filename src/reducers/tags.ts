@@ -4,16 +4,11 @@ import {
   SetTagsAction,
   TagsActionsTypes,
   TagsStoreState,
-  UpdateTagAction,
 } from "../store/store.types";
 
-const tagsReducerDefaultState: TagsStoreState[] = [];
+export const tagsReducerDefaultState: TagsStoreState[] = [];
 
-type TagsAction =
-  | SetTagsAction
-  | AddTagAction
-  | RemoveTagAction
-  | UpdateTagAction;
+type TagsAction = SetTagsAction | AddTagAction | RemoveTagAction;
 
 export default (
   state: TagsStoreState[] = tagsReducerDefaultState,

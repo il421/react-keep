@@ -19,7 +19,7 @@ type NotesAction =
   | ToggleImportantAction
   | ToggleArchiveAction;
 
-const notesReducerDefaultState: NotesStoreState[] = [];
+export const notesReducerDefaultState: NotesStoreState[] = [];
 
 export default (
   state: NotesStoreState[] = notesReducerDefaultState,

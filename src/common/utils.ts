@@ -1,6 +1,6 @@
 import { QueryKeys } from "../routers/Routing";
 import { parse } from "query-string";
-import { ListItem, Note } from "../store/store.types";
+import { Filters, ImageItem, ListItem, Note } from "../store/store.types";
 import { NoteType } from "../components/notes/notes.types";
 
 export const nameOf = <T>() => (name: keyof T & string) => name;
@@ -13,12 +13,8 @@ export const isModal = (options: {
   return !!query && !!parse(query)[type];
 };
 
-interface Filters {
-  searchText: string;
-  tags: string[];
-}
-export const getFilteredNotes = (notes: Note[], filters: Filters) => {
-  const { searchText, tags } = filters;
+export const getFilteredNotes = (notes: Note[], filters: Filters): Note[] => {
+  const { search, tagFilters } = filters;
   const filteredNotes = notes.filter((note) => {
     // dont show archived notes
     if (note.archive) {
@@ -28,24 +24,31 @@ export const getFilteredNotes = (notes: Note[], filters: Filters) => {
     let contentMatch: boolean = true;
     const titleMatch: boolean = note.title
       .toLowerCase()
-      .includes(searchText.toLowerCase());
+      .includes(search.toLowerCase());
     let tagsMatch: boolean = true;
 
     switch (note.type) {
       case NoteType.text:
         contentMatch = (note.content as string)
           .toLowerCase()
-          .includes(searchText.toLowerCase());
+          .includes(search.toLowerCase());
         break;
+
+      case NoteType.image:
+        contentMatch = (note.content as ImageItem).content
+          .toLowerCase()
+          .includes(search.toLowerCase());
+        break;
+
       case NoteType.list:
         contentMatch = (note.content as ListItem[]).some((item) =>
-          item.content.toLowerCase().includes(searchText.toLowerCase())
+          item.content.toLowerCase().includes(search.toLowerCase())
         );
         break;
     }
 
-    if (tags.length > 0) {
-      tagsMatch = note.tags.some((id) => tags.includes(id));
+    if (tagFilters.length > 0) {
+      tagsMatch = note.tags.some((id) => tagFilters.includes(id));
     }
 
     return (contentMatch || titleMatch) && tagsMatch;
@@ -59,7 +62,7 @@ export const getFilteredNotes = (notes: Note[], filters: Filters) => {
   }, []);
 };
 
-export const getShortText = (text: string, maxLength?: number) => {
+export const getShortText = (text: string, maxLength?: number): string => {
   const MAX_LENGTH = maxLength ?? 100;
   if (text.length > MAX_LENGTH) {
     text = text.slice(0, MAX_LENGTH) + "...";

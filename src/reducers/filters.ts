@@ -5,7 +5,7 @@ import {
   TagsFilterAction,
 } from "../store/store.types";
 
-const defaultFiltersState: FiltersStoreState = {
+export const defaultFiltersState: FiltersStoreState = {
   tagFilters: [],
   search: "",
 };
