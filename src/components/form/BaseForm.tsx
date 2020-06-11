@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import { Form, FormRenderProps } from "react-final-form";
-import { Mutator, ValidationErrors } from "final-form";
+import { ValidationErrors } from "final-form";
 import { FlexBox, LinkButton } from "../ui-components";
 import { AlignItems, JustifyContent } from "../../common/variables";
 import { BaseFormOptions } from "./BaseForm.types";
@@ -22,10 +22,10 @@ import { ConfirmButton } from "../ui-components/ConfirmButton";
  * @param getFormOptions - optional, if specified and getButtons = undefined, add extra fields as a note options
  * @param getSubmitButtonName - optional, overwrite the default submit button name
  * @param classNames - optional, a number of the form components class names for styling and testing
- * @mutators - number of array methods
+ * @param resetAfterSubmitting - options reset after submitting
  */
 
-interface BaseFormProps<FormValues> {
+export interface BaseFormProps<FormValues> {
   initialValues: FormValues & { currentOption?: BaseFormOptions };
   onSubmit: (values: FormValues) => void;
   getButtons?: (
@@ -38,7 +38,6 @@ interface BaseFormProps<FormValues> {
   submitButtonName?: string;
   classNames?: BaseFormClassNames;
   validate?: (values: FormValues) => ValidationErrors;
-  mutators?: { [key: string]: Mutator<FormValues> };
   resetAfterSubmitting?: boolean;
 }
 

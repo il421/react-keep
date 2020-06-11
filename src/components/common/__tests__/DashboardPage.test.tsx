@@ -1,5 +1,5 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { shallow, ShallowWrapper } from "enzyme";
 import { DashboardPage, onNoteSelected } from "../DashboardPage";
 import { createBrowserHistory, History } from "history";
 import { NoteType } from "../../notes/notes.types";
@@ -7,9 +7,9 @@ import { NoteType } from "../../notes/notes.types";
 export const history: History = createBrowserHistory();
 
 test("should render DashboardPage correctly", () => {
-  const wrapper: any = shallow<typeof DashboardPage>(
-    <DashboardPage history={history} />
-  );
+  const wrapper: ShallowWrapper<typeof DashboardPage, any> = shallow<
+    typeof DashboardPage
+  >(<DashboardPage history={history} />);
   expect(wrapper.debug()).toMatchSnapshot();
 });
 

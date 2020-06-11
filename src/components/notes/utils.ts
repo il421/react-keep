@@ -25,7 +25,7 @@ export const getSelectedNote = (search: string, notes: Note[]) => {
  *   defaultValues - empty values
  * }
  */
-export const getInitialsFormValues = <
+export const getInitialNoteFormValues = <
   T extends string | ListItem[] | ImageItem
 >(options: {
   type: NoteType;

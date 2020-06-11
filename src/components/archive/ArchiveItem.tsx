@@ -8,7 +8,7 @@ import moment from "moment";
 import { NoteType } from "../notes/notes.types";
 import { getShortText } from "../../common/utils";
 
-interface ArchiveItemProps {
+export interface ArchiveItemProps {
   note: Note;
   unarchiveNote: (id: string) => void;
 }

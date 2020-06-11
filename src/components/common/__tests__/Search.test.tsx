@@ -1,14 +1,14 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { shallow, ShallowWrapper } from "enzyme";
 import { DispatchProps, Search } from "../Search";
 
-let wrapper: any, props: DispatchProps;
+let wrapper: ShallowWrapper<DispatchProps, any>, props: DispatchProps;
 
 beforeEach(() => {
   props = {
     setSearchFilter: jest.fn(),
   };
-  wrapper = shallow<typeof Search>(<Search {...props} />);
+  wrapper = shallow<DispatchProps>(<Search {...props} />);
 });
 
 test("should render Search", () => {

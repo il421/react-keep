@@ -10,7 +10,7 @@ import { BaseForm, CheckboxInputField, TextInputField } from "../form";
 import { ConfirmButton } from "../ui-components";
 import { ThunkDispatch } from "redux-thunk";
 
-interface LoginFormValues {
+export interface LoginFormValues {
   email: string;
   password: string;
   isNew: boolean;
@@ -25,7 +25,27 @@ interface DispatchProps {
   startSignUp: (email: string, password: string) => void;
 }
 
-type Props = StateProps & DispatchProps;
+export type Props = StateProps & DispatchProps;
+export const getValidationErrors = (
+  values: LoginFormValues
+): ValidationErrors => {
+  const errors: ValidationErrors = {};
+  const { email, password } = values;
+
+  if (!password) {
+    errors.password = Errors.required;
+  } else if (password.length < 6) {
+    errors.password = Errors.password;
+  }
+
+  if (!email) {
+    errors.email = Errors.required;
+  } else if (!emailRegEx.test(email)) {
+    errors.email = Errors.email;
+  }
+
+  return errors;
+};
 
 export class LoginPage extends React.PureComponent<Props> {
   private initialValues: LoginFormValues = {
@@ -51,25 +71,6 @@ export class LoginPage extends React.PureComponent<Props> {
     );
   };
 
-  private getValidationErrors = (values: LoginFormValues): ValidationErrors => {
-    const errors: ValidationErrors = {};
-    const { email, password } = values;
-
-    if (!password) {
-      errors.password = Errors.required;
-    } else if (password.length < 6) {
-      errors.password = Errors.password;
-    }
-
-    if (!email) {
-      errors.email = Errors.required;
-    } else if (!emailRegEx.test(email)) {
-      errors.email = Errors.email;
-    }
-
-    return errors;
-  };
-
   private submitLoginForm = (values: LoginFormValues): void => {
     if (values.isNew) {
       this.props.startSignUp(values.email, values.password);
@@ -93,7 +94,7 @@ export class LoginPage extends React.PureComponent<Props> {
               form: "login-box__form login-form",
             }}
             onSubmit={this.submitLoginForm}
-            validate={this.getValidationErrors}
+            validate={getValidationErrors}
             getButtons={this.getButtons}
           >
             <TextInputField

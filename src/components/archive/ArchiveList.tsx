@@ -17,9 +17,9 @@ interface DispatchProps {
   unarchiveNote: (id: string) => void;
 }
 
-type Props = StateProps & DispatchProps;
+export type Props = StateProps & DispatchProps;
 
-const ArchiveList: React.FunctionComponent<Props> = ({
+export const ArchiveList: React.FunctionComponent<Props> = ({
   notes,
   unarchiveNote,
 }) => {

@@ -30,7 +30,7 @@ import { ThunkDispatch } from "redux-thunk";
 import moment from "moment";
 import {
   getDefaultContent,
-  getInitialsFormValues,
+  getInitialNoteFormValues,
   getSelectedNote,
 } from "./utils";
 import { ContentContainer } from "../ui-components/ContentContainer";
@@ -109,7 +109,7 @@ class NoteForm extends React.Component<Props> {
         }}
       >
         <BaseForm<NoteFormValues<string | ListItem[] | ImageItem>>
-          initialValues={getInitialsFormValues({
+          initialValues={getInitialNoteFormValues({
             type: this.props.type,
             currentNote: this.state.currentNote,
             defaultValues: this.defaultNote,

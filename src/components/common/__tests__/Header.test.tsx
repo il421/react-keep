@@ -1,9 +1,9 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { shallow, ShallowWrapper } from "enzyme";
 import { Header, Props } from "../Header";
 import { defaultAuthStore } from "../../../reducers/auth";
 
-let props: Props, wrapper: any;
+let props: Props, wrapper: ShallowWrapper<Props, any>;
 const mockHistoryPush = jest.fn();
 
 const history = {
@@ -20,7 +20,7 @@ beforeEach(() => {
     auth: defaultAuthStore,
   };
 
-  wrapper = shallow<typeof Header>(<Header {...props} />);
+  wrapper = shallow<Props>(<Header {...props} />);
 });
 
 test("should render Header correctly", () => {
@@ -28,21 +28,21 @@ test("should render Header correctly", () => {
 });
 
 test("should show side bar if click on burger button", () => {
-  wrapper.find("IconButton").at(0).prop("onButtonClick")();
+  wrapper.find("IconButton").at(0).prop<any>("onButtonClick")();
   expect(props.showSidebar).toHaveBeenLastCalledWith(true);
 });
 
 test("should open user edit modal by clicking on user name link", () => {
-  wrapper.find("LinkButton").at(0).prop("onClick")();
+  wrapper.find("LinkButton").at(0).prop<any>("onClick")();
   expect(mockHistoryPush).toHaveBeenLastCalledWith("pathname?user=edit");
 });
 
 test("should open user edit modal by clicking on user cog icon", () => {
-  wrapper.find("IconButton").at(1).prop("onButtonClick")();
+  wrapper.find("IconButton").at(1).prop<any>("onButtonClick")();
   expect(mockHistoryPush).toHaveBeenLastCalledWith("pathname?user=edit");
 });
 
 test("should logout if click on an logout button", () => {
-  wrapper.find("IconButton").at(2).prop("onButtonClick")();
+  wrapper.find("IconButton").at(2).prop<any>("onButtonClick")();
   expect(props.startLogout).toHaveBeenLastCalledWith();
 });

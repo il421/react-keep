@@ -5,7 +5,7 @@ import {
 } from "@fortawesome/react-fontawesome";
 import "../../styles/ui-components/_icon-button.scss";
 
-interface IconButtonProps extends FontAwesomeIconProps {
+export interface IconButtonProps extends FontAwesomeIconProps {
   onButtonClick?: (
     evt?: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => void;

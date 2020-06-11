@@ -26,3 +26,6 @@ yarn-error.log*
 \.idea
 
 /src/components/common/__tests__/__snapshots__/
+/src/components/archive/__tests__/__snapshots__/
+/src/components/form/__tests__/__snapshots__/
+/src/components/login/__tests__/__snapshots__/
