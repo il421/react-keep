@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { stringify } from "query-string";
 import { AuthStoreState, Store } from "../../store/store.types";
 import { QueryKeys, RouteActions } from "../../routers/Routing";
@@ -17,9 +16,11 @@ import "../../styles/components/header/_header.scss";
 import "../../styles/components/header/_user-box.scss";
 import "../../styles/components/common/_visibility.scss";
 import { ThunkDispatch } from "redux-thunk";
+import { History } from "history";
 
-interface HeaderProps {
+export interface HeaderProps {
   showSidebar: (value: boolean) => void;
+  history: History;
 }
 
 interface StateProps {
@@ -30,16 +31,15 @@ interface DispatchProps {
   startLogout: () => void;
 }
 
-type Props = HeaderProps & DispatchProps & StateProps;
+export type Props = HeaderProps & DispatchProps & StateProps;
 
-const Header: React.FunctionComponent<Props> = ({
+export const Header: React.FunctionComponent<Props> = ({
   startLogout,
   auth,
   showSidebar,
+  history,
 }) => {
-  const history = useHistory();
-
-  const onClickHandler = (key: keyof typeof QueryKeys) => {
+  const onClickHandler = (key: QueryKeys) => {
     const query = stringify({
       [key]: RouteActions.edit,
     });
@@ -61,7 +61,12 @@ const Header: React.FunctionComponent<Props> = ({
 
           <Search wrapperClass="header__search" />
 
-          <Controllers className="hide-for-mobile" />
+          <Controllers
+            className="hide-for-mobile"
+            openDialog={(query) =>
+              history.push(`${history.location.pathname}?${query}`)
+            }
+          />
 
           <div className="header__user-box user-box">
             {auth.name && auth.url !== null && (

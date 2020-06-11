@@ -24,3 +24,5 @@ yarn-error.log*
 
 # editor
 \.idea
+
+/src/components/common/__tests__/__snapshots__/

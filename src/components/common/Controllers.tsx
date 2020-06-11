@@ -1,6 +1,5 @@
 import React from "react";
 import { QueryKeys, RouteActions } from "../../routers/Routing";
-import { useHistory } from "react-router-dom";
 import { stringify } from "query-string";
 import { AlignItems, JustifyContent } from "../../common/variables";
 import { IconButton, FlexBox } from "../ui-components";
@@ -8,19 +7,18 @@ import "../../styles/components/common/_controllers.scss";
 
 interface Controllers extends Partial<Pick<HTMLElement, "className">> {
   isMobile?: boolean;
+  openDialog: (query: string) => void;
 }
 
 export const Controllers: React.FunctionComponent<Controllers> = ({
   className,
   isMobile = false,
+  openDialog,
 }) => {
-  const history = useHistory();
-
-  const onClickHandler = (key: keyof typeof QueryKeys) => {
-    const query = stringify({
+  const getQuery = (key: keyof typeof QueryKeys) => {
+    return stringify({
       [key]: RouteActions.add,
     });
-    history.push(`${history.location.pathname}?${query}`);
   };
 
   return (
@@ -36,21 +34,21 @@ export const Controllers: React.FunctionComponent<Controllers> = ({
       >
         <IconButton
           className="controllers__text"
-          onButtonClick={() => onClickHandler(QueryKeys.text)}
+          onButtonClick={() => openDialog(getQuery(QueryKeys.text))}
           icon="align-left"
           size="2x"
         />
 
         <IconButton
           className="controllers__list"
-          onButtonClick={() => onClickHandler(QueryKeys.list)}
+          onButtonClick={() => openDialog(getQuery(QueryKeys.list))}
           icon="check-square"
           size="2x"
         />
 
         <IconButton
           className="controllers__image"
-          onButtonClick={() => onClickHandler(QueryKeys.image)}
+          onButtonClick={() => openDialog(getQuery(QueryKeys.image))}
           icon="image"
           size="2x"
         />

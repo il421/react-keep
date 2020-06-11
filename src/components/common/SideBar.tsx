@@ -4,7 +4,7 @@ import "../../styles/components/common/_sidebar.scss";
 import { FlexBox } from "../ui-components/FlexBox";
 import { JustifyContent } from "../../common/variables";
 
-interface SideBarProp {
+export interface SideBarProp {
   showBar: boolean;
   setShowSidebar: (value: boolean) => void;
 }

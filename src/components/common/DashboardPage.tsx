@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ToastContainer } from "react-toastify";
-import { History } from "history";
+import { History, Path } from "history";
 import { JustifyContent } from "../../common/variables";
 import Header from "./Header";
 import { SideBar } from "./SideBar";
@@ -21,7 +21,7 @@ import Tags from "../tags/Tags";
 import ArchiveList from "../archive/ArchiveList";
 import ImageNoteFormModal from "../notes/ImageNoteFormModal";
 
-interface DashboardPageProps {
+export interface DashboardPageProps {
   history: History;
 }
 
@@ -30,30 +30,36 @@ enum CollapseType {
   "arch",
 }
 
+export const onNoteSelected = (options: {
+  type: NoteType;
+  id: string;
+  pathname: string;
+  push: (path: Path) => void;
+}) => {
+  let key: keyof typeof QueryKeys;
+  const { type, id, pathname, push } = options;
+  switch (type) {
+    case NoteType.text:
+      key = QueryKeys.text;
+      break;
+    case NoteType.list:
+      key = QueryKeys.list;
+      break;
+    default:
+      key = QueryKeys.image;
+  }
+
+  const query = stringify({
+    [key]: id,
+  });
+  push(`${pathname}?${query}`);
+};
+
 export const DashboardPage: React.FunctionComponent<DashboardPageProps> = ({
   history,
 }): JSX.Element => {
   const [showBar, setShowSidebar] = useState<boolean>(false);
   const [collapsed, setCollapsed] = useState<CollapseType[]>([]);
-
-  const onNoteSelected = (type: NoteType, id: string) => {
-    let key: keyof typeof QueryKeys;
-    switch (type) {
-      case NoteType.text:
-        key = QueryKeys.text;
-        break;
-      case NoteType.list:
-        key = QueryKeys.list;
-        break;
-      default:
-        key = QueryKeys.image;
-    }
-
-    const query = stringify({
-      [key]: id,
-    });
-    history.push(`${history.location.pathname}?${query}`);
-  };
 
   return (
     <FlexBox
@@ -61,8 +67,17 @@ export const DashboardPage: React.FunctionComponent<DashboardPageProps> = ({
       justifyContent={JustifyContent.spaceBetween}
       className="dashboard"
     >
-      <Header showSidebar={setShowSidebar} />
-      <NotesList onNoteSelected={onNoteSelected} />
+      <Header showSidebar={setShowSidebar} history={history} />
+      <NotesList
+        onNoteSelected={(type: NoteType, id: string) =>
+          onNoteSelected({
+            type,
+            id,
+            pathname: history.location.pathname,
+            push: history.push,
+          })
+        }
+      />
 
       <SideBar showBar={showBar} setShowSidebar={setShowSidebar}>
         <div className="dashboard__sidebar">
@@ -104,7 +119,12 @@ export const DashboardPage: React.FunctionComponent<DashboardPageProps> = ({
       <ListNoteFormModal history={history} />
       <ImageNoteFormModal history={history} />
       <UserFormModal history={history} />
-      <Controllers isMobile />
+      <Controllers
+        isMobile
+        openDialog={(query) =>
+          history.push(`${history.location.pathname}?${query}`)
+        }
+      />
 
       <ToastContainer autoClose={2000} />
     </FlexBox>

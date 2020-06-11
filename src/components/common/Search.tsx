@@ -10,20 +10,20 @@ interface SearchProps {
   wrapperClass?: string;
 }
 
-interface DispatchProps {
+export interface DispatchProps {
   setSearchFilter: (value: string) => void;
 }
 
 type Props = SearchProps & DispatchProps;
 
-class Search extends React.PureComponent<Props> {
+export class Search extends React.PureComponent<Props> {
   render() {
     return (
       <div className={this.props.wrapperClass}>
         <input
           className="search"
           placeholder={Placeholders.search}
-          onInput={(evt) =>
+          onChange={(evt) =>
             this.props.setSearchFilter((evt.target as HTMLInputElement).value)
           }
         />

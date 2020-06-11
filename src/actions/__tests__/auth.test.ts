@@ -5,7 +5,7 @@ import configureMockStore from "redux-mock-store";
 import thunk from "redux-thunk";
 import { firebase } from "../../firebase/firebase";
 
-const defaultAuthState = {
+export const defaultAuthState = {
   auth: {
     uid: user.uid,
     name: user.firstName,
