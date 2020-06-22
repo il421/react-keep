@@ -9,11 +9,10 @@ import { FieldArray } from "react-final-form-arrays";
 
 import { ListNoteFromItem } from "./ListNoteFromItem";
 import { FormRenderProps, FormSpy } from "react-final-form";
-import { IconButton } from "../ui-components/IconButton";
-import { FlexBox } from "../ui-components/FlexBox";
-import { AlignItems, JustifyContent } from "../../common/variables";
+import { IconButton, FlexBox } from "../ui-components";
+import { AlignItems, JustifyContent } from "../../common";
 import { getDefaultContent } from "./utils";
-import { isModal, nameOf } from "../../common/utils";
+import { isModal, nameOf } from "../../common";
 
 interface ListNoteFormModalProps {
   history: History;
@@ -43,7 +42,7 @@ class ListNoteFormModal extends React.Component<ListNoteFormModalProps> {
         className="note-modal"
         ariaHideApp={false}
       >
-        <NoteForm type={NoteType.list}>
+        <NoteForm type={NoteType.list} history={this.props.history}>
           <>
             <FormSpy>
               {({

@@ -1,4 +1,4 @@
-import { NoteType } from "../components/notes/notes.types";
+import { NoteType } from "../components/notes";
 import { User } from "firebase";
 
 export type Store = {

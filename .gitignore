@@ -23,9 +23,12 @@ yarn-debug.log*
 yarn-error.log*
 
 # editor
-\.idea
+/.idea
 
 /src/components/common/__tests__/__snapshots__/
 /src/components/archive/__tests__/__snapshots__/
 /src/components/form/__tests__/__snapshots__/
 /src/components/login/__tests__/__snapshots__/
+/src/components/notes/options/__tests__/__snapshots__/
+/src/components/notes/__test__/__snapshots__/
+/src/react-app-env.d.ts

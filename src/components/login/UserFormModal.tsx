@@ -3,17 +3,25 @@ import { connect } from "react-redux";
 import { History } from "history";
 import Modal from "react-modal";
 import { PathNames, QueryKeys } from "../../routers/Routing";
-import { AlignItems, JustifyContent } from "../../common/variables";
+import {
+  AlignItems,
+  JustifyContent,
+  isModal,
+  nameOf,
+  Placeholders,
+} from "../../common";
 import { AuthStoreState, Store, UpdateUser } from "../../store/store.types";
-import { isModal, nameOf, Placeholders } from "../../common";
 import { updateUserData } from "../../actions/auth";
-import { ContentContainer, ConfirmButton, FlexBox } from "../ui-components";
-import { BaseForm, TextInputField } from "../form";
+import {
+  ContentContainer,
+  ConfirmButton,
+  FlexBox,
+  IconButton,
+} from "../ui-components";
+import { BaseForm, TextInputField, FileFormField } from "../form";
 import "../../styles/components/login/_user-form.scss";
 import { ThunkDispatch } from "redux-thunk";
-import { IconButton } from "../ui-components/IconButton";
 import { Field, FormSpy } from "react-final-form";
-import { FileFormField } from "../form/FileFormField";
 import { FormApi } from "final-form";
 
 interface UserFormValues {
@@ -41,9 +49,9 @@ interface UserFormModalProps {
   history: History;
 }
 
-type Props = StateProps & UserFormModalProps & DispatchProps;
+export type Props = StateProps & UserFormModalProps & DispatchProps;
 
-class UserFormModal extends React.PureComponent<Props> {
+export class UserFormModal extends React.PureComponent<Props> {
   private nameOf = nameOf<UserFormValues>();
   private readonly NO_AVATAR_URL: string = "img/no_avatar.png";
   private readonly FIELD_ID: string = "avatar";
@@ -114,11 +122,10 @@ class UserFormModal extends React.PureComponent<Props> {
         <ContentContainer>
           <BaseForm<UserFormValues>
             classNames={{
-              form: "login-box__form login-form",
+              form: "login-box__form user-form",
             }}
             initialValues={this.getFormValues(this.props.auth)}
             onSubmit={this.onSubmit}
-            onCancel={() => this.props.history.push(PathNames.base)}
             getButtons={this.getButtons}
           >
             <FlexBox
@@ -171,6 +178,7 @@ class UserFormModal extends React.PureComponent<Props> {
                         />
                         {initialValues.photoUrl && (
                           <IconButton
+                            id="test-delete-avatar-button"
                             className="avatar__btn"
                             icon="trash"
                             onButtonClick={() => {

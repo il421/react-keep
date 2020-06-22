@@ -1,10 +1,7 @@
 import React from "react";
 import { Field } from "react-final-form";
 import { ExposedFieldProps, FieldAdapterProps } from "./BaseForm.types";
-import {
-  CheckboxGroup,
-  CheckboxGroupProps,
-} from "../ui-components/CheckboxGroup";
+import { CheckboxGroup, CheckboxGroupProps } from "../ui-components";
 
 const FieldAdapter: React.FunctionComponent<
   FieldAdapterProps<CheckboxGroupProps["selectedKeys"]> &

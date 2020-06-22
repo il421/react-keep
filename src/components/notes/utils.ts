@@ -1,7 +1,7 @@
 import { parse } from "query-string";
 import { ImageItem, ListItem, Note } from "../../store/store.types";
 import { NoteFormValues, NoteType } from "./notes.types";
-import { BaseFormOptions } from "../form/BaseForm.types";
+import { BaseFormOptions } from "../form";
 import { v4 as uuidv4 } from "uuid";
 
 /**

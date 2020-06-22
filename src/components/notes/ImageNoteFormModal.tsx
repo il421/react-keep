@@ -1,24 +1,30 @@
 import React from "react";
 import Modal from "react-modal";
 import { NoteFormValues, NoteType } from "./notes.types";
-import { isModal, nameOf, Placeholders } from "../../common";
+import {
+  isModal,
+  nameOf,
+  Placeholders,
+  AlignItems,
+  JustifyContent,
+} from "../../common";
 import { PathNames, QueryKeys } from "../../routers/Routing";
-import { FileFormField, TextInputField } from "../form/index";
+import { FileFormField, TextInputField } from "../form";
 import "../../styles/components/notes/_note-form.scss";
 import "../../styles/components/notes/_image-note-form-item.scss";
 import NoteForm from "./NoteForm";
 import { History } from "history";
 import { ImageItem } from "../../store/store.types";
 import { Field, FormRenderProps, FormSpy } from "react-final-form";
-import { AlignItems, JustifyContent } from "../../common/variables";
-import { IconButton } from "../ui-components/IconButton";
-import { FlexBox } from "../ui-components/FlexBox";
+import { IconButton, FlexBox } from "../ui-components";
 
-interface ImageNoteFormModalProps {
+export interface ImageNoteFormModalProps {
   history: History;
 }
 
-class ImageNoteFormModal extends React.Component<ImageNoteFormModalProps> {
+export class ImageNoteFormModal extends React.Component<
+  ImageNoteFormModalProps
+> {
   private nameOf = nameOf<NoteFormValues<ImageItem>>();
   private nameOfContent = nameOf<ImageItem>();
   private readonly NO_IMAGE_URL: string = "img/no_image.png";
@@ -47,7 +53,7 @@ class ImageNoteFormModal extends React.Component<ImageNoteFormModalProps> {
         className="note-modal"
         ariaHideApp={false}
       >
-        <NoteForm type={NoteType.image}>
+        <NoteForm type={NoteType.image} history={this.props.history}>
           <FormSpy>
             {({
               form,
@@ -142,5 +148,3 @@ class ImageNoteFormModal extends React.Component<ImageNoteFormModalProps> {
     );
   }
 }
-
-export default ImageNoteFormModal;

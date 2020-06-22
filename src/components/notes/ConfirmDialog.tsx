@@ -1,14 +1,13 @@
 import React from "react";
-import { ConfirmButton } from "../ui-components/ConfirmButton";
-import { FlexBox } from "../ui-components/FlexBox";
-import { AlignItems, JustifyContent } from "../../common/variables";
+import { FlexBox, ConfirmButton } from "../ui-components";
+import { AlignItems, JustifyContent } from "../../common";
 import "../../styles/components/notes/_confirm-dialog.scss";
 
 /**
  * This component works only as a part of Note for now.
  */
 
-interface ConfirmDialogProps extends Pick<HTMLElement, "className"> {
+export interface ConfirmDialogProps extends Pick<HTMLElement, "className"> {
   handleConfirm: () => void;
   closeDialog: () => void;
   buttonsProps?: {
@@ -17,7 +16,7 @@ interface ConfirmDialogProps extends Pick<HTMLElement, "className"> {
   };
 }
 
-const ConfirmDialog: React.FunctionComponent<ConfirmDialogProps> = ({
+export const ConfirmDialog: React.FunctionComponent<ConfirmDialogProps> = ({
   className,
   closeDialog,
   handleConfirm,
@@ -34,6 +33,7 @@ const ConfirmDialog: React.FunctionComponent<ConfirmDialogProps> = ({
         justifyContent={JustifyContent.spaceAround}
       >
         <ConfirmButton
+          id="test-confirm-dialog-delete-btn"
           type="button"
           text={buttonsProps?.confirmButtonText! ?? "Delete"}
           wrapperClassName="confirm-dialog__button"
@@ -44,6 +44,7 @@ const ConfirmDialog: React.FunctionComponent<ConfirmDialogProps> = ({
         />
 
         <ConfirmButton
+          id="test-confirm-dialog-dont-btn"
           type="button"
           text={buttonsProps?.cancelButtonText! ?? "Don't"}
           wrapperClassName="confirm-dialog__button"
@@ -56,5 +57,3 @@ const ConfirmDialog: React.FunctionComponent<ConfirmDialogProps> = ({
     </FlexBox>
   );
 };
-
-export default ConfirmDialog;

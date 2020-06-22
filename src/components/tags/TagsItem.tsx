@@ -1,8 +1,7 @@
 import React from "react";
-import { FlexBox } from "../ui-components/FlexBox";
-import { AlignItems, JustifyContent } from "../../common/variables";
+import { FlexBox, IconButton } from "../ui-components";
+import { AlignItems, JustifyContent } from "../../common";
 import { Tag } from "../../store/store.types";
-import { IconButton } from "../ui-components/IconButton";
 import "../../styles/components/tags/_tags-item.scss";
 
 interface TagsItemProps {

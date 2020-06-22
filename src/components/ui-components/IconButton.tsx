@@ -10,6 +10,7 @@ export interface IconButtonProps extends FontAwesomeIconProps {
     evt?: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => void;
   className?: string;
+  id?: string;
   disabled?: boolean;
   text?: string;
   type?: "button" | "submit";
@@ -22,10 +23,12 @@ export class IconButton extends React.PureComponent<IconButtonProps> {
       className,
       disabled,
       type = "button",
+      id,
       ...rest
     } = this.props;
     return (
       <button
+        id={id}
         className={`icon-button ${className} `}
         onClick={onButtonClick}
         disabled={disabled}

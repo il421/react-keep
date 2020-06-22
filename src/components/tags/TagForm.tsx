@@ -2,14 +2,12 @@ import React from "react";
 import { Store, TagsStoreState } from "../../store/store.types";
 import { ThunkDispatch } from "redux-thunk";
 import { connect } from "react-redux";
-import { BaseForm } from "../form/BaseForm";
-import { TextInputField } from "../form/TextInputField";
-import { Placeholders, nameOf } from "../../common";
+import { TextInputField, BaseForm } from "../form";
+import { Placeholders, nameOf, Errors } from "../../common";
 import { handleAddTag } from "../../actions/tags";
 import "../../styles/components/tags/_tags-form.scss";
-import { IconButton } from "../ui-components/IconButton";
+import { IconButton } from "../ui-components";
 import { ValidationErrors } from "final-form";
-import { Errors } from "../../common/validationErrors";
 
 interface TagFormProps {}
 

@@ -1,5 +1,5 @@
 import { Note } from "../../store/store.types";
-import { BaseFormOptions } from "../form/BaseForm.types";
+import { BaseFormOptions } from "../form";
 
 export enum NoteType {
   text,

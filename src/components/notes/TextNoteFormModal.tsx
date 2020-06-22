@@ -3,7 +3,7 @@ import Modal from "react-modal";
 import { NoteFormValues, NoteType } from "./notes.types";
 import { isModal, nameOf, Placeholders } from "../../common";
 import { PathNames, QueryKeys } from "../../routers/Routing";
-import { TextInputField } from "../form/index";
+import { TextInputField } from "../form";
 import "../../styles/components/notes/_note-form.scss";
 import NoteForm from "./NoteForm";
 import { History } from "history";
@@ -11,7 +11,7 @@ import { History } from "history";
 interface TextNoteFormModalProps {
   history: History;
 }
-class TextNoteFormModal extends React.Component<TextNoteFormModalProps> {
+export class TextNoteFormModal extends React.Component<TextNoteFormModalProps> {
   private nameOf = nameOf<NoteFormValues<string>>();
 
   render() {
@@ -31,7 +31,7 @@ class TextNoteFormModal extends React.Component<TextNoteFormModalProps> {
         className="note-modal"
         ariaHideApp={false}
       >
-        <NoteForm type={NoteType.text}>
+        <NoteForm type={NoteType.text} history={this.props.history}>
           <TextInputField
             isTextArea={true}
             name={this.nameOf("content")}
@@ -43,5 +43,3 @@ class TextNoteFormModal extends React.Component<TextNoteFormModalProps> {
     );
   }
 }
-
-export default TextNoteFormModal;

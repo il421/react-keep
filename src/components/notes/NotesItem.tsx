@@ -2,13 +2,8 @@ import React, { useState } from "react";
 import moment from "moment";
 import { Note } from "../../store/store.types";
 import { ContentContainer, FlexBox, IconButton } from "../ui-components";
-import {
-  AlignItems,
-  Colors,
-  FlexWrap,
-  JustifyContent,
-} from "../../common/variables";
-import ConfirmDialog from "./ConfirmDialog";
+import { AlignItems, Colors, FlexWrap, JustifyContent } from "../../common";
+import { ConfirmDialog } from "./ConfirmDialog";
 import "../../styles/components/notes/_note.scss";
 import NoteContent from "./NoteContent";
 import { NoteType } from "./notes.types";

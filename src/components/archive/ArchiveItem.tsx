@@ -1,12 +1,10 @@
 import React from "react";
 import { ImageItem, ListItem, Note } from "../../store/store.types";
-import { FlexBox } from "../ui-components/FlexBox";
+import { FlexBox, IconButton } from "../ui-components";
 import "../../styles/components/archive/_archive-item.scss";
-import { AlignItems, JustifyContent } from "../../common/variables";
-import { IconButton } from "../ui-components/IconButton";
+import { AlignItems, JustifyContent, getShortText } from "../../common";
 import moment from "moment";
 import { NoteType } from "../notes/notes.types";
-import { getShortText } from "../../common/utils";
 
 export interface ArchiveItemProps {
   note: Note;

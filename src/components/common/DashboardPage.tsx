@@ -1,25 +1,21 @@
 import React, { useState } from "react";
 import { ToastContainer } from "react-toastify";
 import { History, Path } from "history";
-import { JustifyContent } from "../../common/variables";
+import { JustifyContent, toggleArrayElement } from "../../common";
 import Header from "./Header";
 import { SideBar } from "./SideBar";
 import { Controllers } from "./Controllers";
-import { FlexBox } from "../ui-components";
 import UserFormModal from "../login/UserFormModal";
 import "../../styles/components/common/_dashboard.scss";
 import "../../styles/components/notes/_note-modal.scss";
-import TextNoteFormModal from "../notes/TextNoteFormModal";
 import NotesList from "../notes/NotesList";
 import { QueryKeys } from "../../routers/Routing";
 import { stringify } from "query-string";
 import ListNoteFormModal from "../notes/ListNoteFormModal";
-import { NoteType } from "../notes/notes.types";
-import { IconButton } from "../ui-components/IconButton";
-import { toggleArrayElement } from "../../common/utils";
+import { NoteType, ImageNoteFormModal, TextNoteFormModal } from "../notes";
+import { IconButton, FlexBox } from "../ui-components";
 import Tags from "../tags/Tags";
 import ArchiveList from "../archive/ArchiveList";
-import ImageNoteFormModal from "../notes/ImageNoteFormModal";
 
 export interface DashboardPageProps {
   history: History;

@@ -10,10 +10,9 @@ import {
 } from "../../actions/notes";
 import { NoteType } from "./notes.types";
 import Masonry from "react-masonry-css";
-import { getFilteredNotes } from "../../common/utils";
-import { FlexBox } from "../ui-components/FlexBox";
-import { JustifyContent } from "../../common/variables";
-import { ContentContainer } from "../ui-components/ContentContainer";
+import { getFilteredNotes } from "../../common";
+import { FlexBox, ContentContainer } from "../ui-components";
+import { JustifyContent } from "../../common";
 
 interface StateProps {
   notes: Note[];

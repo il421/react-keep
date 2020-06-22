@@ -1,7 +1,6 @@
-/* eslint-disable indent */
-import React from "react";
+import React, { ReactNode } from "react";
 import { connect } from "react-redux";
-import { RouteComponentProps, withRouter } from "react-router-dom";
+import { History } from "history";
 import {
   AddNote,
   ImageItem,
@@ -13,16 +12,10 @@ import {
   UpdateNote,
 } from "../../store/store.types";
 import { NoteFormValues, NoteType } from "./notes.types";
-import { PickerColors } from "../../common/variables";
 import ColorsPickerField from "./options/ColorsPickerField";
-import { nameOf, Placeholders } from "../../common";
+import { nameOf, Placeholders, PickerColors } from "../../common";
 import { PathNames } from "../../routers/Routing";
-import {
-  BaseForm,
-  BaseFormOptions,
-  FieldSpy,
-  TextInputField,
-} from "../form/index";
+import { BaseForm, BaseFormOptions, FieldSpy, TextInputField } from "../form";
 import { FormRenderProps, FormSpy } from "react-final-form";
 import { handleAddNote, handleUpdateNote } from "../../actions/notes";
 import "../../styles/components/notes/_note-form.scss";
@@ -33,7 +26,7 @@ import {
   getInitialNoteFormValues,
   getSelectedNote,
 } from "./utils";
-import { ContentContainer } from "../ui-components/ContentContainer";
+import { ContentContainer } from "../ui-components";
 import TagsPickerField from "./options/TagsPickerField";
 
 interface StateProps {
@@ -42,7 +35,9 @@ interface StateProps {
 }
 
 interface NoteFormProps {
+  history: History;
   type: NoteType;
+  children: ReactNode;
 }
 
 interface DispatchProps {
@@ -55,9 +50,9 @@ interface TextNoteFormModalState {
   currentNote: Note | null;
 }
 
-type Props = RouteComponentProps & DispatchProps & StateProps & NoteFormProps;
+type Props = DispatchProps & StateProps & NoteFormProps;
 
-class NoteForm extends React.Component<Props> {
+class NoteForm extends React.PureComponent<Props> {
   private defaultNote: NoteFormValues<string | ListItem[] | ImageItem> = {
     type: this.props.type,
     title: "",
@@ -176,9 +171,7 @@ const mapDispatchToProps = (
     dispatch(handleUpdateNote(id, note)),
 });
 
-export default withRouter(
-  connect<StateProps, DispatchProps, RouteComponentProps, Store>(
-    mapStateToProps,
-    mapDispatchToProps
-  )(NoteForm)
-);
+export default connect<StateProps, DispatchProps, NoteFormProps, Store>(
+  mapStateToProps,
+  mapDispatchToProps
+)(NoteForm);

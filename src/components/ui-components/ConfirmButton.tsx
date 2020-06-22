@@ -1,11 +1,11 @@
 import React from "react";
 import { BeatLoader } from "react-spinners";
-import { Colors, JustifyContent } from "../../common/variables";
+import { Colors, JustifyContent } from "../../common";
 import { FlexBox } from "./FlexBox";
 import "../../styles/ui-components/_login-button.scss";
 
-interface ConfirmButtonProps
-  extends Partial<Pick<HTMLButtonElement, "disabled" | "className">> {
+export interface ConfirmButtonProps
+  extends Partial<Pick<HTMLButtonElement, "disabled" | "className" | "id">> {
   text: string;
   loading?: boolean;
   type?: "submit" | "button";
@@ -22,6 +22,7 @@ export class ConfirmButton extends React.PureComponent<ConfirmButtonProps> {
       text,
       disabled = false,
       onCLick,
+      id,
       wrapperClassName,
     } = this.props;
     return (
@@ -31,6 +32,7 @@ export class ConfirmButton extends React.PureComponent<ConfirmButtonProps> {
       >
         {!loading ? (
           <button
+            id={id}
             className={className}
             type={type}
             disabled={disabled}

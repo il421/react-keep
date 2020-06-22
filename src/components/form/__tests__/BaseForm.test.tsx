@@ -1,10 +1,13 @@
 import React from "react";
-import { shallow, mount, ShallowWrapper } from "enzyme";
+import { shallow, mount, ShallowWrapper, ReactWrapper } from "enzyme";
 import { BaseForm, BaseFormProps } from "../BaseForm";
 import { notes } from "../../../testData/notes";
-import { NoteFormValues, NoteType } from "../../notes/notes.types";
-import { getInitialNoteFormValues } from "../../notes/utils";
-import { PickerColors } from "../../../common/variables";
+import {
+  NoteFormValues,
+  NoteType,
+  getInitialNoteFormValues,
+} from "../../notes";
+import { PickerColors } from "../../../common";
 import { BaseFormOptions } from "../BaseForm.types";
 
 let props: BaseFormProps<NoteFormValues<string>>,
@@ -26,6 +29,7 @@ beforeEach(() => {
       defaultValues: defaultNote,
     }),
     onSubmit: jest.fn(),
+    onCancel: jest.fn(),
   };
 
   wrapper = shallow<BaseFormProps<NoteFormValues<string>>>(
@@ -39,7 +43,7 @@ test("should render BaseForm", () => {
 
 test("should submit form", () => {
   const mountedForm = mount<
-    ShallowWrapper<BaseFormProps<NoteFormValues<string>>, any>
+    ReactWrapper<BaseFormProps<NoteFormValues<string>>, any>
   >(<BaseForm {...props} />);
   expect(mountedForm.exists(".note-form")).toBeTruthy();
   mountedForm.find("form").simulate("focus").simulate("submit");
@@ -48,4 +52,17 @@ test("should submit form", () => {
     expect.anything(), // formApi
     expect.anything() // options callback
   );
+});
+
+test("should cancel form", () => {
+  const mountedForm = mount<
+    ReactWrapper<BaseFormProps<NoteFormValues<string>>, any>
+  >(<BaseForm {...props} />);
+  expect(mountedForm.exists(".note-form")).toBeTruthy();
+  expect(mountedForm.exists("#test-base-form-close-button")).toBeTruthy();
+  mountedForm
+    .find("#test-base-form-close-button")
+    .hostNodes()
+    .simulate("click");
+  expect(props.onCancel).toHaveBeenLastCalledWith();
 });

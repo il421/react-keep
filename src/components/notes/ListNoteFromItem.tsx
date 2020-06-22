@@ -1,9 +1,7 @@
 import React from "react";
-import { FlexBox } from "../ui-components/FlexBox";
-import { AlignItems, JustifyContent } from "../../common/variables";
-import { CheckboxInputField } from "../form/CheckboxInputField";
-import { TextInputField } from "../form/TextInputField";
-import { IconButton } from "../ui-components/IconButton";
+import { FlexBox, IconButton } from "../ui-components";
+import { AlignItems, JustifyContent } from "../../common";
+import { CheckboxInputField, TextInputField } from "../form";
 import "../../styles/components/notes/_list-note-form-item.scss";
 
 interface ListNoteFromItemProps {

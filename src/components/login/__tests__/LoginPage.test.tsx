@@ -19,6 +19,12 @@ beforeEach(() => {
   wrapper = mount(<LoginPage {...props} />);
 });
 
+describe("Rendering", () => {
+  test("should render LoginPage correctly", () => {
+    expect(wrapper.debug()).toMatchSnapshot();
+  });
+});
+
 describe("Submitting", () => {
   test("should logIn with  correct data", () => {
     triggerInputChange(wrapper, { name: "email" }, user.email);

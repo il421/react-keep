@@ -1,7 +1,7 @@
 import React from "react";
 import { NoteType } from "./notes.types";
 import { ImageItem, ListItem } from "../../store/store.types";
-import { getShortText } from "../../common/utils";
+import { getShortText } from "../../common";
 
 interface NoteContentProps {
   type: NoteType;

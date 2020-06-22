@@ -1,15 +1,14 @@
 import React, { ReactNode } from "react";
 import { Form, FormRenderProps } from "react-final-form";
 import { ValidationErrors } from "final-form";
-import { FlexBox, LinkButton } from "../ui-components";
-import { AlignItems, JustifyContent } from "../../common/variables";
+import { FlexBox, LinkButton, ConfirmButton } from "../ui-components";
+import { AlignItems, JustifyContent } from "../../common";
 import { BaseFormOptions } from "./BaseForm.types";
 import { RadioButtonsInputField } from "./RadioButtonsInputField";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import "../../styles/components/notes/_note-form.scss";
 import "../../styles/ui-components/_icon-button.scss";
 import arrayMutators from "final-form-arrays";
-import { ConfirmButton } from "../ui-components/ConfirmButton";
 
 /**
  * Base Form initially works with all types of notes, however also
@@ -131,6 +130,7 @@ export class BaseForm<FormValues> extends React.PureComponent<
                             }
                           >
                             <ConfirmButton
+                              id="test-base-form-submit-button"
                               className="link-button"
                               text={submitButtonName}
                               type="submit"
@@ -139,10 +139,11 @@ export class BaseForm<FormValues> extends React.PureComponent<
                             />
 
                             <LinkButton
+                              id="test-base-form-close-button"
                               text="Close"
                               type="button"
                               disabled={submitting}
-                              onClick={onCancel}
+                              onClick={() => onCancel && onCancel()}
                             />
                           </FlexBox>
                         </FlexBox>

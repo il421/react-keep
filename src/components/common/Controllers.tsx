@@ -1,7 +1,7 @@
 import React from "react";
 import { QueryKeys, RouteActions } from "../../routers/Routing";
 import { stringify } from "query-string";
-import { AlignItems, JustifyContent } from "../../common/variables";
+import { AlignItems, JustifyContent } from "../../common";
 import { IconButton, FlexBox } from "../ui-components";
 import "../../styles/components/common/_controllers.scss";
 

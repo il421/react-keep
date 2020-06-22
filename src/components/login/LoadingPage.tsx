@@ -1,8 +1,8 @@
 import React from "react";
 import { RingLoader } from "react-spinners";
-import { AlignItems, Colors, JustifyContent } from "../../common/variables";
+import { AlignItems, Colors, JustifyContent } from "../../common";
 import "../../styles/components/login/_loading-page.scss";
-import { FlexBox } from "../ui-components/FlexBox";
+import { FlexBox } from "../ui-components";
 
 const LoadingPage = (): JSX.Element => (
   <FlexBox

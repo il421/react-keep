@@ -1,6 +1,6 @@
 import React from "react";
-import { FlexBox } from "../ui-components/FlexBox";
-import { JustifyContent } from "../../common/variables";
+import { FlexBox } from "../ui-components";
+import { JustifyContent } from "../../common";
 import {
   FiltersStoreState,
   Store,

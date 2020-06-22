@@ -3,7 +3,7 @@ import { Router, Route, Switch } from "react-router-dom";
 import { createBrowserHistory, History } from "history";
 
 import LoginPage from "../components/login/LoginPage";
-import { DashboardPage } from "../components/common/DashboardPage";
+import { DashboardPage } from "../components/common";
 import NotFoundPage from "../components/common/NotFoundPage";
 
 import PrivateRouter from "./PrivateRouter";
