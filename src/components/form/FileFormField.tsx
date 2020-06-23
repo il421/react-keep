@@ -12,17 +12,19 @@ const FieldAdapter: React.FunctionComponent<FieldAdapterProps> = ({
   const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     target.files && input.onChange(target.files[0]);
   };
-
   return (
     <div className={className}>
       <input
+        {...rest}
+        name={input.name}
         id={id}
         type="file"
         onChange={handleChange}
-        {...rest}
         accept="image/*"
       />
-      {meta.error && meta.touched && <span>{meta.error}</span>}
+      {(meta.error || meta.submitError) && meta.touched && (
+        <span>{meta.error}</span>
+      )}
     </div>
   );
 };

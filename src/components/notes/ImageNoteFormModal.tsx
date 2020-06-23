@@ -7,6 +7,7 @@ import {
   Placeholders,
   AlignItems,
   JustifyContent,
+  Errors,
 } from "../../common";
 import { PathNames, QueryKeys } from "../../routers/Routing";
 import { FileFormField, TextInputField } from "../form";
@@ -17,10 +18,24 @@ import { History } from "history";
 import { ImageItem } from "../../store/store.types";
 import { Field, FormRenderProps, FormSpy } from "react-final-form";
 import { IconButton, FlexBox } from "../ui-components";
+import { ValidationErrors } from "final-form";
 
 export interface ImageNoteFormModalProps {
   history: History;
 }
+
+export const getValidationErrors = (
+  values: NoteFormValues<ImageItem>
+): ValidationErrors => {
+  const errors: ValidationErrors = { content: {} };
+  const { uploadingImage } = values.content;
+
+  if (!uploadingImage) {
+    errors.content.uploadingImage = Errors.required;
+  }
+
+  return errors;
+};
 
 export class ImageNoteFormModal extends React.Component<
   ImageNoteFormModalProps
@@ -53,7 +68,11 @@ export class ImageNoteFormModal extends React.Component<
         className="note-modal"
         ariaHideApp={false}
       >
-        <NoteForm type={NoteType.image} history={this.props.history}>
+        <NoteForm
+          type={NoteType.image}
+          history={this.props.history}
+          validate={getValidationErrors}
+        >
           <FormSpy>
             {({
               form,
@@ -63,9 +82,9 @@ export class ImageNoteFormModal extends React.Component<
               return (
                 <div className="image-note-form-item">
                   <Field
-                    name={`${this.nameOf("content")}[${this.nameOfContent(
+                    name={`${this.nameOf("content")}.${this.nameOfContent(
                       "imageUrl"
-                    )}]`}
+                    )}`}
                   >
                     {() => (
                       <img
@@ -126,7 +145,7 @@ export class ImageNoteFormModal extends React.Component<
                     )}
                     <FileFormField
                       id={this.FIELD_ID}
-                      name={`${this.nameOf("content")}[${this.nameOfContent(
+                      name={`${this.nameOf("content")}.${this.nameOfContent(
                         "uploadingImage"
                       )}]`}
                       className="image-note-form-item__field"
@@ -139,7 +158,7 @@ export class ImageNoteFormModal extends React.Component<
 
           <TextInputField
             isTextArea={true}
-            name={`${this.nameOf("content")}[${this.nameOfContent("content")}]`}
+            name={`${this.nameOf("content")}.${this.nameOfContent("content")}`}
             placeholder={Placeholders.content}
             className="note-form__text"
           />

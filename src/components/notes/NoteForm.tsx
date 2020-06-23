@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { History } from "history";
 import {
@@ -28,6 +28,7 @@ import {
 } from "./utils";
 import { ContentContainer } from "../ui-components";
 import TagsPickerField from "./options/TagsPickerField";
+import { ValidationErrors } from "final-form";
 
 interface StateProps {
   notes: NotesStoreState[];
@@ -37,7 +38,9 @@ interface StateProps {
 interface NoteFormProps {
   history: History;
   type: NoteType;
-  children: ReactNode;
+  validate?: (
+    values: NoteFormValues<string | ListItem[] | ImageItem>
+  ) => ValidationErrors;
 }
 
 interface DispatchProps {
@@ -62,7 +65,7 @@ class NoteForm extends React.PureComponent<Props> {
     currentOption: BaseFormOptions.none,
   };
 
-  private nameOf = nameOf<NoteFormValues<string | ListItem[]>>();
+  private nameOf = nameOf<NoteFormValues<string | ListItem[] | ImageItem>>();
 
   state = {
     currentNote: getSelectedNote(
@@ -109,6 +112,7 @@ class NoteForm extends React.PureComponent<Props> {
             currentNote: this.state.currentNote,
             defaultValues: this.defaultNote,
           })}
+          validate={this.props.validate}
           onSubmit={this.onSubmitAction}
           onCancel={() => this.props.history.push(PathNames.base)}
           submitButtonName={this.state.currentNote ? "Update" : undefined}
@@ -171,7 +175,7 @@ const mapDispatchToProps = (
     dispatch(handleUpdateNote(id, note)),
 });
 
-export default connect<StateProps, DispatchProps, NoteFormProps, Store>(
+export default connect<StateProps, DispatchProps, any, Store>(
   mapStateToProps,
   mapDispatchToProps
 )(NoteForm);

@@ -29,7 +29,9 @@ const FieldAdapter: React.FunctionComponent<FieldAdapterProps> = ({
           autoFocus={autoFocus}
         />
       )}
-      {meta.error && meta.touched && <span>{meta.error}</span>}
+      {(meta.error || meta.submitError) && meta.touched && (
+        <span>{meta.error}</span>
+      )}
     </div>
   );
 };
