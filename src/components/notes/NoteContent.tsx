@@ -46,7 +46,7 @@ const NoteContent: React.FunctionComponent<NoteContentProps> = ({
             alt="Picture of the note"
           />
           <div className="content__text">
-            {getShortText((content as ImageItem).content)}
+            {getShortText((content as ImageItem).text)}
           </div>
         </div>
       )}

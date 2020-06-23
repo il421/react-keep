@@ -158,7 +158,7 @@ export class ImageNoteFormModal extends React.Component<
 
           <TextInputField
             isTextArea={true}
-            name={`${this.nameOf("content")}.${this.nameOfContent("content")}`}
+            name={`${this.nameOf("content")}.${this.nameOfContent("text")}`}
             placeholder={Placeholders.content}
             className="note-form__text"
           />

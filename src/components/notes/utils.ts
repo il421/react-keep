@@ -63,7 +63,7 @@ export const getDefaultContent = (
       ] as ListItem[];
     case NoteType.image:
       return {
-        content: "",
+        text: "",
         imageUrl: null,
       } as ImageItem;
     default:

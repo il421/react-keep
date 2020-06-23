@@ -35,7 +35,7 @@ export const getFilteredNotes = (notes: Note[], filters: Filters): Note[] => {
         break;
 
       case NoteType.image:
-        contentMatch = (note.content as ImageItem).content
+        contentMatch = (note.content as ImageItem).text
           .toLowerCase()
           .includes(search.toLowerCase());
         break;

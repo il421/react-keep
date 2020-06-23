@@ -82,7 +82,7 @@ export interface ListItem {
 }
 
 export interface ImageItem {
-  content: string;
+  text: string;
   imageUrl: string | null;
   uploadingImage?: File;
 }

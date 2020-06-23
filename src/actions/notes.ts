@@ -129,7 +129,7 @@ export const handleAddNote = (
         ...note,
         content:
           note.type === NoteType.image
-            ? { content: (note.content as ImageItem).content, imageUrl }
+            ? { text: (note.content as ImageItem).text, imageUrl }
             : note.content,
         createdAt: moment().valueOf(),
         updatedAt: moment().valueOf(),

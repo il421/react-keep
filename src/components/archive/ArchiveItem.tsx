@@ -4,7 +4,7 @@ import { FlexBox, IconButton } from "../ui-components";
 import "../../styles/components/archive/_archive-item.scss";
 import { AlignItems, JustifyContent, getShortText } from "../../common";
 import moment from "moment";
-import { NoteType } from "../notes/notes.types";
+import { NoteType } from "../notes";
 
 export interface ArchiveItemProps {
   note: Note;
@@ -68,7 +68,7 @@ export const ArchiveItem: React.FunctionComponent<ArchiveItemProps> = ({
               ) : (
                 <div>
                   <div>
-                    {getShortText((note.content as ImageItem).content, 20)}
+                    {getShortText((note.content as ImageItem).text, 20)}
                   </div>
                   <img
                     src={
