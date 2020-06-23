@@ -1,0 +1,12 @@
+@import "../../mixins/mixins";
+@import "../../base/variables";
+
+.tags-item {
+  &__checkbox {
+    @include checkbox-field;
+  }
+
+  &__value {
+    margin-left: $l-size;
+  }
+}

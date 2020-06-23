@@ -1,28 +1,18 @@
-.ReactModalPortal {
-  & > div {
-    opacity: 0;
-  }
-
-  & .ReactModal__Overlay  {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    transition: opacity 200ms ease-in-out;
-    overflow-y: auto;
-  }
-
-  & .ReactModal__Overlay--after-open  {
-    opacity: 1;
-  }
-
-  & .ReactModal__Overlay--before-close  {
-    opacity: 0;
-  }
-}
-
+@import "../../base/variables";
 .note-modal {
-  &--form {
-    height: 90vh;
+  &__container {
+    width: 95vw;
+    margin-top: $m-size;
+    margin-bottom: $m-size;
+
+    background-color: $white;
+    box-shadow: 0 1px 1px 0 rgba(65, 69, 73, 0.3),
+      0 1px 3px 1px rgba(65, 69, 73, 0.15);
+
+    @media (min-width: $tablet-widths) {
+      & {
+        width: 500px;
+      }
+    }
   }
 }

@@ -1,3 +1,5 @@
+@import "../base/variables";
+
 @mixin extra-bg {
   display: flex;
   justify-content: center;
@@ -6,7 +8,7 @@
   height: 100vh;
   width: 100vw;
 
-  background-image: url('/img/bg.jpg');
+  background-image: url("/img/bg.jpg");
   background-size: cover;
 }
 
@@ -14,5 +16,85 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-content: space-between;
+}
+
+@mixin flex-col-between-between {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: inherit;
+}
+
+@mixin flex-row-between-center {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
+}
+
+@mixin flex-row-end-center {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+@mixin button {
+  background: $sunshine;
+  color: $white;
+  border: none;
+  padding: $s-size;
+  font-size: $font-size-large;
+  font-weight: 300;
+  display: inline-block;
+  text-decoration: none;
+  line-height: 1;
+  cursor: pointer;
+}
+
+@mixin checkbox-field {
+  position: relative;
+  label {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 20px;
+    height: 20px;
+    margin: 0;
+
+    border: 2px solid $grey-light;
+
+    border-radius: 2px;
+
+    cursor: pointer;
+    transition: border-color 500ms ease;
+
+    &:hover {
+      border-color: lighten($grey-light, 20%);
+      transition: border-color 500ms ease;
+    }
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 2px;
+
+      width: 8px;
+      height: 4px;
+
+      border: 3px solid $grey-light;
+      border-top: none;
+      border-right: none;
+      background: transparent;
+      opacity: 0;
+      transform: rotate(-45deg);
+    }
+  }
+  input[type="checkbox"] {
+    visibility: hidden;
+    &:checked + label:after {
+      opacity: 1;
+    }
+  }
 }

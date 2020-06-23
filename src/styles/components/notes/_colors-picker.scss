@@ -1,0 +1,32 @@
+.colors-picker {
+  height: 27px;
+  width: 315px;
+
+  &__item {
+    & input {
+      display: none;
+    }
+
+    & label {
+      display: block;
+      width: 25px;
+      height: 25px;
+      transition: transform 300ms ease-in-out;
+      box-shadow: 0 1px 1px 0 rgba(65, 69, 73, 0.3),
+        0 1px 3px 1px rgba(65, 69, 73, 0.15);
+
+      &:hover {
+        transform: scale(1.2);
+        transition: transform 300ms ease-in-out;
+      }
+
+      &:active {
+        opacity: 0.5;
+      }
+    }
+
+    & input:checked + label {
+      border: 1px solid black;
+    }
+  }
+}

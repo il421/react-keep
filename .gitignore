@@ -1,11 +1,32 @@
-node_modules/
-.idea/
-.firebase/
-node_modules/
-public/dist/
-public/*.html
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-*.log*
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
 
-__snapshot__/
-*.snap*
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.development
+.env.test.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# editor
+/.idea
+
+/src/components/common/__tests__/__snapshots__/
+/src/components/archive/__tests__/__snapshots__/
+/src/components/form/__tests__/__snapshots__/
+/src/components/login/__tests__/__snapshots__/
+/src/components/notes/options/__tests__/__snapshots__/
+/src/components/notes/__tests__/__snapshots__/
+/src/react-app-env.d.ts

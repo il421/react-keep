@@ -1,5 +1,12 @@
-.show-for-mobile {
-  @media (max-width: $tablet-widths) {
+@import "../../base/variables";
+.hide-for-desktop {
+  @media (min-width: $desktop-widths) {
+    display: none;
+  }
+}
+
+.hide-for-mobile {
+  @media (max-width: $desktop-widths) {
     display: none;
   }
 }

@@ -1,0 +1,16 @@
+@import "../mixins/mixins";
+@import "../base/variables";
+
+.link-button {
+  @include button;
+
+  background: none;
+
+  color: $grey-light;
+  transition: color 500ms ease;
+
+  &:hover {
+    color: lighten($grey-light, 20%);
+    transition: color 500ms ease;
+  }
+}

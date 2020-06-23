@@ -1,3 +1,5 @@
+@import "../../base/variables";
+
 .sidebar {
   position: fixed;
 
@@ -10,15 +12,11 @@
   transform: translateX(-300px);
   transition: transform 0.2s linear;
 
-  z-index: 20;
+  z-index: 2000;
 
   &--show {
     transform: translateX(0);
     transition: transform 0.2s linear;
-  }
-
-  &__close {
-    text-align: right;
   }
 
   &__cover {

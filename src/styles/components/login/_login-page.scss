@@ -1,3 +1,6 @@
+@import "../../mixins/mixins";
+@import "../../base/variables";
+
 .login-page {
   @include extra-bg;
 
@@ -35,88 +38,46 @@
 }
 
 .login-form {
-  &__new-user {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-
+  &__new-user-field {
     width: 100%;
-    label {
-      position: absolute;
-      top: 0;
-      left: 0;
-
-      width: 20px;
-      height: 20px;
-      margin: 0;
-
-      background: $white;
-      box-shadow: inset 0 1px 1px $grey-light, 0 1px 3px rgba(0,0,0,0.5);
-
-      cursor: pointer;
-
-      &:after {
-        content: '';
-        position: absolute;
-        top: 4px;
-        left: 4px;
-
-        width: 10px;
-        height: 6px;
-
-        border: 3px solid #333;
-        border-top: none;
-        border-right: none;
-        background: transparent;
-        opacity: 0;
-        transform: rotate(-45deg);
-      }
-      &:hover::after {
-        opacity: 0;
-      }
-    }
-    input[type=checkbox] {
-      visibility: hidden;
-      &:checked + label:after {
-        opacity: 1;
-      }
-    }
+    @include flex-row-between-center;
   }
 
   //input container
-  &__fields {
+  &__field {
     position: relative;
     width: 100%;
-  }
 
-  & input:not([type='checkbox']) {
-    width: 100%;
-    padding: 15px;
+    & input:not([type="checkbox"]) {
+      width: inherit;
+      padding: 15px;
 
-    background-color: $white;
-    border: none;
-    box-shadow: 0 1px 1px 0 rgba(65,69,73,0.3), 0 1px 3px 1px rgba(65,69,73,0.15);
-    font-size: $font-size-medium;
+      background-color: $white;
+      border: none;
+      box-shadow: 0 1px 1px 0 rgba(65, 69, 73, 0.3),
+        0 1px 3px 1px rgba(65, 69, 73, 0.15);
+      font-size: $font-size-medium;
 
-    &:focus {
-      box-shadow:  0 4px 4px 0 rgba(65,69,73,0.3), 0 4px 12px 4px rgba(65,69,73,0.15);
+      &:focus {
+        box-shadow: 0 4px 4px 0 rgba(65, 69, 73, 0.3),
+          0 4px 12px 4px rgba(65, 69, 73, 0.15);
+      }
+    }
+
+    //error message
+    & span {
+      position: absolute;
+
+      width: 100%;
+      left: 0;
+      bottom: 0;
+
+      font-size: calc(#{$font-size-small} / 1.3);
+      color: $red;
     }
   }
+}
 
-  //error message
-  & span {
-    position: absolute;
-
-    width: 100%;
-    left: 0;
-    bottom: 0;
-
-    font-size: calc(#{$font-size-small} / 1.3);
-    color: $varmillion;
-  }
-
-  & button {
-    width: 100%;
-    box-shadow: 0 1px 1px 0 rgba(65,69,73,0.3), 0 1px 3px 1px rgba(65,69,73,0.15);
-  }
+.new-user-field__checkbox {
+  @include checkbox-field;
 }

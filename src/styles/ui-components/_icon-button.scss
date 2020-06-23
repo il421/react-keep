@@ -1,0 +1,22 @@
+@import "../mixins/mixins";
+@import "../base/variables";
+
+.icon-button {
+  @include button;
+  @include flex-row-end-center;
+
+  background: none;
+  color: $grey-light;
+  transition: color 500ms ease;
+
+  &__text {
+    padding-left: $s-size;
+
+    font-size: $font-size-small;
+  }
+
+  &:hover {
+    color: lighten($grey-light, 20%);
+    transition: color 500ms ease;
+  }
+}

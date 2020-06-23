@@ -1,29 +1,59 @@
+@import "variables";
 * {
   box-sizing: border-box;
 }
 
 html {
   font-size: 62.5%;
+  height: 100%;
 }
 
 body {
   font-family: Helvetica, Arial sans-serif;
   font-size: $font-size-small;
-  font-weight:400;
+  font-weight: 400;
   line-height: 1.6;
 }
 
 button:disabled {
   cursor: default;
-  opacity: .5;
+  opacity: 0.5;
 }
 
 button:focus,
 input:focus,
 div:focus {
-  outline: none!important;
+  outline: none !important;
+}
+
+textarea {
+  padding: 0;
+  margin: 0;
+}
+
+img {
+  width: 100%;
 }
 
 .pointer {
   cursor: pointer;
+}
+
+.my-masonry-grid {
+  display: -webkit-box; /* Not needed if autoprefixing */
+  display: -ms-flexbox; /* Not needed if autoprefixing */
+  display: flex;
+  margin-left: -10px; /* gutter size offset */
+  width: 100%;
+}
+.my-masonry-grid_column {
+  padding-left: 10px; /* gutter size */
+  background-clip: padding-box;
+}
+
+/* Style your items */
+.my-masonry-grid_column > div {
+  /* change div to reference your elements you put in <Masonry> */
+  background: grey;
+  margin-bottom: 10px;
 }

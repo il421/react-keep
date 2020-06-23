@@ -2,3 +2,4 @@
 .env.development filter=firestoreDevAPIKey
 .env.production filter=firestoreProdAPIKey
 
+* text=auto eol=lf
