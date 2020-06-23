@@ -8,6 +8,7 @@ import { RadioButtonsInputField } from "./RadioButtonsInputField";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import "../../styles/components/notes/_note-form.scss";
 import "../../styles/ui-components/_icon-button.scss";
+import "../../styles/ui-components/_link-button.scss";
 import arrayMutators from "final-form-arrays";
 
 /**

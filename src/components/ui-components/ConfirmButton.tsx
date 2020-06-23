@@ -18,7 +18,7 @@ export class ConfirmButton extends React.PureComponent<ConfirmButtonProps> {
     const {
       type = "submit",
       loading,
-      className,
+      className = "login-button",
       text,
       disabled = false,
       onCLick,
