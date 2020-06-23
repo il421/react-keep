@@ -114,11 +114,11 @@ export const handleAddNote = (
     try {
       if (
         note.type === NoteType.image &&
-        !!(note.content as ImageItem).uploadingImage
+        !!(note.content as ImageItem).uploadedImage
       ) {
         const ref = initStorageAvatarRef(uuidv4());
         const snapshot = await ref.put(
-          (note.content as ImageItem).uploadingImage!
+          (note.content as ImageItem).uploadedImage!
         );
         if (snapshot) {
           imageUrl = await snapshot.ref.getDownloadURL();

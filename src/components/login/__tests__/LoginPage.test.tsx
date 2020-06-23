@@ -7,8 +7,8 @@ import {
 } from "../../../common/testUtils";
 import { user } from "../../../testData/users";
 import { ValidationErrors } from "final-form";
-import { Errors } from "../../../common/validationErrors";
-let wrapper: ReactWrapper, props: Props;
+import { Errors } from "../../../common";
+let wrapper: ReactWrapper | undefined, props: Props;
 
 beforeEach(() => {
   props = {
@@ -19,46 +19,61 @@ beforeEach(() => {
   wrapper = mount(<LoginPage {...props} />);
 });
 
+afterEach(() => {
+  if (wrapper) {
+    wrapper.unmount();
+    wrapper = undefined;
+  }
+});
+
 describe("Rendering", () => {
   test("should render LoginPage correctly", () => {
-    expect(wrapper.debug()).toMatchSnapshot();
+    if (wrapper) {
+      expect(wrapper.debug()).toMatchSnapshot();
+    }
   });
 });
 
 describe("Submitting", () => {
   test("should logIn with  correct data", () => {
-    triggerInputChange(wrapper, { name: "email" }, user.email);
-    triggerInputChange(wrapper, { name: "password" }, user.password);
+    if (wrapper) {
+      triggerInputChange(wrapper, { name: "email" }, user.email);
+      triggerInputChange(wrapper, { name: "password" }, user.password);
 
-    wrapper.find("form").simulate("focus").simulate("submit");
-    expect(props.startLogin).toHaveBeenLastCalledWith(
-      user.email,
-      user.password
-    );
-    expect(props.startSignUp).not.toBeCalled();
+      wrapper.find("form").simulate("focus").simulate("submit");
+      expect(props.startLogin).toHaveBeenLastCalledWith(
+        user.email,
+        user.password
+      );
+      expect(props.startSignUp).not.toBeCalled();
+    }
   });
 
   test("should submit logIn correct data correctly", () => {
-    triggerInputChange(wrapper, { name: "email" }, user.email);
-    triggerInputChange(wrapper, { name: "password" }, user.password);
-    triggerCheckboxChange(wrapper, { name: "isNew" }, true);
+    if (wrapper) {
+      triggerInputChange(wrapper, { name: "email" }, user.email);
+      triggerInputChange(wrapper, { name: "password" }, user.password);
+      triggerCheckboxChange(wrapper, { name: "isNew" }, true);
 
-    wrapper.find("form").simulate("focus").simulate("submit");
-    expect(props.startSignUp).toHaveBeenLastCalledWith(
-      user.email,
-      user.password
-    );
-    expect(props.startLogin).not.toBeCalled();
+      wrapper.find("form").simulate("focus").simulate("submit");
+      expect(props.startSignUp).toHaveBeenLastCalledWith(
+        user.email,
+        user.password
+      );
+      expect(props.startLogin).not.toBeCalled();
+    }
   });
 
   test("should not submit with invalid email correctly", () => {
-    triggerInputChange(wrapper, { name: "email" }, "email");
-    triggerInputChange(wrapper, { name: "password" }, user.password);
-    triggerCheckboxChange(wrapper, { name: "isNew" }, true);
+    if (wrapper) {
+      triggerInputChange(wrapper, { name: "email" }, "email");
+      triggerInputChange(wrapper, { name: "password" }, user.password);
+      triggerCheckboxChange(wrapper, { name: "isNew" }, true);
 
-    wrapper.find("form").simulate("focus").simulate("submit");
-    expect(props.startSignUp).not.toBeCalled();
-    expect(props.startLogin).not.toBeCalled();
+      wrapper.find("form").simulate("focus").simulate("submit");
+      expect(props.startSignUp).not.toBeCalled();
+      expect(props.startLogin).not.toBeCalled();
+    }
   });
 });
 

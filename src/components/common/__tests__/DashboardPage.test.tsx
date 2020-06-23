@@ -2,7 +2,7 @@ import React from "react";
 import { shallow, ShallowWrapper } from "enzyme";
 import { DashboardPage, onNoteSelected } from "../DashboardPage";
 import { createBrowserHistory, History } from "history";
-import { NoteType } from "../../notes/notes.types";
+import { NoteType } from "../../notes";
 
 export const history: History = createBrowserHistory();
 

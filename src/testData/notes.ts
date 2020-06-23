@@ -1,5 +1,5 @@
 import { Note } from "../store/store.types";
-import { NoteType } from "../components/notes/notes.types";
+import { NoteType } from "../components/notes";
 import { tags } from "./tags";
 
 export const notes: Note[] = [
@@ -42,7 +42,7 @@ export const notes: Note[] = [
     type: NoteType.image,
     id: "3",
     title: "3",
-    content: { text: "text", imageUrl: null },
+    content: { text: "text", imageUrl: "imageUrl" },
     tags: [tags[1].id],
     color: "#3",
     important: false,

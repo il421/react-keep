@@ -25,13 +25,13 @@ export interface ImageNoteFormModalProps {
 }
 
 export const getValidationErrors = (
-  values: NoteFormValues<ImageItem>
+  values: Pick<NoteFormValues<ImageItem>, "content">
 ): ValidationErrors => {
   const errors: ValidationErrors = { content: {} };
-  const { uploadingImage } = values.content;
+  const { uploadedImage } = values.content!;
 
-  if (!uploadingImage) {
-    errors.content.uploadingImage = Errors.required;
+  if (!uploadedImage) {
+    errors.content.uploadedImage = Errors.required;
   }
 
   return errors;
@@ -91,10 +91,10 @@ export class ImageNoteFormModal extends React.Component<
                         className="image-note-form-item__img"
                         src={
                           values.content.imageUrl &&
-                          !values.content.uploadingImage
+                          !values.content.uploadedImage
                             ? values.content.imageUrl
-                            : values.content.uploadingImage
-                            ? URL.createObjectURL(values.content.uploadingImage)
+                            : values.content.uploadedImage
+                            ? URL.createObjectURL(values.content.uploadedImage)
                             : this.NO_IMAGE_URL
                         }
                         alt="Uploaded file"
@@ -118,7 +118,7 @@ export class ImageNoteFormModal extends React.Component<
                       onButtonClick={() => {
                         form.change(
                           `${this.nameOf("content")}[${this.nameOfContent(
-                            "uploadingImage"
+                            "uploadedImage"
                           )}]`,
                           undefined
                         );
@@ -126,6 +126,7 @@ export class ImageNoteFormModal extends React.Component<
                     />
                     {initialValues.content.imageUrl && (
                       <IconButton
+                        id="test-trash-image-button"
                         icon="trash"
                         onButtonClick={() => {
                           form.change(
@@ -136,7 +137,7 @@ export class ImageNoteFormModal extends React.Component<
                           );
                           form.change(
                             `${this.nameOf("content")}[${this.nameOfContent(
-                              "uploadingImage"
+                              "uploadedImage"
                             )}]`,
                             undefined
                           );
@@ -146,7 +147,7 @@ export class ImageNoteFormModal extends React.Component<
                     <FileFormField
                       id={this.FIELD_ID}
                       name={`${this.nameOf("content")}.${this.nameOfContent(
-                        "uploadingImage"
+                        "uploadedImage"
                       )}]`}
                       className="image-note-form-item__field"
                     />

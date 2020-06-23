@@ -84,7 +84,7 @@ export interface ListItem {
 export interface ImageItem {
   text: string;
   imageUrl: string | null;
-  uploadingImage?: File;
+  uploadedImage?: File;
 }
 
 export interface SetNotesAction {
