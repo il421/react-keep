@@ -24,21 +24,20 @@ interface TagFormValues {
   value: string | undefined;
 }
 
+const getValidationErrors = (values: TagFormValues): ValidationErrors => {
+  const errors: ValidationErrors = {};
+  const { value } = values;
+
+  if (value && value.length === 0) {
+    errors.value = Errors.required;
+  } else if (value && value.length > 20) {
+    errors.value = Errors.tag;
+  }
+  return errors;
+};
+
 class TagForm extends React.PureComponent<Props> {
   private nameOf = nameOf<TagFormValues>();
-
-  private getValidationErrors = (values: TagFormValues): ValidationErrors => {
-    const errors: ValidationErrors = {};
-    const { value } = values;
-
-    if (value && value.length === 0) {
-      errors.value = Errors.required;
-    } else if (value && value.length > 20) {
-      errors.value = Errors.tag;
-    }
-
-    return errors;
-  };
 
   render() {
     return (
@@ -51,7 +50,7 @@ class TagForm extends React.PureComponent<Props> {
         classNames={{
           form: "tags-form",
         }}
-        validate={this.getValidationErrors}
+        validate={getValidationErrors}
         resetAfterSubmitting={true}
         getButtons={(isDisable: boolean) => (
           <IconButton

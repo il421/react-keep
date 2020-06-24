@@ -38,7 +38,7 @@ export const getInitialNoteFormValues = <
       type: options.type,
       title,
       content:
-      // sort the initial state if list note
+        // sort the initial state if list note
         options.type === NoteType.list
           ? (content as ListItem[]).sort(
               (a: ListItem, b: ListItem) =>
