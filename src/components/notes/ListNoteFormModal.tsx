@@ -5,7 +5,7 @@ import { NoteFormValues, NoteType } from "./notes.types";
 import { PathNames, QueryKeys } from "../../routers/Routing";
 import NoteForm from "./NoteForm";
 import { History } from "history";
-import { FieldArray } from "react-final-form-arrays";
+import { FieldArray, FieldArrayRenderProps } from "react-final-form-arrays";
 
 import { ListNoteFromItem } from "./ListNoteFromItem";
 import { FormRenderProps, FormSpy } from "react-final-form";
@@ -72,12 +72,24 @@ class ListNoteFormModal extends React.Component<ListNoteFormModalProps> {
             </FormSpy>
           </>
           <FieldArray name={this.nameOf("content")}>
-            {({ fields }) => {
-              return fields.map((name, index) => (
+            {(
+              props: FieldArrayRenderProps<ListItem, HTMLElement> & {
+                fields: {
+                  sortArray: (compareFn: (a: any, b: any) => number) => void;
+                };
+              }
+            ) => {
+              return props.fields.map((name, index) => (
                 <ListNoteFromItem
                   name={name}
                   key={index}
-                  onRemove={() => fields.remove(index)}
+                  onRemove={() => props.fields.remove(index)}
+                  onChecked={() => {
+                    props.fields.sortArray(
+                      (a: ListItem, b: ListItem) =>
+                        Number(a.checked) - Number(b.checked)
+                    );
+                  }}
                 />
               ));
             }}

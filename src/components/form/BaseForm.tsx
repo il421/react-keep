@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import { Form, FormRenderProps } from "react-final-form";
 import { ValidationErrors } from "final-form";
 import { FlexBox, LinkButton, ConfirmButton } from "../ui-components";
-import { AlignItems, JustifyContent } from "../../common";
+import { AlignItems, JustifyContent, sortArray } from "../../common";
 import { BaseFormOptions } from "./BaseForm.types";
 import { RadioButtonsInputField } from "./RadioButtonsInputField";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
@@ -68,9 +68,7 @@ export class BaseForm<FormValues> extends React.PureComponent<
         initialValues={initialValues}
         onSubmit={onSubmit}
         validate={validate}
-        mutators={{
-          ...arrayMutators,
-        }}
+        mutators={{ sortArray, ...arrayMutators }}
       >
         {(props: FormRenderProps<FormValues>) => {
           const {
