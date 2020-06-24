@@ -84,8 +84,8 @@ firebase.auth().onAuthStateChanged(async (user) => {
     store.dispatch<LoginAction>(
       login(user.uid, user.displayName, user.photoURL)
     );
-    store.dispatch<any>(handleSetNotes());
-    store.dispatch<any>(handleSetTags());
+    await store.dispatch<any>(handleSetNotes());
+    await store.dispatch<any>(handleSetTags());
 
     await renderApp();
     if (history.location.pathname === "/") {
