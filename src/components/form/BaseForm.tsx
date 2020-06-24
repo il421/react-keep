@@ -73,14 +73,21 @@ export class BaseForm<FormValues> extends React.PureComponent<
         }}
       >
         {(props: FormRenderProps<FormValues>) => {
-          const { dirty, values, submitting, submitSucceeded, form } = props;
+          const {
+            dirty,
+            values,
+            submitting,
+            submitSucceeded,
+            form,
+            handleSubmit,
+          } = props;
           // reset form if form is submitted successfully
           resetAfterSubmitting && submitSucceeded && form.reset();
 
           return (
             <>
               <form
-                onSubmit={props.handleSubmit}
+                onSubmit={handleSubmit}
                 className={classNames?.form ?? "note-form"}
                 autoComplete="off"
               >

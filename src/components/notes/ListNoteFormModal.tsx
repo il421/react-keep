@@ -21,7 +21,8 @@ interface ListNoteFormModalProps {
 class ListNoteFormModal extends React.Component<ListNoteFormModalProps> {
   private nameOf = nameOf<NoteFormValues<ListItem[]>>();
 
-  private getCheckedItems = (content: ListItem[]) => {
+  private getCheckedItems = (content: ListItem[]): string => {
+    if (!content) return "";
     return `${content.length}/${content.filter((c) => c.checked).length}`;
   };
 
