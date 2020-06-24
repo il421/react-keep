@@ -17,6 +17,7 @@ class ColorsPickerField extends React.PureComponent {
       >
         {Object.values(PickerColors).map((color: string) => (
           <RadioButtonsInputField
+            id={`color-icon-${color}`}
             key={color}
             name={this.nameOf("color")}
             radioClassName="colors-picker__item"

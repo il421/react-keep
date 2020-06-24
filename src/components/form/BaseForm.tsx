@@ -118,6 +118,7 @@ export class BaseForm<FormValues> extends React.PureComponent<
                               (option: string) =>
                                 option === BaseFormOptions.none ? null : (
                                   <RadioButtonsInputField
+                                    id={`icon-${option}`}
                                     key={option}
                                     name="currentOption"
                                     radioClassName="options__item"

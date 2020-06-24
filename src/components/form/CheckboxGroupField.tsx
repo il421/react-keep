@@ -16,8 +16,11 @@ const FieldAdapter: React.FunctionComponent<
     />
   );
 };
-
-export const CheckboxGroupField: React.FunctionComponent<
-  ExposedFieldProps<CheckboxGroupProps["selectedKeys"], HTMLElement> &
-    Pick<CheckboxGroupProps, "options" | "classNames">
-> = (props) => <Field {...props} name={props.name} component={FieldAdapter} />;
+export type CheckboxGroupFieldProps = ExposedFieldProps<
+  CheckboxGroupProps["selectedKeys"],
+  HTMLElement
+> &
+  Pick<CheckboxGroupProps, "options" | "classNames">;
+export const CheckboxGroupField: React.FunctionComponent<CheckboxGroupFieldProps> = (
+  props
+) => <Field {...props} name={props.name} component={FieldAdapter} />;

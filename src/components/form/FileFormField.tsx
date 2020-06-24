@@ -23,15 +23,17 @@ const FieldAdapter: React.FunctionComponent<FieldAdapterProps> = ({
         accept="image/*"
       />
       {(meta.error || meta.submitError) && meta.touched && (
-        <span>{meta.error}</span>
+        <span id={`error-message-${input.name}`}>{meta.error}</span>
       )}
     </div>
   );
 };
 
-export const FileFormField: React.FunctionComponent<
-  ExposedFieldProps<string, HTMLElement> & {
-    className: string;
-    id?: string;
-  }
-> = (props) => <Field {...props} name={props.name} component={FieldAdapter} />;
+export interface FileFormFieldProps
+  extends ExposedFieldProps<string, HTMLElement> {
+  className: string;
+  id?: string;
+}
+export const FileFormField: React.FunctionComponent<FileFormFieldProps> = (
+  props
+) => <Field {...props} name={props.name} component={FieldAdapter} />;

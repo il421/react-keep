@@ -30,21 +30,23 @@ const FieldAdapter: React.FunctionComponent<FieldAdapterProps> = ({
         />
       )}
       {(meta.error || meta.submitError) && meta.touched && (
-        <span>{meta.error}</span>
+        <span id={`error-message-${input.name}`}>{meta.error}</span>
       )}
     </div>
   );
 };
 
-export const TextInputField: React.FunctionComponent<
-  ExposedFieldProps<string, HTMLElement> & {
-    type?: string;
-    placeholder?: string;
-    className: string;
-    isTextArea?: boolean;
-    autoFocus?: boolean;
-  }
-> = (props) => (
+export interface TextInputFieldProps
+  extends ExposedFieldProps<string, HTMLElement> {
+  type?: string;
+  placeholder?: string;
+  className: string;
+  isTextArea?: boolean;
+  autoFocus?: boolean;
+}
+export const TextInputField: React.FunctionComponent<TextInputFieldProps> = (
+  props
+) => (
   <Field
     {...props}
     name={props.name}

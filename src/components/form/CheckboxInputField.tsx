@@ -4,7 +4,7 @@ import { ExposedFieldProps, FieldAdapterProps } from "./BaseForm.types";
 
 const FieldAdapter: React.FunctionComponent<FieldAdapterProps> = ({
   className,
-  id = "defaultId",
+  id,
   input: { ...input },
 }) => {
   return (
@@ -15,9 +15,14 @@ const FieldAdapter: React.FunctionComponent<FieldAdapterProps> = ({
   );
 };
 
-export const CheckboxInputField: React.FunctionComponent<
-  ExposedFieldProps<string, HTMLElement> & { className: string; id?: string }
-> = (props) => (
+export interface CheckboxInputFieldProps
+  extends ExposedFieldProps<string, HTMLElement> {
+  className: string;
+  id: string;
+}
+export const CheckboxInputField: React.FunctionComponent<CheckboxInputFieldProps> = (
+  props
+) => (
   <Field
     {...props}
     name={props.name}

@@ -113,6 +113,7 @@ export class LoginPage extends React.PureComponent<Props> {
 
             <div className="login-form__new-user-field new-user-field">
               <CheckboxInputField
+                id="is-new-user"
                 name={this.nameOf("isNew")}
                 className="new-user-field__checkbox"
               />
