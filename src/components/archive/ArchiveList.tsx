@@ -19,7 +19,7 @@ interface DispatchProps {
 
 export type Props = StateProps & DispatchProps;
 
-export const ArchiveList: React.FunctionComponent<Props> = ({
+export const ArchiveListBase: React.FunctionComponent<Props> = ({
   notes,
   unarchiveNote,
 }) => {
@@ -50,7 +50,7 @@ const mapStateToProps = (state: Store): StateProps => {
   };
 };
 
-export default connect<StateProps, DispatchProps, {}, Store>(
+export const ArchiveList = connect<StateProps, DispatchProps, {}, Store>(
   mapStateToProps,
   mapDispatchToProps
-)(ArchiveList);
+)(ArchiveListBase);

@@ -16,7 +16,7 @@ export interface DispatchProps {
 
 type Props = SearchProps & DispatchProps;
 
-export class Search extends React.PureComponent<Props> {
+export class SearchBase extends React.PureComponent<Props> {
   render() {
     return (
       <div className={this.props.wrapperClass}>
@@ -40,7 +40,7 @@ const mapDispatchToProps = (
   };
 };
 
-export default connect<{}, DispatchProps, SearchProps>(
+export const Search = connect<{}, DispatchProps, SearchProps>(
   undefined,
   mapDispatchToProps
-)(Search);
+)(SearchBase);

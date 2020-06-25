@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow, ShallowWrapper } from "enzyme";
-import { Header, Props } from "../Header";
+import { HeaderBase, Props } from "../Header";
 import { defaultAuthStore } from "../../../reducers/auth";
 
 let props: Props, wrapper: ShallowWrapper<Props, any>;
@@ -20,7 +20,7 @@ beforeEach(() => {
     auth: defaultAuthStore,
   };
 
-  wrapper = shallow<Props>(<Header {...props} />);
+  wrapper = shallow<Props>(<HeaderBase {...props} />);
 });
 
 test("should render Header correctly", () => {

@@ -30,3 +30,4 @@ yarn-error.log*
 /src/components/notes/options/__tests__/__snapshots__/
 /src/components/notes/__tests__/__snapshots__/
 /src/components/ui-components/__tests__/__snapshots__/
+/src/components/tags/__tests__/__snapshots__/

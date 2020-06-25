@@ -4,7 +4,7 @@ import { AlignItems, JustifyContent } from "../../common";
 import { Tag } from "../../store/store.types";
 import "../../styles/components/tags/_tags-item.scss";
 
-interface TagsItemProps {
+export interface TagsItemProps {
   tag: Tag;
   removeTag: (id: string) => void;
   checked: boolean;

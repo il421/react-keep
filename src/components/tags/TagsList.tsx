@@ -26,9 +26,9 @@ interface DispatchProps {
   removeTagFromNotes: (id: string) => void;
 }
 
-type Props = TagsListProps & DispatchProps & StateProps;
+export type Props = DispatchProps & StateProps;
 
-class TagsList extends React.PureComponent<Props> {
+export class TagsListBase extends React.PureComponent<Props> {
   render() {
     return (
       <FlexBox vertical justifyContent={JustifyContent.start}>
@@ -64,7 +64,12 @@ const mapDispatchToProps = (
   removeTagFromNotes: (id: string) => dispatch(removeTagFromNotes(id)),
 });
 
-export default connect<StateProps, DispatchProps, TagsListProps, Store>(
+export const TagsList = connect<
+  StateProps,
+  DispatchProps,
+  TagsListProps,
+  Store
+>(
   mapStateToProps,
   mapDispatchToProps
-)(TagsList);
+)(TagsListBase);

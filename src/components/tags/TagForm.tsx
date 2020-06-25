@@ -18,17 +18,19 @@ interface StateProps {
 interface DispatchProps {
   addTag: (value: string) => void;
 }
-type Props = TagFormProps & DispatchProps & StateProps;
+export type Props = TagFormProps & DispatchProps & StateProps;
 
 interface TagFormValues {
   value: string | undefined;
 }
 
-const getValidationErrors = (values: TagFormValues): ValidationErrors => {
+export const getValidationErrors = (
+  values: TagFormValues
+): ValidationErrors => {
   const errors: ValidationErrors = {};
   const { value } = values;
 
-  if (value && value.length === 0) {
+  if (typeof value !== "undefined" && value.length === 0) {
     errors.value = Errors.required;
   } else if (value && value.length > 20) {
     errors.value = Errors.tag;
@@ -36,7 +38,7 @@ const getValidationErrors = (values: TagFormValues): ValidationErrors => {
   return errors;
 };
 
-class TagForm extends React.PureComponent<Props> {
+export class TagForm extends React.PureComponent<Props> {
   private nameOf = nameOf<TagFormValues>();
 
   render() {

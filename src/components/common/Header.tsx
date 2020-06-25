@@ -4,7 +4,7 @@ import { stringify } from "query-string";
 import { AuthStoreState, Store } from "../../store/store.types";
 import { QueryKeys, RouteActions } from "../../routers/Routing";
 import { startLogout } from "../../actions/auth";
-import Search from "./Search";
+import { Search } from "./Search";
 import { Controllers } from "./Controllers";
 import {
   IconButton,
@@ -33,7 +33,7 @@ interface DispatchProps {
 
 export type Props = HeaderProps & DispatchProps & StateProps;
 
-export const Header: React.FunctionComponent<Props> = ({
+export const HeaderBase: React.FunctionComponent<Props> = ({
   startLogout,
   auth,
   showSidebar,
@@ -120,7 +120,7 @@ const mapStateToProps = (state: Store): StateProps => {
   };
 };
 
-export default connect<StateProps, DispatchProps, HeaderProps, Store>(
+export const Header = connect<StateProps, DispatchProps, HeaderProps, Store>(
   mapStateToProps,
   mapDispatchToProps
-)(Header);
+)(HeaderBase);
