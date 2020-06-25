@@ -14,6 +14,7 @@ import "../../styles/ui-components/_icon-radio.scss";
 
 interface RadioButtonsInputProps {
   radioClassName: string;
+  id: string;
   labelProps?: LabelProps;
 }
 
@@ -24,12 +25,12 @@ interface LabelProps {
 
 const FieldAdapter: React.FunctionComponent<
   FieldAdapterProps & RadioButtonsInputProps
-> = ({ radioClassName, labelProps, input: { value, ...input } }) => {
+> = ({ radioClassName, id, labelProps, input: { value, ...input } }) => {
   return (
     <div className={radioClassName}>
-      <input id={value} {...input} type="radio" value={value} />
+      <input id={id} {...input} type="radio" value={value} />
 
-      <label htmlFor={value} style={labelProps?.style}>
+      <label htmlFor={id} style={labelProps?.style}>
         {labelProps && labelProps.iconName && (
           <FontAwesomeIcon
             icon={labelProps?.iconName}
@@ -41,8 +42,11 @@ const FieldAdapter: React.FunctionComponent<
   );
 };
 
-export const RadioButtonsInputField: React.FunctionComponent<
-  ExposedFieldProps<string, HTMLElement> & RadioButtonsInputProps
-> = (props: ExposedFieldProps<string, HTMLElement>) => (
-  <Field {...props} type="radio" component={FieldAdapter} />
-);
+export type RadioButtonsInputFieldProps = ExposedFieldProps<
+  string,
+  HTMLElement
+> &
+  RadioButtonsInputProps;
+export const RadioButtonsInputField: React.FunctionComponent<RadioButtonsInputFieldProps> = (
+  props: ExposedFieldProps<string, HTMLElement>
+) => <Field {...props} type="radio" component={FieldAdapter} />;

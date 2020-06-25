@@ -18,27 +18,28 @@ interface StateProps {
 interface DispatchProps {
   addTag: (value: string) => void;
 }
-type Props = TagFormProps & DispatchProps & StateProps;
+export type Props = TagFormProps & DispatchProps & StateProps;
 
 interface TagFormValues {
   value: string | undefined;
 }
 
-class TagForm extends React.PureComponent<Props> {
+export const getValidationErrors = (
+  values: TagFormValues
+): ValidationErrors => {
+  const errors: ValidationErrors = {};
+  const { value } = values;
+
+  if (typeof value !== "undefined" && value.length === 0) {
+    errors.value = Errors.required;
+  } else if (value && value.length > 20) {
+    errors.value = Errors.tag;
+  }
+  return errors;
+};
+
+export class TagForm extends React.PureComponent<Props> {
   private nameOf = nameOf<TagFormValues>();
-
-  private getValidationErrors = (values: TagFormValues): ValidationErrors => {
-    const errors: ValidationErrors = {};
-    const { value } = values;
-
-    if (value && value.length === 0) {
-      errors.value = Errors.required;
-    } else if (value && value.length > 20) {
-      errors.value = Errors.tag;
-    }
-
-    return errors;
-  };
 
   render() {
     return (
@@ -51,7 +52,7 @@ class TagForm extends React.PureComponent<Props> {
         classNames={{
           form: "tags-form",
         }}
-        validate={this.getValidationErrors}
+        validate={getValidationErrors}
         resetAfterSubmitting={true}
         getButtons={(isDisable: boolean) => (
           <IconButton

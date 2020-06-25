@@ -1,18 +1,20 @@
 import React from "react";
 import { FlexBox, IconButton } from "../ui-components";
 import { AlignItems, JustifyContent } from "../../common";
-import { CheckboxInputField, TextInputField } from "../form";
+import { CheckboxInputField, FieldSpy, TextInputField } from "../form";
 import "../../styles/components/notes/_list-note-form-item.scss";
 
 interface ListNoteFromItemProps {
   name: string;
   onRemove: () => void;
+  onChecked: (checked: boolean, values: any) => void;
   autoFocus?: boolean;
 }
 
 export const ListNoteFromItem: React.FunctionComponent<ListNoteFromItemProps> = ({
   name,
   onRemove,
+  onChecked,
   autoFocus,
 }) => {
   return (
@@ -26,6 +28,7 @@ export const ListNoteFromItem: React.FunctionComponent<ListNoteFromItemProps> = 
         className="list-note-form-item__check"
         id={`${name}.checked`}
       />
+      <FieldSpy name={`${name}.checked`} onChange={onChecked} />
       <TextInputField
         isTextArea={true}
         name={`${name}.content`}

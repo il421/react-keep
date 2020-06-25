@@ -37,7 +37,14 @@ export const getInitialNoteFormValues = <
     return {
       type: options.type,
       title,
-      content: content as T,
+      content:
+        // sort the initial state if list note
+        options.type === NoteType.list
+          ? (content as ListItem[]).sort(
+              (a: ListItem, b: ListItem) =>
+                Number(a.checked) - Number(b.checked)
+            )
+          : (content as T),
       tags,
       color,
       currentOption: BaseFormOptions.none,

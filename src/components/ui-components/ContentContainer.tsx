@@ -1,7 +1,7 @@
 import React, { CSSProperties, MouseEventHandler } from "react";
 import "../../styles/components/common/_content-conteiner.scss";
 
-interface ContentContainerProps
+export interface ContentContainerProps
   extends Partial<Pick<HTMLDivElement, "className">> {
   style?: CSSProperties;
   onClick?: MouseEventHandler<HTMLDivElement>;

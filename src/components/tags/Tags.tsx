@@ -1,7 +1,7 @@
 import React from "react";
 import "../../styles/components/tags/_tags.scss";
 import TagForm from "./TagForm";
-import TagsList from "./TagsList";
+import { TagsList } from "./TagsList";
 
 interface TagsProps {}
 

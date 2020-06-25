@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import { Form, FormRenderProps } from "react-final-form";
 import { ValidationErrors } from "final-form";
 import { FlexBox, LinkButton, ConfirmButton } from "../ui-components";
-import { AlignItems, JustifyContent } from "../../common";
+import { AlignItems, JustifyContent, sortArray } from "../../common";
 import { BaseFormOptions } from "./BaseForm.types";
 import { RadioButtonsInputField } from "./RadioButtonsInputField";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
@@ -68,19 +68,24 @@ export class BaseForm<FormValues> extends React.PureComponent<
         initialValues={initialValues}
         onSubmit={onSubmit}
         validate={validate}
-        mutators={{
-          ...arrayMutators,
-        }}
+        mutators={{ sortArray, ...arrayMutators }}
       >
         {(props: FormRenderProps<FormValues>) => {
-          const { dirty, values, submitting, submitSucceeded, form } = props;
+          const {
+            dirty,
+            values,
+            submitting,
+            submitSucceeded,
+            form,
+            handleSubmit,
+          } = props;
           // reset form if form is submitted successfully
           resetAfterSubmitting && submitSucceeded && form.reset();
 
           return (
             <>
               <form
-                onSubmit={props.handleSubmit}
+                onSubmit={handleSubmit}
                 className={classNames?.form ?? "note-form"}
                 autoComplete="off"
               >
@@ -111,6 +116,7 @@ export class BaseForm<FormValues> extends React.PureComponent<
                               (option: string) =>
                                 option === BaseFormOptions.none ? null : (
                                   <RadioButtonsInputField
+                                    id={`icon-${option}`}
                                     key={option}
                                     name="currentOption"
                                     radioClassName="options__item"

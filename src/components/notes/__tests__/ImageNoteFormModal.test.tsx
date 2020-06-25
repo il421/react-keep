@@ -119,7 +119,13 @@ describe("Validation", () => {
     const noErrors: ValidationErrors = getValidationErrors({
       content: { uploadedImage: photoFile, imageUrl: null, text: "text" },
     });
-    console.log(noErrors);
+    expect(Object.keys(noErrors.content).length).toBe(0);
+  });
+
+  test("should return no errors if imageUrl", () => {
+    const noErrors: ValidationErrors = getValidationErrors({
+      content: { uploadedImage: undefined, imageUrl: "imageUrl", text: "text" },
+    });
     expect(Object.keys(noErrors.content).length).toBe(0);
   });
 

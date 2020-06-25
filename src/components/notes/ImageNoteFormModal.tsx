@@ -28,9 +28,9 @@ export const getValidationErrors = (
   values: Pick<NoteFormValues<ImageItem>, "content">
 ): ValidationErrors => {
   const errors: ValidationErrors = { content: {} };
-  const { uploadedImage } = values.content!;
+  const { uploadedImage, imageUrl } = values.content!;
 
-  if (!uploadedImage) {
+  if (!uploadedImage && !imageUrl) {
     errors.content.uploadedImage = Errors.required;
   }
 

@@ -22,14 +22,22 @@ const NoteContent: React.FunctionComponent<NoteContentProps> = ({
       type === NoteType.list ? (
         <ul className={"content__list list"}>
           {/* show 10 lines */}
-          {(content as ListItem[]).slice(0, 10).map((item, index) => (
-            <li key={index}>
-              <div
-                className={`list__box ${item.checked && "list__box--checked"}`}
-              />
-              <span className="list__text">{getShortText(item.content)}</span>
-            </li>
-          ))}
+          {(content as ListItem[])
+            .slice(0, 10)
+            .sort(
+              (a: ListItem, b: ListItem) =>
+                Number(a.checked) - Number(b.checked)
+            )
+            .map((item, index) => (
+              <li key={index}>
+                <div
+                  className={`list__box ${
+                    item.checked && "list__box--checked"
+                  }`}
+                />
+                <span className="list__text">{getShortText(item.content)}</span>
+              </li>
+            ))}
 
           {/* show "..." if length is more than 10 */}
           {(content as ListItem[]).length > 10 && <div>......</div>}

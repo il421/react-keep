@@ -2,6 +2,7 @@ import { QueryKeys } from "../routers/Routing";
 import { parse } from "query-string";
 import { Filters, ImageItem, ListItem, Note } from "../store/store.types";
 import { NoteType } from "../components/notes/notes.types";
+import { MutableState, Mutator, Tools } from "final-form";
 
 export const nameOf = <T>() => (name: keyof T & string) => name;
 
@@ -73,3 +74,18 @@ export const getShortText = (text: string, maxLength?: number): string => {
 
 export const toggleArrayElement = (arr: any[], item: any): any[] =>
   arr.includes(item) ? arr.filter((i) => i !== item) : [...arr, item];
+
+// react-final-form-array mutator to sort an array
+export const sortArray: Mutator<any> = <FromValues>(
+  [name, compareFn]: [string, (a: any, b: any) => number],
+  state: MutableState<FromValues>,
+  tools: Tools<any>
+) => {
+  type FormValues = {
+    [key: string]: any;
+  };
+  const sortedArray = (state.formState.values as FormValues)[name].sort(
+    compareFn
+  );
+  tools.setIn(state, "formState.values" + name, sortedArray);
+};

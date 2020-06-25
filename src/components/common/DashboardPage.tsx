@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ToastContainer } from "react-toastify";
 import { History, Path } from "history";
 import { JustifyContent, toggleArrayElement } from "../../common";
-import Header from "./Header";
+import { Header } from "./Header";
 import { SideBar } from "./SideBar";
 import { Controllers } from "./Controllers";
 import UserFormModal from "../login/UserFormModal";
@@ -15,7 +15,7 @@ import ListNoteFormModal from "../notes/ListNoteFormModal";
 import { NoteType, ImageNoteFormModal, TextNoteFormModal } from "../notes";
 import { IconButton, FlexBox } from "../ui-components";
 import Tags from "../tags/Tags";
-import ArchiveList from "../archive/ArchiveList";
+import { ArchiveList } from "../archive/ArchiveList";
 
 export interface DashboardPageProps {
   history: History;
