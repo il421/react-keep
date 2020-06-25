@@ -1,6 +1,6 @@
 import React from "react";
 
-interface UserPhotoProps
+export interface UserPhotoProps
   extends Pick<HTMLImageElement, "src" | "width" | "height"> {
   className?: string;
 }

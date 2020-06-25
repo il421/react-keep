@@ -1,6 +1,5 @@
 import React from "react";
 import { mount, ReactWrapper } from "enzyme";
-import { TextInputField, TextInputFieldProps } from "../TextInputField";
 import { Form } from "react-final-form";
 import { ValidationErrors } from "final-form";
 import { Errors } from "../../../common";

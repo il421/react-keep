@@ -3,8 +3,7 @@ import { mount, ReactWrapper } from "enzyme";
 import { TextInputField, TextInputFieldProps } from "../TextInputField";
 import { Form } from "react-final-form";
 import { ValidationErrors } from "final-form";
-import { emailRegEx, Errors } from "../../../common";
-import { LoginFormValues } from "../../login/LoginPage";
+import { Errors } from "../../../common";
 
 let props: TextInputFieldProps, wrapper: ReactWrapper<TextInputFieldProps, {}>;
 
