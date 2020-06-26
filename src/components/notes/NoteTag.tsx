@@ -9,9 +9,9 @@ interface StateProps {
   tags: TagsStoreState[];
 }
 
-type Props = NoteTagProps & StateProps;
+export type Props = NoteTagProps & StateProps;
 
-const NoteTag: React.FunctionComponent<Props> = ({
+export const NoteTagBase: React.FunctionComponent<Props> = ({
   tagId,
   tags,
 }): JSX.Element => {
@@ -29,6 +29,6 @@ const mapStateToProps = (state: Store): StateProps => {
   };
 };
 
-export default connect<StateProps, {}, NoteTagProps, Store>(mapStateToProps)(
-  NoteTag
-);
+export const NoteTag = connect<StateProps, {}, NoteTagProps, Store>(
+  mapStateToProps
+)(NoteTagBase);

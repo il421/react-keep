@@ -14,11 +14,11 @@ import { AlignItems, JustifyContent } from "../../common";
 import { getDefaultContent } from "./utils";
 import { isModal, nameOf } from "../../common";
 
-interface ListNoteFormModalProps {
+export interface ListNoteFormModalProps {
   history: History;
 }
 
-class ListNoteFormModal extends React.Component<ListNoteFormModalProps> {
+export class ListNoteFormModal extends React.Component<ListNoteFormModalProps> {
   private nameOf = nameOf<NoteFormValues<ListItem[]>>();
 
   private getCheckedItems = (content: ListItem[]): string => {
@@ -55,7 +55,9 @@ class ListNoteFormModal extends React.Component<ListNoteFormModalProps> {
                     justifyContent={JustifyContent.spaceBetween}
                     alignItems={AlignItems.center}
                   >
-                    <div>Checked: {this.getCheckedItems(values.content)}</div>
+                    <div id="test-checked-items">
+                      Checked: {this.getCheckedItems(values.content)}
+                    </div>
                     <IconButton
                       onButtonClick={() =>
                         form.change(this.nameOf("content"), [
@@ -65,6 +67,7 @@ class ListNoteFormModal extends React.Component<ListNoteFormModalProps> {
                       }
                       icon="plus-circle"
                       text="Add line"
+                      id="test-add-item-button"
                     />
                   </FlexBox>
                 );
@@ -83,6 +86,7 @@ class ListNoteFormModal extends React.Component<ListNoteFormModalProps> {
                 <ListNoteFromItem
                   name={name}
                   key={index}
+                  index={index}
                   onRemove={() => props.fields.remove(index)}
                   onChecked={() => {
                     props.fields.sortArray(
@@ -99,5 +103,3 @@ class ListNoteFormModal extends React.Component<ListNoteFormModalProps> {
     );
   }
 }
-
-export default ListNoteFormModal;

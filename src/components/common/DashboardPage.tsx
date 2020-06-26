@@ -8,11 +8,15 @@ import { Controllers } from "./Controllers";
 import UserFormModal from "../login/UserFormModal";
 import "../../styles/components/common/_dashboard.scss";
 import "../../styles/components/notes/_note-modal.scss";
-import NotesList from "../notes/NotesList";
 import { QueryKeys } from "../../routers/Routing";
 import { stringify } from "query-string";
-import ListNoteFormModal from "../notes/ListNoteFormModal";
-import { NoteType, ImageNoteFormModal, TextNoteFormModal } from "../notes";
+import {
+  NoteType,
+  ImageNoteFormModal,
+  TextNoteFormModal,
+  ListNoteFormModal,
+  NotesList,
+} from "../notes";
 import { IconButton, FlexBox } from "../ui-components";
 import Tags from "../tags/Tags";
 import { ArchiveList } from "../archive/ArchiveList";

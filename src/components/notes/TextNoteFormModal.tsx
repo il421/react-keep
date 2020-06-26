@@ -8,7 +8,7 @@ import "../../styles/components/notes/_note-form.scss";
 import NoteForm from "./NoteForm";
 import { History } from "history";
 
-interface TextNoteFormModalProps {
+export interface TextNoteFormModalProps {
   history: History;
 }
 export class TextNoteFormModal extends React.Component<TextNoteFormModalProps> {

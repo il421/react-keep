@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Note, Store } from "../../store/store.types";
-import NotesItem from "./NotesItem";
+import { NotesItem } from "./NotesItem";
 import { ThunkDispatch } from "redux-thunk";
 import {
   changeNoteArchiveStatus,
@@ -28,9 +28,9 @@ interface NotesListProp {
   onNoteSelected: (type: NoteType, id: string) => void;
 }
 
-type Props = StateProps & DispatchProps & NotesListProp;
+export type Props = StateProps & DispatchProps & NotesListProp;
 
-const NotesList: React.FunctionComponent<Props> = ({
+export const NotesListBase: React.FunctionComponent<Props> = ({
   notes,
   removeNote,
   moveToArchive,
@@ -84,7 +84,12 @@ const mapDispatchToProps = (
   toggleImportance: (id: string) => dispatch(changeNoteImportance(id)),
 });
 
-export default connect<StateProps, DispatchProps, NotesListProp, Store>(
+export const NotesList = connect<
+  StateProps,
+  DispatchProps,
+  NotesListProp,
+  Store
+>(
   mapStateToProps,
   mapDispatchToProps
-)(NotesList);
+)(NotesListBase);

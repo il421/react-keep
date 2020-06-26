@@ -5,11 +5,11 @@ import { ContentContainer, FlexBox, IconButton } from "../ui-components";
 import { AlignItems, Colors, FlexWrap, JustifyContent } from "../../common";
 import { ConfirmDialog } from "./ConfirmDialog";
 import "../../styles/components/notes/_note.scss";
-import NoteContent from "./NoteContent";
+import { NoteContent } from "./NoteContent";
 import { NoteType } from "./notes.types";
-import NoteTag from "./NoteTag";
+import { NoteTag } from "./NoteTag";
 
-interface NoteProps {
+export interface NoteProps {
   note: Note;
   removeNote: (id: string) => void;
   moveToArchive: (id: string) => void;
@@ -17,9 +17,9 @@ interface NoteProps {
   onNoteSelected: (type: NoteType, id: string) => void;
 }
 
-type Confirm = "del" | "arch" | null;
+export type Confirm = "del" | "arch" | null;
 
-const NotesItem: React.FunctionComponent<NoteProps> = ({
+export const NotesItem: React.FunctionComponent<NoteProps> = ({
   note,
   removeNote,
   moveToArchive,
@@ -48,6 +48,7 @@ const NotesItem: React.FunctionComponent<NoteProps> = ({
             }}
             icon="bookmark"
             color={note.important ? Colors.red : Colors.lightGray}
+            id={`test-toggle-importance-${note.id}`}
           />
           <FlexBox
             justifyContent={JustifyContent.start}
@@ -59,6 +60,7 @@ const NotesItem: React.FunctionComponent<NoteProps> = ({
                 setIsConfirm("arch");
               }}
               icon="archive"
+              id={`test-toggle-arch-${note.id}`}
             />
 
             <IconButton
@@ -67,6 +69,7 @@ const NotesItem: React.FunctionComponent<NoteProps> = ({
                 setIsConfirm("del");
               }}
               icon="times"
+              id={`test-delete-note-${note.id}`}
             />
           </FlexBox>
         </FlexBox>
@@ -133,5 +136,3 @@ const NotesItem: React.FunctionComponent<NoteProps> = ({
     </ContentContainer>
   );
 };
-
-export default NotesItem;

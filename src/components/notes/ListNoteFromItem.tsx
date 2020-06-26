@@ -4,8 +4,9 @@ import { AlignItems, JustifyContent } from "../../common";
 import { CheckboxInputField, FieldSpy, TextInputField } from "../form";
 import "../../styles/components/notes/_list-note-form-item.scss";
 
-interface ListNoteFromItemProps {
+export interface ListNoteFromItemProps {
   name: string;
+  index: number;
   onRemove: () => void;
   onChecked: (checked: boolean, values: any) => void;
   autoFocus?: boolean;
@@ -15,6 +16,7 @@ export const ListNoteFromItem: React.FunctionComponent<ListNoteFromItemProps> = 
   name,
   onRemove,
   onChecked,
+  index,
   autoFocus,
 }) => {
   return (
@@ -37,8 +39,9 @@ export const ListNoteFromItem: React.FunctionComponent<ListNoteFromItemProps> = 
         autoFocus={autoFocus}
       />
       <IconButton
+        id={`test-item-rm-button-${index}`}
         onButtonClick={onRemove}
-        icon={"times"}
+        icon="times"
         className="list-note-form-item__remove"
       />
     </FlexBox>

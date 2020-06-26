@@ -3,12 +3,12 @@ import { NoteType } from "./notes.types";
 import { ImageItem, ListItem } from "../../store/store.types";
 import { getShortText } from "../../common";
 
-interface NoteContentProps {
+export interface NoteContentProps {
   type: NoteType;
   content: string | ListItem[] | ImageItem;
 }
 
-const NoteContent: React.FunctionComponent<NoteContentProps> = ({
+export const NoteContent: React.FunctionComponent<NoteContentProps> = ({
   type,
   content,
 }): JSX.Element => {
@@ -61,5 +61,3 @@ const NoteContent: React.FunctionComponent<NoteContentProps> = ({
     </>
   );
 };
-
-export default NoteContent;
