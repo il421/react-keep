@@ -5,7 +5,7 @@ import { isModal, nameOf, Placeholders } from "../../common";
 import { PathNames, QueryKeys } from "../../routers/Routing";
 import { TextInputField } from "../form";
 import "../../styles/components/notes/_note-form.scss";
-import NoteForm from "./NoteForm";
+import { NoteForm } from "./NoteForm";
 import { History } from "history";
 
 export interface TextNoteFormModalProps {
