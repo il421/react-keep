@@ -15,11 +15,11 @@ import {
   ImageNoteFormModal,
   TextNoteFormModal,
   ListNoteFormModal,
-  NotesList,
 } from "../notes";
 import { IconButton, FlexBox } from "../ui-components";
 import Tags from "../tags/Tags";
 import { ArchiveList } from "../archive/ArchiveList";
+import { NotesList } from "../notes/NotesList";
 
 export interface DashboardPageProps {
   history: History;

@@ -53,9 +53,9 @@ interface TextNoteFormModalState {
   currentNote: Note | null;
 }
 
-type Props = DispatchProps & StateProps & NoteFormProps;
+export type Props = DispatchProps & StateProps & NoteFormProps;
 
-class NoteForm extends React.PureComponent<Props> {
+export class NoteFormBase extends React.PureComponent<Props> {
   private defaultNote: NoteFormValues<string | ListItem[] | ImageItem> = {
     type: this.props.type,
     title: "",
@@ -175,7 +175,7 @@ const mapDispatchToProps = (
     dispatch(handleUpdateNote(id, note)),
 });
 
-export default connect<StateProps, DispatchProps, any, Store>(
+export const NoteForm = connect<StateProps, DispatchProps, any, Store>(
   mapStateToProps,
   mapDispatchToProps
-)(NoteForm);
+)(NoteFormBase);

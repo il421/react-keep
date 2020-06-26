@@ -13,7 +13,7 @@ import { PathNames, QueryKeys } from "../../routers/Routing";
 import { FileFormField, TextInputField } from "../form";
 import "../../styles/components/notes/_note-form.scss";
 import "../../styles/components/notes/_image-note-form-item.scss";
-import NoteForm from "./NoteForm";
+import { NoteForm } from "./NoteForm";
 import { History } from "history";
 import { ImageItem } from "../../store/store.types";
 import { Field, FormRenderProps, FormSpy } from "react-final-form";

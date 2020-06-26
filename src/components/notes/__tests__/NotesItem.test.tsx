@@ -1,6 +1,6 @@
 import React from "react";
 import { mount, ReactWrapper } from "enzyme";
-import { NotesItem, NoteProps, Confirm } from "../NotesItem";
+import { NotesItem, NoteProps } from "../NotesItem";
 import { notes } from "../../../testData/notes";
 import configureMockStore from "redux-mock-store";
 import thunk from "redux-thunk";

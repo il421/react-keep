@@ -6,7 +6,6 @@ export * from "./NoteContent";
 export * from "./NoteForm";
 export * from "./notes.types";
 export * from "./NotesItem";
-export * from "./NotesList";
 export * from "./TextNoteFormModal";
 export * from "./utils";
 export * from "./options/ColorsPickerField";

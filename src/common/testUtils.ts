@@ -36,3 +36,7 @@ export const triggerCheckboxChange = (
 
   input.simulate("change", { target: { value: checked } });
 };
+
+export const flushPromises = () => {
+  return new Promise((resolve) => setImmediate(resolve));
+};

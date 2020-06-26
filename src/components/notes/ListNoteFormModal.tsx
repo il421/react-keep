@@ -3,7 +3,7 @@ import Modal from "react-modal";
 import { ListItem } from "../../store/store.types";
 import { NoteFormValues, NoteType } from "./notes.types";
 import { PathNames, QueryKeys } from "../../routers/Routing";
-import NoteForm from "./NoteForm";
+import { NoteForm } from "./NoteForm";
 import { History } from "history";
 import { FieldArray, FieldArrayRenderProps } from "react-final-form-arrays";
 
