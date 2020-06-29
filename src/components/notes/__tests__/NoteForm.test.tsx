@@ -46,6 +46,28 @@ afterEach(() => {
 
 describe("Rendering", () => {
   test("should render NoteForm correctly", () => {
+    wrapper = mount(
+      <Provider
+        store={createMockStore({
+          notes: notes,
+          tags: tags,
+          auth: defaultAuthState.auth,
+        } as Store)}
+      >
+        <Form initialValues={{}} onSubmit={() => {}}>
+          {() => (
+            <NoteFormBase {...props}>
+              <TextInputField
+                isTextArea={true}
+                name={"content"}
+                placeholder={Placeholders.content}
+                className="note-form__text"
+              />
+            </NoteFormBase>
+          )}
+        </Form>
+      </Provider>
+    );
     if (wrapper) {
       expect(wrapper.debug()).toMatchSnapshot();
     }
