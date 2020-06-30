@@ -1,6 +1,6 @@
 {
   "name": "react-keep",
-  "version": "2.0.0",
+  "version": "1.2.2",
   "description": "Keep Notes App",
   "private": true,
   "dependencies": {
@@ -41,7 +41,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test-no-watch": "react-scripts test --watchAll=false",
-    "release": "release-it --no-git.requireCleanWorkingDir",
+    "release": "release-it --github.release --no-git.requireCleanWorkingDir",
     "deploy": "yarn run build && firebase deploy"
   },
   "eslintConfig": {
