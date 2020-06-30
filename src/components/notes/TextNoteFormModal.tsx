@@ -33,6 +33,7 @@ export class TextNoteFormModal extends React.Component<TextNoteFormModalProps> {
       >
         <NoteForm type={NoteType.text} history={this.props.history}>
           <TextInputField
+            autoFocus={true}
             isTextArea={true}
             name={this.nameOf("content")}
             placeholder={Placeholders.content}
