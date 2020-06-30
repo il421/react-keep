@@ -4,6 +4,16 @@
 .note-form {
   @include flex-col-between-between;
 
+  &__text,
+  &__list {
+    max-height: calc(100vh - 350px);
+    overflow-y: auto;
+
+    &--image {
+      max-height: calc(100vh - 800px);
+    }
+  }
+
   &__title input,
   &__text textarea {
     width: 100%;

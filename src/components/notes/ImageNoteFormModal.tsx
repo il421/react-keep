@@ -161,7 +161,7 @@ export class ImageNoteFormModal extends React.Component<
             isTextArea={true}
             name={`${this.nameOf("content")}.${this.nameOfContent("text")}`}
             placeholder={Placeholders.content}
-            className="note-form__text"
+            className="note-form__text note-form__text--image"
           />
         </NoteForm>
       </Modal>

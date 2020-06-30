@@ -74,30 +74,32 @@ export class ListNoteFormModal extends React.Component<ListNoteFormModalProps> {
               }}
             </FormSpy>
           </>
-          <FieldArray name={this.nameOf("content")}>
-            {(
-              props: FieldArrayRenderProps<ListItem, HTMLElement> & {
-                fields: {
-                  sortArray: (compareFn: (a: any, b: any) => number) => void;
-                };
-              }
-            ) => {
-              return props.fields.map((name, index) => (
-                <ListNoteFromItem
-                  name={name}
-                  key={index}
-                  index={index}
-                  onRemove={() => props.fields.remove(index)}
-                  onChecked={() => {
-                    props.fields.sortArray(
-                      (a: ListItem, b: ListItem) =>
-                        Number(a.checked) - Number(b.checked)
-                    );
-                  }}
-                />
-              ));
-            }}
-          </FieldArray>
+          <div className="note-form__list">
+            <FieldArray name={this.nameOf("content")}>
+              {(
+                props: FieldArrayRenderProps<ListItem, HTMLElement> & {
+                  fields: {
+                    sortArray: (compareFn: (a: any, b: any) => number) => void;
+                  };
+                }
+              ) => {
+                return props.fields.map((name, index) => (
+                  <ListNoteFromItem
+                    name={name}
+                    key={index}
+                    index={index}
+                    onRemove={() => props.fields.remove(index)}
+                    onChecked={() => {
+                      props.fields.sortArray(
+                        (a: ListItem, b: ListItem) =>
+                          Number(a.checked) - Number(b.checked)
+                      );
+                    }}
+                  />
+                ));
+              }}
+            </FieldArray>
+          </div>
         </NoteForm>
       </Modal>
     );
