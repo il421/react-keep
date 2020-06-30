@@ -1,9 +1,5 @@
 import { user } from "../../testData/users";
-import {
-  AuthStoreState,
-  Note,
-  NotesActionsTypes,
-} from "../../store/store.types";
+import { Note, NotesActionsTypes } from "../../store/store.types";
 import configureMockStore from "redux-mock-store";
 import thunk from "redux-thunk";
 import { newNote, notes, updatedNote } from "../../testData/notes";
@@ -27,13 +23,14 @@ import {
 } from "../notes";
 import { tags } from "../../testData/tags";
 
-const defaultAuthState = {
+const defaultState = {
   auth: {
     uid: user.uid,
     name: user.firstName,
     url: user.url,
     loading: false,
-  } as AuthStoreState,
+  },
+  notes: notes,
 };
 const createMockStore = configureMockStore([thunk]);
 
@@ -76,7 +73,7 @@ describe("Setting", () => {
   });
 
   test("should fetch the notes from DB", (done) => {
-    const store = createMockStore(defaultAuthState);
+    const store = createMockStore(defaultState);
     store.dispatch<any>(handleSetNotes()).then(() => {
       const actions = store.getActions();
       expect(actions[0]).toEqual({
@@ -98,7 +95,7 @@ describe("Adding", () => {
   });
 
   test("should add a note to DB and store", (done) => {
-    const store = createMockStore(defaultAuthState);
+    const store = createMockStore(defaultState);
     let id: string | undefined;
     let createdAt: number | undefined;
     let updatedAt: number | undefined;
@@ -147,7 +144,7 @@ describe("Removing", () => {
   });
 
   test("should remove a note to DB and store by id", (done) => {
-    const store = createMockStore(defaultAuthState);
+    const store = createMockStore(defaultState);
 
     store.dispatch<any>(handleRemoveNote(notes[0].id)).then(() => {
       const actions = store.getActions();
@@ -180,7 +177,7 @@ describe("Updating", () => {
   });
 
   test("should update a note in DB and store by id", (done) => {
-    const store = createMockStore(defaultAuthState);
+    const store = createMockStore(defaultState);
 
     store.dispatch<any>(handleUpdateNote(notes[0].id, updatedNote)).then(() => {
       const actions = store.getActions();
@@ -218,7 +215,7 @@ describe("Importance", () => {
   });
 
   test("should setup change note importance tag in DB and store by id", (done) => {
-    const store = createMockStore(defaultAuthState);
+    const store = createMockStore(defaultState);
 
     store.dispatch<any>(changeNoteImportance(notes[0].id)).then(() => {
       const actions = store.getActions();
@@ -253,7 +250,7 @@ describe("Archiving", () => {
   });
 
   test("should setup change note archive status tag in DB and store by id", (done) => {
-    const store = createMockStore(defaultAuthState);
+    const store = createMockStore(defaultState);
 
     store.dispatch<any>(changeNoteArchiveStatus(notes[0].id)).then(() => {
       const actions = store.getActions();
@@ -288,7 +285,7 @@ describe("Tagging", () => {
   });
 
   test("should remove tag from note in DB and store by id", (done) => {
-    const store = createMockStore(defaultAuthState);
+    const store = createMockStore(defaultState);
 
     database
       .collection(Collections.users)

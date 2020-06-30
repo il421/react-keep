@@ -12,6 +12,8 @@
   transform: translateX(-300px);
   transition: transform 0.2s linear;
 
+  border-right: 1px solid $grey-light;
+
   z-index: 2000;
 
   &--show {

@@ -4,6 +4,7 @@ import {
   ImageItem,
   Note,
   NotesActionsTypes,
+  NotesStoreState,
   RemoveNoteAction,
   RemoveNoteTagAction,
   SetNotesAction,
@@ -18,12 +19,12 @@ import { getMessage, Message } from "../common";
 import { toast } from "react-toastify";
 import moment from "moment";
 import database, { firebase, storage } from "../firebase/firebase";
-import { NoteType } from "../components/notes/notes.types";
+import { NoteType } from "../components/notes";
 import { v4 as uuidv4 } from "uuid";
 import { Collections } from "../firebase/Collections";
 import { ThunkAction } from "redux-thunk";
 
-const initStorageAvatarRef = (name: string): firebase.storage.Reference => {
+const initStorageImageRef = (name: string): firebase.storage.Reference => {
   const ref = storage.ref();
   return ref.child(`${Collections.images}/${name}`);
 };
@@ -110,13 +111,15 @@ export const handleAddNote = (
   return async (dispatch: Dispatch, getState: () => Store) => {
     const uid = getState().auth.uid;
     let imageUrl: string | null = null;
+    let imageId: string | null = null;
 
     try {
       if (
         note.type === NoteType.image &&
         !!(note.content as ImageItem).uploadedImage
       ) {
-        const ref = initStorageAvatarRef(uuidv4());
+        imageId = uuidv4() as string;
+        const ref = initStorageImageRef(imageId);
         const snapshot = await ref.put(
           (note.content as ImageItem).uploadedImage!
         );
@@ -129,7 +132,7 @@ export const handleAddNote = (
         ...note,
         content:
           note.type === NoteType.image
-            ? { text: (note.content as ImageItem).text, imageUrl }
+            ? { text: (note.content as ImageItem).text, imageUrl, imageId }
             : note.content,
         createdAt: moment().valueOf(),
         updatedAt: moment().valueOf(),
@@ -155,10 +158,28 @@ export const handleRemoveNote = (
 ): ThunkAction<any, Store, any, Action> => {
   return async (dispatch: Dispatch, getState: () => Store) => {
     const uid = getState().auth.uid;
+    const notes = getState().notes;
+
+    const deletedNote = notes.find((n: NotesStoreState) => n.id === id);
+    if (!deletedNote) {
+      toast.error(getMessage(Message.noteNotFound));
+      return;
+    }
 
     const docRef = initDocumentRef(uid);
     try {
       await docRef.doc(id).delete();
+
+      // delete the image from storage if exist
+      if (
+        deletedNote.type === NoteType.image &&
+        (deletedNote.content as ImageItem).imageId !== null
+      ) {
+        const ref = initStorageImageRef(
+          (deletedNote.content as ImageItem).imageId!
+        );
+        await ref.delete();
+      }
       dispatch(removeNote(id));
     } catch (e) {
       console.log(e.message);
@@ -174,9 +195,42 @@ export const handleUpdateNote = (
   return async (dispatch: Dispatch, getState: () => Store) => {
     const uid = getState().auth.uid;
     const docRef = initDocumentRef(uid);
+    let imageId: string | null = null;
+    let imageUrl: string | null = null;
+
     try {
-      await docRef.doc(id).set(updates);
-      dispatch(updateNote(id, updates));
+      // in case if update an image
+      if (
+        updates.type === NoteType.image &&
+        (updates.content as ImageItem).uploadedImage
+      ) {
+        // delete the old image
+        const delRef = initStorageImageRef(
+          (updates.content as ImageItem).imageId!
+        );
+        await delRef.delete();
+
+        // store a new one
+        imageId = uuidv4() as string;
+        const ref = initStorageImageRef(imageId);
+        const snapshot = await ref.put(
+          (updates.content as ImageItem).uploadedImage!
+        );
+        if (snapshot) {
+          imageUrl = await snapshot.ref.getDownloadURL();
+        }
+      }
+      const note = {
+        ...updates,
+        content:
+          updates.type === NoteType.image
+            ? { text: (updates.content as ImageItem).text, imageUrl, imageId }
+            : updates.content,
+      };
+
+      // update the note
+      await docRef.doc(id).set(note);
+      dispatch(updateNote(id, note));
     } catch (e) {
       console.log(e);
       toast.error(e.message);

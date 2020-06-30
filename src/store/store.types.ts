@@ -85,6 +85,7 @@ export interface ImageItem {
   text: string;
   imageUrl: string | null;
   uploadedImage?: File;
+  imageId: string | null;
 }
 
 export interface SetNotesAction {
