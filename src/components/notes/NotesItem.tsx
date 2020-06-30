@@ -121,7 +121,7 @@ export const NotesItem: React.FunctionComponent<NoteProps> = ({
           className="note__confirm"
           closeDialog={() => setIsConfirm(null)}
           buttonsProps={{
-            confirmButtonText: isConfirm === "arch" ? "To archive" : undefined,
+            confirmButtonText: isConfirm === "arch" ? "Archive" : undefined,
           }}
           handleConfirm={() => {
             if (isConfirm === "del") {
