@@ -40,7 +40,7 @@ export const getValidationErrors = (
 
   if (!email) {
     errors.email = Errors.required;
-  } else if (!emailRegEx.test(email)) {
+  } else if (!emailRegEx.test(email.trim())) {
     errors.email = Errors.email;
   }
 
@@ -73,9 +73,9 @@ export class LoginPage extends React.PureComponent<Props> {
 
   private submitLoginForm = (values: LoginFormValues): void => {
     if (values.isNew) {
-      this.props.startSignUp(values.email, values.password);
+      this.props.startSignUp(values.email.trim(), values.password);
     } else {
-      this.props.startLogin(values.email, values.password);
+      this.props.startLogin(values.email.trim(), values.password);
     }
   };
 
@@ -98,6 +98,7 @@ export class LoginPage extends React.PureComponent<Props> {
             getButtons={this.getButtons}
           >
             <TextInputField
+              autoFocus={true}
               name={this.nameOf("email")}
               type="text"
               placeholder={Placeholders.email}
