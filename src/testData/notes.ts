@@ -42,7 +42,7 @@ export const notes: Note[] = [
     type: NoteType.image,
     id: "3",
     title: "3",
-    content: { text: "text", imageUrl: "imageUrl" },
+    content: { text: "text", imageUrl: "imageUrl", imageId: "imageId" },
     tags: [tags[1].id],
     color: "#3",
     important: false,

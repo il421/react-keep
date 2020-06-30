@@ -72,6 +72,7 @@ export const getDefaultContent = (
       return {
         text: "",
         imageUrl: null,
+        imageId: null,
       } as ImageItem;
     default:
       return "";
