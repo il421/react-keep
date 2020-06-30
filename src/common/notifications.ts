@@ -6,6 +6,7 @@ export enum Message {
   noteSaved,
   noteUpdated,
   noteRemoved,
+  noteNotFound,
 }
 
 export const getMessage = (message: Message, data?: string | number) => {
@@ -17,6 +18,7 @@ export const getMessage = (message: Message, data?: string | number) => {
     [Message.noteSaved]: "The note has been saved",
     [Message.noteUpdated]: "The note has been updated",
     [Message.noteRemoved]: "The note has been removed",
+    [Message.noteNotFound]: "The note is not found",
   };
 
   return notifications[message];
