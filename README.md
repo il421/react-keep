@@ -17,11 +17,8 @@ yarn install
 ## Usage
 
 ```
-// development server
 yarn start
-
-yarn build-dev
-yarn build-prod
+yarn deploy
 ```
 
 ## Testing
