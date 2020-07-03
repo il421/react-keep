@@ -9,7 +9,10 @@ import { v4 as uuidv4 } from "uuid";
  * @param search - as history -> location prop
  * @param notes - list of notes
  */
-export const getSelectedNote = (search: string, notes: Note[]) => {
+export const getSelectedNote = (
+  search: string,
+  notes: Note[]
+): Note | undefined => {
   const textId = parse(search).text;
   const listId = parse(search).list;
   const imageId = parse(search).image;
@@ -29,7 +32,7 @@ export const getInitialNoteFormValues = <
   T extends string | ListItem[] | ImageItem
 >(options: {
   type: NoteType;
-  currentNote: Note | null;
+  currentNote: Note | undefined;
   defaultValues: NoteFormValues<T>;
 }): NoteFormValues<T> => {
   if (options.currentNote) {

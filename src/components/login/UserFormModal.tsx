@@ -211,7 +211,6 @@ export class UserFormModal extends React.PureComponent<Props> {
                 type="text"
                 placeholder={Placeholders.firstName}
                 className="user-form__field"
-                autoFocus={true}
               />
 
               <TextInputField

@@ -50,7 +50,7 @@ interface DispatchProps {
 
 interface TextNoteFormModalState {
   currentNoteColor: PickerColors;
-  currentNote: Note | null;
+  currentNote: Note | undefined;
 }
 
 export type Props = DispatchProps & StateProps & NoteFormProps;

@@ -2,7 +2,7 @@ import React from "react";
 import Modal from "react-modal";
 import { ListItem } from "../../store/store.types";
 import { NoteFormValues, NoteType } from "./notes.types";
-import { PathNames, QueryKeys } from "../../routers/Routing";
+import { PathNames, QueryKeys, RouteActions } from "../../routers/Routing";
 import { NoteForm } from "./NoteForm";
 import { History } from "history";
 import { FieldArray, FieldArrayRenderProps } from "react-final-form-arrays";
@@ -13,6 +13,7 @@ import { IconButton, FlexBox } from "../ui-components";
 import { AlignItems, JustifyContent } from "../../common";
 import { getDefaultContent } from "./utils";
 import { isModal, nameOf } from "../../common";
+import { parse } from "query-string";
 
 export interface ListNoteFormModalProps {
   history: History;
@@ -25,6 +26,10 @@ export class ListNoteFormModal extends React.Component<ListNoteFormModalProps> {
     if (!content) return "";
     return `${content.length}/${content.filter((c) => c.checked).length}`;
   };
+
+  private isNewNote: boolean =
+    parse(this.props.history.location.search)[QueryKeys.list] ===
+    RouteActions.add;
 
   render() {
     if (
@@ -85,7 +90,7 @@ export class ListNoteFormModal extends React.Component<ListNoteFormModalProps> {
               ) => {
                 return props.fields.map((name: string, index: number) => (
                   <ListNoteFromItem
-                    autoFocus={index === 0}
+                    autoFocus={this.isNewNote && index === 0}
                     name={name}
                     key={props.fields.length! - index} // to focus the first element
                     index={index}
