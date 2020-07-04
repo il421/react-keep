@@ -41,7 +41,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test-no-watch": "react-scripts test --watchAll=false",
-    "release": "release-it --no-git.requireCleanWorkingDir",
+    "release": "dotenv -e .env.development release-it",
     "deploy": "yarn run build && firebase deploy"
   },
   "eslintConfig": {
@@ -72,6 +72,7 @@
     "@types/react-transition-group": "^4.2.4",
     "@types/redux-mock-store": "^1.0.2",
     "@types/uuid": "7.0.4",
+    "dotenv-cli": "^3.2.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "enzyme-to-json": "^3.5.0",
