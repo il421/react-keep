@@ -34,10 +34,12 @@ import { faPlusCircle } from "@fortawesome/free-solid-svg-icons/faPlusCircle";
 import { faUsersCog } from "@fortawesome/free-solid-svg-icons/faUsersCog";
 import { faArchive } from "@fortawesome/free-solid-svg-icons/faArchive";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons/faArrowRight";
-import { LoginAction } from "./store/store.types";
+import { ImageItem, LoginAction, Note } from "./store/store.types";
 import { PathNames } from "./routers/Routing";
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons/faTrash";
+import { User } from "firebase";
+import { NoteType } from "./components/notes";
 
 library.add(
   faBars,
@@ -76,10 +78,29 @@ const renderApp = () => {
   }
 };
 
+const preloadNoteImages = async (notes: Note[]): Promise<void> => {
+  const loadImage = (src: string) =>
+    new Promise((resolve) => {
+      const image = new Image();
+      image.src = src;
+      image.addEventListener("load", () => resolve());
+      // resolve in the error case too, since it can be downloaded the image on the dashboard
+      image.addEventListener("error", () => resolve());
+    });
+
+  const promises: Promise<any>[] = [];
+  notes.forEach((n) => {
+    if ((n.content as ImageItem).imageUrl) {
+      promises.push(loadImage((n.content as ImageItem).imageUrl as string));
+    }
+  });
+  await Promise.all(promises);
+};
+
 ReactDOM.render(<LoadingPage />, document.getElementById("root"));
 
 // google authentication
-firebase.auth().onAuthStateChanged(async (user) => {
+firebase.auth().onAuthStateChanged(async (user: User | null) => {
   if (user) {
     store.dispatch<LoginAction>(
       login(user.uid, user.displayName, user.photoURL)
@@ -87,7 +108,17 @@ firebase.auth().onAuthStateChanged(async (user) => {
     await store.dispatch<any>(handleSetNotes());
     await store.dispatch<any>(handleSetTags());
 
+    const imageNotes = store
+      .getState()
+      .notes.filter((n) => n.type === NoteType.image);
+
+    // preload notes images before rendering
+    if (imageNotes.length) {
+      await preloadNoteImages(imageNotes);
+    }
+
     await renderApp();
+
     if (history.location.pathname === "/") {
       await history.push(PathNames.base);
     }
