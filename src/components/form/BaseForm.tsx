@@ -136,6 +136,14 @@ export class BaseForm<FormValues> extends React.PureComponent<
                               classNames?.buttons ?? "actions__buttons"
                             }
                           >
+                            <LinkButton
+                              id="test-base-form-close-button"
+                              text="Close"
+                              type="button"
+                              disabled={submitting}
+                              onClick={() => onCancel && onCancel()}
+                            />
+
                             <ConfirmButton
                               id="test-base-form-submit-button"
                               className="link-button"
@@ -143,14 +151,6 @@ export class BaseForm<FormValues> extends React.PureComponent<
                               type="submit"
                               disabled={!dirty}
                               loading={submitting}
-                            />
-
-                            <LinkButton
-                              id="test-base-form-close-button"
-                              text="Close"
-                              type="button"
-                              disabled={submitting}
-                              onClick={() => onCancel && onCancel()}
                             />
                           </FlexBox>
                         </FlexBox>
