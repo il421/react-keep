@@ -4,6 +4,11 @@
 .note-form {
   height: 100%;
   @include flex-col-between-between;
+
+  &__title {
+    margin-bottom: $s-size;
+  }
+
   &__text,
   &__list {
     max-height: calc(100vh - 350px);
@@ -59,6 +64,14 @@
 
     @media (min-width: $desktop-widths) {
       width: 30%;
+    }
+  }
+}
+
+.submitting-buttons {
+  &__submit {
+    &--width {
+      width: 82px;
     }
   }
 }

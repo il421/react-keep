@@ -133,7 +133,8 @@ export class BaseForm<FormValues> extends React.PureComponent<
                             justifyContent={JustifyContent.end}
                             alignItems={AlignItems.center}
                             className={
-                              classNames?.buttons ?? "actions__buttons"
+                              classNames?.buttons ??
+                              "actions__submitting-buttons submitting-buttons"
                             }
                           >
                             <LinkButton
@@ -146,6 +147,7 @@ export class BaseForm<FormValues> extends React.PureComponent<
 
                             <ConfirmButton
                               id="test-base-form-submit-button"
+                              wrapperClassName="submitting-buttons__submit--width"
                               className="link-button"
                               text={submitButtonName}
                               type="submit"
