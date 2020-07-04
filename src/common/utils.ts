@@ -1,7 +1,7 @@
 import { QueryKeys } from "../routers/Routing";
 import { parse } from "query-string";
 import { Filters, ImageItem, ListItem, Note } from "../store/store.types";
-import { NoteType } from "../components/notes/notes.types";
+import { NoteType } from "../components/notes";
 import { MutableState, Mutator, Tools } from "final-form";
 
 export const nameOf = <T>() => (name: keyof T & string) => name;

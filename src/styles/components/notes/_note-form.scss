@@ -2,22 +2,23 @@
 @import "../../mixins/mixins";
 
 .note-form {
+  height: 100%;
   @include flex-col-between-between;
-
   &__text,
   &__list {
     max-height: calc(100vh - 350px);
     overflow-y: auto;
+    flex-grow: 1;
 
-    &--image {
-      max-height: calc(100vh - 800px);
+    @media (max-width: $tablet-widths) {
+      max-height: 100%;
     }
   }
 
   &__title input,
   &__text textarea {
     width: 100%;
-    margin-bottom: $s-size;
+    padding: 0;
 
     border: none;
     outline: none;
@@ -32,6 +33,7 @@
   }
 
   &__text textarea {
+    min-height: 100px;
     font-size: $font-size-medium;
     line-height: 1.6;
     resize: none;

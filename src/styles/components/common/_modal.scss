@@ -1,15 +1,16 @@
+@import "../../base/variables";
+@import "../../mixins/mixins";
+
 .ReactModalPortal {
   & > div {
     opacity: 0;
   }
 
   & .ReactModal__Overlay {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flex-col-center-center;
 
     transition: opacity 200ms ease-in-out;
-    overflow-y: auto;
+    z-index: 1000;
   }
 
   & .ReactModal__Overlay--after-open {
@@ -18,5 +19,14 @@
 
   & .ReactModal__Overlay--before-close {
     opacity: 0;
+  }
+}
+
+.ReactModal__Content {
+  width: 100%;
+  height: 100%;
+
+  @media (min-width: $tablet-widths) {
+    height: auto;
   }
 }

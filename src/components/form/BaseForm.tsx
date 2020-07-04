@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import { Form, FormRenderProps } from "react-final-form";
 import { ValidationErrors } from "final-form";
-import { FlexBox, LinkButton, ConfirmButton } from "../ui-components";
+import { ConfirmButton, FlexBox, LinkButton } from "../ui-components";
 import { AlignItems, JustifyContent, sortArray } from "../../common";
 import { BaseFormOptions } from "./BaseForm.types";
 import { RadioButtonsInputField } from "./RadioButtonsInputField";
@@ -90,7 +90,7 @@ export class BaseForm<FormValues> extends React.PureComponent<
                 autoComplete="off"
               >
                 {this.props.children}
-                <>
+                <div>
                   {
                     // if getButtons = true, use custom buttons if the form is not user
                     // for notes (like login form), otherwise render original buttons
@@ -166,7 +166,7 @@ export class BaseForm<FormValues> extends React.PureComponent<
                       </>
                     )
                   }
-                </>
+                </div>
               </form>
             </>
           );

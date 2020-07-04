@@ -77,12 +77,21 @@ export class UserFormModal extends React.PureComponent<Props> {
 
   private getButtons = (isDisable: boolean) => {
     return (
-      <ConfirmButton
-        text="Update"
-        loading={this.props.auth.loading}
-        disabled={isDisable}
-        className="login-button user-form__button"
-      />
+      <>
+        <ConfirmButton
+          text="Update"
+          loading={this.props.auth.loading}
+          disabled={isDisable}
+          className="login-button user-form__button"
+        />
+
+        <ConfirmButton
+          text="Close"
+          type="button"
+          onCLick={this.closeModal}
+          className="login-button user-form__button"
+        />
+      </>
     );
   };
 
@@ -102,6 +111,8 @@ export class UserFormModal extends React.PureComponent<Props> {
     fileInput && fileInput.click();
   };
 
+  private closeModal = () => this.props.history.push(PathNames.base);
+
   render() {
     if (
       !isModal({
@@ -114,12 +125,11 @@ export class UserFormModal extends React.PureComponent<Props> {
     return (
       <Modal
         isOpen={true}
-        onRequestClose={() => this.props.history.push(PathNames.base)}
-        closeTimeoutMS={200}
+        onRequestClose={this.closeModal}
         className="user-modal"
         ariaHideApp={false}
       >
-        <ContentContainer>
+        <ContentContainer className="user-modal__container">
           <BaseForm<UserFormValues>
             classNames={{
               form: "login-box__form user-form",
@@ -201,6 +211,7 @@ export class UserFormModal extends React.PureComponent<Props> {
                 }}
               </FormSpy>
             </FlexBox>
+
             <FlexBox
               vertical
               justifyContent={JustifyContent.spaceBetween}

@@ -6,6 +6,7 @@ export interface FlexBoxProps extends Partial<Pick<HTMLElement, "className">> {
   justifyContent: JustifyContent;
   alignItems?: AlignItems;
   flexWrap?: FlexWrap;
+  flexGrow?: boolean;
   width?: string;
 }
 
@@ -22,6 +23,7 @@ export class FlexBox extends React.PureComponent<FlexBoxProps> {
     justifyContent: this.props.justifyContent,
     alignItems: this.props.alignItems ?? AlignItems.inherit,
     flexWrap: this.props.flexWrap ?? FlexWrap.inherit,
+    flexGrow: this.props.flexGrow ? 1 : 0,
   };
 
   render() {

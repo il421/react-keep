@@ -40,6 +40,7 @@
 .login-form {
   &__new-user-field {
     width: 100%;
+    margin-bottom: $s-size;
     @include flex-row-between-center;
   }
 
@@ -47,6 +48,7 @@
   &__field {
     position: relative;
     width: 100%;
+    margin-bottom: $s-size;
 
     & input:not([type="checkbox"]) {
       width: inherit;

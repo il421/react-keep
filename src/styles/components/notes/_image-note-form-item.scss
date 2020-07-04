@@ -3,6 +3,8 @@
 
 .image-note-form-item {
   position: relative;
+  overflow-y: auto;
+
   &__img {
     width: 100%;
     max-width: inherit;

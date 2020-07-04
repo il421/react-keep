@@ -15,14 +15,28 @@
 @mixin flex-col-between-center {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-content: space-between;
+}
+
+@mixin flex-col-center-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
 }
 
 @mixin flex-col-between-between {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: inherit;
+}
+
+@mixin flex-col-start-between {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: inherit;
 }
 
