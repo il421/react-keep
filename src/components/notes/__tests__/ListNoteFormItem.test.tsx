@@ -10,6 +10,7 @@ beforeEach(() => {
   props = {
     name: "text",
     index: 1,
+    addItem: jest.fn(),
     onRemove: jest.fn(),
     onChecked: jest.fn(),
   };
@@ -44,14 +45,37 @@ describe("Actions", () => {
       </Form>
     );
 
+    // remove item
+    wrapper.find("#test-item-rm-button-1").hostNodes().simulate("click");
+    expect(props.onRemove).toBeCalled();
+  });
+
+  test("should call onChecked then click on a remove button", () => {
+    wrapper = mount(
+      <Form initialValues={{}} onSubmit={() => {}}>
+        {() => <ListNoteFromItem {...props} />}
+      </Form>
+    );
+
     // check item
     triggerCheckboxChange(wrapper, { name: "text.checked" }, true);
     expect(props.onChecked).toHaveBeenLastCalledWith(true, {
       text: { checked: true },
     });
+  });
 
-    // remove item
-    wrapper.find("#test-item-rm-button-1").hostNodes().simulate("click");
-    expect(props.onRemove).toBeCalled();
+  test("should call addItem then click on a remove button", () => {
+    wrapper = mount(
+      <Form initialValues={{}} onSubmit={() => {}}>
+        {() => <ListNoteFromItem {...props} />}
+      </Form>
+    );
+
+    // add item
+    wrapper
+      .find("textarea[name='text.content']")
+      .hostNodes()
+      .simulate("keyup", { keyCode: 13 });
+    expect(props.addItem).toBeCalled();
   });
 });

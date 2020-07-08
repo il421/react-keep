@@ -21,10 +21,11 @@ const FieldAdapter: React.FunctionComponent<FieldAdapterProps> = ({
         useWebWorker: true,
       };
       file = await imageCompression(target.files[0], options);
-    }
-
-    if (!!file) {
-      input.onChange(file);
+      if (!!file) {
+        input.onChange(file);
+      } else {
+        input.onChange(target.files[0]);
+      }
     }
   };
   return (

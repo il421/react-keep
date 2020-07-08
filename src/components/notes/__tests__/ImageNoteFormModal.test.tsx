@@ -13,6 +13,7 @@ import { notes } from "../../../testData/notes";
 import { tags } from "../../../testData/tags";
 import { ValidationErrors } from "final-form";
 import { Errors } from "../../../common";
+import fs from "fs";
 
 let wrapper: ReactWrapper | undefined, props: ImageNoteFormModalProps;
 const mockHistoryPush = jest.fn();
@@ -25,6 +26,7 @@ const history = {
   },
 };
 const createMockStore = configureMockStore([thunk]);
+const file = fs.readFileSync("./src/testData/test_img.jpg");
 
 beforeEach(() => {
   props = {
@@ -114,24 +116,39 @@ describe("Canceling", () => {
 
 describe("Validation", () => {
   test("should return no errors", () => {
-    const photoFile = new File(["(⌐□_□)"], "test.png", { type: "image/png" });
+    const uploadedImage = new File([file], "test.png", { type: "image/png" });
 
     const noErrors: ValidationErrors = getValidationErrors({
-      content: { uploadedImage: photoFile, imageUrl: null, text: "text" },
+      content: {
+        uploadedImage,
+        imageId: null,
+        imageUrl: null,
+        text: "text",
+      },
     });
     expect(Object.keys(noErrors.content).length).toBe(0);
   });
 
   test("should return no errors if imageUrl", () => {
     const noErrors: ValidationErrors = getValidationErrors({
-      content: { uploadedImage: undefined, imageUrl: "imageUrl", text: "text" },
+      content: {
+        uploadedImage: undefined,
+        imageUrl: "imageUrl",
+        imageId: "imageId",
+        text: "text",
+      },
     });
     expect(Object.keys(noErrors.content).length).toBe(0);
   });
 
   test("should return uploadedImage required", () => {
     const emailIsRequiredError: ValidationErrors = getValidationErrors({
-      content: { uploadedImage: undefined, imageUrl: null, text: "text" },
+      content: {
+        uploadedImage: undefined,
+        imageUrl: null,
+        imageId: null,
+        text: "text",
+      },
     });
     expect(Object.keys(emailIsRequiredError).length).toBe(1);
     expect(emailIsRequiredError.content.uploadedImage).toBe(Errors.required);

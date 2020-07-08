@@ -4,9 +4,11 @@ import { Props, UserFormModal } from "../UserFormModal";
 import { defaultAuthState } from "../../../actions/__tests__/auth.test";
 import { triggerInputChange } from "../../../common/testUtils";
 import { user } from "../../../testData/users";
+import fs from "fs";
 
 let wrapper: ReactWrapper | undefined, props: Props;
 const mockHistoryPush = jest.fn();
+const file = fs.readFileSync("./src/testData/test_img.jpg");
 
 const history = {
   push: mockHistoryPush,
@@ -41,10 +43,10 @@ describe("Rendering", () => {
 });
 
 describe("Submitting", () => {
-  test("should update user details", () => {
+  test("should update user details", async () => {
     if (wrapper) {
       window.URL.createObjectURL = jest.fn();
-      const photoFile = new File(["(⌐□_□)"], "test.png", { type: "image/png" });
+      const photoFile = new File([file], "test.png", { type: "image/png" });
       expect(wrapper.exists(".user-form")).toBeTruthy();
 
       // set values
@@ -59,7 +61,6 @@ describe("Submitting", () => {
       wrapper.find("form").simulate("focus").simulate("submit");
       expect(props.updateUserData).toHaveBeenLastCalledWith({
         displayName: "test test",
-        photoFile,
         photoURL: null,
         tenantId: user.uid,
       });
