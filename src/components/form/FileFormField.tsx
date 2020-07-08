@@ -1,6 +1,7 @@
 import React from "react";
 import { Field } from "react-final-form";
 import { ExposedFieldProps, FieldAdapterProps } from "./BaseForm.types";
+import imageCompression from "browser-image-compression";
 
 const FieldAdapter: React.FunctionComponent<FieldAdapterProps> = ({
   className,
@@ -9,8 +10,22 @@ const FieldAdapter: React.FunctionComponent<FieldAdapterProps> = ({
   meta,
   ...rest
 }) => {
-  const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-    target.files && input.onChange(target.files[0]);
+  const handleChange = async ({
+    target,
+  }: React.ChangeEvent<HTMLInputElement>) => {
+    let file: File | Blob | undefined;
+    if (target.files && target.files[0]) {
+      const options = {
+        maxSizeMB: 1,
+        maxWidthOrHeight: 500,
+        useWebWorker: true,
+      };
+      file = await imageCompression(target.files[0], options);
+    }
+
+    if (!!file) {
+      input.onChange(file);
+    }
   };
   return (
     <div className={className}>
