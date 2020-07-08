@@ -9,6 +9,7 @@ export interface ListNoteFromItemProps {
   index: number;
   onRemove: () => void;
   onChecked: (checked: boolean, values: any) => void;
+  addItem: () => void;
   autoFocus?: boolean;
 }
 
@@ -18,7 +19,12 @@ export const ListNoteFromItem: React.FunctionComponent<ListNoteFromItemProps> = 
   onChecked,
   index,
   autoFocus,
+  addItem,
 }) => {
+  const handleOnKeyUp = (keyCode: number) => {
+    const ENTER_KEY_CODE = 13;
+    keyCode === ENTER_KEY_CODE && addItem();
+  };
   return (
     <FlexBox
       justifyContent={JustifyContent.spaceBetween}
@@ -32,6 +38,7 @@ export const ListNoteFromItem: React.FunctionComponent<ListNoteFromItemProps> = 
       />
       <FieldSpy name={`${name}.checked`} onChange={onChecked} />
       <TextInputField
+        onKeyUp={handleOnKeyUp}
         isTextArea={true}
         name={`${name}.content`}
         placeholder="Type something ..."

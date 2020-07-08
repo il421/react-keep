@@ -49,13 +49,19 @@ export class ListNoteFormModal extends React.Component<ListNoteFormModalProps> {
         ariaHideApp={false}
       >
         <NoteForm type={NoteType.list} history={this.props.history}>
-          <>
-            <FormSpy>
-              {({
-                form,
-                values,
-              }: FormRenderProps<NoteFormValues<ListItem[]>>) => {
-                return (
+          <FormSpy>
+            {({
+              form,
+              values,
+            }: FormRenderProps<NoteFormValues<ListItem[]>>) => {
+              const addItem = () => {
+                form.change(this.nameOf("content"), [
+                  (getDefaultContent(NoteType.list) as ListItem[])[0],
+                  ...values.content,
+                ]);
+              };
+              return (
+                <>
                   <FlexBox
                     justifyContent={JustifyContent.spaceBetween}
                     alignItems={AlignItems.center}
@@ -64,48 +70,54 @@ export class ListNoteFormModal extends React.Component<ListNoteFormModalProps> {
                       Checked: {this.getCheckedItems(values.content)}
                     </div>
                     <IconButton
-                      onButtonClick={() =>
-                        form.change(this.nameOf("content"), [
-                          (getDefaultContent(NoteType.list) as ListItem[])[0],
-                          ...values.content,
-                        ])
-                      }
+                      onButtonClick={addItem}
                       icon="plus-circle"
                       text="Add line"
                       id="test-add-item-button"
                     />
                   </FlexBox>
-                );
-              }}
-            </FormSpy>
-          </>
-          <div className="note-form__list">
-            <FieldArray name={this.nameOf("content")}>
-              {(
-                props: FieldArrayRenderProps<ListItem, HTMLElement> & {
-                  fields: {
-                    sortArray: (compareFn: (a: any, b: any) => number) => void;
-                  };
-                }
-              ) => {
-                return props.fields.map((name: string, index: number) => (
-                  <ListNoteFromItem
-                    autoFocus={this.isNewNote && index === 0}
-                    name={name}
-                    key={props.fields.length! - index} // to focus the first element
-                    index={index}
-                    onRemove={() => props.fields.remove(index)}
-                    onChecked={() => {
-                      props.fields.sortArray(
-                        (a: ListItem, b: ListItem) =>
-                          Number(a.checked) - Number(b.checked)
-                      );
-                    }}
-                  />
-                ));
-              }}
-            </FieldArray>
-          </div>
+
+                  <div className="note-form__list">
+                    <FieldArray name={this.nameOf("content")}>
+                      {(
+                        props: FieldArrayRenderProps<ListItem, HTMLElement> & {
+                          fields: {
+                            sortArray: (
+                              compareFn: (a: any, b: any) => number
+                            ) => void;
+                          };
+                        }
+                      ) => {
+                        const handleOnChecked = () => {
+                          props.fields.sortArray(
+                            (a: ListItem, b: ListItem) =>
+                              Number(a.checked) - Number(b.checked)
+                          );
+                        };
+
+                        const handleOnRemove = (index: number) => () => {
+                          props.fields.remove(index);
+                        };
+                        return props.fields.map(
+                          (name: string, index: number) => (
+                            <ListNoteFromItem
+                              autoFocus={this.isNewNote && index === 0}
+                              name={name}
+                              key={props.fields.length! - index} // to focus the first element
+                              index={index}
+                              onRemove={handleOnRemove(index)}
+                              addItem={addItem}
+                              onChecked={handleOnChecked}
+                            />
+                          )
+                        );
+                      }}
+                    </FieldArray>
+                  </div>
+                </>
+              );
+            }}
+          </FormSpy>
         </NoteForm>
       </Modal>
     );

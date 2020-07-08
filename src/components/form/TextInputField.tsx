@@ -9,14 +9,21 @@ const FieldAdapter: React.FunctionComponent<FieldAdapterProps> = ({
   input,
   meta,
   isTextArea = false,
+  onKeyUp,
   ...rest
 }) => {
+  const handleOnKeyUp = (
+    event: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    onKeyUp && onKeyUp(event.keyCode);
+  };
   return (
     <div className={className}>
       {isTextArea ? (
         <TextareaAutosize
           {...input}
           {...rest}
+          onKeyUp={handleOnKeyUp}
           spellCheck="false"
           autoComplete="new-password"
           autoFocus={autoFocus}
@@ -25,6 +32,7 @@ const FieldAdapter: React.FunctionComponent<FieldAdapterProps> = ({
         <input
           {...input}
           {...rest}
+          onKeyUp={handleOnKeyUp}
           autoComplete="new-password"
           autoFocus={autoFocus}
         />
@@ -42,6 +50,7 @@ export interface TextInputFieldProps
   placeholder?: string;
   className: string;
   isTextArea?: boolean;
+  onKeyUp?: (keyCode: number) => void;
   autoFocus?: boolean;
 }
 export const TextInputField: React.FunctionComponent<TextInputFieldProps> = (
