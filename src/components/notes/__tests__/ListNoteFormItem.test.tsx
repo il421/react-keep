@@ -2,7 +2,10 @@ import React from "react";
 import { mount, ReactWrapper } from "enzyme";
 import { ListNoteFromItemProps, ListNoteFromItem } from "../ListNoteFromItem";
 import { Form } from "react-final-form";
-import { triggerCheckboxChange } from "../../../common/testUtils";
+import {
+  triggerCheckboxChange,
+  triggerInputChange,
+} from "../../../common/testUtils";
 
 let wrapper: ReactWrapper | undefined, props: ListNoteFromItemProps;
 
@@ -13,6 +16,7 @@ beforeEach(() => {
     addItem: jest.fn(),
     onRemove: jest.fn(),
     onChecked: jest.fn(),
+    setPastedValue: jest.fn(),
   };
 
   wrapper = mount(
@@ -62,20 +66,5 @@ describe("Actions", () => {
     expect(props.onChecked).toHaveBeenLastCalledWith(true, {
       text: { checked: true },
     });
-  });
-
-  test("should call addItem then click on a remove button", () => {
-    wrapper = mount(
-      <Form initialValues={{}} onSubmit={() => {}}>
-        {() => <ListNoteFromItem {...props} />}
-      </Form>
-    );
-
-    // add item
-    wrapper
-      .find("textarea[name='text.content']")
-      .hostNodes()
-      .simulate("keyup", { keyCode: 13 });
-    expect(props.addItem).toBeCalled();
   });
 });

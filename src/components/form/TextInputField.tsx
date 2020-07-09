@@ -2,6 +2,7 @@ import React from "react";
 import { Field } from "react-final-form";
 import TextareaAutosize from "react-textarea-autosize";
 import { ExposedFieldProps, FieldAdapterProps } from "./BaseForm.types";
+import { newLineRegEx } from "../../common";
 
 const FieldAdapter: React.FunctionComponent<FieldAdapterProps> = ({
   className,
@@ -9,21 +10,39 @@ const FieldAdapter: React.FunctionComponent<FieldAdapterProps> = ({
   input,
   meta,
   isTextArea = false,
-  onKeyUp,
+  afterChangeCallback,
+  onPaste,
   ...rest
 }) => {
-  const handleOnKeyUp = (
-    event: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>
+  const handleOnChange = (
+    event: React.FormEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
-    onKeyUp && onKeyUp(event.keyCode);
+    const isInsertFromPasteNativeEvent =
+      (event.nativeEvent as InputEvent).inputType === "insertFromPaste";
+    const value: string = event.currentTarget.value;
+    const match: RegExpExecArray | null = newLineRegEx.exec(value);
+
+    if (!match) {
+      input.onChange(event);
+    } else {
+      // prevent change if value has new line in the end or beginning, but evoke a callback
+      if (match.index === 0 || match.index === value.length - 1) {
+        afterChangeCallback();
+      } else {
+        // prevent onChange of the value is pasted and has new lines
+        !isInsertFromPasteNativeEvent && input.onChange(event);
+      }
+    }
   };
+
   return (
     <div className={className}>
       {isTextArea ? (
         <TextareaAutosize
           {...input}
           {...rest}
-          onKeyUp={handleOnKeyUp}
+          onChange={handleOnChange}
+          onPaste={onPaste}
           spellCheck="false"
           autoComplete="new-password"
           autoFocus={autoFocus}
@@ -32,7 +51,8 @@ const FieldAdapter: React.FunctionComponent<FieldAdapterProps> = ({
         <input
           {...input}
           {...rest}
-          onKeyUp={handleOnKeyUp}
+          onInput={handleOnChange}
+          onPaste={onPaste}
           autoComplete="new-password"
           autoFocus={autoFocus}
         />
@@ -50,8 +70,11 @@ export interface TextInputFieldProps
   placeholder?: string;
   className: string;
   isTextArea?: boolean;
-  onKeyUp?: (keyCode: number) => void;
   autoFocus?: boolean;
+  afterChangeCallback?: () => void;
+  onPaste?: (
+    event: React.ClipboardEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => void;
 }
 export const TextInputField: React.FunctionComponent<TextInputFieldProps> = (
   props

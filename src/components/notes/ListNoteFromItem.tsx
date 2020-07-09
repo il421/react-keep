@@ -1,6 +1,6 @@
 import React from "react";
 import { FlexBox, IconButton } from "../ui-components";
-import { AlignItems, JustifyContent } from "../../common";
+import { AlignItems, JustifyContent, newLineRegEx } from "../../common";
 import { CheckboxInputField, FieldSpy, TextInputField } from "../form";
 import "../../styles/components/notes/_list-note-form-item.scss";
 
@@ -11,6 +11,7 @@ export interface ListNoteFromItemProps {
   onChecked: (checked: boolean, values: any) => void;
   addItem: () => void;
   autoFocus?: boolean;
+  setPastedValue: (paste: string) => void;
 }
 
 export const ListNoteFromItem: React.FunctionComponent<ListNoteFromItemProps> = ({
@@ -20,10 +21,18 @@ export const ListNoteFromItem: React.FunctionComponent<ListNoteFromItemProps> = 
   index,
   autoFocus,
   addItem,
+  setPastedValue,
 }) => {
-  const handleOnKeyUp = (keyCode: number) => {
-    const ENTER_KEY_CODE = 13;
-    keyCode === ENTER_KEY_CODE && addItem();
+  const handleOnPaste = (
+    event: React.ClipboardEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    const value: string = event.currentTarget.value.trim();
+    const paste: string = event.clipboardData.getData("text").trim();
+    const match: RegExpExecArray | null = newLineRegEx.exec(paste);
+    // if paste contains newlines => setPastedValue
+    if (value.length === 0 && paste.length > 0 && match) {
+      setPastedValue(paste);
+    }
   };
   return (
     <FlexBox
@@ -38,12 +47,13 @@ export const ListNoteFromItem: React.FunctionComponent<ListNoteFromItemProps> = 
       />
       <FieldSpy name={`${name}.checked`} onChange={onChecked} />
       <TextInputField
-        onKeyUp={handleOnKeyUp}
+        afterChangeCallback={addItem}
         isTextArea={true}
         name={`${name}.content`}
         placeholder="Type something ..."
         className="list-note-form-item__text"
         autoFocus={autoFocus}
+        onPaste={handleOnPaste}
       />
       <IconButton
         id={`test-item-rm-button-${index}`}

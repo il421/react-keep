@@ -9,10 +9,15 @@ import { FieldArray, FieldArrayRenderProps } from "react-final-form-arrays";
 
 import { ListNoteFromItem } from "./ListNoteFromItem";
 import { FormRenderProps, FormSpy } from "react-final-form";
-import { IconButton, FlexBox } from "../ui-components";
-import { AlignItems, JustifyContent } from "../../common";
+import { FlexBox, IconButton } from "../ui-components";
+import {
+  AlignItems,
+  isModal,
+  JustifyContent,
+  nameOf,
+  newLineRegEx,
+} from "../../common";
 import { getDefaultContent } from "./utils";
-import { isModal, nameOf } from "../../common";
 import { parse } from "query-string";
 
 export interface ListNoteFormModalProps {
@@ -56,7 +61,7 @@ export class ListNoteFormModal extends React.Component<ListNoteFormModalProps> {
             }: FormRenderProps<NoteFormValues<ListItem[]>>) => {
               const addItem = () => {
                 form.change(this.nameOf("content"), [
-                  (getDefaultContent(NoteType.list) as ListItem[])[0],
+                  getDefaultContent<ListItem[]>(NoteType.list)[0],
                   ...values.content,
                 ]);
               };
@@ -98,6 +103,36 @@ export class ListNoteFormModal extends React.Component<ListNoteFormModalProps> {
                         const handleOnRemove = (index: number) => () => {
                           props.fields.remove(index);
                         };
+
+                        const setPastedValue = (index: number) => (
+                          paste: string
+                        ) => {
+                          const values: string[] = paste
+                            .split(newLineRegEx)
+                            .filter((v) => !!v);
+
+                          if (values.length > 1) {
+                            const defaultItem: ListItem = getDefaultContent<
+                              ListItem[]
+                            >(NoteType.list)[0];
+                            for (let i = 0; i < values.length; i++) {
+                              if (i === 0) {
+                                // update the first element
+                                props.fields.update(index, {
+                                  ...defaultItem,
+                                  content: values[i].trim(),
+                                });
+                              } else {
+                                // push others
+                                props.fields.unshift({
+                                  ...defaultItem,
+                                  content: values[i].trim(),
+                                });
+                              }
+                            }
+                          }
+                        };
+
                         return props.fields.map(
                           (name: string, index: number) => (
                             <ListNoteFromItem
@@ -108,6 +143,7 @@ export class ListNoteFormModal extends React.Component<ListNoteFormModalProps> {
                               onRemove={handleOnRemove(index)}
                               addItem={addItem}
                               onChecked={handleOnChecked}
+                              setPastedValue={setPastedValue(index)}
                             />
                           )
                         );

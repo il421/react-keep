@@ -56,12 +56,12 @@ export const getInitialNoteFormValues = <
   return options.defaultValues;
 };
 
-export const getDefaultContent = (
+export const getDefaultContent = <T extends string | ListItem[] | ImageItem>(
   type: NoteType
-): string | ListItem[] | ImageItem => {
+): T => {
   switch (type) {
     case NoteType.text:
-      return "" as string;
+      return "" as T;
     case NoteType.list:
       return [
         {
@@ -70,14 +70,14 @@ export const getDefaultContent = (
           checked: false,
           position: 0,
         },
-      ] as ListItem[];
+      ] as T;
     case NoteType.image:
       return {
         text: "",
         imageUrl: null,
         imageId: null,
-      } as ImageItem;
+      } as T;
     default:
-      return "";
+      return "" as T;
   }
 };
