@@ -42,7 +42,7 @@ export const NotesListBase: React.FunctionComponent<Props> = ({
     1400: 4,
     991: 3,
     794: 2,
-    615: 2,
+    569: 2,
   };
 
   return (
