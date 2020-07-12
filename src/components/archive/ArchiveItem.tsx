@@ -24,6 +24,7 @@ export const ArchiveItem: React.FunctionComponent<ArchiveItemProps> = ({
     >
       <FlexBox
         justifyContent={JustifyContent.spaceBetween}
+        flexGrow={true}
         className="archive-item__content"
       >
         <FlexBox
