@@ -23,7 +23,7 @@ export const NoteContent: React.FunctionComponent<NoteContentProps> = ({
         <ul className={"content__list list"}>
           {/* show 10 lines */}
           {(content as ListItem[])
-            .slice(0, 10)
+            .slice(0, 5)
             .sort(
               (a: ListItem, b: ListItem) =>
                 Number(a.checked) - Number(b.checked)
