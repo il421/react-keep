@@ -10,13 +10,17 @@ const FieldAdapter: React.FunctionComponent<FieldAdapterProps> = ({
   input,
   meta,
   isTextArea = false,
-  afterChangeCallback,
+  afterPasteCallback,
   onPaste,
   ...rest
 }) => {
   const handleOnChange = (
     event: React.FormEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
+    if (!afterPasteCallback) {
+      input.onChange(event);
+      return;
+    }
     const isInsertFromPasteNativeEvent =
       (event.nativeEvent as InputEvent).inputType === "insertFromPaste";
     const value: string = event.currentTarget.value;
@@ -27,7 +31,7 @@ const FieldAdapter: React.FunctionComponent<FieldAdapterProps> = ({
     } else {
       // prevent change if value has new line in the end or beginning, but evoke a callback
       if (match.index === 0 || match.index === value.length - 1) {
-        afterChangeCallback();
+        afterPasteCallback();
       } else {
         // prevent onChange of the value is pasted and has new lines
         !isInsertFromPasteNativeEvent && input.onChange(event);
@@ -41,6 +45,8 @@ const FieldAdapter: React.FunctionComponent<FieldAdapterProps> = ({
         <TextareaAutosize
           {...input}
           {...rest}
+          onBlur={input.onBlur}
+          onFocus={input.onFocus}
           onChange={handleOnChange}
           onPaste={onPaste}
           spellCheck="false"
@@ -71,7 +77,7 @@ export interface TextInputFieldProps
   className: string;
   isTextArea?: boolean;
   autoFocus?: boolean;
-  afterChangeCallback?: () => void;
+  afterPasteCallback?: () => void;
   onPaste?: (
     event: React.ClipboardEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => void;

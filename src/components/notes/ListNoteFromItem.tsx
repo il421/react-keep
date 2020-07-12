@@ -47,7 +47,7 @@ export const ListNoteFromItem: React.FunctionComponent<ListNoteFromItemProps> = 
       />
       <FieldSpy name={`${name}.checked`} onChange={onChecked} />
       <TextInputField
-        afterChangeCallback={addItem}
+        afterPasteCallback={addItem}
         isTextArea={true}
         name={`${name}.content`}
         placeholder="Type something ..."
