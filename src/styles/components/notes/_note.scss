@@ -3,7 +3,7 @@
 .note {
   position: relative;
 
-  width: 240px;
+  min-width: 120px;
   height: inherit;
 
   padding: $s-size;
@@ -11,6 +11,12 @@
   box-shadow: 0 1px 1px 0 rgba(65, 69, 73, 0.3),
     0 1px 3px 1px rgba(65, 69, 73, 0.15);
   word-break: break-word;
+
+  @media (min-width: $mobile-widths) {
+    & {
+      width: 240px;
+    }
+  }
 
   @media (min-width: $tablet-widths) {
     & {

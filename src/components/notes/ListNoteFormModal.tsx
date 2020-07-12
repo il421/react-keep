@@ -115,21 +115,23 @@ export class ListNoteFormModal extends React.Component<ListNoteFormModalProps> {
                             const defaultItem: ListItem = getDefaultContent<
                               ListItem[]
                             >(NoteType.list)[0];
-                            for (let i = 0; i < values.length; i++) {
-                              if (i === 0) {
-                                // update the first element
-                                props.fields.update(index, {
-                                  ...defaultItem,
-                                  content: values[i].trim(),
-                                });
-                              } else {
-                                // push others
-                                props.fields.unshift({
-                                  ...defaultItem,
-                                  content: values[i].trim(),
-                                });
+                            form.batch(() => {
+                              for (let i = 0; i < values.length; i++) {
+                                if (i === 0) {
+                                  // update the first element
+                                  props.fields.update(index, {
+                                    ...defaultItem,
+                                    content: values[i].trim(),
+                                  });
+                                } else {
+                                  // push others
+                                  props.fields.push({
+                                    ...defaultItem,
+                                    content: values[i].trim(),
+                                  });
+                                }
                               }
-                            }
+                            });
                           }
                         };
 

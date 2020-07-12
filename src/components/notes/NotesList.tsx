@@ -42,11 +42,11 @@ export const NotesListBase: React.FunctionComponent<Props> = ({
     1400: 4,
     991: 3,
     794: 2,
-    615: 1,
+    615: 2,
   };
 
   return (
-    <ContentContainer style={{ margin: "0 50px" }}>
+    <ContentContainer style={{ margin: "0 5px" }}>
       <FlexBox justifyContent={JustifyContent.center} className="note-list">
         <Masonry
           breakpointCols={breakpointColumnsObj}
