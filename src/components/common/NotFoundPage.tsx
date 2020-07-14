@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../../styles/components/not-found/_not-found.scss";
 
-const NotFoundPage = (): JSX.Element => (
+const NotFoundPage: React.FunctionComponent = (): JSX.Element => (
   <div className="not-found">
     <div className="not-found__wrapper">
       <div className="not-found__text">
