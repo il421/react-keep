@@ -1,7 +1,7 @@
 export const user = {
   email: "app.ilya.testing@gmail.com",
-  password: "E4E2Mo12345678901",
-  uid: "{SECURE_TEST_USER_UID}",
+  password: "{SECURE_TEST_USER_PASS}2",
+  uid: "qIxSzOgxdGcEFgG9JZg9LyWVLH2345678901",
   firstName: "Ilya",
   lastName: "Suglobov",
   url: null,
