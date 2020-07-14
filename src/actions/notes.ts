@@ -224,7 +224,11 @@ export const handleUpdateNote = (
         ...updates,
         content:
           updates.type === NoteType.image
-            ? { text: (updates.content as ImageItem).text, imageUrl, imageId }
+            ? {
+                text: (updates.content as ImageItem).text,
+                imageUrl: imageUrl ?? (updates.content as ImageItem).imageUrl,
+                imageId: imageId ?? (updates.content as ImageItem).imageId,
+              }
             : updates.content,
       };
 
