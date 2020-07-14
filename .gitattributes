@@ -3,7 +3,7 @@
 .env.test.local filter=firestoreTestAPIKey
 .env.development filter=gitHubToken
 .env.production filter=firestoreProdAPIKey
-./testData/users.ts filter=testUserPass
-./testData/users.ts filter=testUserUid
+./src/testData/users.ts filter=testUserPass
+./src/testData/users.ts filter=testUserUid
 
 * text=auto eol=lf
