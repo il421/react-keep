@@ -1,3 +1,6 @@
+@import "../../mixins/mixins";
+@import "../../base/variables";
+
 .confirm-dialog {
   &__wrapper {
     width: 100%;
@@ -5,5 +8,13 @@
 
   &__button {
     width: 40%;
+
+    @media (max-width: $mobile-widths) {
+      & button {
+        font-size: $s-size;
+        padding-left: $xxs-size;
+        padding-right: $xxs-size;
+      }
+    }
   }
 }
