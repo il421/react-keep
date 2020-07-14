@@ -13,6 +13,7 @@ import Masonry from "react-masonry-css";
 import { getFilteredNotes } from "../../common";
 import { FlexBox, ContentContainer } from "../ui-components";
 import { JustifyContent } from "../../common";
+import "../../styles/components/notes/_note-list.scss";
 
 interface StateProps {
   notes: Note[];
@@ -46,8 +47,8 @@ export const NotesListBase: React.FunctionComponent<Props> = ({
   };
 
   return (
-    <ContentContainer style={{ margin: "0 5px" }}>
-      <FlexBox justifyContent={JustifyContent.center} className="note-list">
+    <ContentContainer style={{ margin: "0 5px" }} className="note-list">
+      <FlexBox justifyContent={JustifyContent.center}>
         <Masonry
           breakpointCols={breakpointColumnsObj}
           className="my-masonry-grid"

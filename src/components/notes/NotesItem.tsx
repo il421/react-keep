@@ -97,10 +97,10 @@ export const NotesItem: React.FunctionComponent<NoteProps> = ({
             justifyContent={JustifyContent.spaceBetween}
           >
             <div>
-              <b>Created:</b> {moment(note.createdAt).format("MMMM Do, YYYY")}
+              <b>Created:</b> {moment(note.createdAt).format("DD/MM/YY")}
             </div>
             <div>
-              <b>Edited:</b> {moment(note.updatedAt).format("MMMM Do, YYYY")}
+              <b>Edited:</b> {moment(note.updatedAt).format("DD/MM/YY")}
             </div>
           </FlexBox>
 
