@@ -81,7 +81,7 @@ test("should setup add tag action object correctly", () => {
   });
 });
 
-test("should add a note to DB and store", (done) => {
+test("should add a tag to DB and store", (done) => {
   const newTag: { value: string } = {
     value: "Tag3",
   };

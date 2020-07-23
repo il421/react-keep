@@ -4,7 +4,6 @@ import { triggerInputChange } from "../../../common/testUtils";
 import { TagForm, Props, getValidationErrors } from "../TagForm";
 import { tags } from "../../../testData/tags";
 import { ValidationErrors } from "final-form";
-import { user } from "../../../testData/users";
 import { Errors } from "../../../common";
 
 let wrapper: ReactWrapper | undefined, props: Props;

@@ -31,7 +31,10 @@ yarn-error.log*
 /src/components/notes/__tests__/__snapshots__/
 /src/components/ui-components/__tests__/__snapshots__/
 /src/components/tags/__tests__/__snapshots__/
+/src/components/collaborators/__tests__/__snapshots__/
 
 # git
 /.githooks
+
+#firebase
 /.firebase/

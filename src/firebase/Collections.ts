@@ -3,5 +3,6 @@ export enum Collections {
   images = "images",
   notes = "notes",
   tags = "tags",
+  collaborators = "collaborators",
   avatars = "avatars",
 }

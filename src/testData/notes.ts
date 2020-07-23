@@ -1,6 +1,7 @@
 import { Note } from "../store/store.types";
 import { NoteType } from "../components/notes";
 import { tags } from "./tags";
+import { collaborators, user } from "./users";
 
 export const notes: Note[] = [
   {
@@ -14,6 +15,8 @@ export const notes: Note[] = [
     archive: false,
     createdAt: 100000,
     updatedAt: 100005,
+    collaborators: collaborators.map((c) => c.uid),
+    createdBy: user.uid,
   },
   {
     type: NoteType.list,

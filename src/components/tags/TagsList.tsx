@@ -12,6 +12,7 @@ import TagsItem from "./TagsItem";
 import { handleRemoveTag } from "../../actions/tags";
 import { setTagsFilter } from "../../actions/filters";
 import { removeTagFromNotes } from "../../actions/notes";
+import "../../styles/components/tags/_tags-list.scss";
 
 interface TagsListProps {}
 
@@ -31,7 +32,11 @@ export type Props = DispatchProps & StateProps;
 export class TagsListBase extends React.PureComponent<Props> {
   render() {
     return (
-      <FlexBox vertical justifyContent={JustifyContent.start}>
+      <FlexBox
+        vertical
+        justifyContent={JustifyContent.start}
+        className="tags-list"
+      >
         {this.props.tags.map((tag) => (
           <TagsItem
             key={tag.id}

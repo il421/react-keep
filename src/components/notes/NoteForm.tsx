@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { History } from "history";
 import {
   AddNote,
+  CollaboratorsStoreState,
   ImageItem,
   ListItem,
   Note,
@@ -29,10 +30,12 @@ import {
 import { ContentContainer } from "../ui-components";
 import TagsPickerField from "./options/TagsPickerField";
 import { ValidationErrors } from "final-form";
+import CollaboratorsField from "./options/CollaboratorsField";
 
 interface StateProps {
   notes: NotesStoreState[];
   tags: TagsStoreState[];
+  collaborators: CollaboratorsStoreState[];
 }
 
 interface NoteFormProps {
@@ -128,6 +131,12 @@ export class NoteFormBase extends React.PureComponent<Props> {
                     return <ColorsPickerField />;
                   case BaseFormOptions.tags:
                     return <TagsPickerField tags={this.props.tags} />;
+                  case BaseFormOptions.collaborators:
+                    return (
+                      <CollaboratorsField
+                        collaborators={this.props.collaborators}
+                      />
+                    );
                   default:
                     return null;
                 }
@@ -165,6 +174,7 @@ export class NoteFormBase extends React.PureComponent<Props> {
 const mapStateToProps = (state: Store): StateProps => ({
   notes: state.notes,
   tags: state.tags,
+  collaborators: state.collaborators,
 });
 
 const mapDispatchToProps = (

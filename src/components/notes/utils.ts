@@ -36,7 +36,7 @@ export const getInitialNoteFormValues = <
   defaultValues: NoteFormValues<T>;
 }): NoteFormValues<T> => {
   if (options.currentNote) {
-    const { title, color, content, tags } = options.currentNote;
+    const { title, color, content, tags, collaborators } = options.currentNote;
     return {
       type: options.type,
       title,
@@ -50,6 +50,7 @@ export const getInitialNoteFormValues = <
           : (content as T),
       tags,
       color,
+      collaborators,
       currentOption: BaseFormOptions.none,
     } as NoteFormValues<T>;
   }

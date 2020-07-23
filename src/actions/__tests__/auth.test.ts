@@ -11,6 +11,7 @@ export const defaultAuthState = {
     name: user.firstName,
     url: user.url,
     loading: false,
+    email: user.email,
   } as AuthStoreState,
 };
 const createMockStore = configureMockStore([thunk]);
@@ -43,12 +44,13 @@ test("should generate loading action object correctly", () => {
 });
 
 test("should generate login action object", () => {
-  const action = login(user.uid, user.firstName, user.url);
+  const action = login(user.uid, user.firstName, user.url, user.email);
   expect(action).toEqual({
     type: AuthActionsTypes.login,
     uid: user.uid,
     name: user.firstName,
     url: user.url,
+    email: user.email,
   });
 });
 
@@ -59,7 +61,7 @@ test("should generate logout action object", () => {
   });
 });
 
-test("should fetch the notes from DB", async (done) => {
+test("should fetch the data from DB", async (done) => {
   const store = createMockStore(defaultAuthState);
   store
     .dispatch<any>(

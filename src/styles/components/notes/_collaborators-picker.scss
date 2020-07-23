@@ -1,0 +1,15 @@
+@import "../../base/variables";
+@import "../../mixins/mixins";
+.collaborators-picker {
+  width: 100%;
+  &__wrapper {
+    width: 50%;
+    margin-bottom: $s-size;
+  }
+  &__checkbox {
+    @include checkbox-field;
+  }
+  &__value {
+    margin-left: $l-size;
+  }
+}

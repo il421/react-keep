@@ -27,12 +27,14 @@ export const loading = (loading: boolean): LoadingAction => ({
 export const login = (
   uid: string,
   name: string | null,
-  url: string | null
+  url: string | null,
+  email?: string
 ): LoginAction => ({
   type: AuthActionsTypes.login,
   uid,
   name,
   url,
+  email,
 });
 
 export const logout = (): LogoutAction => ({

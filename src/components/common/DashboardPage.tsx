@@ -17,9 +17,10 @@ import {
   ListNoteFormModal,
 } from "../notes";
 import { IconButton, FlexBox } from "../ui-components";
-import Tags from "../tags/Tags";
+import { Collaborators } from "../collaborators/Collaborators";
 import { ArchiveList } from "../archive/ArchiveList";
 import { NotesList } from "../notes/NotesList";
+import Tags from "../tags/Tags";
 
 export interface DashboardPageProps {
   history: History;
@@ -28,6 +29,7 @@ export interface DashboardPageProps {
 enum CollapseType {
   "tags",
   "arch",
+  "collaborators",
 }
 
 export const onNoteSelected = (options: {
@@ -61,6 +63,9 @@ export const DashboardPage: React.FunctionComponent<DashboardPageProps> = ({
   const [showBar, setShowSidebar] = useState<boolean>(false);
   const [collapsed, setCollapsed] = useState<CollapseType[]>([]);
 
+  const handleSetCollapsed = (value: CollapseType[]) => () =>
+    setCollapsed(value);
+
   return (
     <FlexBox
       vertical={true}
@@ -85,13 +90,13 @@ export const DashboardPage: React.FunctionComponent<DashboardPageProps> = ({
             <IconButton
               icon="tags"
               text="Tags list"
-              onButtonClick={() => {
-                setCollapsed(toggleArrayElement(collapsed, CollapseType.tags));
-              }}
+              onButtonClick={handleSetCollapsed(
+                toggleArrayElement(collapsed, CollapseType.tags)
+              )}
               className={
                 collapsed.includes(CollapseType.tags)
                   ? "icon-button--collapsed"
-                  : ""
+                  : undefined
               }
             />
             {collapsed.includes(CollapseType.tags) && <Tags />}
@@ -101,16 +106,33 @@ export const DashboardPage: React.FunctionComponent<DashboardPageProps> = ({
             <IconButton
               icon="archive"
               text="Archived notes"
-              onButtonClick={() => {
-                setCollapsed(toggleArrayElement(collapsed, CollapseType.arch));
-              }}
+              onButtonClick={handleSetCollapsed(
+                toggleArrayElement(collapsed, CollapseType.arch)
+              )}
               className={
                 collapsed.includes(CollapseType.arch)
                   ? "icon-button--collapsed"
-                  : ""
+                  : undefined
               }
             />
             {collapsed.includes(CollapseType.arch) && <ArchiveList />}
+          </>
+          <>
+            <IconButton
+              icon="user-friends"
+              text="Collaborators"
+              onButtonClick={handleSetCollapsed(
+                toggleArrayElement(collapsed, CollapseType.collaborators)
+              )}
+              className={
+                collapsed.includes(CollapseType.collaborators)
+                  ? "icon-button--collapsed"
+                  : undefined
+              }
+            />
+            {collapsed.includes(CollapseType.collaborators) && (
+              <Collaborators />
+            )}
           </>
         </div>
       </SideBar>

@@ -6,6 +6,7 @@ export type Store = {
   notes: NotesStoreState[];
   filters: FiltersStoreState;
   tags: TagsStoreState[];
+  collaborators: CollaboratorsStoreState[];
 };
 
 // AUTH
@@ -14,6 +15,7 @@ export interface AuthStoreState {
   name: string | null;
   url: string | null;
   loading: boolean;
+  email?: string;
 }
 
 export interface LoginAction extends Omit<AuthStoreState, "loading"> {
@@ -27,6 +29,9 @@ export interface LogoutAction {
 export interface LoadingAction extends Pick<AuthStoreState, "loading"> {
   type: AuthActionsTypes.loading;
 }
+
+export interface UserData
+  extends Pick<User, "uid" | "email" | "displayName" | "photoURL"> {}
 
 export interface UpdateUser
   extends Pick<User, "displayName" | "photoURL" | "tenantId"> {
@@ -64,6 +69,8 @@ export interface Note {
   archive: boolean;
   createdAt: number;
   updatedAt: number;
+  collaborators?: string[];
+  createdBy?: string;
 }
 
 export interface AddNote
@@ -119,6 +126,30 @@ export interface RemoveNoteTagAction {
   type: NotesActionsTypes.removeTagFromNote;
   tagId: string;
 }
+// COLLABORATORS
+export type Collaborator = {
+  uid: string;
+  notesIds: string[];
+  email: string | null;
+  displayName: string | null;
+  photoURL: string | null;
+};
+export interface CollaboratorsStoreState extends Collaborator {}
+
+export interface SetCollaboratorsAction {
+  collaborators: Collaborator[];
+  type: CollaboratorsActionsTypes.setCollaborators;
+}
+
+export interface AddCollaboratorAction {
+  type: CollaboratorsActionsTypes.addCollaborator;
+  data: UserData;
+}
+
+export interface RemoveCollaboratorAction {
+  type: CollaboratorsActionsTypes.removeCollaborator;
+  uid: string;
+}
 
 // TAGS
 export interface TagsStoreState extends Tag {}
@@ -167,4 +198,10 @@ export enum TagsActionsTypes {
   setTags = "setTags",
   removeTag = "removeTag",
   updateTag = "updateTag",
+}
+
+export enum CollaboratorsActionsTypes {
+  addCollaborator = "addCollaborator",
+  setCollaborators = "setCollaborators",
+  removeCollaborator = "removeCollaborator",
 }

@@ -14,6 +14,7 @@ import { TextInputField } from "../../form";
 import { PickerColors, Placeholders } from "../../../common";
 import { act } from "react-dom/test-utils";
 import { defaultAuthState } from "../../../actions/__tests__/auth.test";
+import { collaborators } from "../../../testData/users";
 
 let wrapper: ReactWrapper | undefined, props: Props;
 const mockHistoryPush = jest.fn();
@@ -29,6 +30,7 @@ const history = {
 beforeEach(() => {
   props = {
     notes: notes,
+    collaborators: collaborators,
     history: history as any,
     tags: tags,
     type: NoteType.text,
@@ -277,6 +279,8 @@ describe("Actions", () => {
           type: NoteType.text,
           createdAt: notes[0].createdAt,
           updatedAt: expect.anything(),
+          collaborators: collaborators.map((c) => c.uid),
+          createdBy: "4Q4i3nfJlrfZLs6dxJFpB3uoKlq1",
         });
       }
     });

@@ -72,7 +72,7 @@ export const getShortText = (text: string, maxLength?: number): string => {
   return text;
 };
 
-export const toggleArrayElement = (arr: any[], item: any): any[] =>
+export const toggleArrayElement = <T>(arr: T[], item: any): any[] =>
   arr.includes(item) ? arr.filter((i) => i !== item) : [...arr, item];
 
 // react-final-form-array mutator to sort an array

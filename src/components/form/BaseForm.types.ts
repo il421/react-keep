@@ -14,4 +14,5 @@ export enum BaseFormOptions {
   none = "none",
   palette = "palette",
   tags = "tags",
+  collaborators = "share",
 }

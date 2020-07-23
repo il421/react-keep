@@ -38,8 +38,11 @@ import { ImageItem, LoginAction, Note } from "./store/store.types";
 import { PathNames } from "./routers/Routing";
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons/faTrash";
+import { faShare } from "@fortawesome/free-solid-svg-icons/faShare";
+import { faUserFriends } from "@fortawesome/free-solid-svg-icons/faUserFriends";
 import { User } from "firebase";
 import { NoteType } from "./components/notes";
+import { handleSetCollaborators } from "./actions/collaborators";
 
 library.add(
   faBars,
@@ -59,7 +62,9 @@ library.add(
   faPlusCircle,
   faUsersCog,
   faArrowRight,
-  faTrash
+  faTrash,
+  faShare,
+  faUserFriends
 );
 
 const store = configStore();
@@ -103,10 +108,11 @@ ReactDOM.render(<LoadingPage />, document.getElementById("root"));
 firebase.auth().onAuthStateChanged(async (user: User | null) => {
   if (user) {
     store.dispatch<LoginAction>(
-      login(user.uid, user.displayName, user.photoURL)
+      login(user.uid, user.displayName, user.photoURL, user.email!)
     );
     await store.dispatch<any>(handleSetNotes());
     await store.dispatch<any>(handleSetTags());
+    await store.dispatch<any>(handleSetCollaborators());
 
     const imageNotes = store
       .getState()

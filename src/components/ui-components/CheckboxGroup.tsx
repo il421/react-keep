@@ -3,7 +3,7 @@ import { JustifyContent } from "../../common";
 import { FlexBox } from "./FlexBox";
 import "../../styles/ui-components/_login-button.scss";
 
-interface Option {
+export interface Option {
   id: string;
   value: string;
 }

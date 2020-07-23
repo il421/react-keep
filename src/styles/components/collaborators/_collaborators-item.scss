@@ -1,0 +1,14 @@
+@import "../../mixins/mixins";
+@import "../../base/variables";
+
+.collaborators-item {
+  &__value {
+    margin-left: $xxs-size;
+  }
+
+  & img {
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+  }
+}

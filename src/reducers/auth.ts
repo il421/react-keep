@@ -8,10 +8,11 @@ import {
 
 export type AuthAction = LoginAction | LogoutAction | LoadingAction;
 
-export const defaultAuthStore = {
+export const defaultAuthStore: AuthStoreState = {
   name: null,
   url: null,
   uid: "",
+  email: "",
   loading: false,
 };
 
@@ -26,6 +27,7 @@ export default (
         uid: action.uid,
         name: action.name,
         url: action.url,
+        email: action.email,
       } as AuthStoreState;
 
     case AuthActionsTypes.logout:
