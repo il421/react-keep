@@ -40,7 +40,15 @@ export const getValidationErrors = (
 
 export class TagForm extends React.PureComponent<Props> {
   private nameOf = nameOf<TagFormValues>();
-
+  private getFormActions = (isDisable: boolean) => (
+    <IconButton
+      className="tags-form__submit"
+      icon="plus-circle"
+      size="1x"
+      type="submit"
+      disabled={isDisable}
+    />
+  );
   render() {
     return (
       <BaseForm<TagFormValues>
@@ -48,21 +56,10 @@ export class TagForm extends React.PureComponent<Props> {
         onSubmit={(values: TagFormValues) =>
           values.value && this.props.addTag(values.value)
         }
-        onCancel={() => {}}
-        classNames={{
-          form: "tags-form",
-        }}
+        formClassName="tags-form"
         validate={getValidationErrors}
         resetAfterSubmitting={true}
-        getButtons={(isDisable: boolean) => (
-          <IconButton
-            className="tags-form__submit"
-            icon="plus-circle"
-            size="1x"
-            type="submit"
-            disabled={isDisable}
-          />
-        )}
+        getFormActions={this.getFormActions}
       >
         <TextInputField
           name={this.nameOf("value")}

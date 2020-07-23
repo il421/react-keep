@@ -14,7 +14,7 @@ import { TextInputField } from "../../form";
 import { PickerColors, Placeholders } from "../../../common";
 import { act } from "react-dom/test-utils";
 import { defaultAuthState } from "../../../actions/__tests__/auth.test";
-import { collaborators } from "../../../testData/users";
+import { collaborators, user } from "../../../testData/users";
 
 let wrapper: ReactWrapper | undefined, props: Props;
 const mockHistoryPush = jest.fn();
@@ -54,6 +54,7 @@ describe("Rendering", () => {
           notes: notes,
           tags: tags,
           auth: defaultAuthState.auth,
+          collaborators: collaborators,
         } as Store)}
       >
         <Form initialValues={{}} onSubmit={() => {}}>
@@ -123,8 +124,9 @@ describe("Actions", () => {
             tag: "textarea",
           }
         );
+
         // change the color
-        wrapper.find("#icon-palette").hostNodes().simulate("change");
+        wrapper.find("#icon-palette").hostNodes().simulate("click");
         await flushPromises();
         wrapper.update();
         expect(wrapper.find(".colors-picker").exists()).toBeTruthy();
@@ -139,7 +141,7 @@ describe("Actions", () => {
         ).toBe(PickerColors.red);
 
         // check tags
-        wrapper.find("#icon-tags").hostNodes().simulate("change");
+        wrapper.find("#icon-tags").hostNodes().simulate("click");
         await flushPromises();
         wrapper.update();
         wrapper
@@ -157,6 +159,25 @@ describe("Actions", () => {
         await flushPromises();
         wrapper.update();
 
+        // check collaborators
+        wrapper.find("#icon-share").hostNodes().simulate("click");
+        await flushPromises();
+        wrapper.update();
+        wrapper
+          .find(".collaborators-picker__checkbox")
+          .at(0)
+          .find("label")
+          .simulate("click");
+        await flushPromises();
+        wrapper.update();
+        wrapper
+          .find(".collaborators-picker__checkbox")
+          .at(1)
+          .find("label")
+          .simulate("click");
+        await flushPromises();
+        wrapper.update();
+
         // submit the form
         expect(
           wrapper.find("#test-base-form-submit-button").hostNodes().props()
@@ -168,6 +189,7 @@ describe("Actions", () => {
           .simulate("submit");
         await flushPromises();
         expect(props.addNote).toHaveBeenLastCalledWith({
+          collaborators: collaborators.map((c) => c.uid),
           color: PickerColors.red,
           content: notes[0].content,
           tags: [tags[0].id, tags[1].id],
@@ -232,7 +254,7 @@ describe("Actions", () => {
         wrapper.update();
 
         // change the color
-        wrapper.find("#icon-palette").hostNodes().simulate("change");
+        wrapper.find("#icon-palette").hostNodes().simulate("click");
         await flushPromises();
         wrapper.update();
         expect(wrapper.find(".colors-picker").exists()).toBeTruthy();
@@ -247,11 +269,23 @@ describe("Actions", () => {
         ).toBe(PickerColors.blue);
 
         // check tags
-        wrapper.find("#icon-tags").hostNodes().simulate("change");
+        wrapper.find("#icon-tags").hostNodes().simulate("click");
         await flushPromises();
         wrapper.update();
         wrapper
           .find(".tags-picker__checkbox")
+          .at(0)
+          .find("label")
+          .simulate("click");
+        await flushPromises();
+        wrapper.update();
+
+        // check collaborators
+        wrapper.find("#icon-share").hostNodes().simulate("click");
+        await flushPromises();
+        wrapper.update();
+        wrapper
+          .find(".collaborators-picker__checkbox")
           .at(0)
           .find("label")
           .simulate("click");
@@ -279,8 +313,8 @@ describe("Actions", () => {
           type: NoteType.text,
           createdAt: notes[0].createdAt,
           updatedAt: expect.anything(),
-          collaborators: collaborators.map((c) => c.uid),
-          createdBy: "4Q4i3nfJlrfZLs6dxJFpB3uoKlq1",
+          collaborators: [collaborators[1].uid],
+          createdBy: user.uid,
         });
       }
     });

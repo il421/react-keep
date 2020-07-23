@@ -1,5 +1,4 @@
 import { Note } from "../../store/store.types";
-import { BaseFormOptions } from "../form";
 
 export enum NoteType {
   text,
@@ -13,5 +12,4 @@ export interface NoteFormValues<T>
     "id" | "important" | "archive" | "createdAt" | "updatedAt" | "content"
   > {
   content: T;
-  currentOption: BaseFormOptions;
 }

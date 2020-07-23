@@ -12,6 +12,7 @@ export interface IconButtonProps extends FontAwesomeIconProps {
   className?: string;
   id?: string;
   disabled?: boolean;
+  pressed?: boolean;
   text?: string;
   type?: "button" | "submit";
 }
@@ -25,12 +26,15 @@ export class IconButton extends React.PureComponent<IconButtonProps> {
       type = "button",
       id,
       text,
+      pressed,
       ...rest
     } = this.props;
     return (
       <button
         id={id}
-        className={`icon-button ${className} `}
+        className={`icon-button ${className} ${
+          pressed ? "icon-button--pressed" : ""
+        }`}
         onClick={onButtonClick}
         disabled={disabled}
         type={type}

@@ -8,7 +8,6 @@ import {
   getInitialNoteFormValues,
 } from "../../notes";
 import { PickerColors } from "../../../common";
-import { BaseFormOptions } from "../BaseForm.types";
 
 let props: BaseFormProps<NoteFormValues<string>>,
   wrapper: ShallowWrapper<BaseFormProps<NoteFormValues<string>>, any>;
@@ -18,7 +17,6 @@ const defaultNote: NoteFormValues<string> = {
   content: "",
   tags: [],
   color: PickerColors.white,
-  currentOption: BaseFormOptions.none,
 };
 
 beforeEach(() => {
@@ -29,7 +27,8 @@ beforeEach(() => {
       defaultValues: defaultNote,
     }),
     onSubmit: jest.fn(),
-    onCancel: jest.fn(),
+    formClassName: "formClassName",
+    getFormActions: jest.fn()
   };
 
   wrapper = shallow<BaseFormProps<NoteFormValues<string>>>(
@@ -45,24 +44,11 @@ test("should submit form", () => {
   const mountedForm = mount<
     ReactWrapper<BaseFormProps<NoteFormValues<string>>, any>
   >(<BaseForm {...props} />);
-  expect(mountedForm.exists(".note-form")).toBeTruthy();
+  expect(mountedForm.exists(".formClassName")).toBeTruthy();
   mountedForm.find("form").simulate("focus").simulate("submit");
   expect(props.onSubmit).toHaveBeenLastCalledWith(
     props.initialValues,
     expect.anything(), // formApi
     expect.anything() // options callback
   );
-});
-
-test("should cancel form", () => {
-  const mountedForm = mount<
-    ReactWrapper<BaseFormProps<NoteFormValues<string>>, any>
-  >(<BaseForm {...props} />);
-  expect(mountedForm.exists(".note-form")).toBeTruthy();
-  expect(mountedForm.exists("#test-base-form-close-button")).toBeTruthy();
-  mountedForm
-    .find("#test-base-form-close-button")
-    .hostNodes()
-    .simulate("click");
-  expect(props.onCancel).toHaveBeenLastCalledWith();
 });

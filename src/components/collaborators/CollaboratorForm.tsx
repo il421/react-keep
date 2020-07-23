@@ -57,29 +57,28 @@ export class CollaboratorForm extends React.PureComponent<Props> {
     await getUserByEmail(values.email!, this.props.addCollaborator);
   };
 
+  private getFormActions = (isDisable: boolean) => (
+    <IconButton
+      className="collaborators-form__submit"
+      icon="plus-circle"
+      size="1x"
+      type="submit"
+      disabled={isDisable}
+    />
+  );
+
   render() {
     return (
       <BaseForm<CollaboratorFormValues>
         initialValues={{ email: undefined }}
         onSubmit={this.getUserDataByEmail}
-        onCancel={() => {}}
-        classNames={{
-          form: "collaborators-form",
-        }}
+        formClassName="collaborators-form"
         validate={getValidationErrors(
           this.props.auth.email!,
           this.props.collaborators.map((c) => c.email!)
         )}
         resetAfterSubmitting={true}
-        getButtons={(isDisable: boolean) => (
-          <IconButton
-            className="collaborators-form__submit"
-            icon="plus-circle"
-            size="1x"
-            type="submit"
-            disabled={isDisable}
-          />
-        )}
+        getFormActions={this.getFormActions}
       >
         <TextInputField
           name={this.nameOf("email")}

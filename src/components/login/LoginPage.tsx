@@ -90,12 +90,10 @@ export class LoginPage extends React.PureComponent<Props> {
 
           <BaseForm<LoginFormValues>
             initialValues={this.initialValues}
-            classNames={{
-              form: "login-box__form login-form",
-            }}
+            formClassName="login-box__form login-form"
             onSubmit={this.submitLoginForm}
             validate={getValidationErrors}
-            getButtons={this.getButtons}
+            getFormActions={this.getButtons}
           >
             <TextInputField
               autoFocus={true}

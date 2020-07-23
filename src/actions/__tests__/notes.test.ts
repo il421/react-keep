@@ -1,10 +1,11 @@
-import { user } from "../../testData/users";
+import { collaborators, user } from "../../testData/users";
 import { Note, NotesActionsTypes } from "../../store/store.types";
 import configureMockStore from "redux-mock-store";
 import thunk from "redux-thunk";
 import { newNote, notes, updatedNote } from "../../testData/notes";
 import database from "../../firebase/firebase";
 import { Collections } from "../../firebase/Collections";
+
 import {
   addNote,
   changeArchive,
@@ -133,6 +134,57 @@ describe("Adding", () => {
         });
     });
   });
+
+  test("should set cratedBy if had collaborators when add a note to DB and store", (done) => {
+    const store = createMockStore(defaultState);
+    let id: string | undefined;
+    let createdAt: number | undefined;
+    let updatedAt: number | undefined;
+
+    store
+      .dispatch<any>(
+        handleAddNote({
+          ...newNote,
+          collaborators: collaborators.map((c) => c.uid),
+        })
+      )
+      .then(() => {
+        const actions = store.getActions();
+        id = actions[0].note.id;
+        createdAt = actions[0].note.createdAt;
+        updatedAt = actions[0].note.updatedAt;
+        expect(actions[0]).toEqual({
+          type: NotesActionsTypes.addNote,
+          note: {
+            id,
+            createdAt,
+            updatedAt,
+            collaborators: collaborators.map((c) => c.uid),
+            createdBy: user.uid,
+            ...newNote,
+          },
+        });
+
+        database
+          .collection(Collections.users)
+          .doc(user.uid)
+          .collection(Collections.notes)
+          .doc(id)
+          .get()
+          .then((doc) => {
+            if (doc.exists) {
+              expect(doc.data()).toEqual({
+                createdAt,
+                updatedAt,
+                collaborators: collaborators.map((c) => c.uid),
+                createdBy: user.uid,
+                ...newNote,
+              });
+            }
+            done();
+          });
+      });
+  });
 });
 describe("Removing", () => {
   test("should setup remove note action object correctly", () => {
@@ -202,6 +254,46 @@ describe("Updating", () => {
           done();
         });
     });
+  });
+
+  test("should set cratedBy if had collaborators when update a note in DB and store by id", (done) => {
+    const store = createMockStore(defaultState);
+
+    store
+      .dispatch<any>(
+        handleUpdateNote(notes[2].id, {
+          ...notes[2],
+          collaborators: [collaborators[0].uid],
+        })
+      )
+      .then(() => {
+        const actions = store.getActions();
+        expect(actions[0]).toEqual({
+          type: NotesActionsTypes.updateNote,
+          id: notes[2].id,
+          updates: {
+            ...notes[2],
+            collaborators: [collaborators[0].uid],
+            createdBy: user.uid,
+          },
+        });
+
+        database
+          .collection(Collections.users)
+          .doc(user.uid)
+          .collection(Collections.notes)
+          .doc(notes[2].id)
+          .get()
+          .then((doc) => {
+            if (doc.exists) {
+              expect((doc.data() as Note).collaborators).toEqual([
+                collaborators[0].uid,
+              ]);
+              expect((doc.data() as Note).createdBy).toBe(user.uid);
+            }
+            done();
+          });
+      });
   });
 });
 

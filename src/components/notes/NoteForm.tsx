@@ -14,12 +14,16 @@ import {
 } from "../../store/store.types";
 import { NoteFormValues, NoteType } from "./notes.types";
 import ColorsPickerField from "./options/ColorsPickerField";
-import { nameOf, Placeholders, PickerColors } from "../../common";
+import {
+  nameOf,
+  Placeholders,
+  PickerColors,
+  JustifyContent,
+  AlignItems,
+} from "../../common";
 import { PathNames } from "../../routers/Routing";
-import { BaseForm, BaseFormOptions, FieldSpy, TextInputField } from "../form";
-import { FormRenderProps, FormSpy } from "react-final-form";
+import { BaseForm, FieldSpy, TextInputField } from "../form";
 import { handleAddNote, handleUpdateNote } from "../../actions/notes";
-import "../../styles/components/notes/_note-form.scss";
 import { ThunkDispatch } from "redux-thunk";
 import moment from "moment";
 import {
@@ -27,10 +31,20 @@ import {
   getInitialNoteFormValues,
   getSelectedNote,
 } from "./utils";
-import { ContentContainer } from "../ui-components";
+import {
+  ConfirmButton,
+  ContentContainer,
+  FlexBox,
+  IconButton,
+  LinkButton,
+} from "../ui-components";
 import TagsPickerField from "./options/TagsPickerField";
 import { ValidationErrors } from "final-form";
 import CollaboratorsField from "./options/CollaboratorsField";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import "../../styles/components/notes/_note-form.scss";
+import "../../styles/ui-components/_icon-button.scss";
+import "../../styles/ui-components/_link-button.scss";
 
 interface StateProps {
   notes: NotesStoreState[];
@@ -51,9 +65,19 @@ interface DispatchProps {
   updateNote: (id: string, note: UpdateNote) => void;
 }
 
+// value is an icon name from @fontawesome/react-fontawesome"
+// "none" is default or none value
+enum NoteFormOptions {
+  none = "none",
+  palette = "palette",
+  tags = "tags",
+  collaborators = "share",
+}
+
 interface TextNoteFormModalState {
   currentNoteColor: PickerColors;
   currentNote: Note | undefined;
+  currentOption: NoteFormOptions | null;
 }
 
 export type Props = DispatchProps & StateProps & NoteFormProps;
@@ -65,7 +89,6 @@ export class NoteFormBase extends React.PureComponent<Props> {
     content: getDefaultContent(this.props.type),
     tags: [],
     color: PickerColors.white,
-    currentOption: BaseFormOptions.none,
   };
 
   private nameOf = nameOf<NoteFormValues<string | ListItem[] | ImageItem>>();
@@ -78,13 +101,14 @@ export class NoteFormBase extends React.PureComponent<Props> {
     currentNoteColor:
       getSelectedNote(this.props.history.location.search, this.props.notes)
         ?.color ?? this.defaultNote.color,
+    currentOption: null,
   } as TextNoteFormModalState;
 
   private onSubmitAction = async (
     values: NoteFormValues<string | ListItem[] | ImageItem>
   ): Promise<void> => {
     // eslint-disable-next-line
-    const { currentOption, ...note } = values;
+    const { ...note } = values;
 
     if (this.state.currentNote) {
       const update: UpdateNote = {
@@ -101,6 +125,76 @@ export class NoteFormBase extends React.PureComponent<Props> {
     this.props.history.push(PathNames.base);
   };
 
+  private handleOnCancel = (): void => {
+    this.props.history.push(PathNames.base);
+  };
+
+  private setFormOption = (currentOption: NoteFormOptions) => () => {
+    this.setState({ currentOption });
+  };
+
+  private getFormActions = (isDisable: boolean, isSubmitting: boolean) => {
+    return (
+      <>
+        <FlexBox
+          justifyContent={JustifyContent.spaceBetween}
+          alignItems={AlignItems.center}
+          className="note-form__actions actions"
+        >
+          <FlexBox
+            justifyContent={JustifyContent.start}
+            alignItems={AlignItems.baseline}
+            className="actions__options"
+          >
+            {Object.values(NoteFormOptions).map((option: string) =>
+              option === NoteFormOptions.none ? null : (
+                <IconButton
+                  key={option}
+                  id={`icon-${option}`}
+                  icon={option as IconProp}
+                  pressed={option === this.state.currentOption}
+                  onButtonClick={this.setFormOption(option as NoteFormOptions)}
+                />
+              )
+            )}
+          </FlexBox>
+
+          <FlexBox
+            justifyContent={JustifyContent.end}
+            alignItems={AlignItems.center}
+            className="actions__submitting-buttons submitting-buttons"
+          >
+            <LinkButton
+              id="test-base-form-close-button"
+              text="Close"
+              type="button"
+              disabled={isSubmitting}
+              onClick={this.handleOnCancel}
+            />
+
+            <ConfirmButton
+              id="test-base-form-submit-button"
+              wrapperClassName="submitting-buttons__submit--width"
+              className="link-button"
+              text={this.state.currentNote ? "Update" : "Keep"}
+              type="submit"
+              disabled={isDisable}
+              loading={isSubmitting}
+            />
+          </FlexBox>
+        </FlexBox>
+
+        {this.state.currentOption === NoteFormOptions.palette ? (
+          <ColorsPickerField />
+        ) : this.state.currentOption === NoteFormOptions.tags ? (
+          <TagsPickerField tags={this.props.tags} />
+        ) : this.state.currentOption === NoteFormOptions.collaborators ? (
+          <CollaboratorsField collaborators={this.props.collaborators} />
+        ) : null}
+      </>
+    );
+  };
+
   render() {
     return (
       <ContentContainer
@@ -110,6 +204,7 @@ export class NoteFormBase extends React.PureComponent<Props> {
         }}
       >
         <BaseForm<NoteFormValues<string | ListItem[] | ImageItem>>
+          formClassName="note-form"
           initialValues={getInitialNoteFormValues({
             type: this.props.type,
             currentNote: this.state.currentNote,
@@ -117,32 +212,7 @@ export class NoteFormBase extends React.PureComponent<Props> {
           })}
           validate={this.props.validate}
           onSubmit={this.onSubmitAction}
-          onCancel={() => this.props.history.push(PathNames.base)}
-          submitButtonName={this.state.currentNote ? "Update" : undefined}
-          getFormOptions={
-            <FormSpy>
-              {({
-                values,
-              }: FormRenderProps<
-                NoteFormValues<string | ListItem[] | ImageItem>
-              >) => {
-                switch (values.currentOption) {
-                  case BaseFormOptions.palette:
-                    return <ColorsPickerField />;
-                  case BaseFormOptions.tags:
-                    return <TagsPickerField tags={this.props.tags} />;
-                  case BaseFormOptions.collaborators:
-                    return (
-                      <CollaboratorsField
-                        collaborators={this.props.collaborators}
-                      />
-                    );
-                  default:
-                    return null;
-                }
-              }}
-            </FormSpy>
-          }
+          getFormActions={this.getFormActions}
         >
           <TextInputField
             name={this.nameOf("title")}

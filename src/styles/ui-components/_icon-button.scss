@@ -5,6 +5,10 @@
   @include button;
   @include flex-row-end-center;
 
+  &--pressed {
+    color: $red;
+  }
+
   background: none;
   color: $grey-light;
   transition: color 500ms ease;

@@ -131,12 +131,10 @@ export class UserFormModal extends React.PureComponent<Props> {
       >
         <ContentContainer className="user-modal__container">
           <BaseForm<UserFormValues>
-            classNames={{
-              form: "login-box__form user-form",
-            }}
+            formClassName="login-box__form user-form"
             initialValues={this.getFormValues(this.props.auth)}
             onSubmit={this.onSubmit}
-            getButtons={this.getButtons}
+            getFormActions={this.getButtons}
           >
             <FlexBox
               justifyContent={JustifyContent.start}

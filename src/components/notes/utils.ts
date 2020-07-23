@@ -1,7 +1,6 @@
 import { parse } from "query-string";
 import { ImageItem, ListItem, Note } from "../../store/store.types";
 import { NoteFormValues, NoteType } from "./notes.types";
-import { BaseFormOptions } from "../form";
 import { v4 as uuidv4 } from "uuid";
 
 /**
@@ -51,7 +50,6 @@ export const getInitialNoteFormValues = <
       tags,
       color,
       collaborators,
-      currentOption: BaseFormOptions.none,
     } as NoteFormValues<T>;
   }
   return options.defaultValues;

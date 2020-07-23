@@ -138,8 +138,13 @@ export const handleAddNote = (
         updatedAt: moment().valueOf(),
         important: false,
         archive: false,
+        // set user id in createdBy field if the note has collaborators
+        createdBy:
+          note.collaborators && note.collaborators.length > 0 ? uid : undefined,
       };
-      const docRef = await initDocumentRef(uid).add(newNote);
+      const cleanedNote = JSON.parse(JSON.stringify(newNote));
+
+      const docRef = await initDocumentRef(uid).add(cleanedNote);
       dispatch(
         addNote({
           id: docRef.id,
@@ -230,11 +235,17 @@ export const handleUpdateNote = (
                 imageId: imageId ?? (updates.content as ImageItem).imageId,
               }
             : updates.content,
+        createdBy: // set user id in createdBy field if the note has collaborators
+          updates.collaborators && updates.collaborators.length > 0
+            ? uid
+            : undefined,
       };
 
+      const cleanedNote = JSON.parse(JSON.stringify(note));
+
       // update the note
-      await docRef.doc(id).set(note);
-      dispatch(updateNote(id, note));
+      await docRef.doc(id).set(cleanedNote);
+      dispatch(updateNote(id, cleanedNote));
     } catch (e) {
       console.log(e);
       toast.error(e.message);
