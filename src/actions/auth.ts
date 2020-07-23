@@ -13,6 +13,9 @@ import { Action, Dispatch } from "redux";
 import { getMessage, Message } from "../common";
 import { ThunkAction } from "redux-thunk";
 import { Collections } from "../firebase/Collections";
+import { setNotes } from "./notes";
+import { setTags } from "./tags";
+import { setCollaborators } from "./collaborators";
 
 const initStorageAvatarRef = (name: string): firebase.storage.Reference => {
   const ref = storage.ref();
@@ -77,10 +80,14 @@ export const startSignUp = (
   };
 };
 
-export const startLogout = (): (() => Promise<void>) => {
-  return async () => {
+export const startLogout = (): ThunkAction<any, Store, any, Action> => {
+  return async (dispatch: Dispatch) => {
     try {
       await firebase.auth().signOut();
+      dispatch(logout());
+      dispatch(setNotes([]));
+      dispatch(setTags([]));
+      dispatch(setCollaborators([]));
     } catch (e) {
       console.log(e);
       toast.error(e.message);

@@ -38,7 +38,7 @@ export const getValidationErrors = (
   const errors: ValidationErrors = {};
   const { email } = values;
 
-  if (typeof email === "undefined" || email.length === 0) {
+  if (typeof email !== "undefined" && email.length === 0) {
     errors.email = Errors.required;
   } else if (email && !emailRegEx.test(email.trim())) {
     errors.email = Errors.email;
