@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import moment from "moment";
-import { Note } from "../../store/store.types";
+import { Collaborator, Note } from "../../store/store.types";
 import { ContentContainer, FlexBox, IconButton } from "../ui-components";
 import { AlignItems, Colors, FlexWrap, JustifyContent } from "../../common";
 import { ConfirmDialog } from "./ConfirmDialog";
@@ -8,12 +8,14 @@ import "../../styles/components/notes/_note.scss";
 import { NoteContent } from "./NoteContent";
 import { NoteType } from "./notes.types";
 import { NoteTag } from "./NoteTag";
+import { Coin } from "../ui-components/Coin";
 
 export interface NoteProps {
   note: Note;
   removeNote: (id: string) => void;
   moveToArchive: (id: string) => void;
   toggleImportance: (id: string) => void;
+  getCollaborator: (uid: string) => Collaborator | undefined;
   onNoteSelected: (type: NoteType, id: string) => void;
 }
 
@@ -25,8 +27,19 @@ export const NotesItem: React.FunctionComponent<NoteProps> = ({
   moveToArchive,
   toggleImportance,
   onNoteSelected,
+  getCollaborator,
 }): JSX.Element => {
   const [isConfirm, setIsConfirm] = useState<Confirm>(null);
+
+  const createdBy: Collaborator | undefined = note.createdBy
+    ? getCollaborator(note.createdBy)
+    : undefined;
+
+  const collaborators: Collaborator[] = note.collaborators
+    ? note.collaborators
+        .map((uid) => getCollaborator(uid)!)
+        .filter((c: Collaborator) => !!c)
+    : [];
 
   return (
     <ContentContainer
@@ -37,33 +50,68 @@ export const NotesItem: React.FunctionComponent<NoteProps> = ({
       <FlexBox vertical justifyContent={JustifyContent.spaceBetween}>
         {/*actions*/}
         <FlexBox
-          className="note__actions"
-          justifyContent={JustifyContent.spaceBetween}
+          className="note__actions actions"
+          justifyContent={
+            !note.createdBy ? JustifyContent.spaceBetween : JustifyContent.end
+          }
           alignItems={AlignItems.center}
         >
-          <IconButton
-            onButtonClick={(evt) => {
-              evt?.stopPropagation();
-              toggleImportance(note.id);
-            }}
-            icon="bookmark"
-            color={note.important ? Colors.red : Colors.lightGray}
-            id={`test-toggle-importance-${note.id}`}
-          />
+          {
+            // don't render shared notes
+            !note.createdBy && (
+              <IconButton
+                className="actions__important"
+                onButtonClick={(evt) => {
+                  evt?.stopPropagation();
+                  toggleImportance(note.id);
+                }}
+                icon="bookmark"
+                color={note.important ? Colors.red : Colors.lightGray}
+                id={`test-toggle-importance-${note.id}`}
+              />
+            )
+          }
+
+          <FlexBox justifyContent={JustifyContent.start} flexGrow>
+            {createdBy && (
+              <Coin
+                name={createdBy.displayName}
+                email={createdBy.email}
+                url={createdBy.photoURL}
+                showTooltip
+              />
+            )}
+
+            {collaborators &&
+              collaborators.map((c: Collaborator, index: number) => (
+                <Coin
+                  key={index}
+                  name={c.displayName}
+                  email={c.email}
+                  url={c.photoURL}
+                  showTooltip
+                />
+              ))}
+          </FlexBox>
+
           <FlexBox
             justifyContent={JustifyContent.start}
             alignItems={AlignItems.center}
           >
-            <IconButton
-              onButtonClick={(evt) => {
-                evt?.stopPropagation();
-                setIsConfirm("arch");
-              }}
-              icon="archive"
-              id={`test-toggle-arch-${note.id}`}
-            />
+            {!note.createdBy && (
+              <IconButton
+                className="actions__archive"
+                onButtonClick={(evt) => {
+                  evt?.stopPropagation();
+                  setIsConfirm("arch");
+                }}
+                icon="archive"
+                id={`test-toggle-arch-${note.id}`}
+              />
+            )}
 
             <IconButton
+              className="actions__remove"
               onButtonClick={(evt) => {
                 evt?.stopPropagation();
                 setIsConfirm("del");

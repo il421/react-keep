@@ -1,6 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Note, Store } from "../../store/store.types";
+import {
+  AuthStoreState,
+  Collaborator,
+  Note,
+  Store,
+} from "../../store/store.types";
 import { NotesItem } from "./NotesItem";
 import { ThunkDispatch } from "redux-thunk";
 import {
@@ -17,6 +22,8 @@ import "../../styles/components/notes/_note-list.scss";
 
 interface StateProps {
   notes: Note[];
+  auth: AuthStoreState;
+  collaborators: Collaborator[];
 }
 
 interface DispatchProps {
@@ -33,6 +40,8 @@ export type Props = StateProps & DispatchProps & NotesListProp;
 
 export const NotesListBase: React.FunctionComponent<Props> = ({
   notes,
+  auth,
+  collaborators,
   removeNote,
   moveToArchive,
   toggleImportance,
@@ -44,6 +53,12 @@ export const NotesListBase: React.FunctionComponent<Props> = ({
     991: 3,
     794: 2,
     569: 2,
+  };
+
+  const getCollaborator = (uid: string): Collaborator | undefined => {
+    return uid !== auth.uid
+      ? collaborators.find((c: Collaborator) => c.uid === uid)
+      : undefined;
   };
 
   return (
@@ -62,6 +77,7 @@ export const NotesListBase: React.FunctionComponent<Props> = ({
               removeNote={removeNote}
               moveToArchive={moveToArchive}
               onNoteSelected={onNoteSelected}
+              getCollaborator={getCollaborator}
             />
           ))}
         </Masonry>
@@ -75,6 +91,8 @@ const mapStateToProps = (state: Store): StateProps => ({
     search: state.filters.search,
     tagFilters: state.filters.tagFilters,
   }),
+  collaborators: state.collaborators,
+  auth: state.auth,
 });
 
 const mapDispatchToProps = (

@@ -3,6 +3,7 @@ import { FlexBox, IconButton } from "../ui-components";
 import { AlignItems, JustifyContent } from "../../common";
 import { Collaborator } from "../../store/store.types";
 import "../../styles/components/collaborators/_collaborators-item.scss";
+import { Coin } from "../ui-components/Coin";
 
 export interface CollaboratorsItemProps {
   collaborator: Collaborator;
@@ -24,19 +25,16 @@ export class CollaboratorsItem extends React.PureComponent<
       >
         <FlexBox justifyContent={JustifyContent.start}>
           {this.props.collaborator.photoURL && (
-            <img
-              src={this.props.collaborator.photoURL}
-              alt={`Photo of ${
-                this.props.collaborator.displayName ??
-                this.props.collaborator.email
-              }`}
-              width={25}
-              height={25}
+            <Coin
+              email={this.props.collaborator.email}
+              name={this.props.collaborator.displayName}
+              url={this.props.collaborator.photoURL}
             />
           )}
           <div className="collaborators-item__value">
             {this.props.collaborator.displayName ??
-              this.props.collaborator.email}
+              this.props.collaborator.email ??
+              this.props.collaborator.uid}
           </div>
         </FlexBox>
 

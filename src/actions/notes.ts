@@ -138,13 +138,23 @@ export const handleAddNote = (
         updatedAt: moment().valueOf(),
         important: false,
         archive: false,
-        // set user id in createdBy field if the note has collaborators
-        createdBy:
-          note.collaborators && note.collaborators.length > 0 ? uid : undefined,
       };
-      const cleanedNote = JSON.parse(JSON.stringify(newNote));
 
-      const docRef = await initDocumentRef(uid).add(cleanedNote);
+      // add note to DB
+      const docRef = await initDocumentRef(uid).add(newNote);
+
+      // if has collaborators, add one for each with the case id, and clearedBy props
+      // clearedBy is owner uid
+      if (newNote.collaborators && newNote.collaborators.length > 0) {
+        let promises: Promise<any>[] = [];
+        const collNote: Omit<Note, "id"> = { ...newNote, tags: [], createdBy: uid };
+        newNote.collaborators.forEach((collUid) => {
+          promises.push(initDocumentRef(collUid).doc(docRef.id).set(collNote));
+        });
+
+        await Promise.all(promises);
+      }
+
       dispatch(
         addNote({
           id: docRef.id,
@@ -235,7 +245,8 @@ export const handleUpdateNote = (
                 imageId: imageId ?? (updates.content as ImageItem).imageId,
               }
             : updates.content,
-        createdBy: // set user id in createdBy field if the note has collaborators
+        // set user id in createdBy field if the note has collaborators
+        createdBy:
           updates.collaborators && updates.collaborators.length > 0
             ? uid
             : undefined,

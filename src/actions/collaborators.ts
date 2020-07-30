@@ -10,7 +10,7 @@ import {
 } from "../store/store.types";
 import { Action, Dispatch } from "redux";
 import { toast } from "react-toastify";
-import { getMessage, Message } from "../common";
+import { getMessage, Message, unique } from "../common";
 import { Collections } from "../firebase/Collections";
 import { ThunkAction } from "redux-thunk";
 import { getUserByUids } from "../libs/functions";
@@ -64,7 +64,13 @@ export const handleSetCollaborators = (): ThunkAction<
         }
       });
 
-      const uids: string[] = collaborators.map((c) => c.uid);
+      const notes = getState().notes.filter((n) => n.createdBy);
+
+      // get unique uids of collaborators, and noted owners
+      const uids: string[] = unique([
+        ...collaborators.map((c) => c.uid),
+        ...notes.map((n) => n.createdBy!),
+      ]);
 
       if (uids.length > 0) {
         await getUserByUids(uids, (users: UserData[]) => {
@@ -78,6 +84,7 @@ export const handleSetCollaborators = (): ThunkAction<
           // run get users func
           if (mappedUsers.length > 0) {
             dispatch(setCollaborators(mappedUsers));
+            return;
           } else {
             toast.error(getMessage(Message.usersNotFound));
           }

@@ -1,9 +1,9 @@
 import * as admin from "firebase-admin";
-const serviceAccount = require("../my-keep-type-firebase-adminsdk-ezcu9-f6d8c378a7.json");
+const serviceAccount = require(process.env.CREDENTIAL!);
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://my-keep-type.firebaseio.com",
+  databaseURL: process.env.DATABASE_URL,
 });
 
 const getUserByEmail = require("./getUserByEmail");

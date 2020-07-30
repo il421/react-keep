@@ -147,7 +147,10 @@ export class NoteFormBase extends React.PureComponent<Props> {
             className="actions__options"
           >
             {Object.values(NoteFormOptions).map((option: string) =>
-              option === NoteFormOptions.none ? null : (
+              option === NoteFormOptions.none ||
+              (option === NoteFormOptions.collaborators &&
+                this.state.currentNote &&
+                this.state.currentNote.createdBy) ? null : (
                 <IconButton
                   key={option}
                   id={`icon-${option}`}

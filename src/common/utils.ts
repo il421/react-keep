@@ -63,10 +63,18 @@ export const getFilteredNotes = (notes: Note[], filters: Filters): Note[] => {
   }, []);
 };
 
-export const getShortText = (text: string, maxLength?: number): string => {
+export const getShortText = (
+  text: string,
+  maxLength?: number,
+  hasDots: boolean = true
+): string => {
   const MAX_LENGTH = maxLength ?? 100;
   if (text.length > MAX_LENGTH) {
-    text = text.slice(0, MAX_LENGTH) + "...";
+    text = text.slice(0, MAX_LENGTH);
+  }
+
+  if (hasDots) {
+    return text + "...";
   }
 
   return text;
@@ -88,4 +96,17 @@ export const sortArray: Mutator<any> = <FromValues>(
     compareFn
   );
   tools.setIn(state, "formState.values" + name, sortedArray);
+};
+
+export const getRandomColor = (): string => {
+  const letters: string = "0123456789ABCDEF";
+  let color: string = "#";
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+};
+
+export const unique = <T>(items: T[]): T[] => {
+  return Array.from(new Set(items));
 };

@@ -16,7 +16,7 @@ export class CollaboratorsField extends React.PureComponent<
   private getOptions = (): Option[] => {
     return this.props.collaborators.map<Option>((coll: Collaborator) => ({
       id: coll.uid,
-      value: coll.displayName ?? coll.email!,
+      value: coll.displayName ?? coll.email! ?? coll.uid,
     }));
   };
 

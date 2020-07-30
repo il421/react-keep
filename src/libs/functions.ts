@@ -8,7 +8,7 @@ export const getUserByEmail = (
   callback: (data: UserData) => void
 ): Promise<void> => {
   return axios
-    .get("https://us-central1-my-keep-type.cloudfunctions.net/getUserByEmail", {
+    .get(`${process.env.REACT_APP_FUNCTION_URL}/getUserByEmail`, {
       params: {
         email,
       },
@@ -38,7 +38,7 @@ export const getUserByUids = (
   callback: (data: UserData[]) => void
 ): Promise<void> => {
   return axios
-    .get("https://us-central1-my-keep-type.cloudfunctions.net/getUserByUids", {
+    .get(`${process.env.REACT_APP_FUNCTION_URL}/getUserByUids`, {
       params: {
         uids,
       },

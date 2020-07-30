@@ -76,16 +76,19 @@
 }
 
 .actions {
-  &--important {
-    color: $red;
+  &__archive {
+    padding-top: 0;
   }
 
-  &--casual {
-    color: $black;
+  &__important {
+    padding-left: 0;
+    padding-top: 0;
   }
 
-  &__remove-btn:hover {
-    opacity: 0.3;
+  &__remove {
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
   }
 }
 

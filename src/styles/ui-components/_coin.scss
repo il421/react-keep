@@ -1,0 +1,16 @@
+.coin {
+  & img,
+  & span {
+    width: 25px;
+    height: 25px;
+
+    border-radius: 50%;
+
+    text-align: center;
+    object-fit: cover;
+  }
+
+  &__tooltip {
+    z-index: 2000;
+  }
+}
