@@ -1,4 +1,5 @@
 @import "../../base/variables";
+@import "../../mixins/mixins";
 
 .note {
   position: relative;
@@ -47,11 +48,11 @@
 
   &__tag {
     padding: 0 $xxs-size;
-
     margin-right: $xxs-size;
-    margin-bottom: $xxs-size;
+
     color: $white;
     background-color: rgba($grey-light, 0.8);
+
     border: 1px solid transparent;
     border-radius: 10px;
 
@@ -89,6 +90,12 @@
     padding-left: 0;
     padding-right: 0;
     padding-top: 0;
+  }
+
+  &__col-list {
+    overflow-x: auto;
+    margin-right: $xxs-size;
+    @include hide-scroll;
   }
 }
 

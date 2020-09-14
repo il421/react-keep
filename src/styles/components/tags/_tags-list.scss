@@ -4,4 +4,5 @@
 .tags-list {
   max-height: 30vh;
   overflow-y: auto;
+  @include hide-scroll;
 }

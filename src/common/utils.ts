@@ -71,10 +71,10 @@ export const getShortText = (
   const MAX_LENGTH = maxLength ?? 100;
   if (text.length > MAX_LENGTH) {
     text = text.slice(0, MAX_LENGTH);
-  }
 
-  if (hasDots) {
-    return text + "...";
+    if (hasDots) {
+      text = text + "...";
+    }
   }
 
   return text;

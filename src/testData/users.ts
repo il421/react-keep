@@ -15,13 +15,11 @@ export const collaborators: Collaborator[] = [
     uid: "KyddyBpci1Nijzd5CmHrDQFUFKF3",
     displayName: "Ivan",
     photoURL: "http://test.com",
-    notesIds: ["1"],
   },
   {
     email: "test2@gmail.com",
     uid: "VXPqBsRtJcW7FFOtlUTZfkmjU222",
     displayName: "Tany",
     photoURL: "http://tdest.com",
-    notesIds: ["1"],
   },
 ];

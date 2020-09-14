@@ -72,7 +72,11 @@ export const NotesItem: React.FunctionComponent<NoteProps> = ({
             )
           }
 
-          <FlexBox justifyContent={JustifyContent.start} flexGrow>
+          <FlexBox
+            justifyContent={JustifyContent.start}
+            flexGrow
+            className="actions__col-list"
+          >
             {createdBy && (
               <Coin
                 name={createdBy.displayName}
@@ -152,15 +156,17 @@ export const NotesItem: React.FunctionComponent<NoteProps> = ({
             </div>
           </FlexBox>
 
-          <FlexBox
-            className="details__tags"
-            justifyContent={JustifyContent.start}
-            flexWrap={FlexWrap.wrap}
-          >
-            {note.tags.map((tagId, index) => (
-              <NoteTag key={index} tagId={tagId} />
-            ))}
-          </FlexBox>
+          {note.tags.length > 0 && (
+            <FlexBox
+              className="details__tags"
+              justifyContent={JustifyContent.start}
+              flexWrap={FlexWrap.wrap}
+            >
+              {note.tags.map((tagId, index) => (
+                <NoteTag key={index} tagId={tagId} />
+              ))}
+            </FlexBox>
+          )}
         </FlexBox>
       </FlexBox>
 

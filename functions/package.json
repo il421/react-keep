@@ -13,8 +13,8 @@
   },
   "main": "lib/index.js",
   "dependencies": {
-    "firebase-admin": "^8.10.0",
-    "firebase-functions": "^3.6.1"
+    "firebase-admin": "9.0.0",
+    "firebase-functions": "3.9.0"
   },
   "devDependencies": {
     "dotenv-cli": "^3.2.0",

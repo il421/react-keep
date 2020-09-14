@@ -105,6 +105,7 @@ export const handleSetNotes = (): ThunkAction<any, Store, any, Action> => {
   };
 };
 
+// @TODO need to test .... with colls
 export const handleAddNote = (
   note: AddNote
 ): ThunkAction<any, Store, any, Action> => {
@@ -143,16 +144,19 @@ export const handleAddNote = (
       // add note to DB
       const docRef = await initDocumentRef(uid).add(newNote);
 
-      // if has collaborators, add one for each with the case id, and clearedBy props
-      // clearedBy is owner uid
+      // if has collaborators, add one for each with the case id
       if (newNote.collaborators && newNote.collaborators.length > 0) {
-        let promises: Promise<any>[] = [];
-        const collNote: Omit<Note, "id"> = { ...newNote, tags: [], createdBy: uid };
-        newNote.collaborators.forEach((collUid) => {
-          promises.push(initDocumentRef(collUid).doc(docRef.id).set(collNote));
-        });
+        const collNote: Omit<Note, "id"> = {
+          ...newNote,
+          tags: [],
+          createdBy: uid,
+        };
 
-        await Promise.all(promises);
+        await handleCollaboratorsPromises({
+          collaborators: newNote.collaborators,
+          callback: (collUid) =>
+            initDocumentRef(collUid).doc(docRef.id).set(collNote),
+        });
       }
 
       dispatch(
@@ -181,26 +185,84 @@ export const handleRemoveNote = (
       return;
     }
 
+    const { collaborators, type, content } = deletedNote;
     const docRef = initDocumentRef(uid);
     try {
       await docRef.doc(id).delete();
 
       // delete the image from storage if exist
-      if (
-        deletedNote.type === NoteType.image &&
-        (deletedNote.content as ImageItem).imageId !== null
-      ) {
-        const ref = initStorageImageRef(
-          (deletedNote.content as ImageItem).imageId!
-        );
+      if (type === NoteType.image && (content as ImageItem).imageId !== null) {
+        const ref = initStorageImageRef((content as ImageItem).imageId!);
         await ref.delete();
       }
+
+      if (collaborators && collaborators.length > 0) {
+        await removeCollaborators(deletedNote, uid);
+      }
+
       dispatch(removeNote(id));
     } catch (e) {
       console.log(e.message);
       toast.error(e.message);
     }
   };
+};
+
+// @TODO need to test
+const removeCollaborators = async (deletedNote: Note, uid: string) => {
+  // AS OWNER: collaborators, and createdBy from all collaborators
+  if (!deletedNote.createdBy) {
+    const { collaborators = [] } = deletedNote;
+
+    await handleCollaboratorsPromises({
+      collaborators,
+      callback: async (
+        collUid // deleted all notes with the same id
+      ) => {
+        // get the shared note
+        const notes = await initDocumentRef(collUid).get();
+        const note = notes.docs.find((d) => d.id === deletedNote.id);
+
+        // if found clone one with a new id
+        if (note) {
+          return initDocumentRef(collUid).add({
+            ...(note.data() as Note),
+            collaborators: [],
+            createdBy: "",
+          } as Note);
+        } else {
+          console.log(getMessage(Message.noteNotFound));
+          toast.error(getMessage(Message.noteNotFound));
+          return;
+        }
+      },
+    });
+
+    // delete the shared one
+    await handleCollaboratorsPromises({
+      collaborators,
+      callback: (
+        collUid // deleted all notes with the same id
+      ) => initDocumentRef(collUid).doc(deletedNote.id).delete(),
+    });
+  } else {
+    // AS COLLABORATOR: deleted uid from collaborators of the note, and owner
+    const { id, collaborators = [], createdBy } = deletedNote;
+    // all collaborators excluding current one
+    const filteredCollaborators: string[] = collaborators!.filter(
+      (coll) => coll !== uid
+    );
+
+    await handleCollaboratorsPromises({
+      collaborators,
+      callback: (
+        collUid // update
+      ) =>
+        initDocumentRef(collUid)
+          .doc(id)
+          .update({ collaborators: [...filteredCollaborators, createdBy] }),
+    });
+  }
 };
 
 export const handleUpdateNote = (
@@ -344,4 +406,22 @@ export const removeTagFromNotes = (
       toast.error(e.message);
     }
   };
+};
+
+// @TODO need to test
+const handleCollaboratorsPromises = async (options: {
+  collaborators: string[];
+  callback: (callUid: string) => Promise<any>;
+}) => {
+  const { collaborators, callback } = options;
+  let promises: Promise<any>[] = [];
+
+  collaborators.forEach((callUid: string) => {
+    promises.push(callback(callUid));
+  });
+
+  await Promise.all(promises).catch((e) => {
+    console.log(e.message);
+    toast.error(e.message);
+  });
 };

@@ -15,11 +15,11 @@ import {
 import { NoteFormValues, NoteType } from "./notes.types";
 import ColorsPickerField from "./options/ColorsPickerField";
 import {
-  nameOf,
-  Placeholders,
-  PickerColors,
-  JustifyContent,
   AlignItems,
+  JustifyContent,
+  nameOf,
+  PickerColors,
+  Placeholders,
 } from "../../common";
 import { PathNames } from "../../routers/Routing";
 import { BaseForm, FieldSpy, TextInputField } from "../form";

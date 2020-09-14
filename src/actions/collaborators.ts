@@ -3,6 +3,7 @@ import {
   AddCollaboratorAction,
   Collaborator,
   CollaboratorsActionsTypes,
+  NotesStoreState,
   RemoveCollaboratorAction,
   SetCollaboratorsAction,
   Store,
@@ -46,7 +47,7 @@ export const handleSetCollaborators = (): ThunkAction<
   Action
 > => {
   return async (dispatch: Dispatch, getState: () => Store) => {
-    let collaborators: Pick<Collaborator, "uid" | "notesIds">[] = [];
+    let collaborators: Pick<Collaborator, "uid">[] = [];
     const uid = getState().auth.uid;
     const docRef = initDocumentRef(uid);
 
@@ -56,28 +57,29 @@ export const handleSetCollaborators = (): ThunkAction<
         if (doc.exists) {
           collaborators.push({
             uid: doc.id,
-            notesIds: doc.data().notesIds,
-          } as Pick<Collaborator, "uid" | "notesIds">);
+          } as Pick<Collaborator, "uid">);
         } else {
           console.log(getMessage(Message.errorNoSuchDoc));
           toast.error(getMessage(Message.errorNoSuchDoc));
         }
       });
 
-      const notes = getState().notes.filter((n) => n.createdBy);
+      const notes = getState().notes.filter(
+        (n: NotesStoreState) => n.createdBy
+      );
 
       // get unique uids of collaborators, and noted owners
       const uids: string[] = unique([
         ...collaborators.map((c) => c.uid),
-        ...notes.map((n) => n.createdBy!),
+        ...notes.map((n: NotesStoreState) => n.createdBy!),
       ]);
 
       if (uids.length > 0) {
         await getUserByUids(uids, (users: UserData[]) => {
           const mappedUsers: Collaborator[] = users.map((u: UserData) => {
-            const index = uids.findIndex((k) => k === u.uid);
+            const index = uids.findIndex((k: string) => k === u.uid);
             if (index >= 0) {
-              return { ...u, notesIds: collaborators[index].notesIds };
+              return { ...u };
             }
           }) as Collaborator[];
 
@@ -104,11 +106,7 @@ export const handleAddCollaborator = (
     const currentUid = getState().auth.uid;
     const { uid } = data;
     try {
-      await initDocumentRef(currentUid)
-        .doc(uid)
-        .set({
-          notesIds: [],
-        } as Pick<Collaborator, "notesIds">);
+      await initDocumentRef(currentUid).doc(uid).set({});
       dispatch(addCollaborator(data));
     } catch (e) {
       console.log(e.message);

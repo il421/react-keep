@@ -1,4 +1,6 @@
+@import "../base/variables";
 .coin {
+  margin: $xxs-size;
   & img,
   & span {
     width: 25px;

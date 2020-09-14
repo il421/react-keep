@@ -129,7 +129,6 @@ export interface RemoveNoteTagAction {
 // COLLABORATORS
 export type Collaborator = {
   uid: string;
-  notesIds: string[];
   email: string | null;
   displayName: string | null;
   photoURL: string | null;

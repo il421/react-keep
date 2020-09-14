@@ -101,40 +101,22 @@ export class ImageNoteFormModal extends React.Component<
                       />
                     )}
                   </Field>
-                  <FlexBox
-                    className="image-note-form-item__btns"
-                    justifyContent={JustifyContent.spaceBetween}
-                    alignItems={AlignItems.center}
-                    vertical
-                  >
-                    <IconButton
-                      icon="upload"
-                      onButtonClick={() => {
-                        this.handleUploadClick();
-                      }}
-                    />
-                    <IconButton
-                      icon="times"
-                      onButtonClick={() => {
-                        form.change(
-                          `${this.nameOf("content")}[${this.nameOfContent(
-                            "uploadedImage"
-                          )}]`,
-                          undefined
-                        );
-                      }}
-                    />
-                    {initialValues.content.imageUrl && (
+                  {!initialValues.createdBy && (
+                    <FlexBox
+                      className="image-note-form-item__btns"
+                      justifyContent={JustifyContent.spaceBetween}
+                      alignItems={AlignItems.center}
+                      vertical
+                    >
                       <IconButton
-                        id="test-trash-image-button"
-                        icon="trash"
+                        icon="upload"
                         onButtonClick={() => {
-                          form.change(
-                            `${this.nameOf("content")}[${this.nameOfContent(
-                              "imageUrl"
-                            )}]`,
-                            null
-                          );
+                          this.handleUploadClick();
+                        }}
+                      />
+                      <IconButton
+                        icon="times"
+                        onButtonClick={() => {
                           form.change(
                             `${this.nameOf("content")}[${this.nameOfContent(
                               "uploadedImage"
@@ -143,15 +125,35 @@ export class ImageNoteFormModal extends React.Component<
                           );
                         }}
                       />
-                    )}
-                    <FileFormField
-                      id={this.FIELD_ID}
-                      name={`${this.nameOf("content")}.${this.nameOfContent(
-                        "uploadedImage"
-                      )}]`}
-                      className="image-note-form-item__field"
-                    />
-                  </FlexBox>
+                      {initialValues.content.imageUrl && (
+                        <IconButton
+                          id="test-trash-image-button"
+                          icon="trash"
+                          onButtonClick={() => {
+                            form.change(
+                              `${this.nameOf("content")}[${this.nameOfContent(
+                                "imageUrl"
+                              )}]`,
+                              null
+                            );
+                            form.change(
+                              `${this.nameOf("content")}[${this.nameOfContent(
+                                "uploadedImage"
+                              )}]`,
+                              undefined
+                            );
+                          }}
+                        />
+                      )}
+                      <FileFormField
+                        id={this.FIELD_ID}
+                        name={`${this.nameOf("content")}.${this.nameOfContent(
+                          "uploadedImage"
+                        )}]`}
+                        className="image-note-form-item__field"
+                      />
+                    </FlexBox>
+                  )}
                 </div>
               );
             }}

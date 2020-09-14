@@ -36,7 +36,7 @@ beforeAll((done) => {
       .doc(user.uid)
       .collection(Collections.collaborators)
       .doc(coll.uid)
-      .set({ notesIds: coll.notesIds })
+      .set({})
       .then(() => done())
       .catch(() => done());
   });
@@ -75,7 +75,6 @@ test("should fetch the collaborators from DB", (done) => {
       collaborators: expect.arrayContaining(
         collaborators.map((c) => ({
           uid: c.uid,
-          notesIds: c.notesIds,
           email: c.email,
           displayName: null,
           photoURL: null,
@@ -113,7 +112,7 @@ test("should add a collaborator to DB and store", (done) => {
       .get()
       .then((doc) => {
         if (doc.exists) {
-          expect(doc.data()).toEqual({ notesIds: [] });
+          expect(doc.data()).toEqual({});
         }
         done();
       });

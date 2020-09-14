@@ -28,7 +28,7 @@ beforeEach(() => {
     }),
     onSubmit: jest.fn(),
     formClassName: "formClassName",
-    getFormActions: jest.fn()
+    getFormActions: jest.fn(),
   };
 
   wrapper = shallow<BaseFormProps<NoteFormValues<string>>>(
