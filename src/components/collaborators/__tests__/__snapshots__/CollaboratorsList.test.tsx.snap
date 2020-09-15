@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render CollaboratorsList 1`] = `
+"<WithFontAwesome>
+  <CollaboratorsListBase collaborators={{...}} removeCollaborator={[Function: mockConstructor]}>
+    <FlexBox vertical={true} justifyContent=\\"flex-start\\" className=\\"collaborators-list\\">
+      <div style={{...}} className=\\"collaborators-list\\">
+        <CollaboratorsItem collaborator={{...}} removeCollaborator={[Function: removeCollaborator]}>
+          <FlexBox justifyContent=\\"space-between\\" alignItems=\\"center\\" className=\\"collaborators-item\\">
+            <div style={{...}} className=\\"collaborators-item\\">
+              <FlexBox justifyContent=\\"flex-start\\">
+                <div style={{...}} className={[undefined]}>
+                  <Memo(CoinBase) email=\\"test1@gmail.com\\" name=\\"Ivan\\" url=\\"http://test.com\\">
+                    <div data-tip=\\"Ivan\\">
+                      <FlexBox justifyContent=\\"center\\" className=\\"coin undefined\\">
+                        <div style={{...}} className=\\"coin undefined\\">
+                          <img src=\\"http://test.com\\" alt=\\"Photo of Ivan\\" width={25} height={25} />
+                        </div>
+                      </FlexBox>
+                    </div>
+                  </Memo(CoinBase)>
+                  <div className=\\"collaborators-item__value\\">
+                    Ivan
+                  </div>
+                </div>
+              </FlexBox>
+              <IconButton icon=\\"times\\" onButtonClick={[Function]}>
+                <button id={[undefined]} className=\\"icon-button undefined \\" onClick={[Function]} disabled={[undefined]} type=\\"button\\">
+                  <FontAwesomeIcon icon=\\"times\\" border={false} className=\\"\\" mask={{...}} fixedWidth={false} inverse={false} flip={{...}} listItem={false} pull={{...}} pulse={false} rotation={{...}} size={{...}} spin={false} symbol={false} title=\\"\\" transform={{...}} swapOpacity={false}>
+                    <svg aria-hidden=\\"true\\" focusable=\\"false\\" data-prefix=\\"fas\\" data-icon=\\"times\\" className=\\"svg-inline--fa fa-times fa-w-11 \\" role=\\"img\\" xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 352 512\\" style={{...}}>
+                      <path fill=\\"currentColor\\" d=\\"M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z\\" style={{...}} />
+                    </svg>
+                  </FontAwesomeIcon>
+                </button>
+              </IconButton>
+            </div>
+          </FlexBox>
+        </CollaboratorsItem>
+        <CollaboratorsItem collaborator={{...}} removeCollaborator={[Function: removeCollaborator]}>
+          <FlexBox justifyContent=\\"space-between\\" alignItems=\\"center\\" className=\\"collaborators-item\\">
+            <div style={{...}} className=\\"collaborators-item\\">
+              <FlexBox justifyContent=\\"flex-start\\">
+                <div style={{...}} className={[undefined]}>
+                  <Memo(CoinBase) email=\\"test2@gmail.com\\" name=\\"Tany\\" url=\\"http://tdest.com\\">
+                    <div data-tip=\\"Tany\\">
+                      <FlexBox justifyContent=\\"center\\" className=\\"coin undefined\\">
+                        <div style={{...}} className=\\"coin undefined\\">
+                          <img src=\\"http://tdest.com\\" alt=\\"Photo of Tany\\" width={25} height={25} />
+                        </div>
+                      </FlexBox>
+                    </div>
+                  </Memo(CoinBase)>
+                  <div className=\\"collaborators-item__value\\">
+                    Tany
+                  </div>
+                </div>
+              </FlexBox>
+              <IconButton icon=\\"times\\" onButtonClick={[Function]}>
+                <button id={[undefined]} className=\\"icon-button undefined \\" onClick={[Function]} disabled={[undefined]} type=\\"button\\">
+                  <FontAwesomeIcon icon=\\"times\\" border={false} className=\\"\\" mask={{...}} fixedWidth={false} inverse={false} flip={{...}} listItem={false} pull={{...}} pulse={false} rotation={{...}} size={{...}} spin={false} symbol={false} title=\\"\\" transform={{...}} swapOpacity={false}>
+                    <svg aria-hidden=\\"true\\" focusable=\\"false\\" data-prefix=\\"fas\\" data-icon=\\"times\\" className=\\"svg-inline--fa fa-times fa-w-11 \\" role=\\"img\\" xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 352 512\\" style={{...}}>
+                      <path fill=\\"currentColor\\" d=\\"M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z\\" style={{...}} />
+                    </svg>
+                  </FontAwesomeIcon>
+                </button>
+              </IconButton>
+            </div>
+          </FlexBox>
+        </CollaboratorsItem>
+      </div>
+    </FlexBox>
+  </CollaboratorsListBase>
+</WithFontAwesome>"
+`;

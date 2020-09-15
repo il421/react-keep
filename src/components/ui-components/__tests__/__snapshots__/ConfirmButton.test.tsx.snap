@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render ConfirmButton 1`] = `
+"<ConfirmButton text=\\"text\\" onCLick={[Function: mockConstructor]}>
+  <FlexBox className={[undefined]} justifyContent=\\"center\\">
+    <div style={{...}} className={[undefined]}>
+      <button id={[undefined]} className=\\"login-button\\" type=\\"submit\\" disabled={false} onClick={[Function: mockConstructor]}>
+        text
+      </button>
+    </div>
+  </FlexBox>
+</ConfirmButton>"
+`;

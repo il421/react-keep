@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render CheckboxInputField, and contain input element 1`] = `
+"<ReactFinalForm initialValues={{...}} onSubmit={[Function: onSubmit]}>
+  <CheckboxInputField className=\\"className\\" name=\\"name\\" id=\\"id\\">
+    <Field className=\\"className\\" name=\\"name\\" id=\\"id\\" type=\\"checkbox\\" component={[Function: FieldAdapter]}>
+      <FieldAdapter input={{...}} meta={{...}} className=\\"className\\" id=\\"id\\" render={[undefined]}>
+        <div className=\\"className\\">
+          <input id=\\"id\\" name=\\"name\\" value={[undefined]} checked={false} onBlur={[Function]} onChange={[Function]} onFocus={[Function]} type=\\"checkbox\\" />
+          <label htmlFor=\\"id\\" />
+        </div>
+      </FieldAdapter>
+    </Field>
+  </CheckboxInputField>
+</ReactFinalForm>"
+`;

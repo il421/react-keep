@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render DashboardPage correctly 1`] = `
+"<FlexBox vertical={true} justifyContent=\\"space-between\\" className=\\"dashboard\\">
+  <Connect(HeaderBase) showSidebar={[Function: bound _dispatchAction]} history={{...}} />
+  <Connect(NotesListBase) onNoteSelected={[Function: onNoteSelected]} />
+  <SideBar showBar={false} setShowSidebar={[Function: bound _dispatchAction]}>
+    <div className=\\"dashboard__sidebar\\">
+      <IconButton icon=\\"tags\\" text=\\"Tags list\\" onButtonClick={[Function]} className={[undefined]} />
+      <IconButton icon=\\"archive\\" text=\\"Archived notes\\" onButtonClick={[Function]} className={[undefined]} />
+      <IconButton icon=\\"user-friends\\" text=\\"Collaborators\\" onButtonClick={[Function]} className={[undefined]} />
+    </div>
+  </SideBar>
+  <TextNoteFormModal history={{...}} />
+  <ListNoteFormModal history={{...}} />
+  <ImageNoteFormModal history={{...}} />
+  <Connect(UserFormModal) history={{...}} />
+  <Controllers isMobile={true} openDialog={[Function: openDialog]} />
+  <ToastContainer autoClose={2000} position=\\"top-right\\" transition={[Function: Animation]} rtl={false} hideProgressBar={false} closeButton={{...}} pauseOnHover={true} pauseOnFocusLoss={true} closeOnClick={true} newestOnTop={false} draggable={true} draggablePercent={80} className={{...}} style={{...}} toastClassName={{...}} bodyClassName={{...}} progressClassName={{...}} progressStyle={{...}} role=\\"alert\\" />
+</FlexBox>"
+`;

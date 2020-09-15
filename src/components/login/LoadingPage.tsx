@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { RingLoader } from "react-spinners";
 import { AlignItems, Colors, JustifyContent } from "../../common";
 import "../../styles/components/login/_loading-page.scss";

@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render LinkButton 1`] = `
+<button
+  className="link-button undefined"
+  type="submit"
+>
+  text
+</button>
+`;

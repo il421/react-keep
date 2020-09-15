@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Rendering should render ListNoteFormItem correctly 1`] = `
+"<ReactFinalForm initialValues={{...}} onSubmit={[Function: onSubmit]}>
+  <ListNoteFromItem name=\\"text\\" index={1} addItem={[Function: mockConstructor]} onRemove={[Function: mockConstructor]} onChecked={[Function: mockConstructor]} setPastedValue={[Function: mockConstructor]}>
+    <FlexBox justifyContent=\\"space-between\\" alignItems=\\"flex-start\\" className=\\"list-note-form-item\\">
+      <div style={{...}} className=\\"list-note-form-item\\">
+        <CheckboxInputField name=\\"text.checked\\" className=\\"list-note-form-item__check\\" id=\\"text.checked\\">
+          <Field name=\\"text.checked\\" className=\\"list-note-form-item__check\\" id=\\"text.checked\\" type=\\"checkbox\\" component={[Function: FieldAdapter]}>
+            <FieldAdapter input={{...}} meta={{...}} className=\\"list-note-form-item__check\\" id=\\"text.checked\\" render={[undefined]}>
+              <div className=\\"list-note-form-item__check\\">
+                <input id=\\"text.checked\\" name=\\"text.checked\\" value={[undefined]} checked={false} onBlur={[Function]} onChange={[Function]} onFocus={[Function]} type=\\"checkbox\\" />
+                <label htmlFor=\\"text.checked\\" />
+              </div>
+            </FieldAdapter>
+          </Field>
+        </CheckboxInputField>
+        <FieldSpy name=\\"text.checked\\" onChange={[Function: mockConstructor]}>
+          <FormSpy subscription={{...}} onChange={[Function]} />
+        </FieldSpy>
+        <TextInputField afterPasteCallback={[Function: mockConstructor]} isTextArea={true} name=\\"text.content\\" placeholder=\\"Type something ...\\" className=\\"list-note-form-item__text\\" autoFocus={[undefined]} onPaste={[Function: handleOnPaste]}>
+          <Field afterPasteCallback={[Function: mockConstructor]} isTextArea={true} name=\\"text.content\\" placeholder=\\"Type something ...\\" className=\\"list-note-form-item__text\\" autoFocus={[undefined]} onPaste={[Function: handleOnPaste]} component={[Function: FieldAdapter]} parse={[Function: parse]}>
+            <FieldAdapter input={{...}} meta={{...}} afterPasteCallback={[Function: mockConstructor]} isTextArea={true} placeholder=\\"Type something ...\\" className=\\"list-note-form-item__text\\" autoFocus={[undefined]} onPaste={[Function: handleOnPaste]} render={[undefined]}>
+              <div className=\\"list-note-form-item__text\\">
+                <ForwardRef(TextareaAutosize) name=\\"text.content\\" value=\\"\\" checked={[undefined]} onBlur={[Function]} onChange={[Function: handleOnChange]} onFocus={[Function]} placeholder=\\"Type something ...\\" render={[undefined]} onPaste={[Function: handleOnPaste]} spellCheck=\\"false\\" autoComplete=\\"new-password\\" autoFocus={false}>
+                  <textarea name=\\"text.content\\" value=\\"\\" checked={[undefined]} onBlur={[Function]} onFocus={[Function]} placeholder=\\"Type something ...\\" render={[undefined]} onPaste={[Function: handleOnPaste]} spellCheck=\\"false\\" autoComplete=\\"new-password\\" autoFocus={false} onChange={[Function: handleChange]} />
+                </ForwardRef(TextareaAutosize)>
+              </div>
+            </FieldAdapter>
+          </Field>
+        </TextInputField>
+        <IconButton id=\\"test-item-rm-button-1\\" onButtonClick={[Function: mockConstructor]} icon=\\"times\\" className=\\"list-note-form-item__remove\\">
+          <button id=\\"test-item-rm-button-1\\" className=\\"icon-button list-note-form-item__remove \\" onClick={[Function: mockConstructor]} disabled={[undefined]} type=\\"button\\">
+            <FontAwesomeIcon icon=\\"times\\" border={false} className=\\"\\" mask={{...}} fixedWidth={false} inverse={false} flip={{...}} listItem={false} pull={{...}} pulse={false} rotation={{...}} size={{...}} spin={false} symbol={false} title=\\"\\" transform={{...}} swapOpacity={false}>
+              <svg aria-hidden=\\"true\\" focusable=\\"false\\" data-prefix=\\"fas\\" data-icon=\\"times\\" className=\\"svg-inline--fa fa-times fa-w-11 \\" role=\\"img\\" xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 352 512\\" style={{...}}>
+                <path fill=\\"currentColor\\" d=\\"M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z\\" style={{...}} />
+              </svg>
+            </FontAwesomeIcon>
+          </button>
+        </IconButton>
+      </div>
+    </FlexBox>
+  </ListNoteFromItem>
+</ReactFinalForm>"
+`;

@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render CollaboratorsField correctly 1`] = `
+"<ReactFinalForm initialValues={{...}} onSubmit={[Function: onSubmit]}>
+  <CollaboratorsField collaborators={{...}}>
+    <FlexBox justifyContent=\\"space-between\\" vertical={true} className=\\"collaborators-picker\\" flexWrap=\\"wrap\\">
+      <div style={{...}} className=\\"collaborators-picker\\">
+        <CheckboxGroupField name=\\"collaborators\\" options={{...}} classNames={{...}}>
+          <Field name=\\"collaborators\\" options={{...}} classNames={{...}} component={[Function: FieldAdapter]}>
+            <FieldAdapter input={{...}} meta={{...}} options={{...}} classNames={{...}} render={[undefined]}>
+              <CheckboxGroup options={{...}} classNames={{...}} selectedKeys=\\"\\" onChange={[Function: onChange]}>
+                <FlexBox justifyContent=\\"flex-start\\" className=\\"collaborators-picker__wrapper\\">
+                  <div style={{...}} className=\\"collaborators-picker__wrapper\\">
+                    <div className=\\"collaborators-picker__checkbox\\">
+                      <input id=\\"BYKMnT7RSfeyrLiBAZwvGLajEPF2\\" value=\\"BYKMnT7RSfeyrLiBAZwvGLajEPF2\\" type=\\"checkbox\\" defaultChecked={false} />
+                      <label htmlFor=\\"BYKMnT7RSfeyrLiBAZwvGLajEPF2\\" onClick={[Function: onClick]} />
+                    </div>
+                    <span className=\\"collaborators-picker__value\\">
+                      Ivan
+                    </span>
+                  </div>
+                </FlexBox>
+                <FlexBox justifyContent=\\"flex-start\\" className=\\"collaborators-picker__wrapper\\">
+                  <div style={{...}} className=\\"collaborators-picker__wrapper\\">
+                    <div className=\\"collaborators-picker__checkbox\\">
+                      <input id=\\"Q81hnXu9qJM5Y2iTRkun6gVRj0i1\\" value=\\"Q81hnXu9qJM5Y2iTRkun6gVRj0i1\\" type=\\"checkbox\\" defaultChecked={false} />
+                      <label htmlFor=\\"Q81hnXu9qJM5Y2iTRkun6gVRj0i1\\" onClick={[Function: onClick]} />
+                    </div>
+                    <span className=\\"collaborators-picker__value\\">
+                      Tany
+                    </span>
+                  </div>
+                </FlexBox>
+              </CheckboxGroup>
+            </FieldAdapter>
+          </Field>
+        </CheckboxGroupField>
+      </div>
+    </FlexBox>
+  </CollaboratorsField>
+</ReactFinalForm>"
+`;

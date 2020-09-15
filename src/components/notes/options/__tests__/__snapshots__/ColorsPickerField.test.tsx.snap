@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render ColorsPickerField correctly 1`] = `
+"<FlexBox justifyContent=\\"space-between\\" className=\\"colors-picker\\">
+  <RadioButtonsInputField id=\\"color-icon-#fff\\" name=\\"color\\" radioClassName=\\"colors-picker__item\\" value=\\"#fff\\" labelProps={{...}} />
+  <RadioButtonsInputField id=\\"color-icon-#f28b82\\" name=\\"color\\" radioClassName=\\"colors-picker__item\\" value=\\"#f28b82\\" labelProps={{...}} />
+  <RadioButtonsInputField id=\\"color-icon-#cbf0f8\\" name=\\"color\\" radioClassName=\\"colors-picker__item\\" value=\\"#cbf0f8\\" labelProps={{...}} />
+  <RadioButtonsInputField id=\\"color-icon-#fff475\\" name=\\"color\\" radioClassName=\\"colors-picker__item\\" value=\\"#fff475\\" labelProps={{...}} />
+  <RadioButtonsInputField id=\\"color-icon-#ccff90\\" name=\\"color\\" radioClassName=\\"colors-picker__item\\" value=\\"#ccff90\\" labelProps={{...}} />
+  <RadioButtonsInputField id=\\"color-icon-#e6c9a8\\" name=\\"color\\" radioClassName=\\"colors-picker__item\\" value=\\"#e6c9a8\\" labelProps={{...}} />
+  <RadioButtonsInputField id=\\"color-icon-#e8eaed\\" name=\\"color\\" radioClassName=\\"colors-picker__item\\" value=\\"#e8eaed\\" labelProps={{...}} />
+  <RadioButtonsInputField id=\\"color-icon-#fbbc04\\" name=\\"color\\" radioClassName=\\"colors-picker__item\\" value=\\"#fbbc04\\" labelProps={{...}} />
+</FlexBox>"
+`;

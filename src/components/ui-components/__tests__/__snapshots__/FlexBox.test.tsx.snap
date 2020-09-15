@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render FlexBox 1`] = `
+<div
+  style={
+    Object {
+      "alignItems": "inherit",
+      "display": "flex",
+      "flexDirection": "row",
+      "flexGrow": 0,
+      "flexWrap": "inherit",
+      "justifyContent": "center",
+      "width": undefined,
+    }
+  }
+/>
+`;

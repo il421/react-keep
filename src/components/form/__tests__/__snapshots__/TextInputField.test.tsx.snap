@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render TextInputField, and contain input element 1`] = `
+"<ReactFinalForm initialValues={{...}} onSubmit={[Function: onSubmit]}>
+  <TextInputField className=\\"className\\" name=\\"name\\">
+    <Field className=\\"className\\" name=\\"name\\" component={[Function: FieldAdapter]} parse={[Function: parse]}>
+      <FieldAdapter input={{...}} meta={{...}} className=\\"className\\" render={[undefined]}>
+        <div className=\\"className\\">
+          <input name=\\"name\\" value=\\"\\" checked={[undefined]} onBlur={[Function]} onChange={[Function]} onFocus={[Function]} render={[undefined]} onInput={[Function: handleOnChange]} onPaste={[undefined]} autoComplete=\\"new-password\\" autoFocus={false} />
+        </div>
+      </FieldAdapter>
+    </Field>
+  </TextInputField>
+</ReactFinalForm>"
+`;

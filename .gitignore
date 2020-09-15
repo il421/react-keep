@@ -1,5 +1,3 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # dependencies
 /node_modules
 /.pnp
@@ -21,17 +19,6 @@ yarn-error.log*
 
 # editor
 /.idea
-
-# snapshots
-/src/components/common/__tests__/__snapshots__/
-/src/components/archive/__tests__/__snapshots__/
-/src/components/form/__tests__/__snapshots__/
-/src/components/login/__tests__/__snapshots__/
-/src/components/notes/options/__tests__/__snapshots__/
-/src/components/notes/__tests__/__snapshots__/
-/src/components/ui-components/__tests__/__snapshots__/
-/src/components/tags/__tests__/__snapshots__/
-/src/components/collaborators/__tests__/__snapshots__/
 
 # git
 /.githooks

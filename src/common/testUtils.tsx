@@ -1,4 +1,14 @@
-import { ReactWrapper } from "enzyme";
+import { mount, ReactWrapper } from "enzyme";
+import React from "react";
+import { Provider } from "react-redux";
+import { notes } from "../testData/notes";
+import { tags } from "../testData/tags";
+import { defaultAuthState } from "../actions/__tests__/auth.test";
+import { Store } from "../store/store.types";
+import configureMockStore from "redux-mock-store";
+import thunk from "redux-thunk";
+import { WithFontAwesome } from "./WithFontAwesome";
+import { collaborators } from "../testData/users";
 
 export function triggerInputChange(
   wrapper: ReactWrapper,
@@ -39,4 +49,22 @@ export const triggerCheckboxChange = (
 
 export const flushPromises = () => {
   return new Promise((resolve) => setImmediate(resolve));
+};
+
+const createMockStore = configureMockStore([thunk]);
+export const mountInApp = (node: React.ReactNode) => {
+  return mount(
+    <WithFontAwesome>
+      <Provider
+        store={createMockStore({
+          notes: notes,
+          tags: tags,
+          auth: defaultAuthState.auth,
+          collaborators: collaborators,
+        } as Store)}
+      >
+        {node}
+      </Provider>
+    </WithFontAwesome>
+  );
 };

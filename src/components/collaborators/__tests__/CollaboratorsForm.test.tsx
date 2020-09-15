@@ -9,6 +9,7 @@ import { ValidationErrors } from "final-form";
 import { Errors } from "../../../common";
 import { collaborators } from "../../../testData/users";
 import { defaultAuthState } from "../../../actions/__tests__/auth.test";
+import { WithFontAwesome } from "../../../common/WithFontAwesome";
 
 let wrapper: ReactWrapper | undefined, props: Props;
 
@@ -18,7 +19,11 @@ beforeEach(() => {
     auth: defaultAuthState.auth,
     addCollaborator: jest.fn(),
   };
-  wrapper = mount(<CollaboratorForm {...props} />);
+  wrapper = mount(
+    <WithFontAwesome>
+      <CollaboratorForm {...props} />
+    </WithFontAwesome>
+  );
 });
 
 afterEach(() => {

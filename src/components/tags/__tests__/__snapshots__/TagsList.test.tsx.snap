@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render TagsList 1`] = `
+"<WithFontAwesome>
+  <TagsListBase tags={{...}} filters={{...}} removeTag={[Function: mockConstructor]} toggleTag={[Function: mockConstructor]} removeTagFromNotes={[Function: mockConstructor]}>
+    <FlexBox vertical={true} justifyContent=\\"flex-start\\" className=\\"tags-list\\">
+      <div style={{...}} className=\\"tags-list\\">
+        <TagsItem tag={{...}} removeTag={[Function: removeTag]} checked={true} onChange={[Function: mockConstructor]}>
+          <FlexBox justifyContent=\\"space-between\\" alignItems=\\"center\\" className=\\"tags-item\\">
+            <div style={{...}} className=\\"tags-item\\">
+              <FlexBox justifyContent=\\"flex-start\\">
+                <div style={{...}} className={[undefined]}>
+                  <div className=\\"tags-item__checkbox\\">
+                    <input id=\\"1-list\\" type=\\"checkbox\\" checked={true} onChange={[Function: onChange]} />
+                    <label htmlFor=\\"1-list\\" />
+                  </div>
+                  <div className=\\"tags-item__value\\">
+                    Tag1
+                  </div>
+                </div>
+              </FlexBox>
+              <IconButton icon=\\"times\\" onButtonClick={[Function: onButtonClick]}>
+                <button id={[undefined]} className=\\"icon-button undefined \\" onClick={[Function: onButtonClick]} disabled={[undefined]} type=\\"button\\">
+                  <FontAwesomeIcon icon=\\"times\\" border={false} className=\\"\\" mask={{...}} fixedWidth={false} inverse={false} flip={{...}} listItem={false} pull={{...}} pulse={false} rotation={{...}} size={{...}} spin={false} symbol={false} title=\\"\\" transform={{...}} swapOpacity={false}>
+                    <svg aria-hidden=\\"true\\" focusable=\\"false\\" data-prefix=\\"fas\\" data-icon=\\"times\\" className=\\"svg-inline--fa fa-times fa-w-11 \\" role=\\"img\\" xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 352 512\\" style={{...}}>
+                      <path fill=\\"currentColor\\" d=\\"M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z\\" style={{...}} />
+                    </svg>
+                  </FontAwesomeIcon>
+                </button>
+              </IconButton>
+            </div>
+          </FlexBox>
+        </TagsItem>
+        <TagsItem tag={{...}} removeTag={[Function: removeTag]} checked={false} onChange={[Function: mockConstructor]}>
+          <FlexBox justifyContent=\\"space-between\\" alignItems=\\"center\\" className=\\"tags-item\\">
+            <div style={{...}} className=\\"tags-item\\">
+              <FlexBox justifyContent=\\"flex-start\\">
+                <div style={{...}} className={[undefined]}>
+                  <div className=\\"tags-item__checkbox\\">
+                    <input id=\\"2-list\\" type=\\"checkbox\\" checked={false} onChange={[Function: onChange]} />
+                    <label htmlFor=\\"2-list\\" />
+                  </div>
+                  <div className=\\"tags-item__value\\">
+                    Tag2
+                  </div>
+                </div>
+              </FlexBox>
+              <IconButton icon=\\"times\\" onButtonClick={[Function: onButtonClick]}>
+                <button id={[undefined]} className=\\"icon-button undefined \\" onClick={[Function: onButtonClick]} disabled={[undefined]} type=\\"button\\">
+                  <FontAwesomeIcon icon=\\"times\\" border={false} className=\\"\\" mask={{...}} fixedWidth={false} inverse={false} flip={{...}} listItem={false} pull={{...}} pulse={false} rotation={{...}} size={{...}} spin={false} symbol={false} title=\\"\\" transform={{...}} swapOpacity={false}>
+                    <svg aria-hidden=\\"true\\" focusable=\\"false\\" data-prefix=\\"fas\\" data-icon=\\"times\\" className=\\"svg-inline--fa fa-times fa-w-11 \\" role=\\"img\\" xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 352 512\\" style={{...}}>
+                      <path fill=\\"currentColor\\" d=\\"M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z\\" style={{...}} />
+                    </svg>
+                  </FontAwesomeIcon>
+                </button>
+              </IconButton>
+            </div>
+          </FlexBox>
+        </TagsItem>
+      </div>
+    </FlexBox>
+  </TagsListBase>
+</WithFontAwesome>"
+`;

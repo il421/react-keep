@@ -1,6 +1,5 @@
 # Git Attributes
 .env.development filter=firestoreDevelopmentAPIKey
-.env.test.local filter=firestoreTestAPIKey
 .env.production filter=firestoreProdAPIKey
 src/testData/users.ts filter=testUserPass
 

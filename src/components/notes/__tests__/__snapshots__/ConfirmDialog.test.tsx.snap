@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render ConfirmDialog correctly 1`] = `
+"<ConfirmDialog className=\\"confirm-dialog\\" closeDialog={[Function: mockConstructor]} handleConfirm={[Function: mockConstructor]} buttonsProps={{...}}>
+  <FlexBox className=\\"confirm-dialog confirm-dialog\\" justifyContent=\\"center\\" alignItems=\\"center\\">
+    <div style={{...}} className=\\"confirm-dialog confirm-dialog\\">
+      <FlexBox className=\\"confirm-dialog__wrapper\\" justifyContent=\\"space-around\\">
+        <div style={{...}} className=\\"confirm-dialog__wrapper\\">
+          <ConfirmButton id=\\"test-confirm-dialog-delete-btn\\" type=\\"button\\" text=\\"confirmTest\\" wrapperClassName=\\"confirm-dialog__button\\" onCLick={[Function: onCLick]}>
+            <FlexBox className=\\"confirm-dialog__button\\" justifyContent=\\"center\\">
+              <div style={{...}} className=\\"confirm-dialog__button\\">
+                <button id=\\"test-confirm-dialog-delete-btn\\" className=\\"login-button\\" type=\\"button\\" disabled={false} onClick={[Function: onCLick]}>
+                  confirmTest
+                </button>
+              </div>
+            </FlexBox>
+          </ConfirmButton>
+          <ConfirmButton id=\\"test-confirm-dialog-dont-btn\\" type=\\"button\\" text=\\"cancelTest\\" wrapperClassName=\\"confirm-dialog__button\\" onCLick={[Function: onCLick]}>
+            <FlexBox className=\\"confirm-dialog__button\\" justifyContent=\\"center\\">
+              <div style={{...}} className=\\"confirm-dialog__button\\">
+                <button id=\\"test-confirm-dialog-dont-btn\\" className=\\"login-button\\" type=\\"button\\" disabled={false} onClick={[Function: onCLick]}>
+                  cancelTest
+                </button>
+              </div>
+            </FlexBox>
+          </ConfirmButton>
+        </div>
+      </FlexBox>
+    </div>
+  </FlexBox>
+</ConfirmDialog>"
+`;

@@ -59,7 +59,7 @@ describe("Utils", () => {
       tagFilters: [],
     });
 
-    expect(filteredNotes).toEqual([notes[0]]);
+    expect(filteredNotes).toEqual([notes[0], notes[3]]);
   });
 
   test("should correct return filtered notes with searched text (case 2)", () => {
@@ -105,6 +105,6 @@ describe("Utils", () => {
       tagFilters: [tags[0].id],
     });
 
-    expect(filteredNotes).toEqual([notes[1], notes[0]]);
+    expect(filteredNotes).toEqual([notes[1], notes[0], notes[3]]);
   });
 });

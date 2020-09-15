@@ -1,0 +1,108 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Rendering should render LoginPage correctly 1`] = `
+"<UserFormModal updateUserData={[Function: mockConstructor]} history={{...}} auth={{...}}>
+  <Modal isOpen={true} onRequestClose={[Function]} className=\\"user-modal\\" ariaHideApp={false} portalClassName=\\"ReactModalPortal\\" bodyOpenClassName=\\"ReactModal__Body--open\\" role=\\"dialog\\" closeTimeoutMS={0} shouldFocusAfterRender={true} shouldCloseOnEsc={true} shouldCloseOnOverlayClick={true} shouldReturnFocusAfterClose={true} parentSelector={[Function: parentSelector]}>
+    <Portal containerInfo={{...}}>
+      <ModalPortal defaultStyles={{...}} isOpen={true} onRequestClose={[Function]} className=\\"user-modal\\" ariaHideApp={false} portalClassName=\\"ReactModalPortal\\" bodyOpenClassName=\\"ReactModal__Body--open\\" role=\\"dialog\\" closeTimeoutMS={0} shouldFocusAfterRender={true} shouldCloseOnEsc={true} shouldCloseOnOverlayClick={true} shouldReturnFocusAfterClose={true} parentSelector={[Function: parentSelector]} style={{...}}>
+        <div className=\\"ReactModal__Overlay ReactModal__Overlay--after-open\\" style={{...}} onClick={[Function]} onMouseDown={[Function]}>
+          <div id={[undefined]} style={{...}} className=\\"ReactModal__Content ReactModal__Content--after-open user-modal\\" tabIndex=\\"-1\\" onKeyDown={[Function]} onMouseDown={[Function]} onMouseUp={[Function]} onClick={[Function]} role=\\"dialog\\" aria-label={[undefined]} data-testid={[undefined]}>
+            <ContentContainer className=\\"user-modal__container\\">
+              <div onClick={[undefined]} className=\\"content-container user-modal__container\\" style={[undefined]}>
+                <BaseForm formClassName=\\"login-box__form user-form\\" initialValues={{...}} onSubmit={[Function]} getFormActions={[Function]}>
+                  <ReactFinalForm initialValues={{...}} onSubmit={[Function]} validate={[undefined]} mutators={{...}}>
+                    <form onSubmit={[Function: handleSubmit]} className=\\"login-box__form user-form\\" autoComplete=\\"off\\">
+                      <FlexBox justifyContent=\\"flex-start\\" alignItems=\\"center\\" className=\\"user-form__avatar avatar\\">
+                        <div style={{...}} className=\\"user-form__avatar avatar\\">
+                          <FormSpy>
+                            <Field name=\\"photoUrl\\">
+                              <img className=\\"avatar__img\\" src=\\"img/no_avatar.png\\" width=\\"95\\" height=\\"95\\" alt=\\"User photo\\" />
+                            </Field>
+                            <FlexBox justifyContent=\\"space-between\\" alignItems=\\"center\\" vertical={true}>
+                              <div style={{...}} className={[undefined]}>
+                                <IconButton className=\\"avatar__btn\\" icon=\\"upload\\" onButtonClick={[Function: onButtonClick]}>
+                                  <button id={[undefined]} className=\\"icon-button avatar__btn \\" onClick={[Function: onButtonClick]} disabled={[undefined]} type=\\"button\\">
+                                    <FontAwesomeIcon icon=\\"upload\\" border={false} className=\\"\\" mask={{...}} fixedWidth={false} inverse={false} flip={{...}} listItem={false} pull={{...}} pulse={false} rotation={{...}} size={{...}} spin={false} symbol={false} title=\\"\\" transform={{...}} swapOpacity={false}>
+                                      <svg aria-hidden=\\"true\\" focusable=\\"false\\" data-prefix=\\"fas\\" data-icon=\\"upload\\" className=\\"svg-inline--fa fa-upload fa-w-16 \\" role=\\"img\\" xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 512 512\\" style={{...}}>
+                                        <path fill=\\"currentColor\\" d=\\"M296 384h-80c-13.3 0-24-10.7-24-24V192h-87.7c-17.8 0-26.7-21.5-14.1-34.1L242.3 5.7c7.5-7.5 19.8-7.5 27.3 0l152.2 152.2c12.6 12.6 3.7 34.1-14.1 34.1H320v168c0 13.3-10.7 24-24 24zm216-8v112c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V376c0-13.3 10.7-24 24-24h136v8c0 30.9 25.1 56 56 56h80c30.9 0 56-25.1 56-56v-8h136c13.3 0 24 10.7 24 24zm-124 88c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm64 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z\\" style={{...}} />
+                                      </svg>
+                                    </FontAwesomeIcon>
+                                  </button>
+                                </IconButton>
+                                <IconButton className=\\"avatar__btn\\" icon=\\"times\\" onButtonClick={[Function: onButtonClick]}>
+                                  <button id={[undefined]} className=\\"icon-button avatar__btn \\" onClick={[Function: onButtonClick]} disabled={[undefined]} type=\\"button\\">
+                                    <FontAwesomeIcon icon=\\"times\\" border={false} className=\\"\\" mask={{...}} fixedWidth={false} inverse={false} flip={{...}} listItem={false} pull={{...}} pulse={false} rotation={{...}} size={{...}} spin={false} symbol={false} title=\\"\\" transform={{...}} swapOpacity={false}>
+                                      <svg aria-hidden=\\"true\\" focusable=\\"false\\" data-prefix=\\"fas\\" data-icon=\\"times\\" className=\\"svg-inline--fa fa-times fa-w-11 \\" role=\\"img\\" xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 352 512\\" style={{...}}>
+                                        <path fill=\\"currentColor\\" d=\\"M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z\\" style={{...}} />
+                                      </svg>
+                                    </FontAwesomeIcon>
+                                  </button>
+                                </IconButton>
+                                <FileFormField id=\\"avatar\\" name=\\"uploadingPhoto\\" className=\\"avatar__field\\">
+                                  <Field id=\\"avatar\\" name=\\"uploadingPhoto\\" className=\\"avatar__field\\" component={[Function: FieldAdapter]}>
+                                    <FieldAdapter input={{...}} meta={{...}} id=\\"avatar\\" className=\\"avatar__field\\" render={[undefined]}>
+                                      <div className=\\"avatar__field\\">
+                                        <input render={[undefined]} name=\\"uploadingPhoto\\" id=\\"avatar\\" type=\\"file\\" onChange={[Function: handleChange]} accept=\\"image/*\\" />
+                                      </div>
+                                    </FieldAdapter>
+                                  </Field>
+                                </FileFormField>
+                              </div>
+                            </FlexBox>
+                          </FormSpy>
+                        </div>
+                      </FlexBox>
+                      <FlexBox vertical={true} justifyContent=\\"space-between\\" className=\\"user-form__fields\\">
+                        <div style={{...}} className=\\"user-form__fields\\">
+                          <TextInputField name=\\"firstName\\" type=\\"text\\" placeholder=\\"First name\\" className=\\"user-form__field\\">
+                            <Field name=\\"firstName\\" type=\\"text\\" placeholder=\\"First name\\" className=\\"user-form__field\\" component={[Function: FieldAdapter]} parse={[Function: parse]}>
+                              <FieldAdapter input={{...}} meta={{...}} placeholder=\\"First name\\" className=\\"user-form__field\\" render={[undefined]}>
+                                <div className=\\"user-form__field\\">
+                                  <input name=\\"firstName\\" value=\\"Ilya\\" checked={[undefined]} onBlur={[Function]} onChange={[Function]} onFocus={[Function]} type=\\"text\\" placeholder=\\"First name\\" render={[undefined]} onInput={[Function: handleOnChange]} onPaste={[undefined]} autoComplete=\\"new-password\\" autoFocus={false} />
+                                </div>
+                              </FieldAdapter>
+                            </Field>
+                          </TextInputField>
+                          <TextInputField name=\\"lastName\\" type=\\"text\\" placeholder=\\"Last name\\" className=\\"user-form__field\\">
+                            <Field name=\\"lastName\\" type=\\"text\\" placeholder=\\"Last name\\" className=\\"user-form__field\\" component={[Function: FieldAdapter]} parse={[Function: parse]}>
+                              <FieldAdapter input={{...}} meta={{...}} placeholder=\\"Last name\\" className=\\"user-form__field\\" render={[undefined]}>
+                                <div className=\\"user-form__field\\">
+                                  <input name=\\"lastName\\" value=\\"\\" checked={[undefined]} onBlur={[Function]} onChange={[Function]} onFocus={[Function]} type=\\"text\\" placeholder=\\"Last name\\" render={[undefined]} onInput={[Function: handleOnChange]} onPaste={[undefined]} autoComplete=\\"new-password\\" autoFocus={false} />
+                                </div>
+                              </FieldAdapter>
+                            </Field>
+                          </TextInputField>
+                        </div>
+                      </FlexBox>
+                      <div>
+                        <ConfirmButton text=\\"Update\\" loading={false} disabled={true} className=\\"login-button user-form__button\\">
+                          <FlexBox className={[undefined]} justifyContent=\\"center\\">
+                            <div style={{...}} className={[undefined]}>
+                              <button id={[undefined]} className=\\"login-button user-form__button\\" type=\\"submit\\" disabled={true} onClick={[undefined]}>
+                                Update
+                              </button>
+                            </div>
+                          </FlexBox>
+                        </ConfirmButton>
+                        <ConfirmButton text=\\"Close\\" type=\\"button\\" onCLick={[Function]} className=\\"login-button user-form__button\\">
+                          <FlexBox className={[undefined]} justifyContent=\\"center\\">
+                            <div style={{...}} className={[undefined]}>
+                              <button id={[undefined]} className=\\"login-button user-form__button\\" type=\\"button\\" disabled={false} onClick={[Function]}>
+                                Close
+                              </button>
+                            </div>
+                          </FlexBox>
+                        </ConfirmButton>
+                      </div>
+                    </form>
+                  </ReactFinalForm>
+                </BaseForm>
+              </div>
+            </ContentContainer>
+          </div>
+        </div>
+      </ModalPortal>
+    </Portal>
+  </Modal>
+</UserFormModal>"
+`;

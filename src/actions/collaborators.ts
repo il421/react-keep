@@ -64,9 +64,9 @@ export const handleSetCollaborators = (): ThunkAction<
         }
       });
 
-      const notes = getState().notes.filter(
-        (n: NotesStoreState) => n.createdBy
-      );
+      const notes = getState().notes
+        ? getState().notes.filter((n: NotesStoreState) => n.createdBy)
+        : [];
 
       // get unique uids of collaborators, and noted owners
       const uids: string[] = unique([

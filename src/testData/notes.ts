@@ -53,6 +53,18 @@ export const notes: Note[] = [
     createdAt: 100000,
     updatedAt: 100005,
   },
+  {
+    type: NoteType.text,
+    id: "4",
+    title: "4",
+    content: "text",
+    tags: [tags[0].id],
+    color: "#1",
+    important: false,
+    archive: false,
+    createdAt: 100000,
+    updatedAt: 100005,
+  }
 ];
 
 export const newNote: Omit<Note, "id" | "createdAt" | "updatedAt"> = {

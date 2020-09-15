@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render CheckboxGroupField, and contain input element 1`] = `
+"<ReactFinalForm initialValues={{...}} onSubmit={[Function: onSubmit]}>
+  <CheckboxGroupField name=\\"name\\" options={{...}}>
+    <Field name=\\"name\\" options={{...}} component={[Function: FieldAdapter]}>
+      <FieldAdapter input={{...}} meta={{...}} options={{...}} render={[undefined]}>
+        <CheckboxGroup options={{...}} classNames={[undefined]} selectedKeys=\\"\\" onChange={[Function: onChange]}>
+          <FlexBox justifyContent=\\"flex-start\\" className={[undefined]}>
+            <div style={{...}} className={[undefined]}>
+              <div className={[undefined]}>
+                <input id=\\"id1\\" value=\\"id1\\" type=\\"checkbox\\" defaultChecked={false} />
+                <label htmlFor=\\"id1\\" onClick={[Function: onClick]} />
+              </div>
+              <span className={[undefined]}>
+                1
+              </span>
+            </div>
+          </FlexBox>
+          <FlexBox justifyContent=\\"flex-start\\" className={[undefined]}>
+            <div style={{...}} className={[undefined]}>
+              <div className={[undefined]}>
+                <input id=\\"id2\\" value=\\"id2\\" type=\\"checkbox\\" defaultChecked={false} />
+                <label htmlFor=\\"id2\\" onClick={[Function: onClick]} />
+              </div>
+              <span className={[undefined]}>
+                2
+              </span>
+            </div>
+          </FlexBox>
+        </CheckboxGroup>
+      </FieldAdapter>
+    </Field>
+  </CheckboxGroupField>
+</ReactFinalForm>"
+`;

@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render NoteContent 1`] = `
+<Fragment>
+  <div
+    className="content__text"
+  >
+    text
+  </div>
+</Fragment>
+`;
+
+exports[`should render NoteContent 2`] = `
+<Fragment>
+  <ul
+    className="content__list list"
+  >
+    <li
+      key="0"
+    >
+      <div
+        className="list__box false"
+      />
+      <span
+        className="list__text"
+      >
+        dog
+      </span>
+    </li>
+    <li
+      key="1"
+    >
+      <div
+        className="list__box list__box--checked"
+      />
+      <span
+        className="list__text"
+      >
+        cat
+      </span>
+    </li>
+  </ul>
+</Fragment>
+`;
+
+exports[`should render NoteContent 3`] = `
+<Fragment>
+  <div
+    className="content__image"
+  >
+    <img
+      alt="Picture of the note"
+      src="imageUrl"
+    />
+    <div
+      className="content__text"
+    >
+      text
+    </div>
+  </div>
+</Fragment>
+`;

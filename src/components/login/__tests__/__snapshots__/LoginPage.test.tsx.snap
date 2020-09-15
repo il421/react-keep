@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Rendering should render LoginPage correctly 1`] = `
+"<LoginPage startLogin={[Function: mockConstructor]} startSignUp={[Function: mockConstructor]} loading={false}>
+  <div className=\\"login-page\\">
+    <div className=\\"login-page__login-box login-box\\">
+      <div className=\\"login-box__desc\\">
+        <h1>
+          Keep Me
+        </h1>
+        <p>
+          Design by Ilya Suglobov
+        </p>
+      </div>
+      <BaseForm initialValues={{...}} formClassName=\\"login-box__form login-form\\" onSubmit={[Function]} validate={[Function: getValidationErrors]} getFormActions={[Function]}>
+        <ReactFinalForm initialValues={{...}} onSubmit={[Function]} validate={[Function: getValidationErrors]} mutators={{...}}>
+          <form onSubmit={[Function: handleSubmit]} className=\\"login-box__form login-form\\" autoComplete=\\"off\\">
+            <TextInputField autoFocus={true} name=\\"email\\" type=\\"text\\" placeholder=\\"Email\\" className=\\"login-form__field\\">
+              <Field autoFocus={true} name=\\"email\\" type=\\"text\\" placeholder=\\"Email\\" className=\\"login-form__field\\" component={[Function: FieldAdapter]} parse={[Function: parse]}>
+                <FieldAdapter input={{...}} meta={{...}} autoFocus={true} placeholder=\\"Email\\" className=\\"login-form__field\\" render={[undefined]}>
+                  <div className=\\"login-form__field\\">
+                    <input name=\\"email\\" value=\\"\\" checked={[undefined]} onBlur={[Function]} onChange={[Function]} onFocus={[Function]} type=\\"text\\" placeholder=\\"Email\\" render={[undefined]} onInput={[Function: handleOnChange]} onPaste={[undefined]} autoComplete=\\"new-password\\" autoFocus={true} />
+                  </div>
+                </FieldAdapter>
+              </Field>
+            </TextInputField>
+            <TextInputField name=\\"password\\" type=\\"password\\" placeholder=\\"Password\\" className=\\"login-form__field\\">
+              <Field name=\\"password\\" type=\\"password\\" placeholder=\\"Password\\" className=\\"login-form__field\\" component={[Function: FieldAdapter]} parse={[Function: parse]}>
+                <FieldAdapter input={{...}} meta={{...}} placeholder=\\"Password\\" className=\\"login-form__field\\" render={[undefined]}>
+                  <div className=\\"login-form__field\\">
+                    <input name=\\"password\\" value=\\"\\" checked={[undefined]} onBlur={[Function]} onChange={[Function]} onFocus={[Function]} type=\\"password\\" placeholder=\\"Password\\" render={[undefined]} onInput={[Function: handleOnChange]} onPaste={[undefined]} autoComplete=\\"new-password\\" autoFocus={false} />
+                  </div>
+                </FieldAdapter>
+              </Field>
+            </TextInputField>
+            <div className=\\"login-form__new-user-field new-user-field\\">
+              <CheckboxInputField id=\\"is-new-user\\" name=\\"isNew\\" className=\\"new-user-field__checkbox\\">
+                <Field id=\\"is-new-user\\" name=\\"isNew\\" className=\\"new-user-field__checkbox\\" type=\\"checkbox\\" component={[Function: FieldAdapter]}>
+                  <FieldAdapter input={{...}} meta={{...}} id=\\"is-new-user\\" className=\\"new-user-field__checkbox\\" render={[undefined]}>
+                    <div className=\\"new-user-field__checkbox\\">
+                      <input id=\\"is-new-user\\" name=\\"isNew\\" value={[undefined]} checked={false} onBlur={[Function]} onChange={[Function]} onFocus={[Function]} type=\\"checkbox\\" />
+                      <label htmlFor=\\"is-new-user\\" />
+                    </div>
+                  </FieldAdapter>
+                </Field>
+              </CheckboxInputField>
+              <div>
+                I want to sign up as a new user
+              </div>
+            </div>
+            <div>
+              <ConfirmButton className=\\"login-button\\" text=\\"Log In\\" loading={false} disabled={true}>
+                <FlexBox className={[undefined]} justifyContent=\\"center\\">
+                  <div style={{...}} className={[undefined]}>
+                    <button id={[undefined]} className=\\"login-button\\" type=\\"submit\\" disabled={true} onClick={[undefined]}>
+                      Log In
+                    </button>
+                  </div>
+                </FlexBox>
+              </ConfirmButton>
+            </div>
+          </form>
+        </ReactFinalForm>
+      </BaseForm>
+    </div>
+    <ToastContainer autoClose={3000} position=\\"top-right\\" transition={[Function: Animation]} rtl={false} hideProgressBar={false} closeButton={{...}} pauseOnHover={true} pauseOnFocusLoss={true} closeOnClick={true} newestOnTop={false} draggable={true} draggablePercent={80} className={{...}} style={{...}} toastClassName={{...}} bodyClassName={{...}} progressClassName={{...}} progressStyle={{...}} role=\\"alert\\">
+      <div className=\\"Toastify\\" />
+    </ToastContainer>
+  </div>
+</LoginPage>"
+`;

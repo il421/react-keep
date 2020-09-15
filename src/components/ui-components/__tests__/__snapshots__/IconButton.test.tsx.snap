@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render IconButton 1`] = `
+<button
+  className="icon-button undefined "
+  type="button"
+>
+  <FontAwesomeIcon
+    border={false}
+    className=""
+    fixedWidth={false}
+    flip={null}
+    icon="times"
+    inverse={false}
+    listItem={false}
+    mask={null}
+    pull={null}
+    pulse={false}
+    rotation={null}
+    size={null}
+    spin={false}
+    swapOpacity={false}
+    symbol={false}
+    title=""
+    transform={null}
+  />
+  <div
+    className="icon-button__text"
+  >
+    text
+  </div>
+</button>
+`;

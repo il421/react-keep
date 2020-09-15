@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render FileFormField 1`] = `
+"<ReactFinalForm initialValues={{...}} onSubmit={[Function: onSubmit]}>
+  <FileFormField className=\\"className\\" name=\\"name\\" id=\\"id\\">
+    <Field className=\\"className\\" name=\\"name\\" id=\\"id\\" component={[Function: FieldAdapter]}>
+      <FieldAdapter input={{...}} meta={{...}} className=\\"className\\" id=\\"id\\" render={[undefined]}>
+        <div className=\\"className\\">
+          <input render={[undefined]} name=\\"name\\" id=\\"id\\" type=\\"file\\" onChange={[Function: handleChange]} accept=\\"image/*\\" />
+        </div>
+      </FieldAdapter>
+    </Field>
+  </FileFormField>
+</ReactFinalForm>"
+`;

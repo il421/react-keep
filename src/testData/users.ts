@@ -12,13 +12,13 @@ export const user = {
 export const collaborators: Collaborator[] = [
   {
     email: "test1@gmail.com",
-    uid: "KyddyBpci1Nijzd5CmHrDQFUFKF3",
+    uid: "BYKMnT7RSfeyrLiBAZwvGLajEPF2",
     displayName: "Ivan",
     photoURL: "http://test.com",
   },
   {
     email: "test2@gmail.com",
-    uid: "VXPqBsRtJcW7FFOtlUTZfkmjU222",
+    uid: "Q81hnXu9qJM5Y2iTRkun6gVRj0i1",
     displayName: "Tany",
     photoURL: "http://tdest.com",
   },

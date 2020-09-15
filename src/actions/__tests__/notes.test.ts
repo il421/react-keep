@@ -134,58 +134,8 @@ describe("Adding", () => {
         });
     });
   });
-
-  test("should set cratedBy if had collaborators when add a note to DB and store", (done) => {
-    const store = createMockStore(defaultState);
-    let id: string | undefined;
-    let createdAt: number | undefined;
-    let updatedAt: number | undefined;
-
-    store
-      .dispatch<any>(
-        handleAddNote({
-          ...newNote,
-          collaborators: collaborators.map((c) => c.uid),
-        })
-      )
-      .then(() => {
-        const actions = store.getActions();
-        id = actions[0].note.id;
-        createdAt = actions[0].note.createdAt;
-        updatedAt = actions[0].note.updatedAt;
-        expect(actions[0]).toEqual({
-          type: NotesActionsTypes.addNote,
-          note: {
-            id,
-            createdAt,
-            updatedAt,
-            collaborators: collaborators.map((c) => c.uid),
-            createdBy: user.uid,
-            ...newNote,
-          },
-        });
-
-        database
-          .collection(Collections.users)
-          .doc(user.uid)
-          .collection(Collections.notes)
-          .doc(id)
-          .get()
-          .then((doc) => {
-            if (doc.exists) {
-              expect(doc.data()).toEqual({
-                createdAt,
-                updatedAt,
-                collaborators: collaborators.map((c) => c.uid),
-                createdBy: user.uid,
-                ...newNote,
-              });
-            }
-            done();
-          });
-      });
-  });
 });
+
 describe("Removing", () => {
   test("should setup remove note action object correctly", () => {
     const action = removeNote(notes[0].id);
@@ -218,6 +168,7 @@ describe("Removing", () => {
     });
   });
 });
+
 describe("Updating", () => {
   test("should setup update note action object correctly", () => {
     const action = updateNote(notes[0].id, { ...notes[0], title: "test" });
@@ -254,46 +205,6 @@ describe("Updating", () => {
           done();
         });
     });
-  });
-
-  test("should set cratedBy if had collaborators when update a note in DB and store by id", (done) => {
-    const store = createMockStore(defaultState);
-
-    store
-      .dispatch<any>(
-        handleUpdateNote(notes[2].id, {
-          ...notes[2],
-          collaborators: [collaborators[0].uid],
-        })
-      )
-      .then(() => {
-        const actions = store.getActions();
-        expect(actions[0]).toEqual({
-          type: NotesActionsTypes.updateNote,
-          id: notes[2].id,
-          updates: {
-            ...notes[2],
-            collaborators: [collaborators[0].uid],
-            createdBy: user.uid,
-          },
-        });
-
-        database
-          .collection(Collections.users)
-          .doc(user.uid)
-          .collection(Collections.notes)
-          .doc(notes[2].id)
-          .get()
-          .then((doc) => {
-            if (doc.exists) {
-              expect((doc.data() as Note).collaborators).toEqual([
-                collaborators[0].uid,
-              ]);
-              expect((doc.data() as Note).createdBy).toBe(user.uid);
-            }
-            done();
-          });
-      });
   });
 });
 

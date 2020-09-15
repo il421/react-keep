@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render ArchiveList 1`] = `
+"<FlexBox className=\\"archive-list\\" vertical={true} justifyContent=\\"space-between\\">
+  <ArchiveItem note={{...}} unarchiveNote={[Function: mockConstructor]} />
+</FlexBox>"
+`;

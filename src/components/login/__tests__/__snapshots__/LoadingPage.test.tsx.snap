@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render LoadingPage correctly 1`] = `
+"<FlexBox vertical={true} alignItems=\\"center\\" justifyContent=\\"center\\" className=\\"loading-page\\">
+  <Loader size={100} color=\\"#8ac0b8\\" loading={true} css=\\"\\" />
+  <div>
+    We are getting your important notes...
+  </div>
+</FlexBox>"
+`;

@@ -71,7 +71,7 @@ export const NotesItem: React.FunctionComponent<NoteProps> = ({
               />
             )
           }
-
+          {/* collaborators */}
           <FlexBox
             justifyContent={JustifyContent.start}
             flexGrow

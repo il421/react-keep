@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render ArchiveItem 1`] = `
+"<FlexBox justifyContent=\\"space-between\\" alignItems=\\"baseline\\" className=\\"archive-item\\">
+  <FlexBox justifyContent=\\"space-between\\" flexGrow={true} className=\\"archive-item__content\\">
+    <FlexBox className=\\"archive-item__wrapper\\" vertical={true} justifyContent=\\"space-between\\">
+      <FlexBox className=\\"archive-item-content\\" justifyContent=\\"space-between\\">
+        <b className=\\"archive-item-content__title\\">
+          Title:
+        </b>
+        <div className=\\"archive-item-content__value\\">
+          1
+        </div>
+      </FlexBox>
+      <FlexBox className=\\"archive-item-content\\" justifyContent=\\"space-between\\">
+        <b className=\\"archive-item-content__title\\">
+          Text:
+        </b>
+        <div className=\\"archive-item-content__value\\">
+          <div>
+            text
+          </div>
+        </div>
+      </FlexBox>
+      <FlexBox className=\\"archive-item-content\\" justifyContent=\\"space-between\\">
+        <b className=\\"archive-item-content__title\\">
+          Created:
+        </b>
+        <div className=\\"archive-item-content__value\\">
+          January 1st, 1970
+        </div>
+      </FlexBox>
+    </FlexBox>
+  </FlexBox>
+  <IconButton className=\\"archive-item__icon\\" icon=\\"arrow-right\\" onButtonClick={[Function: onButtonClick]} />
+</FlexBox>"
+`;

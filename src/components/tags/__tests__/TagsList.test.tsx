@@ -3,6 +3,7 @@ import { mount, ReactWrapper } from "enzyme";
 import { Props, TagsListBase } from "../TagsList";
 import { tags } from "../../../testData/tags";
 import { filters } from "../../../testData/filters";
+import { WithFontAwesome } from "../../../common/WithFontAwesome";
 
 let props: Props, wrapper: ReactWrapper<Props>;
 
@@ -14,7 +15,11 @@ beforeEach(() => {
     toggleTag: jest.fn(),
     removeTagFromNotes: jest.fn(),
   };
-  wrapper = mount<Props>(<TagsListBase {...props} />);
+  wrapper = mount<Props>(
+    <WithFontAwesome>
+      <TagsListBase {...props} />
+    </WithFontAwesome>
+  );
 });
 
 test("should render TagsList", () => {

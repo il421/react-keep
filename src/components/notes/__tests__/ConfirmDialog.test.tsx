@@ -1,7 +1,6 @@
-import React from "react";
+import * as React from "react";
 import { mount, ReactWrapper } from "enzyme";
 import { ConfirmDialogProps, ConfirmDialog } from "../ConfirmDialog";
-import { ConfirmButtonProps } from "../../ui-components";
 
 let wrapper: ReactWrapper<ConfirmDialogProps>, props: ConfirmDialogProps;
 const btnNames = {

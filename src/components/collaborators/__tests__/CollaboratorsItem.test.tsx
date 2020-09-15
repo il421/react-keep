@@ -5,6 +5,7 @@ import {
   CollaboratorsItem,
 } from "../CollaboratorsItem";
 import { collaborators } from "../../../testData/users";
+import { WithFontAwesome } from "../../../common/WithFontAwesome";
 
 let props: CollaboratorsItemProps,
   wrapper: ReactWrapper<CollaboratorsItemProps>;
@@ -14,7 +15,11 @@ beforeEach(() => {
     collaborator: collaborators[0],
     removeCollaborator: jest.fn(),
   };
-  wrapper = mount<CollaboratorsItemProps>(<CollaboratorsItem {...props} />);
+  wrapper = mount<CollaboratorsItemProps>(
+    <WithFontAwesome>
+      <CollaboratorsItem {...props} />
+    </WithFontAwesome>
+  );
 });
 
 test("should render CollaboratorsItem", () => {

@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render Coin 1`] = `
+<div
+  data-tip="Ilya"
+>
+  <FlexBox
+    className="coin undefined"
+    justifyContent="center"
+  >
+    <img
+      alt="Photo of Ilya"
+      height={25}
+      src="url"
+      width={25}
+    />
+  </FlexBox>
+</div>
+`;

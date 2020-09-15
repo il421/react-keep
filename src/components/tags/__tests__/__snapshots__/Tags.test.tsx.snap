@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render Tags 1`] = `
+<Fragment>
+  <Connect(TagForm) />
+  <Connect(TagsListBase) />
+</Fragment>
+`;

@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render Controllers correctly 1`] = `
+"<div className=\\"controllers  false undefined\\">
+  <FlexBox vertical={false} justifyContent=\\"space-between\\" alignItems=\\"center\\">
+    <IconButton className=\\"controllers__text\\" onButtonClick={[Function: onButtonClick]} icon=\\"align-left\\" size=\\"2x\\" />
+    <IconButton className=\\"controllers__list\\" onButtonClick={[Function: onButtonClick]} icon=\\"check-square\\" size=\\"2x\\" />
+    <IconButton className=\\"controllers__image\\" onButtonClick={[Function: onButtonClick]} icon=\\"image\\" size=\\"2x\\" />
+  </FlexBox>
+</div>"
+`;

@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { mount, ReactWrapper } from "enzyme";
 import { TextInputField, TextInputFieldProps } from "../TextInputField";
 import { Form } from "react-final-form";

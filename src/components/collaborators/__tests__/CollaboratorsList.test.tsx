@@ -3,6 +3,7 @@ import { mount, ReactWrapper } from "enzyme";
 import { Props, CollaboratorsListBase } from "../CollaboratorsList";
 
 import { collaborators } from "../../../testData/users";
+import { WithFontAwesome } from "../../../common/WithFontAwesome";
 
 let props: Props, wrapper: ReactWrapper<Props>;
 
@@ -11,7 +12,11 @@ beforeEach(() => {
     collaborators,
     removeCollaborator: jest.fn(),
   };
-  wrapper = mount<Props>(<CollaboratorsListBase {...props} />);
+  wrapper = mount<Props>(
+    <WithFontAwesome>
+      <CollaboratorsListBase {...props} />
+    </WithFontAwesome>
+  );
 });
 
 test("should render CollaboratorsList", () => {

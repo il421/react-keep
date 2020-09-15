@@ -146,17 +146,7 @@ export const handleAddNote = (
 
       // if has collaborators, add one for each with the case id
       if (newNote.collaborators && newNote.collaborators.length > 0) {
-        const collNote: Omit<Note, "id"> = {
-          ...newNote,
-          tags: [],
-          createdBy: uid,
-        };
-
-        await handleCollaboratorsPromises({
-          collaborators: newNote.collaborators,
-          callback: (collUid) =>
-            initDocumentRef(collUid).doc(docRef.id).set(collNote),
-        });
+        await addNoteToCollaborators(newNote, uid, docRef.id);
       }
 
       dispatch(
@@ -170,6 +160,24 @@ export const handleAddNote = (
       toast.error(e.message);
     }
   };
+};
+
+// @todo test
+export const addNoteToCollaborators = async (
+  note: Omit<Note, "id">,
+  createdBy: string,
+  id: string
+) => {
+  const collNote: Omit<Note, "id"> = {
+    ...note,
+    tags: [],
+    createdBy,
+  };
+
+  await handleCollaboratorsPromises({
+    collaborators: note.collaborators!,
+    callback: (collUid) => initDocumentRef(collUid).doc(id).set(collNote),
+  });
 };
 
 export const handleRemoveNote = (
@@ -310,20 +318,49 @@ export const handleUpdateNote = (
         // set user id in createdBy field if the note has collaborators
         createdBy:
           updates.collaborators && updates.collaborators.length > 0
-            ? uid
+            ? updates.createdBy === uid
+              ? uid
+              : updates.createdBy
             : undefined,
       };
 
-      const cleanedNote = JSON.parse(JSON.stringify(note));
+      const cleanedNote: Note = JSON.parse(JSON.stringify(note));
 
       // update the note
       await docRef.doc(id).set(cleanedNote);
+
+      // update note for all collaborators
+      if (cleanedNote.collaborators && cleanedNote.collaborators.length > 0) {
+        await updateCollaboratorsNote(cleanedNote, uid);
+      }
+
       dispatch(updateNote(id, cleanedNote));
     } catch (e) {
       console.log(e);
       toast.error(e.message);
     }
   };
+};
+
+// @todo need to test
+export const updateCollaboratorsNote = async (note: Note, uid: string) => {
+  const filteredCollaborators: string[] = [
+    ...note.collaborators!,
+    note.createdBy ?? "",
+  ].filter((coll) => coll && coll !== uid);
+
+  await handleCollaboratorsPromises({
+    collaborators: [...filteredCollaborators],
+    callback: (collUid) =>
+      initDocumentRef(collUid)
+        .doc(note.id)
+        .update({
+          title: note.title,
+          content: note.content,
+          updatedAt: note.updatedAt,
+          collaborators: note.collaborators,
+        } as Note),
+  });
 };
 
 export const changeNoteImportance = (

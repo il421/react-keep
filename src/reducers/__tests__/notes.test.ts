@@ -50,7 +50,7 @@ describe("Notes reducer", () => {
 
     const state = notesReducer(notes, action) as NotesStoreState[];
 
-    expect(state).toEqual([notes[1], notes[2]]);
+    expect(state).toEqual([notes[1], notes[2], notes[3]]);
   });
 
   test("should update note", () => {

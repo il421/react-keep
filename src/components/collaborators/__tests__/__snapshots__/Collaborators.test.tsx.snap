@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render Collaborators 1`] = `
+<Fragment>
+  <Connect(CollaboratorForm) />
+  <Connect(CollaboratorsListBase) />
+</Fragment>
+`;

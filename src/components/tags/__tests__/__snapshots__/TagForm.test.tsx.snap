@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Rendering should render TagForm correctly 1`] = `
+"<TagForm tags={{...}} addTag={[Function: mockConstructor]}>
+  <BaseForm initialValues={{...}} onSubmit={[Function: onSubmit]} formClassName=\\"tags-form\\" validate={[Function: getValidationErrors]} resetAfterSubmitting={true} getFormActions={[Function]}>
+    <ReactFinalForm initialValues={{...}} onSubmit={[Function: onSubmit]} validate={[Function: getValidationErrors]} mutators={{...}}>
+      <form onSubmit={[Function: handleSubmit]} className=\\"tags-form\\" autoComplete=\\"off\\">
+        <TextInputField name=\\"value\\" type=\\"text\\" placeholder=\\"New tag\\" className=\\"tags-form__field\\">
+          <Field name=\\"value\\" type=\\"text\\" placeholder=\\"New tag\\" className=\\"tags-form__field\\" component={[Function: FieldAdapter]} parse={[Function: parse]}>
+            <FieldAdapter input={{...}} meta={{...}} placeholder=\\"New tag\\" className=\\"tags-form__field\\" render={[undefined]}>
+              <div className=\\"tags-form__field\\">
+                <input name=\\"value\\" value=\\"\\" checked={[undefined]} onBlur={[Function]} onChange={[Function]} onFocus={[Function]} type=\\"text\\" placeholder=\\"New tag\\" render={[undefined]} onInput={[Function: handleOnChange]} onPaste={[undefined]} autoComplete=\\"new-password\\" autoFocus={false} />
+              </div>
+            </FieldAdapter>
+          </Field>
+        </TextInputField>
+        <div>
+          <IconButton className=\\"tags-form__submit\\" icon=\\"plus-circle\\" size=\\"1x\\" type=\\"submit\\" disabled={true}>
+            <button id={[undefined]} className=\\"icon-button tags-form__submit \\" onClick={[undefined]} disabled={true} type=\\"submit\\">
+              <FontAwesomeIcon icon=\\"plus-circle\\" size=\\"1x\\" border={false} className=\\"\\" mask={{...}} fixedWidth={false} inverse={false} flip={{...}} listItem={false} pull={{...}} pulse={false} rotation={{...}} spin={false} symbol={false} title=\\"\\" transform={{...}} swapOpacity={false}>
+                <svg aria-hidden=\\"true\\" focusable=\\"false\\" data-prefix=\\"fas\\" data-icon=\\"plus-circle\\" className=\\"svg-inline--fa fa-plus-circle fa-w-16 fa-1x \\" role=\\"img\\" xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 512 512\\" style={{...}}>
+                  <path fill=\\"currentColor\\" d=\\"M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm144 276c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92h-92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z\\" style={{...}} />
+                </svg>
+              </FontAwesomeIcon>
+            </button>
+          </IconButton>
+        </div>
+      </form>
+    </ReactFinalForm>
+  </BaseForm>
+</TagForm>"
+`;

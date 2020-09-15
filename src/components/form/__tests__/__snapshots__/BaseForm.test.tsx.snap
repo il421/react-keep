@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render BaseForm 1`] = `
+"<ReactFinalForm initialValues={{...}} onSubmit={[Function: mockConstructor]} validate={[undefined]} mutators={{...}}>
+  [function]
+</ReactFinalForm>"
+`;

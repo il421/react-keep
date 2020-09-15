@@ -75,9 +75,9 @@ test("should fetch the collaborators from DB", (done) => {
       collaborators: expect.arrayContaining(
         collaborators.map((c) => ({
           uid: c.uid,
-          email: c.email,
-          displayName: null,
-          photoURL: null,
+          email: expect.anything(),
+          displayName: expect.anything(),
+          photoURL: expect.anything(),
         }))
       ),
     });

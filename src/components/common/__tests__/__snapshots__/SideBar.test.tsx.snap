@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render SideBar 1`] = `
+"<Fragment>
+  <div className=\\"sidebar false\\">
+    <FlexBox justifyContent=\\"flex-end\\">
+      <IconButton className=\\"sidebar__close-button\\" onButtonClick={[Function: onButtonClick]} icon=\\"times\\" size=\\"2x\\" />
+    </FlexBox>
+  </div>
+</Fragment>"
+`;

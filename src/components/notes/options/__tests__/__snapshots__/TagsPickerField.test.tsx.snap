@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render TagsPickerField correctly 1`] = `
+"<ReactFinalForm initialValues={{...}} onSubmit={[Function: onSubmit]}>
+  <TagsPickerField tags={{...}}>
+    <FlexBox justifyContent=\\"space-between\\" className=\\"tags-picker\\" flexWrap=\\"wrap\\">
+      <div style={{...}} className=\\"tags-picker\\">
+        <CheckboxGroupField name=\\"tags\\" options={{...}} classNames={{...}}>
+          <Field name=\\"tags\\" options={{...}} classNames={{...}} component={[Function: FieldAdapter]}>
+            <FieldAdapter input={{...}} meta={{...}} options={{...}} classNames={{...}} render={[undefined]}>
+              <CheckboxGroup options={{...}} classNames={{...}} selectedKeys=\\"\\" onChange={[Function: onChange]}>
+                <FlexBox justifyContent=\\"flex-start\\" className=\\"tags-picker__wrapper\\">
+                  <div style={{...}} className=\\"tags-picker__wrapper\\">
+                    <div className=\\"tags-picker__checkbox\\">
+                      <input id=\\"1\\" value=\\"1\\" type=\\"checkbox\\" defaultChecked={false} />
+                      <label htmlFor=\\"1\\" onClick={[Function: onClick]} />
+                    </div>
+                    <span className=\\"tags-picker__value\\">
+                      Tag1
+                    </span>
+                  </div>
+                </FlexBox>
+                <FlexBox justifyContent=\\"flex-start\\" className=\\"tags-picker__wrapper\\">
+                  <div style={{...}} className=\\"tags-picker__wrapper\\">
+                    <div className=\\"tags-picker__checkbox\\">
+                      <input id=\\"2\\" value=\\"2\\" type=\\"checkbox\\" defaultChecked={false} />
+                      <label htmlFor=\\"2\\" onClick={[Function: onClick]} />
+                    </div>
+                    <span className=\\"tags-picker__value\\">
+                      Tag2
+                    </span>
+                  </div>
+                </FlexBox>
+              </CheckboxGroup>
+            </FieldAdapter>
+          </Field>
+        </CheckboxGroupField>
+      </div>
+    </FlexBox>
+  </TagsPickerField>
+</ReactFinalForm>"
+`;

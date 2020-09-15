@@ -1,0 +1,110 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Rendering should render TextNoteFormModal correctly 1`] = `
+"<Provider store={{...}}>
+  <TextNoteFormModal history={{...}}>
+    <Modal isOpen={true} onRequestClose={[Function]} closeTimeoutMS={200} className=\\"note-modal\\" ariaHideApp={false} portalClassName=\\"ReactModalPortal\\" bodyOpenClassName=\\"ReactModal__Body--open\\" role=\\"dialog\\" shouldFocusAfterRender={true} shouldCloseOnEsc={true} shouldCloseOnOverlayClick={true} shouldReturnFocusAfterClose={true} parentSelector={[Function: parentSelector]}>
+      <Portal containerInfo={{...}}>
+        <ModalPortal defaultStyles={{...}} isOpen={true} onRequestClose={[Function]} closeTimeoutMS={200} className=\\"note-modal\\" ariaHideApp={false} portalClassName=\\"ReactModalPortal\\" bodyOpenClassName=\\"ReactModal__Body--open\\" role=\\"dialog\\" shouldFocusAfterRender={true} shouldCloseOnEsc={true} shouldCloseOnOverlayClick={true} shouldReturnFocusAfterClose={true} parentSelector={[Function: parentSelector]} style={{...}}>
+          <div className=\\"ReactModal__Overlay ReactModal__Overlay--after-open\\" style={{...}} onClick={[Function]} onMouseDown={[Function]}>
+            <div id={[undefined]} style={{...}} className=\\"ReactModal__Content ReactModal__Content--after-open note-modal\\" tabIndex=\\"-1\\" onKeyDown={[Function]} onMouseDown={[Function]} onMouseUp={[Function]} onClick={[Function]} role=\\"dialog\\" aria-label={[undefined]} data-testid={[undefined]}>
+              <Connect(NoteFormBase) type={0} history={{...}}>
+                <NoteFormBase type={0} history={{...}} notes={{...}} tags={{...}} collaborators={[undefined]} addNote={[Function: addNote]} updateNote={[Function: updateNote]}>
+                  <ContentContainer className=\\"note-modal__container\\" style={{...}}>
+                    <div onClick={[undefined]} className=\\"content-container note-modal__container\\" style={{...}}>
+                      <BaseForm formClassName=\\"note-form\\" initialValues={{...}} validate={[undefined]} onSubmit={[Function]} getFormActions={[Function]}>
+                        <ReactFinalForm initialValues={{...}} onSubmit={[Function]} validate={[undefined]} mutators={{...}}>
+                          <form onSubmit={[Function: handleSubmit]} className=\\"note-form\\" autoComplete=\\"off\\">
+                            <TextInputField name=\\"title\\" type=\\"text\\" placeholder=\\"Title\\" className=\\"note-form__title\\">
+                              <Field name=\\"title\\" type=\\"text\\" placeholder=\\"Title\\" className=\\"note-form__title\\" component={[Function: FieldAdapter]} parse={[Function: parse]}>
+                                <FieldAdapter input={{...}} meta={{...}} placeholder=\\"Title\\" className=\\"note-form__title\\" render={[undefined]}>
+                                  <div className=\\"note-form__title\\">
+                                    <input name=\\"title\\" value=\\"\\" checked={[undefined]} onBlur={[Function]} onChange={[Function]} onFocus={[Function]} type=\\"text\\" placeholder=\\"Title\\" render={[undefined]} onInput={[Function: handleOnChange]} onPaste={[undefined]} autoComplete=\\"new-password\\" autoFocus={false} />
+                                  </div>
+                                </FieldAdapter>
+                              </Field>
+                            </TextInputField>
+                            <TextInputField autoFocus={true} isTextArea={true} name=\\"content\\" placeholder=\\"Type something ...\\" className=\\"note-form__text\\">
+                              <Field autoFocus={true} isTextArea={true} name=\\"content\\" placeholder=\\"Type something ...\\" className=\\"note-form__text\\" component={[Function: FieldAdapter]} parse={[Function: parse]}>
+                                <FieldAdapter input={{...}} meta={{...}} autoFocus={true} isTextArea={true} placeholder=\\"Type something ...\\" className=\\"note-form__text\\" render={[undefined]}>
+                                  <div className=\\"note-form__text\\">
+                                    <ForwardRef(TextareaAutosize) name=\\"content\\" value=\\"\\" checked={[undefined]} onBlur={[Function]} onChange={[Function: handleOnChange]} onFocus={[Function]} placeholder=\\"Type something ...\\" render={[undefined]} onPaste={[undefined]} spellCheck=\\"false\\" autoComplete=\\"new-password\\" autoFocus={true}>
+                                      <textarea name=\\"content\\" value=\\"\\" checked={[undefined]} onBlur={[Function]} onFocus={[Function]} placeholder=\\"Type something ...\\" render={[undefined]} onPaste={[undefined]} spellCheck=\\"false\\" autoComplete=\\"new-password\\" autoFocus={true} onChange={[Function: handleChange]} />
+                                    </ForwardRef(TextareaAutosize)>
+                                  </div>
+                                </FieldAdapter>
+                              </Field>
+                            </TextInputField>
+                            <FieldSpy name=\\"color\\" onChange={[Function: onChange]}>
+                              <FormSpy subscription={{...}} onChange={[Function]} />
+                            </FieldSpy>
+                            <div>
+                              <FlexBox justifyContent=\\"space-between\\" alignItems=\\"center\\" className=\\"note-form__actions actions\\">
+                                <div style={{...}} className=\\"note-form__actions actions\\">
+                                  <FlexBox justifyContent=\\"flex-start\\" alignItems=\\"baseline\\" className=\\"actions__options\\">
+                                    <div style={{...}} className=\\"actions__options\\">
+                                      <IconButton id=\\"icon-palette\\" icon=\\"palette\\" pressed={false} onButtonClick={[Function]}>
+                                        <button id=\\"icon-palette\\" className=\\"icon-button undefined \\" onClick={[Function]} disabled={[undefined]} type=\\"button\\">
+                                          <FontAwesomeIcon icon=\\"palette\\" border={false} className=\\"\\" mask={{...}} fixedWidth={false} inverse={false} flip={{...}} listItem={false} pull={{...}} pulse={false} rotation={{...}} size={{...}} spin={false} symbol={false} title=\\"\\" transform={{...}} swapOpacity={false}>
+                                            <svg aria-hidden=\\"true\\" focusable=\\"false\\" data-prefix=\\"fas\\" data-icon=\\"palette\\" className=\\"svg-inline--fa fa-palette fa-w-16 \\" role=\\"img\\" xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 512 512\\" style={{...}}>
+                                              <path fill=\\"currentColor\\" d=\\"M204.3 5C104.9 24.4 24.8 104.3 5.2 203.4c-37 187 131.7 326.4 258.8 306.7 41.2-6.4 61.4-54.6 42.5-91.7-23.1-45.4 9.9-98.4 60.9-98.4h79.7c35.8 0 64.8-29.6 64.9-65.3C511.5 97.1 368.1-26.9 204.3 5zM96 320c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm32-128c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm128-64c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm128 64c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32z\\" style={{...}} />
+                                            </svg>
+                                          </FontAwesomeIcon>
+                                        </button>
+                                      </IconButton>
+                                      <IconButton id=\\"icon-tags\\" icon=\\"tags\\" pressed={false} onButtonClick={[Function]}>
+                                        <button id=\\"icon-tags\\" className=\\"icon-button undefined \\" onClick={[Function]} disabled={[undefined]} type=\\"button\\">
+                                          <FontAwesomeIcon icon=\\"tags\\" border={false} className=\\"\\" mask={{...}} fixedWidth={false} inverse={false} flip={{...}} listItem={false} pull={{...}} pulse={false} rotation={{...}} size={{...}} spin={false} symbol={false} title=\\"\\" transform={{...}} swapOpacity={false}>
+                                            <svg aria-hidden=\\"true\\" focusable=\\"false\\" data-prefix=\\"fas\\" data-icon=\\"tags\\" className=\\"svg-inline--fa fa-tags fa-w-20 \\" role=\\"img\\" xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 640 512\\" style={{...}}>
+                                              <path fill=\\"currentColor\\" d=\\"M497.941 225.941L286.059 14.059A48 48 0 0 0 252.118 0H48C21.49 0 0 21.49 0 48v204.118a48 48 0 0 0 14.059 33.941l211.882 211.882c18.744 18.745 49.136 18.746 67.882 0l204.118-204.118c18.745-18.745 18.745-49.137 0-67.882zM112 160c-26.51 0-48-21.49-48-48s21.49-48 48-48 48 21.49 48 48-21.49 48-48 48zm513.941 133.823L421.823 497.941c-18.745 18.745-49.137 18.745-67.882 0l-.36-.36L527.64 323.522c16.999-16.999 26.36-39.6 26.36-63.64s-9.362-46.641-26.36-63.64L331.397 0h48.721a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882z\\" style={{...}} />
+                                            </svg>
+                                          </FontAwesomeIcon>
+                                        </button>
+                                      </IconButton>
+                                      <IconButton id=\\"icon-share\\" icon=\\"share\\" pressed={false} onButtonClick={[Function]}>
+                                        <button id=\\"icon-share\\" className=\\"icon-button undefined \\" onClick={[Function]} disabled={[undefined]} type=\\"button\\">
+                                          <FontAwesomeIcon icon=\\"share\\" border={false} className=\\"\\" mask={{...}} fixedWidth={false} inverse={false} flip={{...}} listItem={false} pull={{...}} pulse={false} rotation={{...}} size={{...}} spin={false} symbol={false} title=\\"\\" transform={{...}} swapOpacity={false}>
+                                            <svg aria-hidden=\\"true\\" focusable=\\"false\\" data-prefix=\\"fas\\" data-icon=\\"share\\" className=\\"svg-inline--fa fa-share fa-w-16 \\" role=\\"img\\" xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 512 512\\" style={{...}}>
+                                              <path fill=\\"currentColor\\" d=\\"M503.691 189.836L327.687 37.851C312.281 24.546 288 35.347 288 56.015v80.053C127.371 137.907 0 170.1 0 322.326c0 61.441 39.581 122.309 83.333 154.132 13.653 9.931 33.111-2.533 28.077-18.631C66.066 312.814 132.917 274.316 288 272.085V360c0 20.7 24.3 31.453 39.687 18.164l176.004-152c11.071-9.562 11.086-26.753 0-36.328z\\" style={{...}} />
+                                            </svg>
+                                          </FontAwesomeIcon>
+                                        </button>
+                                      </IconButton>
+                                    </div>
+                                  </FlexBox>
+                                  <FlexBox justifyContent=\\"flex-end\\" alignItems=\\"center\\" className=\\"actions__submitting-buttons submitting-buttons\\">
+                                    <div style={{...}} className=\\"actions__submitting-buttons submitting-buttons\\">
+                                      <LinkButton id=\\"test-base-form-close-button\\" text=\\"Close\\" type=\\"button\\" disabled={false} onClick={[Function]}>
+                                        <button id=\\"test-base-form-close-button\\" className=\\"link-button undefined\\" type=\\"button\\" disabled={false} onClick={[Function]}>
+                                          Close
+                                        </button>
+                                      </LinkButton>
+                                      <ConfirmButton id=\\"test-base-form-submit-button\\" wrapperClassName=\\"submitting-buttons__submit--width\\" className=\\"link-button\\" text=\\"Keep\\" type=\\"submit\\" disabled={true} loading={false}>
+                                        <FlexBox className=\\"submitting-buttons__submit--width\\" justifyContent=\\"center\\">
+                                          <div style={{...}} className=\\"submitting-buttons__submit--width\\">
+                                            <button id=\\"test-base-form-submit-button\\" className=\\"link-button\\" type=\\"submit\\" disabled={true} onClick={[undefined]}>
+                                              Keep
+                                            </button>
+                                          </div>
+                                        </FlexBox>
+                                      </ConfirmButton>
+                                    </div>
+                                  </FlexBox>
+                                </div>
+                              </FlexBox>
+                            </div>
+                          </form>
+                        </ReactFinalForm>
+                      </BaseForm>
+                    </div>
+                  </ContentContainer>
+                </NoteFormBase>
+              </Connect(NoteFormBase)>
+            </div>
+          </div>
+        </ModalPortal>
+      </Portal>
+    </Modal>
+  </TextNoteFormModal>
+</Provider>"
+`;

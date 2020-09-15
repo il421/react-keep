@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { Field } from "react-final-form";
 import TextareaAutosize from "react-textarea-autosize";
 import { ExposedFieldProps, FieldAdapterProps } from "./BaseForm.types";

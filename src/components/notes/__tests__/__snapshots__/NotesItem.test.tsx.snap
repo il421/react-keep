@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Rendering should render NotesItem correctly 1`] = `
+"<WithFontAwesome>
+  <Provider store={{...}}>
+    <NotesItem note={{...}} removeNote={[Function: mockConstructor]} moveToArchive={[Function: mockConstructor]} toggleImportance={[Function: mockConstructor]} onNoteSelected={[Function: mockConstructor]} getCollaborator={[Function: mockConstructor]}>
+      <ContentContainer className=\\"note\\" style={{...}} onClick={[Function: onClick]}>
+        <div onClick={[Function: onClick]} className=\\"content-container note\\" style={{...}}>
+          <FlexBox vertical={true} justifyContent=\\"space-between\\">
+            <div style={{...}} className={[undefined]}>
+              <FlexBox className=\\"note__actions actions\\" justifyContent=\\"space-between\\" alignItems=\\"center\\">
+                <div style={{...}} className=\\"note__actions actions\\">
+                  <IconButton className=\\"actions__important\\" onButtonClick={[Function: onButtonClick]} icon=\\"bookmark\\" color=\\"#7A7A7A\\" id=\\"test-toggle-importance-4\\">
+                    <button id=\\"test-toggle-importance-4\\" className=\\"icon-button actions__important \\" onClick={[Function: onButtonClick]} disabled={[undefined]} type=\\"button\\">
+                      <FontAwesomeIcon icon=\\"bookmark\\" color=\\"#7A7A7A\\" border={false} className=\\"\\" mask={{...}} fixedWidth={false} inverse={false} flip={{...}} listItem={false} pull={{...}} pulse={false} rotation={{...}} size={{...}} spin={false} symbol={false} title=\\"\\" transform={{...}} swapOpacity={false}>
+                        <svg aria-hidden=\\"true\\" focusable=\\"false\\" data-prefix=\\"fas\\" data-icon=\\"bookmark\\" className=\\"svg-inline--fa fa-bookmark fa-w-12 \\" role=\\"img\\" xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 384 512\\" style={{...}} color=\\"#7A7A7A\\">
+                          <path fill=\\"currentColor\\" d=\\"M0 512V48C0 21.49 21.49 0 48 0h288c26.51 0 48 21.49 48 48v464L192 400 0 512z\\" style={{...}} />
+                        </svg>
+                      </FontAwesomeIcon>
+                    </button>
+                  </IconButton>
+                  <FlexBox justifyContent=\\"flex-start\\" flexGrow={true} className=\\"actions__col-list\\">
+                    <div style={{...}} className=\\"actions__col-list\\" />
+                  </FlexBox>
+                  <FlexBox justifyContent=\\"flex-start\\" alignItems=\\"center\\">
+                    <div style={{...}} className={[undefined]}>
+                      <IconButton className=\\"actions__archive\\" onButtonClick={[Function: onButtonClick]} icon=\\"archive\\" id=\\"test-toggle-arch-4\\">
+                        <button id=\\"test-toggle-arch-4\\" className=\\"icon-button actions__archive \\" onClick={[Function: onButtonClick]} disabled={[undefined]} type=\\"button\\">
+                          <FontAwesomeIcon icon=\\"archive\\" border={false} className=\\"\\" mask={{...}} fixedWidth={false} inverse={false} flip={{...}} listItem={false} pull={{...}} pulse={false} rotation={{...}} size={{...}} spin={false} symbol={false} title=\\"\\" transform={{...}} swapOpacity={false}>
+                            <svg aria-hidden=\\"true\\" focusable=\\"false\\" data-prefix=\\"fas\\" data-icon=\\"archive\\" className=\\"svg-inline--fa fa-archive fa-w-16 \\" role=\\"img\\" xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 512 512\\" style={{...}}>
+                              <path fill=\\"currentColor\\" d=\\"M32 448c0 17.7 14.3 32 32 32h384c17.7 0 32-14.3 32-32V160H32v288zm160-212c0-6.6 5.4-12 12-12h104c6.6 0 12 5.4 12 12v8c0 6.6-5.4 12-12 12H204c-6.6 0-12-5.4-12-12v-8zM480 32H32C14.3 32 0 46.3 0 64v48c0 8.8 7.2 16 16 16h480c8.8 0 16-7.2 16-16V64c0-17.7-14.3-32-32-32z\\" style={{...}} />
+                            </svg>
+                          </FontAwesomeIcon>
+                        </button>
+                      </IconButton>
+                      <IconButton className=\\"actions__remove\\" onButtonClick={[Function: onButtonClick]} icon=\\"times\\" id=\\"test-delete-note-4\\">
+                        <button id=\\"test-delete-note-4\\" className=\\"icon-button actions__remove \\" onClick={[Function: onButtonClick]} disabled={[undefined]} type=\\"button\\">
+                          <FontAwesomeIcon icon=\\"times\\" border={false} className=\\"\\" mask={{...}} fixedWidth={false} inverse={false} flip={{...}} listItem={false} pull={{...}} pulse={false} rotation={{...}} size={{...}} spin={false} symbol={false} title=\\"\\" transform={{...}} swapOpacity={false}>
+                            <svg aria-hidden=\\"true\\" focusable=\\"false\\" data-prefix=\\"fas\\" data-icon=\\"times\\" className=\\"svg-inline--fa fa-times fa-w-11 \\" role=\\"img\\" xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 352 512\\" style={{...}}>
+                              <path fill=\\"currentColor\\" d=\\"M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z\\" style={{...}} />
+                            </svg>
+                          </FontAwesomeIcon>
+                        </button>
+                      </IconButton>
+                    </div>
+                  </FlexBox>
+                </div>
+              </FlexBox>
+              <FlexBox className=\\"note__content content\\" vertical={true} justifyContent=\\"space-between\\">
+                <div style={{...}} className=\\"note__content content\\">
+                  <h2 className=\\"content__title\\">
+                    4
+                  </h2>
+                  <NoteContent type={0} content=\\"text\\">
+                    <div className=\\"content__text\\">
+                      text
+                    </div>
+                  </NoteContent>
+                </div>
+              </FlexBox>
+              <FlexBox className=\\"note__details details\\" vertical={true} justifyContent=\\"space-between\\">
+                <div style={{...}} className=\\"note__details details\\">
+                  <FlexBox className=\\"details__date\\" justifyContent=\\"space-between\\">
+                    <div style={{...}} className=\\"details__date\\">
+                      <div>
+                        <b>
+                          Created:
+                        </b>
+                         
+                        01/01/70
+                      </div>
+                      <div>
+                        <b>
+                          Edited:
+                        </b>
+                         
+                        01/01/70
+                      </div>
+                    </div>
+                  </FlexBox>
+                  <FlexBox className=\\"details__tags\\" justifyContent=\\"flex-start\\" flexWrap=\\"wrap\\">
+                    <div style={{...}} className=\\"details__tags\\">
+                      <Connect(NoteTagBase) tagId=\\"1\\">
+                        <NoteTagBase tagId=\\"1\\" tags={{...}} dispatch={[Function]}>
+                          <div className=\\"note__tag\\">
+                            Tag1
+                          </div>
+                        </NoteTagBase>
+                      </Connect(NoteTagBase)>
+                    </div>
+                  </FlexBox>
+                </div>
+              </FlexBox>
+            </div>
+          </FlexBox>
+        </div>
+      </ContentContainer>
+    </NotesItem>
+  </Provider>
+</WithFontAwesome>"
+`;

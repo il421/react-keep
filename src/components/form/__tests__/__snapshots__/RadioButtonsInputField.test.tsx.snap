@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render RadioButtonsInputField, and contain input element 1`] = `
+"<ReactFinalForm initialValues={{...}} onSubmit={[Function: onSubmit]}>
+  <RadioButtonsInputField name=\\"name\\" id=\\"id\\" radioClassName=\\"radioClassName\\">
+    <Field name=\\"name\\" id=\\"id\\" radioClassName=\\"radioClassName\\" type=\\"radio\\" component={[Function: FieldAdapter]}>
+      <FieldAdapter input={{...}} meta={{...}} id=\\"id\\" radioClassName=\\"radioClassName\\" render={[undefined]}>
+        <div className=\\"radioClassName\\">
+          <input id=\\"id\\" name=\\"name\\" checked={true} onBlur={[Function]} onChange={[Function]} onFocus={[Function]} type=\\"radio\\" value={[undefined]} />
+          <label htmlFor=\\"id\\" style={[undefined]} />
+        </div>
+      </FieldAdapter>
+    </Field>
+  </RadioButtonsInputField>
+</ReactFinalForm>"
+`;

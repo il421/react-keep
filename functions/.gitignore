@@ -4,11 +4,11 @@
 
 # Typescript v1 declaration files
 typings/
+lib/
 
 node_modules/
 /ui-debug.log
 /my-keep-type-firebase-adminsdk-ezcu9-f6d8c378a7.json
 /firebase-debug.log
 /my-keep-type-dev-firebase-adminsdk-ufqbi-263a2dffe3.json
-/my-keep-type-96d60d7ce1c5.json
 /firestore-debug.log
