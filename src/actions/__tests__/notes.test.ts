@@ -5,21 +5,26 @@ import thunk from "redux-thunk";
 import { newNote, notes, updatedNote } from "../../testData/notes";
 import database from "../../firebase/firebase";
 import { Collections } from "../../firebase/Collections";
+import { v4 as uuidv4 } from "uuid";
 
 import {
   addNote,
+  addNoteToCollaborators,
   changeArchive,
   changeImportance,
   changeNoteArchiveStatus,
   changeNoteImportance,
   handleAddNote,
+  handleCollaboratorsPromises,
   handleRemoveNote,
   handleSetNotes,
   handleUpdateNote,
   removeNote,
+  removeNoteFromCollaborators,
   removeTag,
   removeTagFromNotes,
   setNotes,
+  updateCollaboratorsNote,
   updateNote,
 } from "../notes";
 import { tags } from "../../testData/tags";
@@ -51,17 +56,19 @@ beforeAll((done) => {
 });
 
 afterAll((done) => {
-  database
-    .collection(Collections.users)
-    .doc(user.uid)
-    .collection(Collections.notes)
-    .get()
-    .then((res) => {
-      res.forEach((note) => {
-        note.ref.delete();
-      });
-    })
-    .then(() => done());
+  [...collaborators.map((c) => c.uid), user.uid].forEach((uid) =>
+    database
+      .collection(Collections.users)
+      .doc(uid)
+      .collection(Collections.notes)
+      .get()
+      .then((res) => {
+        res.forEach(async (note) => {
+          await note.ref.delete();
+          done();
+        });
+      })
+  );
 });
 
 describe("Setting", () => {
@@ -201,6 +208,7 @@ describe("Updating", () => {
             expect((doc.data() as Note).content).toBe(updatedNote.content);
             expect((doc.data() as Note).color).toBe(updatedNote.color);
             expect((doc.data() as Note).title).toBe(updatedNote.title);
+            expect((doc.data() as Note).id).toBeUndefined();
           }
           done();
         });
@@ -324,5 +332,164 @@ describe("Tagging", () => {
           done();
         });
     });
+  });
+});
+
+describe("Collaborators", () => {
+  const collNote: Omit<Note, "id"> = {
+    ...notes[0],
+    tags: [],
+    important: false,
+    archive: false,
+    createdBy: user.uid,
+  };
+
+  test("handleCollaboratorsPromises should resolve all promises", async () => {
+    const result = await handleCollaboratorsPromises({
+      collaborators: ["1", "2"],
+      callback: (uid) =>
+        new Promise((resolve) => {
+          resolve(uid);
+        }),
+    });
+
+    expect(result).toEqual(["1", "2"]);
+  });
+
+  test("should add note to collaborators", async (done) => {
+    const docIdAdd = uuidv4();
+
+    // added note to collaborators
+    await addNoteToCollaborators(notes[0], user.uid, docIdAdd);
+    // check if added
+    notes[0].collaborators!.forEach((uid) => {
+      database
+        .collection(Collections.users)
+        .doc(uid)
+        .collection(Collections.notes)
+        .doc(docIdAdd)
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            expect(doc.data()).toEqual(collNote);
+          }
+          done();
+        });
+    });
+  });
+
+  test("should remove notes from collaborators as owner", async (done) => {
+    // added note to collaborators
+    const docIdRemove = uuidv4();
+    await addNoteToCollaborators(notes[0], user.uid, docIdRemove);
+    // check if added
+    notes[0].collaborators!.forEach((uid) => {
+      database
+        .collection(Collections.users)
+        .doc(uid)
+        .collection(Collections.notes)
+        .doc(docIdRemove)
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            expect(doc.data()).toEqual(collNote);
+          }
+        });
+    });
+
+    // remove notes as owner
+    await removeNoteFromCollaborators(
+      { ...notes[0], createdBy: undefined, id: docIdRemove },
+      user.uid
+    );
+
+    // check if removed
+    notes[0].collaborators!.forEach((uid) => {
+      database
+        .collection(Collections.users)
+        .doc(uid)
+        .collection(Collections.notes)
+        .doc(docIdRemove)
+        .get()
+        .then((doc) => {
+          expect(doc.exists).toBeFalsy();
+          done();
+        });
+    });
+  });
+
+  test("should remove notes from collaborators as collaborator", async (done) => {
+    const docIdR = uuidv4();
+
+    // added note to collaborators
+    await addNoteToCollaborators(notes[0], user.uid, docIdR);
+
+    // remove note as collaborator
+    await removeNoteFromCollaborators(
+      { ...notes[0], id: docIdR },
+      collaborators[0].uid
+    );
+
+    // check if collaborator list is updated
+    database
+      .collection(Collections.users)
+      .doc(collaborators[1].uid)
+      .collection(Collections.notes)
+      .doc(docIdR)
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          expect((doc.data() as Note).collaborators!.length).toBe(1);
+          expect((doc.data() as Note).collaborators![0]).toBe(
+            collaborators[1].uid
+          );
+          done();
+        }
+      });
+  });
+
+  test("should update a note from collaborators", async (done) => {
+    const docIdR = uuidv4();
+
+    // added note to collaborators
+    await addNoteToCollaborators(
+      { ...notes[0], collaborators: [notes[0].collaborators[0]] },
+      user.uid,
+      docIdR
+    );
+
+    // update note with one new collaborator
+    await updateCollaboratorsNote(
+      { ...notes[0], title: "OOO" },
+      docIdR,
+      user.uid
+    );
+
+    // check if collaborator list is updated
+    database
+      .collection(Collections.users)
+      .doc(collaborators[0].uid)
+      .collection(Collections.notes)
+      .doc(docIdR)
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          expect((doc.data() as Note).title).toBe("OOO");
+        }
+      });
+
+    // check if collaborator list is updated
+    database
+      .collection(Collections.users)
+      .doc(collaborators[1].uid)
+      .collection(Collections.notes)
+      .doc(docIdR)
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          expect((doc.data() as Note).title).toBe("OOO");
+          done();
+        }
+      });
   });
 });

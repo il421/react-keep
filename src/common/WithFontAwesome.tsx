@@ -43,6 +43,6 @@ library.add(
   faShare,
   faUserFriends
 );
-export const WithFontAwesome: React.FunctionComponent = (
-  ({ children }) => <>{children}</>
+export const WithFontAwesome: React.FunctionComponent = ({ children }) => (
+  <>{children}</>
 );

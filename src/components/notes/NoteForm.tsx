@@ -89,6 +89,7 @@ export class NoteFormBase extends React.PureComponent<Props> {
     content: getDefaultContent(this.props.type),
     tags: [],
     color: PickerColors.white,
+    collaborators: [],
   };
 
   private nameOf = nameOf<NoteFormValues<string | ListItem[] | ImageItem>>();

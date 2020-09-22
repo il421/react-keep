@@ -22,6 +22,7 @@ export const notes: Note[] = [
     type: NoteType.list,
     id: "2",
     title: "2",
+    collaborators: [],
     content: [
       {
         id: "2-1",
@@ -48,6 +49,7 @@ export const notes: Note[] = [
     content: { text: "text", imageUrl: "imageUrl", imageId: "imageId" },
     tags: [tags[1].id],
     color: "#3",
+    collaborators: [],
     important: false,
     archive: true,
     createdAt: 100000,
@@ -59,12 +61,13 @@ export const notes: Note[] = [
     title: "4",
     content: "text",
     tags: [tags[0].id],
+    collaborators: [],
     color: "#1",
     important: false,
     archive: false,
     createdAt: 100000,
     updatedAt: 100005,
-  }
+  },
 ];
 
 export const newNote: Omit<Note, "id" | "createdAt" | "updatedAt"> = {
@@ -75,6 +78,7 @@ export const newNote: Omit<Note, "id" | "createdAt" | "updatedAt"> = {
   type: NoteType.text,
   content: "Dont forget to make a call",
   title: "Call",
+  collaborators: [],
 };
 
 export const updatedNote: Omit<Note, "id"> = {
@@ -86,5 +90,6 @@ export const updatedNote: Omit<Note, "id"> = {
   content: "Dont forget to make a call",
   title: "Call",
   createdAt: 54353534,
+  collaborators: [],
   updatedAt: 43432432,
 };

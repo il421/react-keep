@@ -69,7 +69,7 @@ export interface Note {
   archive: boolean;
   createdAt: number;
   updatedAt: number;
-  collaborators?: string[];
+  collaborators: string[];
   createdBy?: string;
 }
 

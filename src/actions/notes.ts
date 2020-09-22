@@ -105,7 +105,6 @@ export const handleSetNotes = (): ThunkAction<any, Store, any, Action> => {
   };
 };
 
-// @TODO need to test .... with colls
 export const handleAddNote = (
   note: AddNote
 ): ThunkAction<any, Store, any, Action> => {
@@ -162,21 +161,21 @@ export const handleAddNote = (
   };
 };
 
-// @todo test
 export const addNoteToCollaborators = async (
   note: Omit<Note, "id">,
   createdBy: string,
-  id: string
+  docId: string
 ) => {
   const collNote: Omit<Note, "id"> = {
     ...note,
     tags: [],
+    important: false,
+    archive: false,
     createdBy,
   };
-
   await handleCollaboratorsPromises({
     collaborators: note.collaborators!,
-    callback: (collUid) => initDocumentRef(collUid).doc(id).set(collNote),
+    callback: (collUid) => initDocumentRef(collUid).doc(docId).set(collNote),
   });
 };
 
@@ -205,7 +204,7 @@ export const handleRemoveNote = (
       }
 
       if (collaborators && collaborators.length > 0) {
-        await removeCollaborators(deletedNote, uid);
+        await removeNoteFromCollaborators(deletedNote, uid);
       }
 
       dispatch(removeNote(id));
@@ -216,8 +215,10 @@ export const handleRemoveNote = (
   };
 };
 
-// @TODO need to test
-const removeCollaborators = async (deletedNote: Note, uid: string) => {
+export const removeNoteFromCollaborators = async (
+  deletedNote: Note,
+  uid: string
+) => {
   // AS OWNER: collaborators, and createdBy from all collaborators
   if (!deletedNote.createdBy) {
     const { collaborators = [] } = deletedNote;
@@ -228,13 +229,19 @@ const removeCollaborators = async (deletedNote: Note, uid: string) => {
         collUid // deleted all notes with the same id
       ) => {
         // get the shared note
+        let note: Note | undefined = undefined;
         const notes = await initDocumentRef(collUid).get();
-        const note = notes.docs.find((d) => d.id === deletedNote.id);
+
+        notes.docs.forEach((snapshot) => {
+          if (snapshot.id === deletedNote.id) {
+            note = snapshot.data() as Note;
+          }
+        });
 
         // if found clone one with a new id
         if (note) {
           return initDocumentRef(collUid).add({
-            ...(note.data() as Note),
+            ...note!,
             collaborators: [],
             createdBy: "",
           } as Note);
@@ -262,13 +269,13 @@ const removeCollaborators = async (deletedNote: Note, uid: string) => {
     );
 
     await handleCollaboratorsPromises({
-      collaborators,
+      collaborators: [...filteredCollaborators, createdBy],
       callback: (
         collUid // update
       ) =>
         initDocumentRef(collUid)
           .doc(id)
-          .update({ collaborators: [...filteredCollaborators, createdBy] }),
+          .update({ collaborators: filteredCollaborators }),
     });
   }
 };
@@ -322,16 +329,28 @@ export const handleUpdateNote = (
               ? uid
               : updates.createdBy
             : undefined,
+        id: undefined,
       };
 
       const cleanedNote: Note = JSON.parse(JSON.stringify(note));
-
       // update the note
       await docRef.doc(id).set(cleanedNote);
 
       // update note for all collaborators
       if (cleanedNote.collaborators && cleanedNote.collaborators.length > 0) {
-        await updateCollaboratorsNote(cleanedNote, uid);
+        const oldNote = getState().notes.find((n) => n.id === id);
+        // check are there any updates in title, content, or collaborators
+        if (
+          oldNote &&
+          (oldNote.title !== updates.title ||
+            oldNote.content !== updates.content ||
+            oldNote.collaborators.length !== updates.collaborators.length ||
+            !oldNote.collaborators.some((c) =>
+              updates.collaborators.includes(c)
+            ))
+        ) {
+          await updateCollaboratorsNote(cleanedNote, id, uid);
+        }
       }
 
       dispatch(updateNote(id, cleanedNote));
@@ -342,24 +361,37 @@ export const handleUpdateNote = (
   };
 };
 
-// @todo need to test
-export const updateCollaboratorsNote = async (note: Note, uid: string) => {
-  const filteredCollaborators: string[] = [
+export const updateCollaboratorsNote = async (
+  note: Note,
+  noteId: string,
+  uid: string
+) => {
+  const { createdBy, title, content, updatedAt } = note;
+  const collaborators: string[] = [
     ...note.collaborators!,
-    note.createdBy ?? "",
-  ].filter((coll) => coll && coll !== uid);
+    createdBy ?? "",
+  ].filter((coll: string) => coll && coll !== uid);
 
   await handleCollaboratorsPromises({
-    collaborators: [...filteredCollaborators],
-    callback: (collUid) =>
-      initDocumentRef(collUid)
-        .doc(note.id)
-        .update({
-          title: note.title,
-          content: note.content,
-          updatedAt: note.updatedAt,
-          collaborators: note.collaborators,
-        } as Note),
+    collaborators,
+    callback: async (collUid) => {
+      const doc = await initDocumentRef(collUid).doc(noteId).get();
+      // if exists update, not add a new one
+      if (doc.exists) {
+        return initDocumentRef(collUid)
+          .doc(noteId)
+          .update({
+            title,
+            content,
+            updatedAt,
+            collaborators,
+          } as Note);
+      } else {
+        return initDocumentRef(collUid)
+          .doc(noteId)
+          .set({ ...note, createdBy: uid } as Note);
+      }
+    },
   });
 };
 
@@ -445,8 +477,7 @@ export const removeTagFromNotes = (
   };
 };
 
-// @TODO need to test
-const handleCollaboratorsPromises = async (options: {
+export const handleCollaboratorsPromises = async (options: {
   collaborators: string[];
   callback: (callUid: string) => Promise<any>;
 }) => {
@@ -457,7 +488,7 @@ const handleCollaboratorsPromises = async (options: {
     promises.push(callback(callUid));
   });
 
-  await Promise.all(promises).catch((e) => {
+  return Promise.all(promises).catch((e) => {
     console.log(e.message);
     toast.error(e.message);
   });

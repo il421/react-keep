@@ -79,6 +79,7 @@ export const NotesItem: React.FunctionComponent<NoteProps> = ({
           >
             {createdBy && (
               <Coin
+                className="coin--owner"
                 name={createdBy.displayName}
                 email={createdBy.email}
                 url={createdBy.photoURL}
