@@ -21,9 +21,9 @@ export const NoteContent: React.FunctionComponent<NoteContentProps> = ({
       ) : /* LIST NOTE */
       type === NoteType.list ? (
         <ul className={"content__list list"}>
-          {/* show 10 lines */}
+          {/* show 3 lines */}
           {(content as ListItem[])
-            .slice(0, 5)
+            .slice(0, 3)
             .sort(
               (a: ListItem, b: ListItem) =>
                 Number(a.checked) - Number(b.checked)
@@ -39,8 +39,8 @@ export const NoteContent: React.FunctionComponent<NoteContentProps> = ({
               </li>
             ))}
 
-          {/* show "..." if length is more than 10 */}
-          {(content as ListItem[]).length > 10 && <div>......</div>}
+          {/* show "..." if length is more than 3 */}
+          {(content as ListItem[]).length > 3 && <div>......</div>}
         </ul>
       ) : (
         /* IMAGE NOTE */
