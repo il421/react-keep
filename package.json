@@ -44,7 +44,8 @@
     "test": "react-scripts test --env=jsdom",
     "test-no-watch": "react-scripts test --watchAll=false",
     "release": "dotenv -e .env.development release-it",
-    "deploy": "yarn run build && firebase deploy"
+    "deploy": "yarn run build && firebase deploy",
+    "deploy-hosting": "yarn run build && firebase deploy --only hosting"
   },
   "eslintConfig": {
     "extends": "react-app"
