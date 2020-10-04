@@ -39,7 +39,7 @@ const CoinBase: React.FunctionComponent<CoinBaseProps> = ({
       </FlexBox>
       {showTooltip && (
         <ReactTooltip
-          place="top"
+          place="bottom"
           type="dark"
           effect="solid"
           className="coin__tooltip"
