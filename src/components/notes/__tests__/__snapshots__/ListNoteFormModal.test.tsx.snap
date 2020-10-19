@@ -47,9 +47,9 @@ exports[`Rendering should render ListNoteFormModal correctly 1`] = `
                               </FlexBox>
                               <div className=\\"note-form__list\\">
                                 <FieldArray name=\\"content\\">
-                                  <ListNoteFromItem autoFocus={true} name=\\"content[0]\\" index={0} onRemove={[Function]} addItem={[Function: addItem]} onChecked={[Function: handleOnChecked]} setPastedValue={[Function]}>
-                                    <FlexBox justifyContent=\\"space-between\\" alignItems=\\"flex-start\\" className=\\"list-note-form-item\\">
-                                      <div style={{...}} className=\\"list-note-form-item\\">
+                                  <ListNoteFromItem autoFocus={true} isChecked={false} name=\\"content[0]\\" index={0} onRemove={[Function]} addItem={[Function: addItem]} onChecked={[Function: handleOnChecked]} setPastedValue={[Function]}>
+                                    <FlexBox justifyContent=\\"space-between\\" alignItems=\\"flex-start\\" className=\\"list-note-form-item \\">
+                                      <div style={{...}} className=\\"list-note-form-item \\">
                                         <CheckboxInputField name=\\"content[0].checked\\" className=\\"list-note-form-item__check\\" id=\\"content[0].checked\\">
                                           <Field name=\\"content[0].checked\\" className=\\"list-note-form-item__check\\" id=\\"content[0].checked\\" type=\\"checkbox\\" component={[Function: FieldAdapter]}>
                                             <FieldAdapter input={{...}} meta={{...}} className=\\"list-note-form-item__check\\" id=\\"content[0].checked\\" render={[undefined]}>

@@ -3,8 +3,8 @@
 exports[`Rendering should render ListNoteFormItem correctly 1`] = `
 "<ReactFinalForm initialValues={{...}} onSubmit={[Function: onSubmit]}>
   <ListNoteFromItem name=\\"text\\" index={1} addItem={[Function: mockConstructor]} onRemove={[Function: mockConstructor]} onChecked={[Function: mockConstructor]} setPastedValue={[Function: mockConstructor]}>
-    <FlexBox justifyContent=\\"space-between\\" alignItems=\\"flex-start\\" className=\\"list-note-form-item\\">
-      <div style={{...}} className=\\"list-note-form-item\\">
+    <FlexBox justifyContent=\\"space-between\\" alignItems=\\"flex-start\\" className=\\"list-note-form-item \\">
+      <div style={{...}} className=\\"list-note-form-item \\">
         <CheckboxInputField name=\\"text.checked\\" className=\\"list-note-form-item__check\\" id=\\"text.checked\\">
           <Field name=\\"text.checked\\" className=\\"list-note-form-item__check\\" id=\\"text.checked\\" type=\\"checkbox\\" component={[Function: FieldAdapter]}>
             <FieldAdapter input={{...}} meta={{...}} className=\\"list-note-form-item__check\\" id=\\"text.checked\\" render={[undefined]}>
