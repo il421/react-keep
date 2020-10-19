@@ -56,21 +56,16 @@ export const NotesItem: React.FunctionComponent<NoteProps> = ({
           }
           alignItems={AlignItems.center}
         >
-          {
-            // don't render shared notes
-            !note.createdBy && (
-              <IconButton
-                className="actions__important"
-                onButtonClick={(evt) => {
-                  evt?.stopPropagation();
-                  toggleImportance(note.id);
-                }}
-                icon="bookmark"
-                color={note.important ? Colors.red : Colors.lightGray}
-                id={`test-toggle-importance-${note.id}`}
-              />
-            )
-          }
+          <IconButton
+            className="actions__important"
+            onButtonClick={(evt) => {
+              evt?.stopPropagation();
+              toggleImportance(note.id);
+            }}
+            icon="bookmark"
+            color={note.important ? Colors.red : Colors.lightGray}
+            id={`test-toggle-importance-${note.id}`}
+          />
           {/* collaborators */}
           <FlexBox
             justifyContent={JustifyContent.start}
