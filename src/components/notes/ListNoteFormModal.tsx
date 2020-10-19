@@ -138,7 +138,7 @@ export class ListNoteFormModal extends React.Component<ListNoteFormModalProps> {
                         return props.fields.map(
                           (name: string, index: number) => (
                             <ListNoteFromItem
-                              autoFocus={this.isNewNote && index === 0}
+                              autoFocus={index === 0}
                               name={name}
                               key={props.fields.length! - index} // to focus the first element
                               index={index}
