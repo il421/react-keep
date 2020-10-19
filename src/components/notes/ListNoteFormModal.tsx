@@ -139,6 +139,7 @@ export class ListNoteFormModal extends React.Component<ListNoteFormModalProps> {
                           (name: string, index: number) => (
                             <ListNoteFromItem
                               autoFocus={index === 0}
+                              isChecked={props.fields.value[index].checked}
                               name={name}
                               key={props.fields.length! - index} // to focus the first element
                               index={index}

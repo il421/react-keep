@@ -10,7 +10,8 @@ export interface ListNoteFromItemProps {
   onRemove: () => void;
   onChecked: (checked: boolean, values: any) => void;
   addItem: () => void;
-  autoFocus?: boolean;
+  autoFocus: boolean;
+  isChecked: boolean;
   setPastedValue: (paste: string) => void;
 }
 
@@ -22,6 +23,7 @@ export const ListNoteFromItem: React.FunctionComponent<ListNoteFromItemProps> = 
   autoFocus,
   addItem,
   setPastedValue,
+  isChecked,
 }) => {
   const handleOnPaste = (
     event: React.ClipboardEvent<HTMLTextAreaElement | HTMLInputElement>
@@ -38,7 +40,9 @@ export const ListNoteFromItem: React.FunctionComponent<ListNoteFromItemProps> = 
     <FlexBox
       justifyContent={JustifyContent.spaceBetween}
       alignItems={AlignItems.start}
-      className="list-note-form-item"
+      className={`list-note-form-item ${
+        isChecked ? "list-note-form-item--checked" : ""
+      }`}
     >
       <CheckboxInputField
         name={`${name}.checked`}
