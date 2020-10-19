@@ -28,6 +28,7 @@
   &__avatar {
     .avatar {
       &__field input {
+        visibility: hidden;
         width: 0;
         height: 0;
       }
