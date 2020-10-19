@@ -2,6 +2,7 @@ import {
   AddNote,
   AddNoteAction,
   ImageItem,
+  ListItem,
   Note,
   NotesActionsTypes,
   NotesStoreState,
@@ -128,12 +129,19 @@ export const handleAddNote = (
         }
       }
 
+      const content =
+        note.type === NoteType.image
+          ? { text: (note.content as ImageItem).text, imageUrl, imageId }
+          : note.type === NoteType.list
+          ? (note.content as ListItem[]).filter(
+              // remove all empty items if a list note
+              (i) => i.content.trim().length > 0
+            )
+          : note.content;
+
       const newNote: Omit<Note, "id"> = {
         ...note,
-        content:
-          note.type === NoteType.image
-            ? { text: (note.content as ImageItem).text, imageUrl, imageId }
-            : note.content,
+        content,
         createdAt: moment().valueOf(),
         updatedAt: moment().valueOf(),
         important: false,
@@ -312,16 +320,24 @@ export const handleUpdateNote = (
           imageUrl = await snapshot.ref.getDownloadURL();
         }
       }
+
+      const content =
+        updates.type === NoteType.image
+          ? {
+              text: (updates.content as ImageItem).text,
+              imageUrl: imageUrl ?? (updates.content as ImageItem).imageUrl,
+              imageId: imageId ?? (updates.content as ImageItem).imageId,
+            }
+          : updates.type === NoteType.list
+          ? (updates.content as ListItem[]).filter(
+              // remove all empty items if a list note
+              (i) => i.content.trim().length > 0
+            )
+          : updates.content;
+
       const note = {
         ...updates,
-        content:
-          updates.type === NoteType.image
-            ? {
-                text: (updates.content as ImageItem).text,
-                imageUrl: imageUrl ?? (updates.content as ImageItem).imageUrl,
-                imageId: imageId ?? (updates.content as ImageItem).imageId,
-              }
-            : updates.content,
+        content,
         // set user id in createdBy field if the note has collaborators
         createdBy:
           updates.collaborators && updates.collaborators.length > 0

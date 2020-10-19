@@ -1,5 +1,5 @@
 import { collaborators, user } from "../../testData/users";
-import { Note, NotesActionsTypes } from "../../store/store.types";
+import { ListItem, Note, NotesActionsTypes } from "../../store/store.types";
 import configureMockStore from "redux-mock-store";
 import thunk from "redux-thunk";
 import { newNote, notes, updatedNote } from "../../testData/notes";
@@ -28,6 +28,7 @@ import {
   updateNote,
 } from "../notes";
 import { tags } from "../../testData/tags";
+import { NoteType } from "../../components/notes";
 
 const defaultState = {
   auth: {
@@ -141,6 +142,36 @@ describe("Adding", () => {
         });
     });
   });
+  test("should not include empty lines in a list note when add", (done) => {
+    const store = createMockStore(defaultState);
+    let id: string | undefined;
+    const listNote = {
+      ...newNote,
+      type: NoteType.list,
+      content: [
+        { id: "1", checked: true, content: "content" },
+        { id: "2", checked: false, content: "" },
+        { id: "3", checked: true, content: "   " },
+      ],
+    };
+    store.dispatch<any>(handleAddNote(listNote)).then(() => {
+      const actions = store.getActions();
+      id = actions[0].note.id;
+
+      database
+        .collection(Collections.users)
+        .doc(user.uid)
+        .collection(Collections.notes)
+        .doc(id)
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            expect(((doc.data() as Note).content as ListItem[]).length).toBe(1);
+          }
+          done();
+        });
+    });
+  });
 });
 
 describe("Removing", () => {
@@ -183,6 +214,34 @@ describe("Updating", () => {
       type: NotesActionsTypes.updateNote,
       id: notes[0].id,
       updates: { ...notes[0], title: "test" },
+    });
+  });
+
+  test("should not include empty lines in a list note when update", (done) => {
+    const store = createMockStore(defaultState);
+    // eslint-disable-next-line unused-imports/no-unused-vars
+    const { id, ...rest } = notes[1];
+    const updates = {
+      ...rest,
+      content: [
+        ...(rest.content as ListItem[]),
+        { content: "   ", id: "123", checked: false },
+      ],
+    };
+
+    store.dispatch<any>(handleUpdateNote(id, updates)).then(() => {
+      database
+        .collection(Collections.users)
+        .doc(user.uid)
+        .collection(Collections.notes)
+        .doc(notes[1].id)
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            expect(((doc.data() as Note).content as ListItem[]).length).toBe(2);
+          }
+          done();
+        });
     });
   });
 
