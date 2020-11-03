@@ -2,7 +2,7 @@
 
 exports[`should render ConfirmDialog correctly 1`] = `
 "<ConfirmDialog className=\\"confirm-dialog\\" closeDialog={[Function: mockConstructor]} handleConfirm={[Function: mockConstructor]} buttonsProps={{...}}>
-  <FlexBox className=\\"confirm-dialog confirm-dialog\\" justifyContent=\\"center\\" alignItems=\\"center\\">
+  <FlexBox vertical={true} className=\\"confirm-dialog confirm-dialog\\" justifyContent=\\"center\\" alignItems=\\"center\\">
     <div style={{...}} className=\\"confirm-dialog confirm-dialog\\">
       <FlexBox className=\\"confirm-dialog__wrapper\\" justifyContent=\\"space-around\\">
         <div style={{...}} className=\\"confirm-dialog__wrapper\\">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { stringify } from "query-string";
 import { AuthStoreState, Store } from "../../store/store.types";
@@ -13,10 +13,13 @@ import {
   LinkButton,
 } from "../ui-components";
 import "../../styles/components/header/_header.scss";
+import "../../styles/components/header/_logout.scss";
 import "../../styles/components/header/_user-box.scss";
 import "../../styles/components/common/_visibility.scss";
 import { ThunkDispatch } from "redux-thunk";
 import { History } from "history";
+import Modal from "react-modal";
+import { ConfirmDialog } from "../notes";
 
 export interface HeaderProps {
   showSidebar: (value: boolean) => void;
@@ -39,6 +42,8 @@ export const HeaderBase: React.FunctionComponent<Props> = ({
   showSidebar,
   history,
 }) => {
+  const [isLoginOut, setIsLogout] = useState<boolean>(false);
+
   const onClickHandler = (key: QueryKeys) => {
     const query = stringify({
       [key]: RouteActions.edit,
@@ -99,11 +104,26 @@ export const HeaderBase: React.FunctionComponent<Props> = ({
               className="user-box__logout"
               icon="sign-out-alt"
               size="lg"
-              onButtonClick={startLogout}
+              onButtonClick={() => setIsLogout(true)}
             />
           </div>
         </div>
       </ContentContainer>
+
+      <Modal
+        isOpen={isLoginOut}
+        onRequestClose={() => setIsLogout(false)}
+        className="user-box__logout logout"
+        ariaHideApp={false}
+      >
+        <ConfirmDialog
+          title="Do you want to logout?"
+          handleConfirm={startLogout}
+          closeDialog={() => setIsLogout(false)}
+          className="logout__dialog"
+          buttonsProps={{ confirmButtonText: "Logout" }}
+        />
+      </Modal>
     </header>
   );
 };

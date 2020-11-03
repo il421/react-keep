@@ -2,6 +2,7 @@ import React from "react";
 import { shallow, ShallowWrapper } from "enzyme";
 import { HeaderBase, Props } from "../Header";
 import { defaultAuthStore } from "../../../reducers/auth";
+import { flushPromises } from "../../../common/testUtils";
 
 let props: Props, wrapper: ShallowWrapper<Props, any>;
 const mockHistoryPush = jest.fn();
@@ -42,7 +43,9 @@ test("should open user edit modal by clicking on user cog icon", () => {
   expect(mockHistoryPush).toHaveBeenLastCalledWith("pathname?user=edit");
 });
 
-test("should logout if click on an logout button", () => {
+test("should logout if click on an logout button", async () => {
   wrapper.find("IconButton").at(2).prop<any>("onButtonClick")();
+  wrapper.find("IconButton").at(2).prop<any>("onButtonClick")();
+  wrapper.find("ConfirmDialog").prop<any>("handleConfirm")();
   expect(props.startLogout).toHaveBeenLastCalledWith();
 });

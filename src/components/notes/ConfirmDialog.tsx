@@ -14,6 +14,7 @@ export interface ConfirmDialogProps extends Pick<HTMLElement, "className"> {
     confirmButtonText?: string;
     cancelButtonText?: string;
   };
+  title?: string;
 }
 
 export const ConfirmDialog: React.FunctionComponent<ConfirmDialogProps> = ({
@@ -21,13 +22,16 @@ export const ConfirmDialog: React.FunctionComponent<ConfirmDialogProps> = ({
   closeDialog,
   handleConfirm,
   buttonsProps,
+  title,
 }) => {
   return (
     <FlexBox
+      vertical
       className={`${className} confirm-dialog`}
       justifyContent={JustifyContent.center}
       alignItems={AlignItems.center}
     >
+      {title && <div className="confirm-dialog__title">{title}</div>}
       <FlexBox
         className="confirm-dialog__wrapper"
         justifyContent={JustifyContent.spaceAround}

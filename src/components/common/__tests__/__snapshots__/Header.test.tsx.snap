@@ -13,9 +13,12 @@ exports[`should render Header correctly 1`] = `
       <div className=\\"header__user-box user-box\\">
         <LinkButton text=\\"Update profile\\" type=\\"button\\" className=\\"user-box__link\\" onClick={[Function: onClick]} />
         <IconButton className=\\"user-box__icon\\" icon=\\"users-cog\\" size=\\"lg\\" onButtonClick={[Function: onButtonClick]} />
-        <IconButton className=\\"user-box__logout\\" icon=\\"sign-out-alt\\" size=\\"lg\\" onButtonClick={[Function: mockConstructor]} />
+        <IconButton className=\\"user-box__logout\\" icon=\\"sign-out-alt\\" size=\\"lg\\" onButtonClick={[Function: onButtonClick]} />
       </div>
     </div>
   </ContentContainer>
+  <Modal isOpen={false} onRequestClose={[Function: onRequestClose]} className=\\"user-box__logout logout\\" ariaHideApp={false} portalClassName=\\"ReactModalPortal\\" bodyOpenClassName=\\"ReactModal__Body--open\\" role=\\"dialog\\" closeTimeoutMS={0} shouldFocusAfterRender={true} shouldCloseOnEsc={true} shouldCloseOnOverlayClick={true} shouldReturnFocusAfterClose={true} parentSelector={[Function: parentSelector]}>
+    <ConfirmDialog title=\\"Do your want to logout?\\" handleConfirm={[Function: mockConstructor]} closeDialog={[Function: closeDialog]} className=\\"logout__dialog\\" buttonsProps={{...}} />
+  </Modal>
 </header>"
 `;

@@ -2,6 +2,11 @@
 @import "../../base/variables";
 
 .confirm-dialog {
+  &__title {
+    font-size: $m-size;
+    margin-bottom: $m-size;
+  }
+
   &__wrapper {
     width: 100%;
   }
