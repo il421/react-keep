@@ -4,6 +4,10 @@
     position: fixed;
     bottom: 0;
     right: 0;
+    background: $white;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    opacity: 0.7;
     @extend .hide-for-desktop;
   }
 }
