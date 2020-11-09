@@ -17,6 +17,7 @@ const defaultNote: NoteFormValues<string> = {
   content: "",
   tags: [],
   color: PickerColors.white,
+  collaborators: [],
 };
 
 beforeEach(() => {

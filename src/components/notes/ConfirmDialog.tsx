@@ -41,7 +41,7 @@ export const ConfirmDialog: React.FunctionComponent<ConfirmDialogProps> = ({
           type="button"
           text={buttonsProps?.confirmButtonText! ?? "Delete"}
           wrapperClassName="confirm-dialog__button"
-          onCLick={(evt) => {
+          onClick={(evt) => {
             evt?.stopPropagation();
             handleConfirm();
           }}
@@ -52,7 +52,7 @@ export const ConfirmDialog: React.FunctionComponent<ConfirmDialogProps> = ({
           type="button"
           text={buttonsProps?.cancelButtonText! ?? "Don't"}
           wrapperClassName="confirm-dialog__button"
-          onCLick={(evt) => {
+          onClick={(evt) => {
             evt?.stopPropagation();
             closeDialog();
           }}

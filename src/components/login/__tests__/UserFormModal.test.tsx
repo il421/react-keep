@@ -7,21 +7,12 @@ import { user } from "../../../testData/users";
 import fs from "fs";
 
 let wrapper: ReactWrapper | undefined, props: Props;
-const mockHistoryPush = jest.fn();
 const file = fs.readFileSync("./src/testData/test_img.jpg");
-
-const history = {
-  push: mockHistoryPush,
-  location: {
-    pathname: "pathname",
-    search: "?user=edit",
-  },
-};
 
 beforeEach(() => {
   props = {
     updateUserData: jest.fn(),
-    history: history as any,
+    toggleUserModal: jest.fn(),
     auth: { ...defaultAuthState.auth },
   };
   wrapper = mount(<UserFormModal {...props} />);
@@ -74,7 +65,7 @@ describe("Canceling", () => {
       expect(wrapper.exists(".user-form")).toBeTruthy();
       expect(wrapper.find(".ReactModal__Overlay").exists()).toBeTruthy();
       wrapper.find(".ReactModal__Overlay").simulate("click");
-      expect(mockHistoryPush).toHaveBeenLastCalledWith("/dashboard");
+      expect(props.toggleUserModal).toHaveBeenLastCalledWith(false);
     }
   });
 });

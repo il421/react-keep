@@ -15,10 +15,12 @@ export interface AuthStoreState {
   name: string | null;
   url: string | null;
   loading: boolean;
+  isUserModalOpen: boolean;
   email?: string;
 }
 
-export interface LoginAction extends Omit<AuthStoreState, "loading"> {
+export interface LoginAction
+  extends Omit<AuthStoreState, "loading" | "isUserModalOpen"> {
   type: AuthActionsTypes.login;
 }
 
@@ -28,6 +30,11 @@ export interface LogoutAction {
 
 export interface LoadingAction extends Pick<AuthStoreState, "loading"> {
   type: AuthActionsTypes.loading;
+}
+
+export interface UserModalToggle
+  extends Pick<AuthStoreState, "isUserModalOpen"> {
+  type: AuthActionsTypes.toggleModal;
 }
 
 export interface UserData
@@ -176,6 +183,7 @@ export enum AuthActionsTypes {
   login = "login",
   logout = "logout",
   loading = "loading",
+  toggleModal = "toggle",
 }
 
 export enum FiltersActionsTypes {

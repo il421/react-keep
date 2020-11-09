@@ -1,7 +1,7 @@
 import React from "react";
-import { JustifyContent } from "../../common";
 import { FlexBox } from "./FlexBox";
 import "../../styles/ui-components/_login-button.scss";
+import { JustifyContent } from "../../common";
 
 export interface Option {
   id: string;

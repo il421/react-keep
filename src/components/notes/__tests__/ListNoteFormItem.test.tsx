@@ -2,10 +2,7 @@ import React from "react";
 import { mount, ReactWrapper } from "enzyme";
 import { ListNoteFromItemProps, ListNoteFromItem } from "../ListNoteFromItem";
 import { Form } from "react-final-form";
-import {
-  triggerCheckboxChange,
-  triggerInputChange,
-} from "../../../common/testUtils";
+import { triggerCheckboxChange } from "../../../common/testUtils";
 
 let wrapper: ReactWrapper | undefined, props: ListNoteFromItemProps;
 
@@ -17,6 +14,8 @@ beforeEach(() => {
     onRemove: jest.fn(),
     onChecked: jest.fn(),
     setPastedValue: jest.fn(),
+    isChecked: false,
+    autoFocus: false,
   };
 
   wrapper = mount(

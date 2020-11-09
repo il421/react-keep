@@ -14,7 +14,7 @@ exports[`should render DashboardPage correctly 1`] = `
   <TextNoteFormModal history={{...}} />
   <ListNoteFormModal history={{...}} />
   <ImageNoteFormModal history={{...}} />
-  <Connect(UserFormModal) history={{...}} />
+  <Connect(UserFormModal) />
   <Controllers isMobile={true} openDialog={[Function: openDialog]} />
   <ToastContainer autoClose={2000} position=\\"top-right\\" transition={[Function: Animation]} rtl={false} hideProgressBar={false} closeButton={{...}} pauseOnHover={true} pauseOnFocusLoss={true} closeOnClick={true} newestOnTop={false} draggable={true} draggablePercent={80} className={{...}} style={{...}} toastClassName={{...}} bodyClassName={{...}} progressClassName={{...}} progressStyle={{...}} role=\\"alert\\" />
 </FlexBox>"

@@ -140,7 +140,7 @@ export const DashboardPage: React.FunctionComponent<DashboardPageProps> = ({
       <TextNoteFormModal history={history} />
       <ListNoteFormModal history={history} />
       <ImageNoteFormModal history={history} />
-      <UserFormModal history={history} />
+      <UserFormModal />
       <Controllers
         isMobile
         openDialog={(query) =>

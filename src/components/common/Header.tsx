@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { stringify } from "query-string";
 import { AuthStoreState, Store } from "../../store/store.types";
-import { QueryKeys, RouteActions } from "../../routers/Routing";
-import { startLogout } from "../../actions/auth";
+import { startLogout, toggleUserModal } from "../../actions/auth";
 import { Search } from "./Search";
 import { Controllers } from "./Controllers";
 import {
@@ -32,6 +30,7 @@ interface StateProps {
 
 interface DispatchProps {
   startLogout: () => void;
+  toggleUserModal: (isUserModalOpen: boolean) => void;
 }
 
 export type Props = HeaderProps & DispatchProps & StateProps;
@@ -40,16 +39,10 @@ export const HeaderBase: React.FunctionComponent<Props> = ({
   startLogout,
   auth,
   showSidebar,
+  toggleUserModal,
   history,
 }) => {
   const [isLoginOut, setIsLogout] = useState<boolean>(false);
-
-  const onClickHandler = (key: QueryKeys) => {
-    const query = stringify({
-      [key]: RouteActions.edit,
-    });
-    history.push(`${history.location.pathname}?${query}`);
-  };
 
   return (
     <header className="header" onClick={(evt) => evt.stopPropagation()}>
@@ -89,14 +82,14 @@ export const HeaderBase: React.FunctionComponent<Props> = ({
                 text={auth.name ?? "Update profile"}
                 type="button"
                 className="user-box__link"
-                onClick={() => onClickHandler(QueryKeys.user)}
+                onClick={() => toggleUserModal(true)}
               />
 
               <IconButton
                 className="user-box__icon"
                 icon="users-cog"
                 size="lg"
-                onButtonClick={() => onClickHandler(QueryKeys.user)}
+                onButtonClick={() => toggleUserModal(true)}
               />
             </>
 
@@ -132,6 +125,8 @@ const mapDispatchToProps = (
   dispatch: ThunkDispatch<{}, {}, any>
 ): DispatchProps => ({
   startLogout: () => dispatch(startLogout()),
+  toggleUserModal: (isUserModalOpen: boolean) =>
+    dispatch(toggleUserModal(isUserModalOpen)),
 });
 
 const mapStateToProps = (state: Store): StateProps => {

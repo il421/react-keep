@@ -1,17 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import { History } from "history";
 import Modal from "react-modal";
-import { PathNames, QueryKeys } from "../../routers/Routing";
-import {
-  AlignItems,
-  JustifyContent,
-  isModal,
-  nameOf,
-  Placeholders,
-} from "../../common";
+import { AlignItems, JustifyContent, nameOf, Placeholders } from "../../common";
 import { AuthStoreState, Store, UpdateUser } from "../../store/store.types";
-import { updateUserData } from "../../actions/auth";
+import { toggleUserModal, updateUserData } from "../../actions/auth";
 import {
   ContentContainer,
   ConfirmButton,
@@ -43,20 +35,23 @@ interface FormSpyProps {
 
 interface DispatchProps {
   updateUserData: (data: UpdateUser) => void;
+  toggleUserModal: (isUserModalOpen: boolean) => void;
 }
 
-interface UserFormModalProps {
-  history: History;
-}
+interface UserFormModalProps {}
 
 export type Props = StateProps & UserFormModalProps & DispatchProps;
 
-export class UserFormModal extends React.PureComponent<Props> {
-  private nameOf = nameOf<UserFormValues>();
-  private readonly NO_AVATAR_URL: string = "img/no_avatar.png";
-  private readonly FIELD_ID: string = "avatar";
+export const UserFormModal: React.FunctionComponent<Props> = ({
+  updateUserData,
+  toggleUserModal,
+  auth,
+}) => {
+  const nameOfField = nameOf<UserFormValues>();
+  const NO_AVATAR_URL: string = "img/no_avatar.png";
+  const FIELD_ID: string = "avatar";
 
-  private getFormValues = (auth: AuthStoreState): UserFormValues => {
+  const getFormValues = (): UserFormValues => {
     let firstName: string = "";
     let lastName: string = "";
 
@@ -75,12 +70,15 @@ export class UserFormModal extends React.PureComponent<Props> {
     };
   };
 
-  private getButtons = (isDisable: boolean) => {
+  const onToggleAction = (isUserModalOpen: boolean) => () =>
+    toggleUserModal(isUserModalOpen);
+
+  const getButtons = (isDisable: boolean) => {
     return (
       <>
         <ConfirmButton
           text="Update"
-          loading={this.props.auth.loading}
+          loading={auth.loading}
           disabled={isDisable}
           className="login-button user-form__button"
         />
@@ -88,153 +86,137 @@ export class UserFormModal extends React.PureComponent<Props> {
         <ConfirmButton
           text="Close"
           type="button"
-          onCLick={this.closeModal}
+          onClick={onToggleAction(false)}
           className="login-button user-form__button"
         />
       </>
     );
   };
 
-  private onSubmit = (values: UserFormValues) => {
+  const onSubmit = (values: UserFormValues) => {
     const displayName = `${values.firstName} ${values.lastName}`.trim();
-    this.props.updateUserData({
+    updateUserData({
       displayName: !!displayName ? displayName : null,
       photoFile: values.uploadingPhoto,
       photoURL: values.photoUrl,
-      tenantId: this.props.auth.uid,
+      tenantId: auth.uid,
     });
-    this.props.history.push(PathNames.base);
   };
 
-  private handleUploadClick = () => {
-    const fileInput = document.getElementById(this.FIELD_ID);
+  const handleUploadClick = () => {
+    const fileInput = document.getElementById(FIELD_ID);
     fileInput && fileInput.click();
   };
 
-  private closeModal = () => this.props.history.push(PathNames.base);
-
-  render() {
-    if (
-      !isModal({
-        query: this.props.history.location.search,
-        type: QueryKeys.user,
-      })
-    ) {
-      return null;
-    }
-    return (
-      <Modal
-        isOpen={true}
-        onRequestClose={this.closeModal}
-        className="user-modal"
-        ariaHideApp={false}
-      >
-        <ContentContainer className="user-modal__container">
-          <BaseForm<UserFormValues>
-            formClassName="login-box__form user-form"
-            initialValues={this.getFormValues(this.props.auth)}
-            onSubmit={this.onSubmit}
-            getFormActions={this.getButtons}
+  return (
+    <Modal
+      isOpen={auth.isUserModalOpen}
+      onRequestClose={onToggleAction(false)}
+      className="user-modal"
+      ariaHideApp={false}
+    >
+      <ContentContainer className="user-modal__container">
+        <BaseForm<UserFormValues>
+          formClassName="login-box__form user-form"
+          initialValues={getFormValues()}
+          onSubmit={onSubmit}
+          getFormActions={getButtons}
+        >
+          <FlexBox
+            justifyContent={JustifyContent.start}
+            alignItems={AlignItems.center}
+            className="user-form__avatar avatar"
           >
-            <FlexBox
-              justifyContent={JustifyContent.start}
-              alignItems={AlignItems.center}
-              className="user-form__avatar avatar"
-            >
-              <FormSpy>
-                {({ form, values, initialValues }: FormSpyProps) => {
-                  return (
-                    <>
-                      <Field name={this.nameOf("photoUrl")}>
-                        {() => (
-                          <img
-                            className="avatar__img"
-                            src={
-                              values.photoUrl && !values.uploadingPhoto
-                                ? values.photoUrl
-                                : values.uploadingPhoto
-                                ? URL.createObjectURL(values.uploadingPhoto)
-                                : this.NO_AVATAR_URL
-                            }
-                            width="95"
-                            height="95"
-                            alt="User photo"
-                          />
-                        )}
-                      </Field>
-                      <FlexBox
-                        justifyContent={JustifyContent.spaceBetween}
-                        alignItems={AlignItems.center}
-                        vertical
-                      >
-                        <IconButton
-                          className="avatar__btn"
-                          icon="upload"
-                          onButtonClick={() => {
-                            this.handleUploadClick();
-                          }}
+            <FormSpy>
+              {({ form, values, initialValues }: FormSpyProps) => {
+                return (
+                  <>
+                    <Field name={nameOfField("photoUrl")}>
+                      {() => (
+                        <img
+                          className="avatar__img"
+                          src={
+                            values.photoUrl && !values.uploadingPhoto
+                              ? values.photoUrl
+                              : values.uploadingPhoto
+                              ? URL.createObjectURL(values.uploadingPhoto)
+                              : NO_AVATAR_URL
+                          }
+                          width="95"
+                          height="95"
+                          alt="User photo"
                         />
+                      )}
+                    </Field>
+                    <FlexBox
+                      justifyContent={JustifyContent.spaceBetween}
+                      alignItems={AlignItems.center}
+                      vertical
+                    >
+                      <IconButton
+                        className="avatar__btn"
+                        icon="upload"
+                        onButtonClick={() => {
+                          handleUploadClick();
+                        }}
+                      />
+                      <IconButton
+                        className="avatar__btn"
+                        icon="times"
+                        onButtonClick={() => {
+                          form.change(nameOfField("uploadingPhoto"), undefined);
+                        }}
+                      />
+                      {initialValues.photoUrl && (
                         <IconButton
+                          id="test-delete-avatar-button"
                           className="avatar__btn"
-                          icon="times"
+                          icon="trash"
                           onButtonClick={() => {
+                            form.change(nameOfField("photoUrl"), null);
                             form.change(
-                              this.nameOf("uploadingPhoto"),
+                              nameOfField("uploadingPhoto"),
                               undefined
                             );
                           }}
                         />
-                        {initialValues.photoUrl && (
-                          <IconButton
-                            id="test-delete-avatar-button"
-                            className="avatar__btn"
-                            icon="trash"
-                            onButtonClick={() => {
-                              form.change(this.nameOf("photoUrl"), null);
-                              form.change(
-                                this.nameOf("uploadingPhoto"),
-                                undefined
-                              );
-                            }}
-                          />
-                        )}
-                        <FileFormField
-                          id={this.FIELD_ID}
-                          name={this.nameOf("uploadingPhoto")}
-                          className="avatar__field"
-                        />
-                      </FlexBox>
-                    </>
-                  );
-                }}
-              </FormSpy>
-            </FlexBox>
+                      )}
+                      <FileFormField
+                        id={FIELD_ID}
+                        name={nameOfField("uploadingPhoto")}
+                        className="avatar__field"
+                      />
+                    </FlexBox>
+                  </>
+                );
+              }}
+            </FormSpy>
+          </FlexBox>
 
-            <FlexBox
-              vertical
-              justifyContent={JustifyContent.spaceBetween}
-              className="user-form__fields"
-            >
-              <TextInputField
-                name={this.nameOf("firstName")}
-                type="text"
-                placeholder={Placeholders.firstName}
-                className="user-form__field"
-              />
+          <FlexBox
+            vertical
+            justifyContent={JustifyContent.spaceBetween}
+            className="user-form__fields"
+          >
+            <TextInputField
+              name={nameOfField("firstName")}
+              type="text"
+              placeholder={Placeholders.firstName}
+              className="user-form__field"
+            />
 
-              <TextInputField
-                name={this.nameOf("lastName")}
-                type="text"
-                placeholder={Placeholders.lastName}
-                className="user-form__field"
-              />
-            </FlexBox>
-          </BaseForm>
-        </ContentContainer>
-      </Modal>
-    );
-  }
-}
+            <TextInputField
+              name={nameOfField("lastName")}
+              type="text"
+              placeholder={Placeholders.lastName}
+              className="user-form__field"
+            />
+          </FlexBox>
+        </BaseForm>
+      </ContentContainer>
+    </Modal>
+  );
+};
 
 const mapStateToProps = (state: Store): StateProps => {
   return {
@@ -246,6 +228,8 @@ const mapDispatchToProps = (
   dispatch: ThunkDispatch<{}, {}, any>
 ): DispatchProps => ({
   updateUserData: (data: UpdateUser) => dispatch(updateUserData(data)),
+  toggleUserModal: (isUserModalOpen: boolean) =>
+    dispatch(toggleUserModal(isUserModalOpen)),
 });
 
 export default connect<StateProps, DispatchProps, UserFormModalProps, Store>(

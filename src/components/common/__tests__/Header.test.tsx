@@ -2,7 +2,6 @@ import React from "react";
 import { shallow, ShallowWrapper } from "enzyme";
 import { HeaderBase, Props } from "../Header";
 import { defaultAuthStore } from "../../../reducers/auth";
-import { flushPromises } from "../../../common/testUtils";
 
 let props: Props, wrapper: ShallowWrapper<Props, any>;
 const mockHistoryPush = jest.fn();
@@ -16,6 +15,7 @@ const history = {
 beforeEach(() => {
   props = {
     showSidebar: jest.fn(),
+    toggleUserModal: jest.fn(),
     startLogout: jest.fn(),
     history: history as any,
     auth: defaultAuthStore,
@@ -35,12 +35,12 @@ test("should show side bar if click on burger button", () => {
 
 test("should open user edit modal by clicking on user name link", () => {
   wrapper.find("LinkButton").at(0).prop<any>("onClick")();
-  expect(mockHistoryPush).toHaveBeenLastCalledWith("pathname?user=edit");
+  expect(props.toggleUserModal).toHaveBeenLastCalledWith(true);
 });
 
 test("should open user edit modal by clicking on user cog icon", () => {
   wrapper.find("IconButton").at(1).prop<any>("onButtonClick")();
-  expect(mockHistoryPush).toHaveBeenLastCalledWith("pathname?user=edit");
+  expect(props.toggleUserModal).toHaveBeenLastCalledWith(true);
 });
 
 test("should logout if click on an logout button", async () => {

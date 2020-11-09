@@ -25,7 +25,6 @@ describe("Utils", () => {
     expect(isModal({ query: imageQuery, type: QueryKeys.image })).toBeTruthy();
     expect(isModal({ query: listQuery, type: QueryKeys.list })).toBeTruthy();
     expect(isModal({ query: textQuery, type: QueryKeys.text })).toBeTruthy();
-    expect(isModal({ query: userQuery, type: QueryKeys.user })).toBeTruthy();
     expect(isModal({ query: userQuery, type: QueryKeys.text })).toBeFalsy();
   });
 

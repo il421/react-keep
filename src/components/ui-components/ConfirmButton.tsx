@@ -1,15 +1,15 @@
 import React from "react";
 import { BeatLoader } from "react-spinners";
-import { Colors, JustifyContent } from "../../common";
 import { FlexBox } from "./FlexBox";
 import "../../styles/ui-components/_login-button.scss";
+import { Colors, JustifyContent } from "../../common";
 
 export interface ConfirmButtonProps
   extends Partial<Pick<HTMLButtonElement, "disabled" | "className" | "id">> {
   text: string;
   loading?: boolean;
   type?: "submit" | "button";
-  onCLick?: (evt?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  onClick?: (evt?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   wrapperClassName?: string;
 }
 
@@ -21,7 +21,7 @@ export class ConfirmButton extends React.PureComponent<ConfirmButtonProps> {
       className = "login-button",
       text,
       disabled = false,
-      onCLick,
+      onClick,
       id,
       wrapperClassName,
     } = this.props;
@@ -36,7 +36,7 @@ export class ConfirmButton extends React.PureComponent<ConfirmButtonProps> {
             className={className}
             type={type}
             disabled={disabled}
-            onClick={onCLick}
+            onClick={onClick}
           >
             {text}
           </button>
@@ -44,7 +44,9 @@ export class ConfirmButton extends React.PureComponent<ConfirmButtonProps> {
           <BeatLoader
             size={10}
             color={Colors.fresh}
-            css={"height: 42px; display: flex; align-items: center"}
+            css={
+              "height: 42px; margin-bottom: 12px; display: flex; align-items: center"
+            }
           />
         )}
       </FlexBox>

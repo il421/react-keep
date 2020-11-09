@@ -7,7 +7,7 @@ let props: ConfirmButtonProps, wrapper: ReactWrapper<ConfirmButtonProps, {}>;
 beforeEach(() => {
   props = {
     text: "text",
-    onCLick: jest.fn(),
+    onClick: jest.fn(),
   };
 });
 

@@ -8,6 +8,7 @@ import {
   LogoutAction,
   Store,
   UpdateUser,
+  UserModalToggle,
 } from "../store/store.types";
 import { Action, Dispatch } from "redux";
 import { getMessage, Message } from "../common";
@@ -42,6 +43,11 @@ export const login = (
 
 export const logout = (): LogoutAction => ({
   type: AuthActionsTypes.logout,
+});
+
+export const toggleUserModal = (isUserModalOpen: boolean): UserModalToggle => ({
+  type: AuthActionsTypes.toggleModal,
+  isUserModalOpen,
 });
 
 export const startLogin = (
@@ -118,9 +124,9 @@ export const updateUserData = (
       if (currentUser) {
         await currentUser.updateProfile({
           displayName: data.displayName,
-          photoURL,
+          photoURL: photoURL ?? data.photoURL,
         });
-        dispatch(login(auth.uid, data.displayName, photoURL));
+        dispatch(login(auth.uid, data.displayName, photoURL ?? data.photoURL));
         toast.success(getMessage(Message.successUpdated));
       }
     } catch (e) {

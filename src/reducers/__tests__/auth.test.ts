@@ -5,6 +5,7 @@ import {
   LoadingAction,
   LoginAction,
   LogoutAction,
+  UserModalToggle,
 } from "../../store/store.types";
 
 describe("Auth reducer", () => {
@@ -40,5 +41,16 @@ describe("Auth reducer", () => {
     const state = authReducer(defaultAuthStore, action) as AuthStoreState;
 
     expect(state).toEqual(defaultAuthStore);
+  });
+
+  test("should toggle isUserModal", () => {
+    const action: UserModalToggle = {
+      type: AuthActionsTypes.toggleModal,
+      isUserModalOpen: true,
+    };
+
+    const state = authReducer(defaultAuthStore, action) as AuthStoreState;
+
+    expect(state.isUserModalOpen).toBe(action.isUserModalOpen);
   });
 });

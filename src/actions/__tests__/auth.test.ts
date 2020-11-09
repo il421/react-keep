@@ -1,4 +1,10 @@
-import { login, logout, loading, updateUserData } from "../auth";
+import {
+  login,
+  logout,
+  loading,
+  updateUserData,
+  toggleUserModal,
+} from "../auth";
 import { user } from "../../testData/users";
 import { AuthActionsTypes, AuthStoreState } from "../../store/store.types";
 import configureMockStore from "redux-mock-store";
@@ -58,6 +64,14 @@ test("should generate logout action object", () => {
   const action = logout();
   expect(action).toEqual({
     type: AuthActionsTypes.logout,
+  });
+});
+
+test("should generate toggle action object", () => {
+  const action = toggleUserModal(true);
+  expect(action).toEqual({
+    type: AuthActionsTypes.toggleModal,
+    isUserModalOpen: true,
   });
 });
 
