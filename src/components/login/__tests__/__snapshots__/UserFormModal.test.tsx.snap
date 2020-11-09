@@ -1,99 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Rendering should render LoginPage correctly 1`] = `
-"<UserFormModal updateUserData={[Function: mockConstructor]} toggleUserModal={[Function: mockConstructor]} auth={{...}}>
-  <Modal isOpen={true} onRequestClose={[Function]} className=\\"user-modal\\" ariaHideApp={false} portalClassName=\\"ReactModalPortal\\" bodyOpenClassName=\\"ReactModal__Body--open\\" role=\\"dialog\\" closeTimeoutMS={0} shouldFocusAfterRender={true} shouldCloseOnEsc={true} shouldCloseOnOverlayClick={true} shouldReturnFocusAfterClose={true} parentSelector={[Function: parentSelector]}>
+"<UserFormModal updateUserData={[Function: mockConstructor]} toggle={[Function: mockConstructor]} auth={{...}} modals={{...}}>
+  <Modal isOpen={false} onRequestClose={[Function]} className=\\"user-modal\\" ariaHideApp={false} portalClassName=\\"ReactModalPortal\\" bodyOpenClassName=\\"ReactModal__Body--open\\" role=\\"dialog\\" closeTimeoutMS={0} shouldFocusAfterRender={true} shouldCloseOnEsc={true} shouldCloseOnOverlayClick={true} shouldReturnFocusAfterClose={true} parentSelector={[Function: parentSelector]}>
     <Portal containerInfo={{...}}>
-      <ModalPortal defaultStyles={{...}} isOpen={true} onRequestClose={[Function]} className=\\"user-modal\\" ariaHideApp={false} portalClassName=\\"ReactModalPortal\\" bodyOpenClassName=\\"ReactModal__Body--open\\" role=\\"dialog\\" closeTimeoutMS={0} shouldFocusAfterRender={true} shouldCloseOnEsc={true} shouldCloseOnOverlayClick={true} shouldReturnFocusAfterClose={true} parentSelector={[Function: parentSelector]} style={{...}}>
-        <div className=\\"ReactModal__Overlay ReactModal__Overlay--after-open\\" style={{...}} onClick={[Function]} onMouseDown={[Function]}>
-          <div id={[undefined]} style={{...}} className=\\"ReactModal__Content ReactModal__Content--after-open user-modal\\" tabIndex=\\"-1\\" onKeyDown={[Function]} onMouseDown={[Function]} onMouseUp={[Function]} onClick={[Function]} role=\\"dialog\\" aria-label={[undefined]} data-testid={[undefined]}>
-            <ContentContainer className=\\"user-modal__container\\">
-              <div onClick={[undefined]} className=\\"content-container user-modal__container\\" style={[undefined]}>
-                <BaseForm formClassName=\\"login-box__form user-form\\" initialValues={{...}} onSubmit={[Function: onSubmit]} getFormActions={[Function: getButtons]}>
-                  <ReactFinalForm initialValues={{...}} onSubmit={[Function: onSubmit]} validate={[undefined]} mutators={{...}}>
-                    <form onSubmit={[Function: handleSubmit]} className=\\"login-box__form user-form\\" autoComplete=\\"off\\">
-                      <FlexBox justifyContent=\\"flex-start\\" alignItems=\\"center\\" className=\\"user-form__avatar avatar\\">
-                        <div style={{...}} className=\\"user-form__avatar avatar\\">
-                          <FormSpy>
-                            <Field name=\\"photoUrl\\">
-                              <img className=\\"avatar__img\\" src=\\"img/no_avatar.png\\" width=\\"95\\" height=\\"95\\" alt=\\"User photo\\" />
-                            </Field>
-                            <FlexBox justifyContent=\\"space-between\\" alignItems=\\"center\\" vertical={true}>
-                              <div style={{...}} className={[undefined]}>
-                                <IconButton className=\\"avatar__btn\\" icon=\\"upload\\" onButtonClick={[Function: onButtonClick]}>
-                                  <button id={[undefined]} className=\\"icon-button avatar__btn \\" onClick={[Function: onButtonClick]} disabled={[undefined]} type=\\"button\\">
-                                    <FontAwesomeIcon icon=\\"upload\\" border={false} className=\\"\\" mask={{...}} fixedWidth={false} inverse={false} flip={{...}} listItem={false} pull={{...}} pulse={false} rotation={{...}} size={{...}} spin={false} symbol={false} title=\\"\\" transform={{...}} swapOpacity={false} />
-                                  </button>
-                                </IconButton>
-                                <IconButton className=\\"avatar__btn\\" icon=\\"times\\" onButtonClick={[Function: onButtonClick]}>
-                                  <button id={[undefined]} className=\\"icon-button avatar__btn \\" onClick={[Function: onButtonClick]} disabled={[undefined]} type=\\"button\\">
-                                    <FontAwesomeIcon icon=\\"times\\" border={false} className=\\"\\" mask={{...}} fixedWidth={false} inverse={false} flip={{...}} listItem={false} pull={{...}} pulse={false} rotation={{...}} size={{...}} spin={false} symbol={false} title=\\"\\" transform={{...}} swapOpacity={false} />
-                                  </button>
-                                </IconButton>
-                                <FileFormField id=\\"avatar\\" name=\\"uploadingPhoto\\" className=\\"avatar__field\\">
-                                  <Field id=\\"avatar\\" name=\\"uploadingPhoto\\" className=\\"avatar__field\\" component={[Function: FieldAdapter]}>
-                                    <FieldAdapter input={{...}} meta={{...}} id=\\"avatar\\" className=\\"avatar__field\\" render={[undefined]}>
-                                      <div className=\\"avatar__field\\">
-                                        <input render={[undefined]} name=\\"uploadingPhoto\\" id=\\"avatar\\" type=\\"file\\" onChange={[Function: handleChange]} accept=\\"image/*\\" />
-                                      </div>
-                                    </FieldAdapter>
-                                  </Field>
-                                </FileFormField>
-                              </div>
-                            </FlexBox>
-                          </FormSpy>
-                        </div>
-                      </FlexBox>
-                      <FlexBox vertical={true} justifyContent=\\"space-between\\" className=\\"user-form__fields\\">
-                        <div style={{...}} className=\\"user-form__fields\\">
-                          <TextInputField name=\\"firstName\\" type=\\"text\\" placeholder=\\"First name\\" className=\\"user-form__field\\">
-                            <Field name=\\"firstName\\" type=\\"text\\" placeholder=\\"First name\\" className=\\"user-form__field\\" component={[Function: FieldAdapter]} parse={[Function: parse]}>
-                              <FieldAdapter input={{...}} meta={{...}} placeholder=\\"First name\\" className=\\"user-form__field\\" render={[undefined]}>
-                                <div className=\\"user-form__field\\">
-                                  <input name=\\"firstName\\" value=\\"Ilya\\" checked={[undefined]} onBlur={[Function]} onChange={[Function]} onFocus={[Function]} type=\\"text\\" placeholder=\\"First name\\" render={[undefined]} onInput={[Function: handleOnChange]} onPaste={[undefined]} autoComplete=\\"new-password\\" autoFocus={false} />
-                                </div>
-                              </FieldAdapter>
-                            </Field>
-                          </TextInputField>
-                          <TextInputField name=\\"lastName\\" type=\\"text\\" placeholder=\\"Last name\\" className=\\"user-form__field\\">
-                            <Field name=\\"lastName\\" type=\\"text\\" placeholder=\\"Last name\\" className=\\"user-form__field\\" component={[Function: FieldAdapter]} parse={[Function: parse]}>
-                              <FieldAdapter input={{...}} meta={{...}} placeholder=\\"Last name\\" className=\\"user-form__field\\" render={[undefined]}>
-                                <div className=\\"user-form__field\\">
-                                  <input name=\\"lastName\\" value=\\"\\" checked={[undefined]} onBlur={[Function]} onChange={[Function]} onFocus={[Function]} type=\\"text\\" placeholder=\\"Last name\\" render={[undefined]} onInput={[Function: handleOnChange]} onPaste={[undefined]} autoComplete=\\"new-password\\" autoFocus={false} />
-                                </div>
-                              </FieldAdapter>
-                            </Field>
-                          </TextInputField>
-                        </div>
-                      </FlexBox>
-                      <div>
-                        <ConfirmButton text=\\"Update\\" loading={false} disabled={true} className=\\"login-button user-form__button\\">
-                          <FlexBox className={[undefined]} justifyContent=\\"center\\">
-                            <div style={{...}} className={[undefined]}>
-                              <button id={[undefined]} className=\\"login-button user-form__button\\" type=\\"submit\\" disabled={true} onClick={[undefined]}>
-                                Update
-                              </button>
-                            </div>
-                          </FlexBox>
-                        </ConfirmButton>
-                        <ConfirmButton text=\\"Close\\" type=\\"button\\" onClick={[Function]} className=\\"login-button user-form__button\\">
-                          <FlexBox className={[undefined]} justifyContent=\\"center\\">
-                            <div style={{...}} className={[undefined]}>
-                              <button id={[undefined]} className=\\"login-button user-form__button\\" type=\\"button\\" disabled={false} onClick={[Function]}>
-                                Close
-                              </button>
-                            </div>
-                          </FlexBox>
-                        </ConfirmButton>
-                      </div>
-                    </form>
-                  </ReactFinalForm>
-                </BaseForm>
-              </div>
-            </ContentContainer>
-          </div>
-        </div>
-      </ModalPortal>
+      <ModalPortal defaultStyles={{...}} isOpen={false} onRequestClose={[Function]} className=\\"user-modal\\" ariaHideApp={false} portalClassName=\\"ReactModalPortal\\" bodyOpenClassName=\\"ReactModal__Body--open\\" role=\\"dialog\\" closeTimeoutMS={0} shouldFocusAfterRender={true} shouldCloseOnEsc={true} shouldCloseOnOverlayClick={true} shouldReturnFocusAfterClose={true} parentSelector={[Function: parentSelector]} style={{...}} />
     </Portal>
   </Modal>
 </UserFormModal>"

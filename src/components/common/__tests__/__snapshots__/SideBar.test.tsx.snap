@@ -4,8 +4,13 @@ exports[`should render SideBar 1`] = `
 "<Fragment>
   <div className=\\"sidebar false\\">
     <FlexBox justifyContent=\\"flex-end\\">
-      <IconButton className=\\"sidebar__close-button\\" onButtonClick={[Function: onButtonClick]} icon=\\"times\\" size=\\"2x\\" />
+      <IconButton className=\\"sidebar__close-button\\" onButtonClick={[Function: handleCloseModal]} icon=\\"times\\" size=\\"2x\\" />
     </FlexBox>
+    <div className=\\"dashboard__sidebar\\">
+      <IconButton icon=\\"tags\\" text=\\"Tags list\\" onButtonClick={[Function]} className={[undefined]} />
+      <IconButton icon=\\"archive\\" text=\\"Archived notes\\" onButtonClick={[Function]} className={[undefined]} />
+      <IconButton icon=\\"user-friends\\" text=\\"Collaborators\\" onButtonClick={[Function]} className={[undefined]} />
+    </div>
   </div>
 </Fragment>"
 `;

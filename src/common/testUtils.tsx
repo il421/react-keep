@@ -9,6 +9,7 @@ import configureMockStore from "redux-mock-store";
 import thunk from "redux-thunk";
 import { WithFontAwesome } from "./WithFontAwesome";
 import { collaborators } from "../testData/users";
+import { modalsReducerDefaultState } from "../reducers/modals";
 
 export function triggerInputChange(
   wrapper: ReactWrapper,
@@ -61,6 +62,7 @@ export const mountInApp = (node: React.ReactNode) => {
           tags: tags,
           auth: defaultAuthState.auth,
           collaborators: collaborators,
+          modals: modalsReducerDefaultState,
         } as Store)}
       >
         {node}

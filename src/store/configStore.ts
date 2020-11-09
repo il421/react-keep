@@ -6,6 +6,7 @@ import notesReducer from "../reducers/notes";
 import tagsReducer from "../reducers/tags";
 import filtersReducer from "../reducers/filters";
 import collaboratorsReducer from "../reducers/collaborators";
+import modalsReducer from "../reducers/modals";
 
 // Store Creating
 export default () => {
@@ -16,6 +17,7 @@ export default () => {
       tags: tagsReducer,
       filters: filtersReducer,
       collaborators: collaboratorsReducer,
+      modals: modalsReducer,
     }),
     composeWithDevTools(applyMiddleware(thunk))
   );

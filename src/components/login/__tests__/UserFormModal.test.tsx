@@ -5,6 +5,7 @@ import { defaultAuthState } from "../../../actions/__tests__/auth.test";
 import { triggerInputChange } from "../../../common/testUtils";
 import { user } from "../../../testData/users";
 import fs from "fs";
+import { defaultModalsState } from "../../../actions/__tests__/modals.test";
 
 let wrapper: ReactWrapper | undefined, props: Props;
 const file = fs.readFileSync("./src/testData/test_img.jpg");
@@ -12,8 +13,9 @@ const file = fs.readFileSync("./src/testData/test_img.jpg");
 beforeEach(() => {
   props = {
     updateUserData: jest.fn(),
-    toggleUserModal: jest.fn(),
+    toggle: jest.fn(),
     auth: { ...defaultAuthState.auth },
+    modals: { ...defaultModalsState, user: { isOpen: true } },
   };
   wrapper = mount(<UserFormModal {...props} />);
 });
@@ -65,7 +67,7 @@ describe("Canceling", () => {
       expect(wrapper.exists(".user-form")).toBeTruthy();
       expect(wrapper.find(".ReactModal__Overlay").exists()).toBeTruthy();
       wrapper.find(".ReactModal__Overlay").simulate("click");
-      expect(props.toggleUserModal).toHaveBeenLastCalledWith(false);
+      expect(props.toggle).toHaveBeenLastCalledWith(false);
     }
   });
 });

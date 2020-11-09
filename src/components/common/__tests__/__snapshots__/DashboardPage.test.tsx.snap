@@ -2,15 +2,9 @@
 
 exports[`should render DashboardPage correctly 1`] = `
 "<FlexBox vertical={true} justifyContent=\\"space-between\\" className=\\"dashboard\\">
-  <Connect(HeaderBase) showSidebar={[Function: bound _dispatchAction]} history={{...}} />
+  <Connect(HeaderBase) history={{...}} />
   <Connect(NotesListBase) onNoteSelected={[Function: onNoteSelected]} />
-  <SideBar showBar={false} setShowSidebar={[Function: bound _dispatchAction]}>
-    <div className=\\"dashboard__sidebar\\">
-      <IconButton icon=\\"tags\\" text=\\"Tags list\\" onButtonClick={[Function]} className={[undefined]} />
-      <IconButton icon=\\"archive\\" text=\\"Archived notes\\" onButtonClick={[Function]} className={[undefined]} />
-      <IconButton icon=\\"user-friends\\" text=\\"Collaborators\\" onButtonClick={[Function]} className={[undefined]} />
-    </div>
-  </SideBar>
+  <Connect(SideBarBase) />
   <TextNoteFormModal history={{...}} />
   <ListNoteFormModal history={{...}} />
   <ImageNoteFormModal history={{...}} />

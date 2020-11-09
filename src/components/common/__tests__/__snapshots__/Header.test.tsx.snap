@@ -4,7 +4,7 @@ exports[`should render Header correctly 1`] = `
 "<header className=\\"header\\" onClick={[Function: onClick]}>
   <ContentContainer>
     <div className=\\"header__content\\">
-      <IconButton className=\\"header__bar\\" icon=\\"bars\\" size=\\"2x\\" onButtonClick={[Function: onButtonClick]} />
+      <IconButton className=\\"header__bar\\" icon=\\"bars\\" size=\\"2x\\" onButtonClick={[Function]} />
       <h1 className=\\"header__title\\">
         KEEP ME
       </h1>
@@ -12,7 +12,7 @@ exports[`should render Header correctly 1`] = `
       <Controllers className=\\"hide-for-mobile\\" openDialog={[Function: openDialog]} />
       <div className=\\"header__user-box user-box\\">
         <LinkButton text=\\"Update profile\\" type=\\"button\\" className=\\"user-box__link\\" onClick={[Function: onClick]} />
-        <IconButton className=\\"user-box__icon\\" icon=\\"users-cog\\" size=\\"lg\\" onButtonClick={[Function: onButtonClick]} />
+        <IconButton className=\\"user-box__icon\\" icon=\\"users-cog\\" size=\\"lg\\" onButtonClick={[Function]} />
         <IconButton className=\\"user-box__logout\\" icon=\\"sign-out-alt\\" size=\\"lg\\" onButtonClick={[Function: onButtonClick]} />
       </div>
     </div>

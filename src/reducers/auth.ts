@@ -4,14 +4,9 @@ import {
   LoadingAction,
   LoginAction,
   LogoutAction,
-  UserModalToggle,
 } from "../store/store.types";
 
-export type AuthAction =
-  | LoginAction
-  | LogoutAction
-  | LoadingAction
-  | UserModalToggle;
+export type AuthAction = LoginAction | LogoutAction | LoadingAction;
 
 export const defaultAuthStore: AuthStoreState = {
   name: null,
@@ -19,7 +14,6 @@ export const defaultAuthStore: AuthStoreState = {
   uid: "",
   email: "",
   loading: false,
-  isUserModalOpen: false,
 };
 
 export default (
@@ -43,12 +37,6 @@ export default (
       return {
         ...state,
         loading: action.loading,
-      } as AuthStoreState;
-
-    case AuthActionsTypes.toggleModal:
-      return {
-        ...state,
-        isUserModalOpen: action.isUserModalOpen,
       } as AuthStoreState;
 
     default:

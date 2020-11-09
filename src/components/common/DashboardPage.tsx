@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { ToastContainer } from "react-toastify";
 import { History, Path } from "history";
-import { JustifyContent, toggleArrayElement } from "../../common";
+import { JustifyContent } from "../../common";
 import { Header } from "./Header";
 import { SideBar } from "./SideBar";
 import { Controllers } from "./Controllers";
@@ -16,20 +16,11 @@ import {
   TextNoteFormModal,
   ListNoteFormModal,
 } from "../notes";
-import { IconButton, FlexBox } from "../ui-components";
-import { Collaborators } from "../collaborators/Collaborators";
-import { ArchiveList } from "../archive/ArchiveList";
+import { FlexBox } from "../ui-components";
 import { NotesList } from "../notes/NotesList";
-import Tags from "../tags/Tags";
 
 export interface DashboardPageProps {
   history: History;
-}
-
-enum CollapseType {
-  "tags",
-  "arch",
-  "collaborators",
 }
 
 export const onNoteSelected = (options: {
@@ -60,19 +51,13 @@ export const onNoteSelected = (options: {
 export const DashboardPage: React.FunctionComponent<DashboardPageProps> = ({
   history,
 }): JSX.Element => {
-  const [showBar, setShowSidebar] = useState<boolean>(false);
-  const [collapsed, setCollapsed] = useState<CollapseType[]>([]);
-
-  const handleSetCollapsed = (value: CollapseType[]) => () =>
-    setCollapsed(value);
-
   return (
     <FlexBox
       vertical={true}
       justifyContent={JustifyContent.spaceBetween}
       className="dashboard"
     >
-      <Header showSidebar={setShowSidebar} history={history} />
+      <Header history={history} />
       <NotesList
         onNoteSelected={(type: NoteType, id: string) =>
           onNoteSelected({
@@ -84,59 +69,7 @@ export const DashboardPage: React.FunctionComponent<DashboardPageProps> = ({
         }
       />
 
-      <SideBar showBar={showBar} setShowSidebar={setShowSidebar}>
-        <div className="dashboard__sidebar">
-          <>
-            <IconButton
-              icon="tags"
-              text="Tags list"
-              onButtonClick={handleSetCollapsed(
-                toggleArrayElement(collapsed, CollapseType.tags)
-              )}
-              className={
-                collapsed.includes(CollapseType.tags)
-                  ? "icon-button--collapsed"
-                  : undefined
-              }
-            />
-            {collapsed.includes(CollapseType.tags) && <Tags />}
-          </>
-
-          <>
-            <IconButton
-              icon="archive"
-              text="Archived notes"
-              onButtonClick={handleSetCollapsed(
-                toggleArrayElement(collapsed, CollapseType.arch)
-              )}
-              className={
-                collapsed.includes(CollapseType.arch)
-                  ? "icon-button--collapsed"
-                  : undefined
-              }
-            />
-            {collapsed.includes(CollapseType.arch) && <ArchiveList />}
-          </>
-          <>
-            <IconButton
-              icon="user-friends"
-              text="Collaborators"
-              onButtonClick={handleSetCollapsed(
-                toggleArrayElement(collapsed, CollapseType.collaborators)
-              )}
-              className={
-                collapsed.includes(CollapseType.collaborators)
-                  ? "icon-button--collapsed"
-                  : undefined
-              }
-            />
-            {collapsed.includes(CollapseType.collaborators) && (
-              <Collaborators />
-            )}
-          </>
-        </div>
-      </SideBar>
-
+      <SideBar />
       <TextNoteFormModal history={history} />
       <ListNoteFormModal history={history} />
       <ImageNoteFormModal history={history} />

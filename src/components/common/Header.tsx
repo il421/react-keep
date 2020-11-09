@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { AuthStoreState, Store } from "../../store/store.types";
-import { startLogout, toggleUserModal } from "../../actions/auth";
+import {
+  AuthStoreState,
+  Modal as ModalType,
+  Store,
+} from "../../store/store.types";
+import { startLogout } from "../../actions/auth";
 import { Search } from "./Search";
 import { Controllers } from "./Controllers";
 import {
@@ -18,9 +22,9 @@ import { ThunkDispatch } from "redux-thunk";
 import { History } from "history";
 import Modal from "react-modal";
 import { ConfirmDialog } from "../notes";
+import { toggle } from "../../actions/modals";
 
 export interface HeaderProps {
-  showSidebar: (value: boolean) => void;
   history: History;
 }
 
@@ -30,19 +34,19 @@ interface StateProps {
 
 interface DispatchProps {
   startLogout: () => void;
-  toggleUserModal: (isUserModalOpen: boolean) => void;
+  toggle: (modal: ModalType, isOpen: boolean) => void;
 }
 
-export type Props = HeaderProps & DispatchProps & StateProps;
+export type HeaderBaseProps = HeaderProps & DispatchProps & StateProps;
 
-export const HeaderBase: React.FunctionComponent<Props> = ({
+export const HeaderBase: React.FunctionComponent<HeaderBaseProps> = ({
   startLogout,
   auth,
-  showSidebar,
-  toggleUserModal,
+  toggle,
   history,
 }) => {
   const [isLoginOut, setIsLogout] = useState<boolean>(false);
+  const handleOpenModal = (model: ModalType) => () => toggle(model, true);
 
   return (
     <header className="header" onClick={(evt) => evt.stopPropagation()}>
@@ -52,7 +56,7 @@ export const HeaderBase: React.FunctionComponent<Props> = ({
             className="header__bar"
             icon="bars"
             size="2x"
-            onButtonClick={() => showSidebar(true)}
+            onButtonClick={handleOpenModal("sidebar")}
           />
 
           <h1 className="header__title">KEEP ME</h1>
@@ -82,14 +86,14 @@ export const HeaderBase: React.FunctionComponent<Props> = ({
                 text={auth.name ?? "Update profile"}
                 type="button"
                 className="user-box__link"
-                onClick={() => toggleUserModal(true)}
+                onClick={() => toggle("user", true)}
               />
 
               <IconButton
                 className="user-box__icon"
                 icon="users-cog"
                 size="lg"
-                onButtonClick={() => toggleUserModal(true)}
+                onButtonClick={handleOpenModal("user")}
               />
             </>
 
@@ -125,8 +129,8 @@ const mapDispatchToProps = (
   dispatch: ThunkDispatch<{}, {}, any>
 ): DispatchProps => ({
   startLogout: () => dispatch(startLogout()),
-  toggleUserModal: (isUserModalOpen: boolean) =>
-    dispatch(toggleUserModal(isUserModalOpen)),
+  toggle: (modal: ModalType, isOpen: boolean) =>
+    dispatch(toggle(modal, isOpen)),
 });
 
 const mapStateToProps = (state: Store): StateProps => {

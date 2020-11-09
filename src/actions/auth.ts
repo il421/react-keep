@@ -8,7 +8,6 @@ import {
   LogoutAction,
   Store,
   UpdateUser,
-  UserModalToggle,
 } from "../store/store.types";
 import { Action, Dispatch } from "redux";
 import { getMessage, Message } from "../common";
@@ -43,11 +42,6 @@ export const login = (
 
 export const logout = (): LogoutAction => ({
   type: AuthActionsTypes.logout,
-});
-
-export const toggleUserModal = (isUserModalOpen: boolean): UserModalToggle => ({
-  type: AuthActionsTypes.toggleModal,
-  isUserModalOpen,
 });
 
 export const startLogin = (

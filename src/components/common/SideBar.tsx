@@ -1,40 +1,125 @@
 import React from "react";
 import { IconButton, FlexBox } from "../ui-components";
 import "../../styles/components/common/_sidebar.scss";
-import { JustifyContent } from "../../common";
+import { JustifyContent, toggleArrayElement } from "../../common";
+import Tags from "../tags/Tags";
+import { ArchiveList } from "../archive/ArchiveList";
+import { Collaborators } from "../collaborators/Collaborators";
+import { ThunkDispatch } from "redux-thunk";
+import {
+  CollapseType,
+  Modal as ModalType,
+  ModalsStoreState,
+  Store,
+} from "../../store/store.types";
+import { setCollapsedOptionsInSidebar, toggle } from "../../actions/modals";
+import { connect } from "react-redux";
 
-export interface SideBarProp {
-  showBar: boolean;
-  setShowSidebar: (value: boolean) => void;
+interface SideBarProp {}
+
+interface StateProps {
+  modals: ModalsStoreState;
 }
 
-export class SideBar extends React.PureComponent<SideBarProp> {
-  render() {
-    return (
-      <>
-        <div className={`sidebar ${this.props.showBar && "sidebar--show"}`}>
-          <FlexBox justifyContent={JustifyContent.end}>
+interface DispatchProps {
+  toggle: (modal: ModalType, isOpen: boolean) => void;
+  setCollapsedOptionsInSidebar: (collapsed: CollapseType[]) => void;
+}
+
+export type SideBarBaseProps = SideBarProp & DispatchProps & StateProps;
+
+export const SideBarBase: React.FunctionComponent<SideBarBaseProps> = ({
+  modals,
+  toggle,
+  setCollapsedOptionsInSidebar,
+}) => {
+  const handleCloseModal = () => toggle("sidebar", false);
+  const handleSetCollapsed = (item: CollapseType) => () =>
+    setCollapsedOptionsInSidebar(toggleArrayElement(collapsed, item));
+
+  const { isOpen, collapsed } = modals.sidebar;
+  return (
+    <>
+      <div className={`sidebar ${isOpen && "sidebar--show"}`}>
+        <FlexBox justifyContent={JustifyContent.end}>
+          <IconButton
+            className="sidebar__close-button"
+            onButtonClick={handleCloseModal}
+            icon="times"
+            size="2x"
+          />
+        </FlexBox>
+
+        <div className="dashboard__sidebar">
+          <>
             <IconButton
-              className="sidebar__close-button"
-              onButtonClick={() => this.props.setShowSidebar(false)}
-              icon="times"
-              size="2x"
+              icon="tags"
+              text="Tags list"
+              onButtonClick={handleSetCollapsed(CollapseType.tags)}
+              className={
+                collapsed.includes(CollapseType.tags)
+                  ? "icon-button--collapsed"
+                  : undefined
+              }
             />
-          </FlexBox>
+            {collapsed.includes(CollapseType.tags) && <Tags />}
+          </>
 
-          {this.props.children}
+          <>
+            <IconButton
+              icon="archive"
+              text="Archived notes"
+              onButtonClick={handleSetCollapsed(CollapseType.arch)}
+              className={
+                collapsed.includes(CollapseType.arch)
+                  ? "icon-button--collapsed"
+                  : undefined
+              }
+            />
+            {collapsed.includes(CollapseType.arch) && <ArchiveList />}
+          </>
+          <>
+            <IconButton
+              icon="user-friends"
+              text="Collaborators"
+              onButtonClick={handleSetCollapsed(CollapseType.collaborators)}
+              className={
+                collapsed.includes(CollapseType.collaborators)
+                  ? "icon-button--collapsed"
+                  : undefined
+              }
+            />
+            {collapsed.includes(CollapseType.collaborators) && (
+              <Collaborators />
+            )}
+          </>
         </div>
+      </div>
 
-        {
-          // handle click on cover to close the sidebar
-          this.props.showBar && (
-            <div
-              className="sidebar__cover"
-              onClick={() => this.props.setShowSidebar(false)}
-            />
-          )
-        }
-      </>
-    );
-  }
-}
+      {
+        // handle click on cover to close the sidebar
+        isOpen && <div className="sidebar__cover" onClick={handleCloseModal} />
+      }
+    </>
+  );
+};
+
+const mapDispatchToProps = (
+  dispatch: ThunkDispatch<{}, {}, any>
+): DispatchProps => ({
+  toggle: (modal: ModalType, isOpen: boolean) =>
+    dispatch(toggle(modal, isOpen)),
+  setCollapsedOptionsInSidebar: (collapsed: CollapseType[]) =>
+    dispatch(setCollapsedOptionsInSidebar(collapsed)),
+});
+
+const mapStateToProps = (state: Store): StateProps => {
+  return {
+    modals: state.modals,
+  };
+};
+
+export const SideBar = connect<StateProps, DispatchProps, SideBarProp, Store>(
+  mapStateToProps,
+  mapDispatchToProps
+)(SideBarBase);

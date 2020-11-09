@@ -1,16 +1,18 @@
 import React from "react";
 import { shallow, ShallowWrapper } from "enzyme";
-import { SideBar, SideBarProp } from "../SideBar";
+import { SideBarBase, SideBarBaseProps } from "../SideBar";
+import { modalsReducerDefaultState } from "../../../reducers/modals";
 
-let props: SideBarProp, wrapper: ShallowWrapper<SideBarProp, any>;
+let props: SideBarBaseProps, wrapper: ShallowWrapper<SideBarBaseProps, any>;
 
 beforeEach(() => {
   props = {
-    showBar: false,
-    setShowSidebar: jest.fn(),
+    modals: modalsReducerDefaultState,
+    toggle: jest.fn(),
+    setCollapsedOptionsInSidebar: jest.fn(),
   };
 
-  wrapper = shallow<SideBarProp>(<SideBar {...props} />);
+  wrapper = shallow<SideBarBaseProps>(<SideBarBase {...props} />);
 });
 
 test("should render SideBar", () => {
@@ -20,12 +22,21 @@ test("should render SideBar", () => {
 
 test("should close side bar if click on close button", () => {
   wrapper.find("IconButton").at(0).prop<any>("onButtonClick")();
-  expect(props.setShowSidebar).toHaveBeenLastCalledWith(false);
+  expect(props.toggle).toHaveBeenLastCalledWith("sidebar", false);
 });
 
 test("should close side bar if click on cover", () => {
-  wrapper.setProps({ showBar: true });
+  wrapper = shallow<SideBarBaseProps>(
+    <SideBarBase
+      {...props}
+      modals={{
+        ...modalsReducerDefaultState,
+        sidebar: { collapsed: [], isOpen: true },
+      }}
+    />
+  );
+  wrapper.update();
   expect(wrapper.exists(".sidebar__cover")).toBeTruthy();
   wrapper.find(".sidebar__cover").simulate("click");
-  expect(props.setShowSidebar).toHaveBeenLastCalledWith(false);
+  expect(props.toggle).toHaveBeenLastCalledWith("sidebar", false);
 });

@@ -2,8 +2,13 @@ import React from "react";
 import { connect } from "react-redux";
 import Modal from "react-modal";
 import { AlignItems, JustifyContent, nameOf, Placeholders } from "../../common";
-import { AuthStoreState, Store, UpdateUser } from "../../store/store.types";
-import { toggleUserModal, updateUserData } from "../../actions/auth";
+import {
+  AuthStoreState,
+  ModalsStoreState,
+  Store,
+  UpdateUser,
+} from "../../store/store.types";
+import { updateUserData } from "../../actions/auth";
 import {
   ContentContainer,
   ConfirmButton,
@@ -15,6 +20,7 @@ import "../../styles/components/login/_user-form.scss";
 import { ThunkDispatch } from "redux-thunk";
 import { Field, FormSpy } from "react-final-form";
 import { FormApi } from "final-form";
+import { toggle } from "../../actions/modals";
 
 interface UserFormValues {
   firstName: string;
@@ -25,6 +31,7 @@ interface UserFormValues {
 
 interface StateProps {
   auth: AuthStoreState;
+  modals: ModalsStoreState;
 }
 
 interface FormSpyProps {
@@ -35,7 +42,7 @@ interface FormSpyProps {
 
 interface DispatchProps {
   updateUserData: (data: UpdateUser) => void;
-  toggleUserModal: (isUserModalOpen: boolean) => void;
+  toggle: (isOpen: boolean) => void;
 }
 
 interface UserFormModalProps {}
@@ -44,7 +51,8 @@ export type Props = StateProps & UserFormModalProps & DispatchProps;
 
 export const UserFormModal: React.FunctionComponent<Props> = ({
   updateUserData,
-  toggleUserModal,
+  toggle,
+  modals,
   auth,
 }) => {
   const nameOfField = nameOf<UserFormValues>();
@@ -70,8 +78,7 @@ export const UserFormModal: React.FunctionComponent<Props> = ({
     };
   };
 
-  const onToggleAction = (isUserModalOpen: boolean) => () =>
-    toggleUserModal(isUserModalOpen);
+  const onToggleAction = (isOpen: boolean) => () => toggle(isOpen);
 
   const getButtons = (isDisable: boolean) => {
     return (
@@ -110,7 +117,7 @@ export const UserFormModal: React.FunctionComponent<Props> = ({
 
   return (
     <Modal
-      isOpen={auth.isUserModalOpen}
+      isOpen={modals.user.isOpen}
       onRequestClose={onToggleAction(false)}
       className="user-modal"
       ariaHideApp={false}
@@ -221,6 +228,7 @@ export const UserFormModal: React.FunctionComponent<Props> = ({
 const mapStateToProps = (state: Store): StateProps => {
   return {
     auth: state.auth,
+    modals: state.modals,
   };
 };
 
@@ -228,8 +236,7 @@ const mapDispatchToProps = (
   dispatch: ThunkDispatch<{}, {}, any>
 ): DispatchProps => ({
   updateUserData: (data: UpdateUser) => dispatch(updateUserData(data)),
-  toggleUserModal: (isUserModalOpen: boolean) =>
-    dispatch(toggleUserModal(isUserModalOpen)),
+  toggle: (isOpen: boolean) => dispatch(toggle("user", isOpen)),
 });
 
 export default connect<StateProps, DispatchProps, UserFormModalProps, Store>(

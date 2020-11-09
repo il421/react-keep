@@ -7,6 +7,7 @@ export type Store = {
   filters: FiltersStoreState;
   tags: TagsStoreState[];
   collaborators: CollaboratorsStoreState[];
+  modals: ModalsStoreState;
 };
 
 // AUTH
@@ -15,12 +16,10 @@ export interface AuthStoreState {
   name: string | null;
   url: string | null;
   loading: boolean;
-  isUserModalOpen: boolean;
   email?: string;
 }
 
-export interface LoginAction
-  extends Omit<AuthStoreState, "loading" | "isUserModalOpen"> {
+export interface LoginAction extends Omit<AuthStoreState, "loading"> {
   type: AuthActionsTypes.login;
 }
 
@@ -30,11 +29,6 @@ export interface LogoutAction {
 
 export interface LoadingAction extends Pick<AuthStoreState, "loading"> {
   type: AuthActionsTypes.loading;
-}
-
-export interface UserModalToggle
-  extends Pick<AuthStoreState, "isUserModalOpen"> {
-  type: AuthActionsTypes.toggleModal;
 }
 
 export interface UserData
@@ -157,6 +151,12 @@ export interface RemoveCollaboratorAction {
   uid: string;
 }
 
+export enum CollaboratorsActionsTypes {
+  addCollaborator = "addCollaborator",
+  setCollaborators = "setCollaborators",
+  removeCollaborator = "removeCollaborator",
+}
+
 // TAGS
 export interface TagsStoreState extends Tag {}
 
@@ -207,8 +207,43 @@ export enum TagsActionsTypes {
   updateTag = "updateTag",
 }
 
-export enum CollaboratorsActionsTypes {
-  addCollaborator = "addCollaborator",
-  setCollaborators = "setCollaborators",
-  removeCollaborator = "removeCollaborator",
+// MODALS
+
+export interface ModalsStoreState {
+  user: {
+    isOpen: boolean;
+  };
+  sidebar: {
+    isOpen: boolean;
+    collapsed: CollapseType[];
+  };
+  note: {
+    isOpen: boolean;
+    type: NoteType;
+  };
+}
+
+export interface ToggleModalAction {
+  modal: Modal;
+  isOpen: boolean;
+  type: ModalActionsTypes.toggle;
+}
+
+export interface SetSidebarCollapseAction {
+  collapsed: CollapseType[];
+  type: ModalActionsTypes.setCollapsedOptions;
+}
+
+export type Modal = "user" | "note" | "sidebar";
+
+export enum ModalActionsTypes {
+  toggle = "toggle",
+  setNoteType = "setNoteType",
+  setCollapsedOptions = "setCollapsedOptions",
+}
+
+export enum CollapseType {
+  "tags",
+  "arch",
+  "collaborators",
 }
