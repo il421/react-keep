@@ -1,13 +1,12 @@
 import React from "react";
-import { QueryKeys, RouteActions } from "../../routers/Routing";
-import { stringify } from "query-string";
 import { AlignItems, JustifyContent } from "../../common";
-import { IconButton, FlexBox } from "../ui-components";
+import { FlexBox, IconButton } from "../ui-components";
 import "../../styles/components/common/_controllers.scss";
+import { NoteType } from "../notes";
 
 interface Controllers extends Partial<Pick<HTMLElement, "className">> {
   isMobile?: boolean;
-  openDialog: (query: string) => void;
+  openDialog: (type: NoteType) => void;
 }
 
 export const Controllers: React.FunctionComponent<Controllers> = ({
@@ -15,11 +14,7 @@ export const Controllers: React.FunctionComponent<Controllers> = ({
   isMobile = false,
   openDialog,
 }) => {
-  const getQuery = (key: keyof typeof QueryKeys) => {
-    return stringify({
-      [key]: RouteActions.add,
-    });
-  };
+  const handleOnClick = (type: NoteType) => () => openDialog(type);
 
   return (
     <div
@@ -34,21 +29,21 @@ export const Controllers: React.FunctionComponent<Controllers> = ({
       >
         <IconButton
           className="controllers__text"
-          onButtonClick={() => openDialog(getQuery(QueryKeys.text))}
+          onButtonClick={handleOnClick(NoteType.text)}
           icon="align-left"
           size="2x"
         />
 
         <IconButton
           className="controllers__list"
-          onButtonClick={() => openDialog(getQuery(QueryKeys.list))}
+          onButtonClick={handleOnClick(NoteType.list)}
           icon="check-square"
           size="2x"
         />
 
         <IconButton
           className="controllers__image"
-          onButtonClick={() => openDialog(getQuery(QueryKeys.image))}
+          onButtonClick={handleOnClick(NoteType.image)}
           icon="image"
           size="2x"
         />

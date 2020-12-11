@@ -219,7 +219,8 @@ export interface ModalsStoreState {
   };
   note: {
     isOpen: boolean;
-    type: NoteType;
+    noteType: NoteType;
+    id: string | null;
   };
 }
 
@@ -234,11 +235,18 @@ export interface SetSidebarCollapseAction {
   type: ModalActionsTypes.setCollapsedOptions;
 }
 
+export interface ToggleCurrentNoteAction {
+  noteType: NoteType;
+  isOpen: boolean;
+  type: ModalActionsTypes.toggleCurrentNote;
+  id: null | string;
+}
+
 export type Modal = "user" | "note" | "sidebar";
 
 export enum ModalActionsTypes {
   toggle = "toggle",
-  setNoteType = "setNoteType",
+  toggleCurrentNote = "toggleCurrentNote",
   setCollapsedOptions = "setCollapsedOptions",
 }
 

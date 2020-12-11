@@ -19,14 +19,11 @@ import "../../styles/components/header/_logout.scss";
 import "../../styles/components/header/_user-box.scss";
 import "../../styles/components/common/_visibility.scss";
 import { ThunkDispatch } from "redux-thunk";
-import { History } from "history";
 import Modal from "react-modal";
-import { ConfirmDialog } from "../notes";
-import { toggle } from "../../actions/modals";
+import { ConfirmDialog, NoteType } from "../notes";
+import { toggleCurrentNote, toggle } from "../../actions/modals";
 
-export interface HeaderProps {
-  history: History;
-}
+export interface HeaderProps {}
 
 interface StateProps {
   auth: AuthStoreState;
@@ -34,6 +31,7 @@ interface StateProps {
 
 interface DispatchProps {
   startLogout: () => void;
+  toggleCurrentNote: (noteType: NoteType, isOpen: boolean, id?: string) => void;
   toggle: (modal: ModalType, isOpen: boolean) => void;
 }
 
@@ -43,7 +41,7 @@ export const HeaderBase: React.FunctionComponent<HeaderBaseProps> = ({
   startLogout,
   auth,
   toggle,
-  history,
+  toggleCurrentNote,
 }) => {
   const [isLoginOut, setIsLogout] = useState<boolean>(false);
   const handleOpenModal = (model: ModalType) => () => toggle(model, true);
@@ -65,9 +63,7 @@ export const HeaderBase: React.FunctionComponent<HeaderBaseProps> = ({
 
           <Controllers
             className="hide-for-mobile"
-            openDialog={(query) =>
-              history.push(`${history.location.pathname}?${query}`)
-            }
+            openDialog={(type: NoteType) => toggleCurrentNote(type, true)}
           />
 
           <div className="header__user-box user-box">
@@ -131,6 +127,8 @@ const mapDispatchToProps = (
   startLogout: () => dispatch(startLogout()),
   toggle: (modal: ModalType, isOpen: boolean) =>
     dispatch(toggle(modal, isOpen)),
+  toggleCurrentNote: (noteType: NoteType, isOpen: boolean, id?: string) =>
+    dispatch(toggleCurrentNote(noteType, isOpen, id)),
 });
 
 const mapStateToProps = (state: Store): StateProps => {

@@ -135,4 +135,4 @@ firebase.auth().onAuthStateChanged(async (user: User | null) => {
   }
 });
 
-serviceWorker.unregister();
+// serviceWorker.register();

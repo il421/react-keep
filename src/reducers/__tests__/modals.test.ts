@@ -5,9 +5,11 @@ import {
   CollapseType,
   ModalActionsTypes,
   ModalsStoreState,
+  ToggleCurrentNoteAction,
   SetSidebarCollapseAction,
   ToggleModalAction,
 } from "../../store/store.types";
+import { NoteType } from "../../components/notes";
 
 test("should toggle modals correctly", () => {
   const action: ToggleModalAction = {
@@ -36,5 +38,24 @@ test("should set collapsed items in sidebar modal", () => {
   expect(state.sidebar).toEqual({
     collapsed: [CollapseType.arch],
     isOpen: false,
+  });
+});
+
+test("should set note type", () => {
+  const action: ToggleCurrentNoteAction = {
+    type: ModalActionsTypes.toggleCurrentNote,
+    noteType: NoteType.image,
+    isOpen: true,
+    id: "1",
+  };
+
+  const state = modalsReducer(
+    modalsReducerDefaultState,
+    action
+  ) as ModalsStoreState;
+  expect(state.note).toEqual({
+    noteType: NoteType.image,
+    isOpen: true,
+    id: "1",
   });
 });

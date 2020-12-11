@@ -1,6 +1,7 @@
 import {
   ModalActionsTypes,
   ModalsStoreState,
+  ToggleCurrentNoteAction,
   SetSidebarCollapseAction,
   ToggleModalAction,
 } from "../store/store.types";
@@ -16,11 +17,15 @@ export const modalsReducerDefaultState: ModalsStoreState = {
   },
   note: {
     isOpen: false,
-    type: NoteType.text,
+    noteType: NoteType.text,
+    id: null,
   },
 };
 
-type ModalsAction = ToggleModalAction | SetSidebarCollapseAction;
+type ModalsAction =
+  | ToggleModalAction
+  | SetSidebarCollapseAction
+  | ToggleCurrentNoteAction;
 
 export default (
   state: ModalsStoreState = modalsReducerDefaultState,
@@ -42,6 +47,16 @@ export default (
         sidebar: {
           ...state.sidebar,
           collapsed: action.collapsed,
+        },
+      };
+
+    case ModalActionsTypes.toggleCurrentNote:
+      return {
+        ...state,
+        note: {
+          isOpen: action.isOpen,
+          noteType: action.noteType,
+          id: action.id,
         },
       };
 

@@ -4,7 +4,11 @@ import {
   ModalsStoreState,
 } from "../../store/store.types";
 import { NoteType } from "../../components/notes";
-import { setCollapsedOptionsInSidebar, toggle } from "../modals";
+import {
+  setCollapsedOptionsInSidebar,
+  toggleCurrentNote,
+  toggle,
+} from "../modals";
 
 export const defaultModalsState = {
   user: {
@@ -16,7 +20,8 @@ export const defaultModalsState = {
   },
   note: {
     isOpen: false,
-    type: NoteType.text,
+    noteType: NoteType.text,
+    id: null,
   },
 } as ModalsStoreState;
 
@@ -34,5 +39,15 @@ test("should generate set collapsed action object correctly", () => {
   expect(action).toEqual({
     type: ModalActionsTypes.setCollapsedOptions,
     collapsed: [CollapseType.arch],
+  });
+});
+
+test("should generate set note type action object correctly", () => {
+  const action = toggleCurrentNote(NoteType.list, true);
+  expect(action).toEqual({
+    type: ModalActionsTypes.toggleCurrentNote,
+    noteType: NoteType.list,
+    isOpen: true,
+    id: null,
   });
 });

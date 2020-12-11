@@ -1,15 +1,13 @@
 import React from "react";
 import { ToastContainer } from "react-toastify";
-import { History, Path } from "history";
+import { History } from "history";
 import { JustifyContent } from "../../common";
-import { Header } from "./Header";
+import { Header, HeaderProps } from "./Header";
 import { SideBar } from "./SideBar";
 import { Controllers } from "./Controllers";
 import UserFormModal from "../login/UserFormModal";
 import "../../styles/components/common/_dashboard.scss";
 import "../../styles/components/notes/_note-modal.scss";
-import { QueryKeys } from "../../routers/Routing";
-import { stringify } from "query-string";
 import {
   NoteType,
   ImageNoteFormModal,
@@ -18,38 +16,24 @@ import {
 } from "../notes";
 import { FlexBox } from "../ui-components";
 import { NotesList } from "../notes/NotesList";
+import { connect } from "react-redux";
+import { Store } from "../../store/store.types";
+import { ThunkDispatch } from "redux-thunk";
+import { toggleCurrentNote } from "../../actions/modals";
 
 export interface DashboardPageProps {
   history: History;
 }
 
-export const onNoteSelected = (options: {
-  type: NoteType;
-  id: string;
-  pathname: string;
-  push: (path: Path) => void;
-}) => {
-  let key: keyof typeof QueryKeys;
-  const { type, id, pathname, push } = options;
-  switch (type) {
-    case NoteType.text:
-      key = QueryKeys.text;
-      break;
-    case NoteType.list:
-      key = QueryKeys.list;
-      break;
-    default:
-      key = QueryKeys.image;
-  }
+interface DispatchProps {
+  toggleCurrentNote: (noteType: NoteType, isOpen: boolean, id?: string) => void;
+}
 
-  const query = stringify({
-    [key]: id,
-  });
-  push(`${pathname}?${query}`);
-};
+export type DashboardPageBaseProps = DashboardPageProps & DispatchProps;
 
-export const DashboardPage: React.FunctionComponent<DashboardPageProps> = ({
+export const DashboardPageBase: React.FunctionComponent<DashboardPageBaseProps> = ({
   history,
+  toggleCurrentNote,
 }): JSX.Element => {
   return (
     <FlexBox
@@ -57,15 +41,10 @@ export const DashboardPage: React.FunctionComponent<DashboardPageProps> = ({
       justifyContent={JustifyContent.spaceBetween}
       className="dashboard"
     >
-      <Header history={history} />
+      <Header />
       <NotesList
         onNoteSelected={(type: NoteType, id: string) =>
-          onNoteSelected({
-            type,
-            id,
-            pathname: history.location.pathname,
-            push: history.push,
-          })
+          toggleCurrentNote(type, true, id)
         }
       />
 
@@ -73,15 +52,26 @@ export const DashboardPage: React.FunctionComponent<DashboardPageProps> = ({
       <TextNoteFormModal history={history} />
       <ListNoteFormModal history={history} />
       <ImageNoteFormModal history={history} />
+
       <UserFormModal />
       <Controllers
         isMobile
-        openDialog={(query) =>
-          history.push(`${history.location.pathname}?${query}`)
-        }
+        openDialog={(type: NoteType) => toggleCurrentNote(type, true)}
       />
 
       <ToastContainer autoClose={2000} />
     </FlexBox>
   );
 };
+
+const mapDispatchToProps = (
+  dispatch: ThunkDispatch<{}, {}, any>
+): DispatchProps => ({
+  toggleCurrentNote: (noteType: NoteType, isOpen: boolean, id?: string) =>
+    dispatch(toggleCurrentNote(noteType, isOpen, id)),
+});
+
+export const DashboardPage = connect<DispatchProps, HeaderProps, Store>(
+  undefined,
+  mapDispatchToProps
+)(DashboardPageBase);

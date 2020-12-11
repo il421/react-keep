@@ -2,7 +2,7 @@
 
 exports[`should render DashboardPage correctly 1`] = `
 "<FlexBox vertical={true} justifyContent=\\"space-between\\" className=\\"dashboard\\">
-  <Connect(HeaderBase) history={{...}} />
+  <Connect(HeaderBase) />
   <Connect(NotesListBase) onNoteSelected={[Function: onNoteSelected]} />
   <Connect(SideBarBase) />
   <TextNoteFormModal history={{...}} />
