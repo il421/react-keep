@@ -5,7 +5,7 @@ Ilya Suglobov
 The app is designed for the personal usage. It is my React version
 of Google Keep.
 Everyone can use on either mobile phone or desktop:
-https://my-keep-type.firebaseio.com
+https://my-keep-type.web.app/
 
 ## Installation
 
