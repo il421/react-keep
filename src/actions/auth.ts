@@ -1,5 +1,10 @@
-import { firebase, storage } from "../firebase/firebase";
 import { toast } from "react-toastify";
+import { Action, Dispatch } from "redux";
+import { ThunkAction } from "redux-thunk";
+
+import { getMessage, Message } from "../common";
+import { Collections } from "../firebase/Collections";
+import { firebase, storage } from "../firebase/firebase";
 import {
   AuthActionsTypes,
   AuthStoreState,
@@ -7,15 +12,11 @@ import {
   LoginAction,
   LogoutAction,
   Store,
-  UpdateUser,
+  UpdateUser
 } from "../store/store.types";
-import { Action, Dispatch } from "redux";
-import { getMessage, Message } from "../common";
-import { ThunkAction } from "redux-thunk";
-import { Collections } from "../firebase/Collections";
+import { setCollaborators } from "./collaborators";
 import { setNotes } from "./notes";
 import { setTags } from "./tags";
-import { setCollaborators } from "./collaborators";
 
 const initStorageAvatarRef = (name: string): firebase.storage.Reference => {
   const ref = storage.ref();
@@ -24,24 +25,21 @@ const initStorageAvatarRef = (name: string): firebase.storage.Reference => {
 
 export const loading = (loading: boolean): LoadingAction => ({
   type: AuthActionsTypes.loading,
-  loading,
+  loading
 });
 
-export const login = (
-  uid: string,
-  name: string | null,
-  url: string | null,
-  email?: string
-): LoginAction => ({
+export const login = (data: {
+  uid: string;
+  name: string | null;
+  url: string | null;
+  email?: string;
+}): LoginAction => ({
   type: AuthActionsTypes.login,
-  uid,
-  name,
-  url,
-  email,
+  data
 });
 
 export const logout = (): LogoutAction => ({
-  type: AuthActionsTypes.logout,
+  type: AuthActionsTypes.logout
 });
 
 export const startLogin = (
@@ -53,7 +51,8 @@ export const startLogin = (
       dispatch(loading(true));
       await firebase.auth().signInWithEmailAndPassword(email, password);
     } catch (e) {
-      console.log(e);
+      // eslint-disable-next-line no-console
+      console.warn(e);
       toast.error(e.message);
       dispatch(loading(false));
     } finally {
@@ -71,7 +70,8 @@ export const startSignUp = (
       dispatch(loading(true));
       await firebase.auth().createUserWithEmailAndPassword(email, password);
     } catch (e) {
-      console.log(e);
+      // eslint-disable-next-line no-console
+      console.warn(e);
       toast.error(e.message);
       dispatch(loading(false));
     } finally {
@@ -89,7 +89,8 @@ export const startLogout = (): ThunkAction<any, Store, any, Action> => {
       dispatch(setTags([]));
       dispatch(setCollaborators([]));
     } catch (e) {
-      console.log(e);
+      // eslint-disable-next-line no-console
+      console.warn(e);
       toast.error(e.message);
     }
   };
@@ -118,13 +119,16 @@ export const updateUserData = (
       if (currentUser) {
         await currentUser.updateProfile({
           displayName: data.displayName,
-          photoURL,
+          photoURL
         });
-        dispatch(login(auth.uid, data.displayName, photoURL));
+        dispatch(
+          login({ uid: auth.uid, name: data.displayName, url: photoURL })
+        );
         toast.success(getMessage(Message.successUpdated));
       }
     } catch (e) {
-      console.log(e);
+      // eslint-disable-next-line no-console
+      console.warn(e);
       toast.error(e.message);
     } finally {
       dispatch(loading(false));

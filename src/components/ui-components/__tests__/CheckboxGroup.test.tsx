@@ -1,5 +1,6 @@
-import React from "react";
 import { mount, ReactWrapper } from "enzyme";
+import React from "react";
+
 import { CheckboxGroup, CheckboxGroupProps } from "../CheckboxGroup";
 
 let props: CheckboxGroupProps, wrapper: ReactWrapper<CheckboxGroupProps, {}>;
@@ -10,14 +11,14 @@ beforeEach(() => {
     options: [
       {
         id: "id1",
-        value: "1",
+        value: "1"
       },
       {
         id: "id2",
-        value: "2",
-      },
+        value: "2"
+      }
     ],
-    onChange: jest.fn(),
+    onChange: jest.fn()
   };
   wrapper = mount<CheckboxGroupProps>(<CheckboxGroup {...props} />);
 });

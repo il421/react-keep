@@ -1,4 +1,5 @@
 import React, { CSSProperties, MouseEventHandler } from "react";
+
 import "../../styles/components/common/_content-conteiner.scss";
 
 export interface ContentContainerProps

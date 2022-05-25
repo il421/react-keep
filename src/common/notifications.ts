@@ -8,10 +8,10 @@ export enum Message {
   noteRemoved,
   noteNotFound,
   userNotFound,
-  usersNotFound,
+  usersNotFound
 }
 
-export const getMessage = (message: Message, data?: string | number) => {
+export const getMessage = (message: Message) => {
   const notifications = {
     [Message.successLoggedIn]: "Logged in successfully",
     [Message.successLoggedOut]: "Logged out successfully",
@@ -22,7 +22,7 @@ export const getMessage = (message: Message, data?: string | number) => {
     [Message.noteRemoved]: "The note has been removed",
     [Message.noteNotFound]: "The note is not found",
     [Message.userNotFound]: "The user is not found",
-    [Message.usersNotFound]: "The users is not found",
+    [Message.usersNotFound]: "The users is not found"
   };
 
   return notifications[message];

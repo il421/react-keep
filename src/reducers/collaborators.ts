@@ -3,7 +3,7 @@ import {
   CollaboratorsActionsTypes,
   CollaboratorsStoreState,
   RemoveCollaboratorAction,
-  SetCollaboratorsAction,
+  SetCollaboratorsAction
 } from "../store/store.types";
 
 export const collaboratorsReducerDefaultState: CollaboratorsStoreState[] = [];
@@ -13,7 +13,7 @@ type CollaboratorsAction =
   | AddCollaboratorAction
   | RemoveCollaboratorAction;
 
-export default (
+export const collaboratorsReducer = (
   state: CollaboratorsStoreState[] = collaboratorsReducerDefaultState,
   action: CollaboratorsAction
 ) => {
@@ -25,7 +25,7 @@ export default (
       return action.collaborators ?? [];
 
     case CollaboratorsActionsTypes.removeCollaborator:
-      return state.filter((coll) => coll.uid !== action.uid);
+      return state.filter(coll => coll.uid !== action.uid);
 
     default:
       return state;

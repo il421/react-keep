@@ -1,8 +1,9 @@
-import React from "react";
 import { mount, ReactWrapper } from "enzyme";
-import TagsPickerField from "../TagsPickerField";
-import { tags } from "../../../../testData/tags";
+import React from "react";
 import { Form } from "react-final-form";
+
+import { tags } from "../../../../testData/tags";
+import TagsPickerField from "../TagsPickerField";
 
 test("should render TagsPickerField correctly", () => {
   const wrapper: ReactWrapper = mount(

@@ -1,12 +1,14 @@
-import { collaborators, user } from "../../testData/users";
-import { ListItem, Note, NotesActionsTypes } from "../../store/store.types";
 import configureMockStore from "redux-mock-store";
 import thunk from "redux-thunk";
-import { newNote, notes, updatedNote } from "../../testData/notes";
-import database from "../../firebase/firebase";
-import { Collections } from "../../firebase/Collections";
 import { v4 as uuidv4 } from "uuid";
 
+import { NoteType } from "../../components/notes";
+import { Collections } from "../../firebase/Collections";
+import database from "../../firebase/firebase";
+import { ListItem, Note, NotesActionsTypes } from "../../store/store.types";
+import { newNote, notes, updatedNote } from "../../testData/notes";
+import { tags } from "../../testData/tags";
+import { collaborators, user } from "../../testData/users";
 import {
   addNote,
   addNoteToCollaborators,
@@ -25,23 +27,22 @@ import {
   removeTagFromNotes,
   setNotes,
   updateCollaboratorsNote,
-  updateNote,
+  updateNote
 } from "../notes";
-import { tags } from "../../testData/tags";
-import { NoteType } from "../../components/notes";
 
 const defaultState = {
   auth: {
     uid: user.uid,
     name: user.firstName,
     url: user.url,
-    loading: false,
+    loading: false
   },
-  notes: notes,
+  notes
 };
+
 const createMockStore = configureMockStore([thunk]);
 
-beforeAll((done) => {
+beforeAll(done => {
   // to firestore format data
   notes.forEach((note: Note) => {
     // set data to test firestore
@@ -56,15 +57,15 @@ beforeAll((done) => {
   });
 });
 
-afterAll((done) => {
-  [...collaborators.map((c) => c.uid), user.uid].forEach((uid) =>
+afterAll(done => {
+  [...collaborators.map(c => c.uid), user.uid].forEach(uid =>
     database
       .collection(Collections.users)
       .doc(uid)
       .collection(Collections.notes)
       .get()
-      .then((res) => {
-        res.forEach(async (note) => {
+      .then(res => {
+        res.forEach(async note => {
           await note.ref.delete();
           done();
         });
@@ -77,17 +78,17 @@ describe("Setting", () => {
     const action = setNotes(notes);
     expect(action).toEqual({
       type: NotesActionsTypes.setNotes,
-      notes,
+      notes
     });
   });
 
-  test("should fetch the notes from DB", (done) => {
+  test("should fetch the notes from DB", done => {
     const store = createMockStore(defaultState);
     store.dispatch<any>(handleSetNotes()).then(() => {
       const actions = store.getActions();
       expect(actions[0]).toEqual({
         type: NotesActionsTypes.setNotes,
-        notes,
+        notes
       });
       done();
     });
@@ -99,11 +100,11 @@ describe("Adding", () => {
     const action = addNote(notes[0]);
     expect(action).toEqual({
       type: NotesActionsTypes.addNote,
-      note: notes[0],
+      note: notes[0]
     });
   });
 
-  test("should add a note to DB and store", (done) => {
+  test("should add a note to DB and store", done => {
     const store = createMockStore(defaultState);
     let id: string | undefined;
     let createdAt: number | undefined;
@@ -120,8 +121,8 @@ describe("Adding", () => {
           id,
           createdAt,
           updatedAt,
-          ...newNote,
-        },
+          ...newNote
+        }
       });
 
       database
@@ -130,19 +131,19 @@ describe("Adding", () => {
         .collection(Collections.notes)
         .doc(id)
         .get()
-        .then((doc) => {
+        .then(doc => {
           if (doc.exists) {
             expect(doc.data()).toEqual({
               createdAt,
               updatedAt,
-              ...newNote,
+              ...newNote
             });
           }
           done();
         });
     });
   });
-  test("should not include empty lines in a list note when add", (done) => {
+  test("should not include empty lines in a list note when add", done => {
     const store = createMockStore(defaultState);
     let id: string | undefined;
     const listNote = {
@@ -151,8 +152,8 @@ describe("Adding", () => {
       content: [
         { id: "1", checked: true, content: "content" },
         { id: "2", checked: false, content: "" },
-        { id: "3", checked: true, content: "   " },
-      ],
+        { id: "3", checked: true, content: "   " }
+      ]
     };
     store.dispatch<any>(handleAddNote(listNote)).then(() => {
       const actions = store.getActions();
@@ -164,7 +165,7 @@ describe("Adding", () => {
         .collection(Collections.notes)
         .doc(id)
         .get()
-        .then((doc) => {
+        .then(doc => {
           if (doc.exists) {
             expect(((doc.data() as Note).content as ListItem[]).length).toBe(1);
           }
@@ -179,18 +180,18 @@ describe("Removing", () => {
     const action = removeNote(notes[0].id);
     expect(action).toEqual({
       type: NotesActionsTypes.removeNote,
-      id: notes[0].id,
+      id: notes[0].id
     });
   });
 
-  test("should remove a note to DB and store by id", (done) => {
+  test("should remove a note to DB and store by id", done => {
     const store = createMockStore(defaultState);
 
     store.dispatch<any>(handleRemoveNote(notes[0].id)).then(() => {
       const actions = store.getActions();
       expect(actions[0]).toEqual({
         type: NotesActionsTypes.removeNote,
-        id: notes[0].id,
+        id: notes[0].id
       });
 
       database
@@ -199,7 +200,7 @@ describe("Removing", () => {
         .collection(Collections.notes)
         .doc(notes[0].id)
         .get()
-        .then((doc) => {
+        .then(doc => {
           expect(doc.exists).toBe(false);
           done();
         });
@@ -213,11 +214,11 @@ describe("Updating", () => {
     expect(action).toEqual({
       type: NotesActionsTypes.updateNote,
       id: notes[0].id,
-      updates: { ...notes[0], title: "test" },
+      updates: { ...notes[0], title: "test" }
     });
   });
 
-  test("should not include empty lines in a list note when update", (done) => {
+  test("should not include empty lines in a list note when update", done => {
     const store = createMockStore(defaultState);
     // eslint-disable-next-line unused-imports/no-unused-vars
     const { id, ...rest } = notes[1];
@@ -225,8 +226,8 @@ describe("Updating", () => {
       ...rest,
       content: [
         ...(rest.content as ListItem[]),
-        { content: "   ", id: "123", checked: false },
-      ],
+        { content: "   ", id: "123", checked: false }
+      ]
     };
 
     store.dispatch<any>(handleUpdateNote(id, updates)).then(() => {
@@ -236,7 +237,7 @@ describe("Updating", () => {
         .collection(Collections.notes)
         .doc(notes[1].id)
         .get()
-        .then((doc) => {
+        .then(doc => {
           if (doc.exists) {
             expect(((doc.data() as Note).content as ListItem[]).length).toBe(2);
           }
@@ -245,7 +246,7 @@ describe("Updating", () => {
     });
   });
 
-  test("should update a note in DB and store by id", (done) => {
+  test("should update a note in DB and store by id", done => {
     const store = createMockStore(defaultState);
 
     store.dispatch<any>(handleUpdateNote(notes[0].id, updatedNote)).then(() => {
@@ -253,7 +254,7 @@ describe("Updating", () => {
       expect(actions[0]).toEqual({
         type: NotesActionsTypes.updateNote,
         id: notes[0].id,
-        updates: updatedNote,
+        updates: updatedNote
       });
 
       database
@@ -262,7 +263,7 @@ describe("Updating", () => {
         .collection(Collections.notes)
         .doc(notes[0].id)
         .get()
-        .then((doc) => {
+        .then(doc => {
           if (doc.exists) {
             expect((doc.data() as Note).content).toBe(updatedNote.content);
             expect((doc.data() as Note).color).toBe(updatedNote.color);
@@ -280,18 +281,18 @@ describe("Importance", () => {
     const action = changeImportance(notes[0].id);
     expect(action).toEqual({
       type: NotesActionsTypes.toggleImportance,
-      id: notes[0].id,
+      id: notes[0].id
     });
   });
 
-  test("should setup change note importance tag in DB and store by id", (done) => {
+  test("should setup change note importance tag in DB and store by id", done => {
     const store = createMockStore(defaultState);
 
     store.dispatch<any>(changeNoteImportance(notes[0].id)).then(() => {
       const actions = store.getActions();
       expect(actions[0]).toEqual({
         type: NotesActionsTypes.toggleImportance,
-        id: notes[0].id,
+        id: notes[0].id
       });
 
       database
@@ -300,7 +301,7 @@ describe("Importance", () => {
         .collection(Collections.notes)
         .doc(notes[0].id)
         .get()
-        .then((doc) => {
+        .then(doc => {
           if (doc.exists) {
             expect((doc.data() as Note).important).toBe(true);
           }
@@ -315,18 +316,18 @@ describe("Archiving", () => {
     const action = changeArchive(notes[0].id);
     expect(action).toEqual({
       type: NotesActionsTypes.toggleArchive,
-      id: notes[0].id,
+      id: notes[0].id
     });
   });
 
-  test("should setup change note archive status tag in DB and store by id", (done) => {
+  test("should setup change note archive status tag in DB and store by id", done => {
     const store = createMockStore(defaultState);
 
     store.dispatch<any>(changeNoteArchiveStatus(notes[0].id)).then(() => {
       const actions = store.getActions();
       expect(actions[0]).toEqual({
         type: NotesActionsTypes.toggleArchive,
-        id: notes[0].id,
+        id: notes[0].id
       });
 
       database
@@ -335,7 +336,7 @@ describe("Archiving", () => {
         .collection(Collections.notes)
         .doc(notes[0].id)
         .get()
-        .then((doc) => {
+        .then(doc => {
           if (doc.exists) {
             expect((doc.data() as Note).archive).toBe(true);
           }
@@ -350,11 +351,11 @@ describe("Tagging", () => {
     const action = removeTag(tags[0].id);
     expect(action).toEqual({
       type: NotesActionsTypes.removeTagFromNote,
-      tagId: tags[0].id,
+      tagId: tags[0].id
     });
   });
 
-  test("should remove tag from note in DB and store by id", (done) => {
+  test("should remove tag from note in DB and store by id", done => {
     const store = createMockStore(defaultState);
 
     database
@@ -363,7 +364,7 @@ describe("Tagging", () => {
       .collection(Collections.notes)
       .doc(notes[0].id)
       .get()
-      .then((doc) => {
+      .then(doc => {
         if (doc.exists) {
           expect((doc.data() as Note).tags.length).toBe(1);
           expect((doc.data() as Note).tags[0]).toBe(tags[0].id);
@@ -375,7 +376,7 @@ describe("Tagging", () => {
       const actions = store.getActions();
       expect(actions[0]).toEqual({
         type: NotesActionsTypes.removeTagFromNote,
-        tagId: tags[0].id,
+        tagId: tags[0].id
       });
 
       database
@@ -384,7 +385,7 @@ describe("Tagging", () => {
         .collection(Collections.notes)
         .doc(notes[0].id)
         .get()
-        .then((doc) => {
+        .then(doc => {
           if (doc.exists) {
             expect((doc.data() as Note).tags.length).toBe(0);
           }
@@ -400,35 +401,35 @@ describe("Collaborators", () => {
     tags: [],
     important: false,
     archive: false,
-    createdBy: user.uid,
+    createdBy: user.uid
   };
 
   test("handleCollaboratorsPromises should resolve all promises", async () => {
     const result = await handleCollaboratorsPromises({
       collaborators: ["1", "2"],
-      callback: (uid) =>
-        new Promise((resolve) => {
+      callback: uid =>
+        new Promise(resolve => {
           resolve(uid);
-        }),
+        })
     });
 
     expect(result).toEqual(["1", "2"]);
   });
 
-  test("should add note to collaborators", async (done) => {
+  test("should add note to collaborators", async done => {
     const docIdAdd = uuidv4();
 
     // added note to collaborators
     await addNoteToCollaborators(notes[0], user.uid, docIdAdd);
     // check if added
-    notes[0].collaborators!.forEach((uid) => {
+    notes[0].collaborators!.forEach(uid => {
       database
         .collection(Collections.users)
         .doc(uid)
         .collection(Collections.notes)
         .doc(docIdAdd)
         .get()
-        .then((doc) => {
+        .then(doc => {
           if (doc.exists) {
             expect(doc.data()).toEqual(collNote);
           }
@@ -437,19 +438,19 @@ describe("Collaborators", () => {
     });
   });
 
-  test("should remove notes from collaborators as owner", async (done) => {
+  test("should remove notes from collaborators as owner", async done => {
     // added note to collaborators
     const docIdRemove = uuidv4();
     await addNoteToCollaborators(notes[0], user.uid, docIdRemove);
     // check if added
-    notes[0].collaborators!.forEach((uid) => {
+    notes[0].collaborators!.forEach(uid => {
       database
         .collection(Collections.users)
         .doc(uid)
         .collection(Collections.notes)
         .doc(docIdRemove)
         .get()
-        .then((doc) => {
+        .then(doc => {
           if (doc.exists) {
             expect(doc.data()).toEqual(collNote);
           }
@@ -463,21 +464,21 @@ describe("Collaborators", () => {
     );
 
     // check if removed
-    notes[0].collaborators!.forEach((uid) => {
+    notes[0].collaborators!.forEach(uid => {
       database
         .collection(Collections.users)
         .doc(uid)
         .collection(Collections.notes)
         .doc(docIdRemove)
         .get()
-        .then((doc) => {
+        .then(doc => {
           expect(doc.exists).toBeFalsy();
           done();
         });
     });
   });
 
-  test("should remove notes from collaborators as collaborator", async (done) => {
+  test("should remove notes from collaborators as collaborator", async done => {
     const docIdR = uuidv4();
 
     // added note to collaborators
@@ -496,7 +497,7 @@ describe("Collaborators", () => {
       .collection(Collections.notes)
       .doc(docIdR)
       .get()
-      .then((doc) => {
+      .then(doc => {
         if (doc.exists) {
           expect((doc.data() as Note).collaborators!.length).toBe(1);
           expect((doc.data() as Note).collaborators![0]).toBe(
@@ -507,7 +508,7 @@ describe("Collaborators", () => {
       });
   });
 
-  test("should update a note from collaborators", async (done) => {
+  test("should update a note from collaborators", async done => {
     const docIdR = uuidv4();
 
     // added note to collaborators
@@ -531,7 +532,7 @@ describe("Collaborators", () => {
       .collection(Collections.notes)
       .doc(docIdR)
       .get()
-      .then((doc) => {
+      .then(doc => {
         if (doc.exists) {
           expect((doc.data() as Note).title).toBe("OOO");
         }
@@ -544,7 +545,7 @@ describe("Collaborators", () => {
       .collection(Collections.notes)
       .doc(docIdR)
       .get()
-      .then((doc) => {
+      .then(doc => {
         if (doc.exists) {
           expect((doc.data() as Note).title).toBe("OOO");
           done();

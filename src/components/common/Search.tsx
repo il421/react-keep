@@ -1,10 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Dispatch } from "redux";
+
 import { setSearchFilter } from "../../actions/filters";
 import { Placeholders } from "../../common";
-import "../../styles/components/header/_search.scss";
-import { Dispatch } from "redux";
 import { SearchFilterAction } from "../../store/store.types";
+import "../../styles/components/header/_search.scss";
 
 interface SearchProps {
   wrapperClass?: string;
@@ -23,7 +24,7 @@ export class SearchBase extends React.PureComponent<Props> {
         <input
           className="search"
           placeholder={Placeholders.search}
-          onChange={(evt) =>
+          onChange={evt =>
             this.props.setSearchFilter((evt.target as HTMLInputElement).value)
           }
         />
@@ -36,7 +37,7 @@ const mapDispatchToProps = (
   dispatch: Dispatch<SearchFilterAction>
 ): DispatchProps => {
   return {
-    setSearchFilter: (value: string) => dispatch(setSearchFilter(value)),
+    setSearchFilter: (value: string) => dispatch(setSearchFilter(value))
   };
 };
 

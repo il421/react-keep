@@ -8,7 +8,7 @@ import {
   SetNotesAction,
   ToggleArchiveAction,
   ToggleImportantAction,
-  UpdateNoteAction,
+  UpdateNoteAction
 } from "../../store/store.types";
 import { notes } from "../../testData/notes";
 import { tags } from "../../testData/tags";
@@ -17,7 +17,7 @@ describe("Notes reducer", () => {
   test("should set notes", () => {
     const action: SetNotesAction = {
       type: NotesActionsTypes.setNotes,
-      notes,
+      notes
     };
 
     const state = notesReducer(
@@ -31,7 +31,7 @@ describe("Notes reducer", () => {
   test("should add note", () => {
     const action: AddNoteAction = {
       type: NotesActionsTypes.addNote,
-      note: notes[0],
+      note: notes[0]
     };
 
     const state = notesReducer(
@@ -45,7 +45,7 @@ describe("Notes reducer", () => {
   test("should remove note", () => {
     const action: RemoveNoteAction = {
       type: NotesActionsTypes.removeNote,
-      id: notes[0].id,
+      id: notes[0].id
     };
 
     const state = notesReducer(notes, action) as NotesStoreState[];
@@ -57,7 +57,7 @@ describe("Notes reducer", () => {
     const action: UpdateNoteAction = {
       type: NotesActionsTypes.updateNote,
       updates: { ...notes[0], title: "test" },
-      id: notes[0].id,
+      id: notes[0].id
     };
 
     const state = notesReducer(notes, action) as NotesStoreState[];
@@ -68,7 +68,7 @@ describe("Notes reducer", () => {
   test("should toggle note importance", () => {
     const action: ToggleImportantAction = {
       type: NotesActionsTypes.toggleImportance,
-      id: notes[0].id,
+      id: notes[0].id
     };
 
     const state = notesReducer(notes, action) as NotesStoreState[];
@@ -79,7 +79,7 @@ describe("Notes reducer", () => {
   test("should toggle note archive status", () => {
     const action: ToggleArchiveAction = {
       type: NotesActionsTypes.toggleArchive,
-      id: notes[0].id,
+      id: notes[0].id
     };
 
     const state = notesReducer(notes, action) as NotesStoreState[];
@@ -90,7 +90,7 @@ describe("Notes reducer", () => {
   test("should remove tag from note", () => {
     const action: RemoveNoteTagAction = {
       type: NotesActionsTypes.removeTagFromNote,
-      tagId: tags[0].id,
+      tagId: tags[0].id
     };
 
     const state = notesReducer(notes, action) as NotesStoreState[];

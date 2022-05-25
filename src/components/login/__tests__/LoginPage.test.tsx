@@ -1,20 +1,22 @@
-import React from "react";
 import { mount, ReactWrapper } from "enzyme";
-import { Props, LoginPage, getValidationErrors } from "../LoginPage";
+import { ValidationErrors } from "final-form";
+import React from "react";
+
+import { Errors } from "../../../common";
 import {
   triggerCheckboxChange,
-  triggerInputChange,
+  triggerInputChange
 } from "../../../common/testUtils";
 import { user } from "../../../testData/users";
-import { ValidationErrors } from "final-form";
-import { Errors } from "../../../common";
+import { Props, LoginPage, getValidationErrors } from "../LoginPage";
+
 let wrapper: ReactWrapper | undefined, props: Props;
 
 beforeEach(() => {
   props = {
     startLogin: jest.fn(),
     startSignUp: jest.fn(),
-    loading: false,
+    loading: false
   };
   wrapper = mount(<LoginPage {...props} />);
 });
@@ -82,7 +84,7 @@ describe("Validation", () => {
     const noErrors: ValidationErrors = getValidationErrors({
       email: user.email,
       password: user.password,
-      isNew: false,
+      isNew: false
     });
     expect(Object.keys(noErrors).length).toBe(0);
   });
@@ -91,7 +93,7 @@ describe("Validation", () => {
     const emailIsRequiredError: ValidationErrors = getValidationErrors({
       email: "",
       password: user.password,
-      isNew: false,
+      isNew: false
     });
     expect(Object.keys(emailIsRequiredError).length).toBe(1);
     expect(emailIsRequiredError.email).toBe(Errors.required);
@@ -101,7 +103,7 @@ describe("Validation", () => {
     const emailIsRequiredError: ValidationErrors = getValidationErrors({
       email: "il.com",
       password: user.password,
-      isNew: false,
+      isNew: false
     });
     expect(Object.keys(emailIsRequiredError).length).toBe(1);
     expect(emailIsRequiredError.email).toBe(Errors.email);
@@ -111,7 +113,7 @@ describe("Validation", () => {
     const emailIsRequiredError: ValidationErrors = getValidationErrors({
       email: user.email,
       password: "",
-      isNew: false,
+      isNew: false
     });
     expect(Object.keys(emailIsRequiredError).length).toBe(1);
     expect(emailIsRequiredError.password).toBe(Errors.required);
@@ -121,7 +123,7 @@ describe("Validation", () => {
     const emailIsRequiredError: ValidationErrors = getValidationErrors({
       email: user.email,
       password: "123",
-      isNew: false,
+      isNew: false
     });
     expect(Object.keys(emailIsRequiredError).length).toBe(1);
     expect(emailIsRequiredError.password).toBe(Errors.password);

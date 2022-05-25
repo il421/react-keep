@@ -1,3 +1,13 @@
+import moment from "moment";
+import { toast } from "react-toastify";
+import { Action, Dispatch } from "redux";
+import { ThunkAction } from "redux-thunk";
+import { v4 as uuidv4 } from "uuid";
+
+import { getMessage, Message } from "../common";
+import { NoteType } from "../components/notes";
+import { Collections } from "../firebase/Collections";
+import { firebase, storage, database } from "../firebase/firebase";
 import {
   AddNote,
   AddNoteAction,
@@ -13,17 +23,8 @@ import {
   ToggleArchiveAction,
   ToggleImportantAction,
   UpdateNote,
-  UpdateNoteAction,
+  UpdateNoteAction
 } from "../store/store.types";
-import { Action, Dispatch } from "redux";
-import { getMessage, Message } from "../common";
-import { toast } from "react-toastify";
-import moment from "moment";
-import database, { firebase, storage } from "../firebase/firebase";
-import { NoteType } from "../components/notes";
-import { v4 as uuidv4 } from "uuid";
-import { Collections } from "../firebase/Collections";
-import { ThunkAction } from "redux-thunk";
 
 const initStorageImageRef = (name: string): firebase.storage.Reference => {
   const ref = storage.ref();
@@ -39,17 +40,17 @@ const initDocumentRef = (uid: string) => {
 
 export const setNotes = (notes: Note[]): SetNotesAction => ({
   type: NotesActionsTypes.setNotes,
-  notes,
+  notes
 });
 
 export const addNote = (note: Note): AddNoteAction => ({
   type: NotesActionsTypes.addNote,
-  note,
+  note
 });
 
 export const removeNote = (id: string): RemoveNoteAction => ({
   type: NotesActionsTypes.removeNote,
-  id,
+  id
 });
 
 export const updateNote = (
@@ -58,22 +59,22 @@ export const updateNote = (
 ): UpdateNoteAction => ({
   type: NotesActionsTypes.updateNote,
   id,
-  updates,
+  updates
 });
 
 export const changeImportance = (id: string): ToggleImportantAction => ({
   type: NotesActionsTypes.toggleImportance,
-  id,
+  id
 });
 
 export const changeArchive = (id: string): ToggleArchiveAction => ({
   type: NotesActionsTypes.toggleArchive,
-  id,
+  id
 });
 
 export const removeTag = (tagId: string): RemoveNoteTagAction => ({
   type: NotesActionsTypes.removeTagFromNote,
-  tagId,
+  tagId
 });
 
 export const handleSetNotes = (): ThunkAction<any, Store, any, Action> => {
@@ -84,12 +85,13 @@ export const handleSetNotes = (): ThunkAction<any, Store, any, Action> => {
 
     try {
       const snapshot = await docRef.get();
-      snapshot.forEach((doc) => {
+      snapshot.forEach(doc => {
         if (doc.exists) {
           notes.push({ id: doc.id, ...(doc.data() as Note) });
         } else {
           toast.error(Message.errorNoSuchDoc);
-          console.log(getMessage(Message.errorNoSuchDoc));
+          // eslint-disable-next-line no-console
+          console.warn(getMessage(Message.errorNoSuchDoc));
         }
       });
 
@@ -101,7 +103,8 @@ export const handleSetNotes = (): ThunkAction<any, Store, any, Action> => {
       dispatch(setNotes(notes));
     } catch (e) {
       toast.error(e.message);
-      console.log(e.message);
+      // eslint-disable-next-line no-console
+      console.warn(e.message);
     }
   };
 };
@@ -135,7 +138,7 @@ export const handleAddNote = (
           : note.type === NoteType.list
           ? (note.content as ListItem[]).filter(
               // remove all empty items if a list note
-              (i) => i.content.trim().length > 0
+              i => i.content.trim().length > 0
             )
           : note.content;
 
@@ -145,7 +148,7 @@ export const handleAddNote = (
         createdAt: moment().valueOf(),
         updatedAt: moment().valueOf(),
         important: false,
-        archive: false,
+        archive: false
       };
 
       // add note to DB
@@ -159,11 +162,12 @@ export const handleAddNote = (
       dispatch(
         addNote({
           id: docRef.id,
-          ...newNote,
+          ...newNote
         })
       );
     } catch (e) {
-      console.log(e.message);
+      // eslint-disable-next-line no-console
+      console.warn(e.message);
       toast.error(e.message);
     }
   };
@@ -179,11 +183,11 @@ export const addNoteToCollaborators = async (
     tags: [],
     important: false,
     archive: false,
-    createdBy,
+    createdBy
   };
   await handleCollaboratorsPromises({
     collaborators: note.collaborators!,
-    callback: (collUid) => initDocumentRef(collUid).doc(docId).set(collNote),
+    callback: collUid => initDocumentRef(collUid).doc(docId).set(collNote)
   });
 };
 
@@ -217,7 +221,8 @@ export const handleRemoveNote = (
 
       dispatch(removeNote(id));
     } catch (e) {
-      console.log(e.message);
+      // eslint-disable-next-line no-console
+      console.warn(e.message);
       toast.error(e.message);
     }
   };
@@ -237,10 +242,10 @@ export const removeNoteFromCollaborators = async (
         collUid // deleted all notes with the same id
       ) => {
         // get the shared note
-        let note: Note | undefined = undefined;
+        let note: Note | undefined;
         const notes = await initDocumentRef(collUid).get();
 
-        notes.docs.forEach((snapshot) => {
+        notes.docs.forEach(snapshot => {
           if (snapshot.id === deletedNote.id) {
             note = snapshot.data() as Note;
           }
@@ -251,14 +256,15 @@ export const removeNoteFromCollaborators = async (
           return initDocumentRef(collUid).add({
             ...note!,
             collaborators: [],
-            createdBy: "",
+            createdBy: ""
           } as Note);
         } else {
-          console.log(getMessage(Message.noteNotFound));
+          // eslint-disable-next-line no-console
+          console.warn(getMessage(Message.noteNotFound));
           toast.error(getMessage(Message.noteNotFound));
           return;
         }
-      },
+      }
     });
 
     // delete the shared one
@@ -266,14 +272,14 @@ export const removeNoteFromCollaborators = async (
       collaborators,
       callback: (
         collUid // deleted all notes with the same id
-      ) => initDocumentRef(collUid).doc(deletedNote.id).delete(),
+      ) => initDocumentRef(collUid).doc(deletedNote.id).delete()
     });
   } else {
     // AS COLLABORATOR: deleted uid from collaborators of the note, and owner
     const { id, collaborators = [], createdBy } = deletedNote;
     // all collaborators excluding current one
     const filteredCollaborators: string[] = collaborators!.filter(
-      (coll) => coll !== uid
+      coll => coll !== uid
     );
 
     await handleCollaboratorsPromises({
@@ -283,7 +289,7 @@ export const removeNoteFromCollaborators = async (
       ) =>
         initDocumentRef(collUid)
           .doc(id)
-          .update({ collaborators: filteredCollaborators }),
+          .update({ collaborators: filteredCollaborators })
     });
   }
 };
@@ -326,12 +332,12 @@ export const handleUpdateNote = (
           ? {
               text: (updates.content as ImageItem).text,
               imageUrl: imageUrl ?? (updates.content as ImageItem).imageUrl,
-              imageId: imageId ?? (updates.content as ImageItem).imageId,
+              imageId: imageId ?? (updates.content as ImageItem).imageId
             }
           : updates.type === NoteType.list
           ? (updates.content as ListItem[]).filter(
               // remove all empty items if a list note
-              (i) => i.content.trim().length > 0
+              i => i.content.trim().length > 0
             )
           : updates.content;
 
@@ -345,7 +351,7 @@ export const handleUpdateNote = (
               ? uid
               : updates.createdBy
             : undefined,
-        id: undefined,
+        id: undefined
       };
 
       const cleanedNote: Note = JSON.parse(JSON.stringify(note));
@@ -354,16 +360,14 @@ export const handleUpdateNote = (
 
       // update note for all collaborators
       if (cleanedNote.collaborators && cleanedNote.collaborators.length > 0) {
-        const oldNote = getState().notes.find((n) => n.id === id);
+        const oldNote = getState().notes.find(n => n.id === id);
         // check are there any updates in title, content, or collaborators
         if (
           oldNote &&
           (oldNote.title !== updates.title ||
             oldNote.content !== updates.content ||
             oldNote.collaborators.length !== updates.collaborators.length ||
-            !oldNote.collaborators.some((c) =>
-              updates.collaborators.includes(c)
-            ))
+            !oldNote.collaborators.some(c => updates.collaborators.includes(c)))
         ) {
           await updateCollaboratorsNote(cleanedNote, id, uid);
         }
@@ -371,7 +375,8 @@ export const handleUpdateNote = (
 
       dispatch(updateNote(id, cleanedNote));
     } catch (e) {
-      console.log(e);
+      // eslint-disable-next-line no-console
+      console.warn(e);
       toast.error(e.message);
     }
   };
@@ -385,12 +390,12 @@ export const updateCollaboratorsNote = async (
   const { createdBy, title, content, updatedAt } = note;
   const collaborators: string[] = [
     ...note.collaborators!,
-    createdBy ?? "",
+    createdBy ?? ""
   ].filter((coll: string) => coll && coll !== uid);
 
   await handleCollaboratorsPromises({
     collaborators,
-    callback: async (collUid) => {
+    callback: async collUid => {
       const doc = await initDocumentRef(collUid).doc(noteId).get();
       // if exists update, not add a new one
       if (doc.exists) {
@@ -400,14 +405,14 @@ export const updateCollaboratorsNote = async (
             title,
             content,
             updatedAt,
-            collaborators,
+            collaborators
           } as Note);
       } else {
         return initDocumentRef(collUid)
           .doc(noteId)
           .set({ ...note, createdBy: uid } as Note);
       }
-    },
+    }
   });
 };
 
@@ -427,11 +432,12 @@ export const changeNoteImportance = (
         const impValue = note.important;
 
         await docRef.doc(id).update({
-          important: !impValue,
+          important: !impValue
         });
       }
     } catch (e) {
-      console.log(e.message);
+      // eslint-disable-next-line no-console
+      console.warn(e.message);
       toast.error(e.message);
     }
   };
@@ -453,11 +459,12 @@ export const changeNoteArchiveStatus = (
         const archiveValue = note.archive;
 
         await docRef.doc(id).update({
-          archive: !archiveValue,
+          archive: !archiveValue
         });
       }
     } catch (e) {
-      console.log(e.message);
+      // eslint-disable-next-line no-console
+      console.warn(e.message);
       toast.error(e.message);
     }
   };
@@ -474,20 +481,23 @@ export const removeTagFromNotes = (
 
     try {
       const snapshot = await docRef.get();
-      snapshot.forEach((doc) => {
+      snapshot.forEach(doc => {
         if (doc.exists) {
-          let data = doc.data();
+          const data = doc.data();
 
           if (data.tags.length > 0) {
-            let updatedTags = data.tags.filter((tagId: string) => tagId !== id);
+            const updatedTags = data.tags.filter(
+              (tagId: string) => tagId !== id
+            );
             docRef.doc(doc.id).update({
-              tags: updatedTags,
+              tags: updatedTags
             });
           }
         }
       });
     } catch (e) {
-      console.log(e.message);
+      // eslint-disable-next-line no-console
+      console.warn(e.message);
       toast.error(e.message);
     }
   };
@@ -498,14 +508,15 @@ export const handleCollaboratorsPromises = async (options: {
   callback: (callUid: string) => Promise<any>;
 }) => {
   const { collaborators, callback } = options;
-  let promises: Promise<any>[] = [];
+  const promises: Promise<any>[] = [];
 
   collaborators.forEach((callUid: string) => {
     promises.push(callback(callUid));
   });
 
-  return Promise.all(promises).catch((e) => {
-    console.log(e.message);
+  return Promise.all(promises).catch(e => {
+    // eslint-disable-next-line no-console
+    console.warn(e.message);
     toast.error(e.message);
   });
 };

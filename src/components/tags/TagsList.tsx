@@ -1,18 +1,19 @@
 import React from "react";
-import { FlexBox } from "../ui-components";
+import { connect } from "react-redux";
+import { ThunkDispatch } from "redux-thunk";
+
+import { setTagsFilter } from "../../actions/filters";
+import { removeTagFromNotes } from "../../actions/notes";
+import { handleRemoveTag } from "../../actions/tags";
 import { JustifyContent } from "../../common";
 import {
   FiltersStoreState,
   Store,
-  TagsStoreState,
+  TagsStoreState
 } from "../../store/store.types";
-import { ThunkDispatch } from "redux-thunk";
-import { connect } from "react-redux";
-import TagsItem from "./TagsItem";
-import { handleRemoveTag } from "../../actions/tags";
-import { setTagsFilter } from "../../actions/filters";
-import { removeTagFromNotes } from "../../actions/notes";
 import "../../styles/components/tags/_tags-list.scss";
+import { FlexBox } from "../ui-components";
+import { TagsItem } from "./TagsItem";
 
 interface TagsListProps {}
 
@@ -37,7 +38,7 @@ export class TagsListBase extends React.PureComponent<Props> {
         justifyContent={JustifyContent.start}
         className="tags-list"
       >
-        {this.props.tags.map((tag) => (
+        {this.props.tags.map(tag => (
           <TagsItem
             key={tag.id}
             tag={tag}
@@ -57,7 +58,7 @@ export class TagsListBase extends React.PureComponent<Props> {
 const mapStateToProps = (state: Store): StateProps => {
   return {
     tags: state.tags,
-    filters: state.filters,
+    filters: state.filters
   };
 };
 
@@ -66,7 +67,7 @@ const mapDispatchToProps = (
 ): DispatchProps => ({
   removeTag: (id: string) => dispatch(handleRemoveTag(id)),
   toggleTag: (id: string) => dispatch(setTagsFilter(id)),
-  removeTagFromNotes: (id: string) => dispatch(removeTagFromNotes(id)),
+  removeTagFromNotes: (id: string) => dispatch(removeTagFromNotes(id))
 });
 
 export const TagsList = connect<

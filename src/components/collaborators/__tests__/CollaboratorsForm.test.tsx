@@ -1,15 +1,16 @@
-import React from "react";
 import { mount, ReactWrapper } from "enzyme";
+import { ValidationErrors } from "final-form";
+import React from "react";
+
+import { defaultAuthState } from "../../../actions/__tests__/auth.test";
+import { Errors } from "../../../common";
+import { WithFontAwesome } from "../../../common/WithFontAwesome";
+import { collaborators } from "../../../testData/users";
 import {
   CollaboratorForm,
   Props,
-  getValidationErrors,
+  getValidationErrors
 } from "../CollaboratorForm";
-import { ValidationErrors } from "final-form";
-import { Errors } from "../../../common";
-import { collaborators } from "../../../testData/users";
-import { defaultAuthState } from "../../../actions/__tests__/auth.test";
-import { WithFontAwesome } from "../../../common/WithFontAwesome";
 
 let wrapper: ReactWrapper | undefined, props: Props;
 
@@ -17,7 +18,7 @@ beforeEach(() => {
   props = {
     collaborators,
     auth: defaultAuthState.auth,
-    addCollaborator: jest.fn(),
+    addCollaborator: jest.fn()
   };
   wrapper = mount(
     <WithFontAwesome>
@@ -45,9 +46,9 @@ describe("Validation", () => {
   test("should return no errors", () => {
     const noErrors: ValidationErrors = getValidationErrors(
       props.auth.email!,
-      collaborators.map((c) => c.email!)
+      collaborators.map(c => c.email!)
     )({
-      email: "test@test.com",
+      email: "test@test.com"
     });
     expect(Object.keys(noErrors).length).toBe(0);
   });
@@ -55,9 +56,9 @@ describe("Validation", () => {
   test("should return value required", () => {
     const requiredError: ValidationErrors = getValidationErrors(
       props.auth.email!,
-      collaborators.map((c) => c.email!)
+      collaborators.map(c => c.email!)
     )({
-      email: "",
+      email: ""
     });
     expect(Object.keys(requiredError).length).toBe(1);
     expect(requiredError.email).toBe(Errors.required);
@@ -66,9 +67,9 @@ describe("Validation", () => {
   test("should return not email", () => {
     const requiredError: ValidationErrors = getValidationErrors(
       props.auth.email!,
-      collaborators.map((c) => c.email!)
+      collaborators.map(c => c.email!)
     )({
-      email: "test",
+      email: "test"
     });
     expect(Object.keys(requiredError).length).toBe(1);
     expect(requiredError.email).toBe(Errors.email);
@@ -77,9 +78,9 @@ describe("Validation", () => {
   test("should return currentEmail", () => {
     const requiredError: ValidationErrors = getValidationErrors(
       props.auth.email!,
-      collaborators.map((c) => c.email!)
+      collaborators.map(c => c.email!)
     )({
-      email: props.auth.email!,
+      email: props.auth.email!
     });
     expect(Object.keys(requiredError).length).toBe(1);
     expect(requiredError.email).toBe(Errors.currentEmail);
@@ -90,7 +91,7 @@ describe("Validation", () => {
       props.auth.email!,
       ["test@test.com"]
     )({
-      email: "test@test.com",
+      email: "test@test.com"
     });
     expect(Object.keys(requiredError).length).toBe(1);
     expect(requiredError.email).toBe(Errors.existingCollaborator);

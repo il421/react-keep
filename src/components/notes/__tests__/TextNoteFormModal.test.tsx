@@ -1,19 +1,20 @@
-import React from "react";
 import { mount, ReactWrapper } from "enzyme";
-import {
-  TextNoteFormModalProps,
-  TextNoteFormModal,
-} from "../TextNoteFormModal";
+import React from "react";
 import { Provider } from "react-redux";
 import configureMockStore from "redux-mock-store";
 import thunk from "redux-thunk";
+
+import {
+  triggerCheckboxChange,
+  triggerInputChange
+} from "../../../common/testUtils";
 import { ListItem, Store } from "../../../store/store.types";
 import { notes } from "../../../testData/notes";
 import { tags } from "../../../testData/tags";
 import {
-  triggerCheckboxChange,
-  triggerInputChange,
-} from "../../../common/testUtils";
+  TextNoteFormModalProps,
+  TextNoteFormModal
+} from "../TextNoteFormModal";
 
 let wrapper: ReactWrapper | undefined, props: TextNoteFormModalProps;
 const mockHistoryPush = jest.fn();
@@ -22,14 +23,15 @@ const history = {
   push: mockHistoryPush,
   location: {
     pathname: "pathname",
-    search: "?text=add",
-  },
+    search: "?text=add"
+  }
 };
+
 const createMockStore = configureMockStore([thunk]);
 
 beforeEach(() => {
   props = {
-    history: history as any,
+    history: history as any
   };
 });
 
@@ -43,7 +45,7 @@ afterEach(() => {
 describe("Rendering", () => {
   test("should render TextNoteFormModal correctly", () => {
     wrapper = mount(
-      <Provider store={createMockStore({ notes: notes, tags: tags } as Store)}>
+      <Provider store={createMockStore({ notes, tags } as Store)}>
         <TextNoteFormModal {...props} />
       </Provider>
     );
@@ -55,14 +57,14 @@ describe("Rendering", () => {
 
   test("should render correct initial state", () => {
     wrapper = mount(
-      <Provider store={createMockStore({ notes: notes, tags: tags } as Store)}>
+      <Provider store={createMockStore({ notes, tags } as Store)}>
         <TextNoteFormModal {...props} />
       </Provider>
     );
 
     if (wrapper) {
       triggerInputChange(wrapper, { name: "content" }, "text", {
-        tag: "textarea",
+        tag: "textarea"
       });
 
       expect(wrapper.find("textarea[name='content']").props().value).toBe(
@@ -73,11 +75,11 @@ describe("Rendering", () => {
 
   test("should render form for an existing note in TextNoteFormModal correctly", () => {
     wrapper = mount(
-      <Provider store={createMockStore({ notes: notes, tags: tags } as Store)}>
+      <Provider store={createMockStore({ notes, tags } as Store)}>
         <TextNoteFormModal
           history={{
             ...props.history,
-            location: { pathname: "pathname", search: "?text=1" } as any,
+            location: { pathname: "pathname", search: "?text=1" } as any
           }}
         />
       </Provider>

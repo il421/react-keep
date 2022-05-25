@@ -1,7 +1,8 @@
-import React from "react";
 import { shallow, ShallowWrapper } from "enzyme";
-import Tags from "../Tags";
 import toJson from "enzyme-to-json";
+import React from "react";
+
+import Tags from "../Tags";
 
 let wrapper: ShallowWrapper;
 

@@ -1,14 +1,15 @@
-import React, { useState } from "react";
 import moment from "moment";
-import { Collaborator, Note } from "../../store/store.types";
-import { ContentContainer, FlexBox, IconButton } from "../ui-components";
+import React, { useState } from "react";
+
 import { AlignItems, Colors, FlexWrap, JustifyContent } from "../../common";
-import { ConfirmDialog } from "./ConfirmDialog";
+import { Collaborator, Note } from "../../store/store.types";
 import "../../styles/components/notes/_note.scss";
-import { NoteContent } from "./NoteContent";
-import { NoteType } from "./notes.types";
-import { NoteTag } from "./NoteTag";
+import { ContentContainer, FlexBox, IconButton } from "../ui-components";
 import { Coin } from "../ui-components/Coin";
+import { ConfirmDialog } from "./ConfirmDialog";
+import { NoteContent } from "./NoteContent";
+import { NoteTag } from "./NoteTag";
+import { NoteType } from "./notes.types";
 
 export interface NoteProps {
   note: Note;
@@ -27,7 +28,7 @@ export const NotesItem: React.FunctionComponent<NoteProps> = ({
   moveToArchive,
   toggleImportance,
   onNoteSelected,
-  getCollaborator,
+  getCollaborator
 }): JSX.Element => {
   const [isConfirm, setIsConfirm] = useState<Confirm>(null);
 
@@ -37,7 +38,7 @@ export const NotesItem: React.FunctionComponent<NoteProps> = ({
 
   const collaborators: Collaborator[] = note.collaborators
     ? note.collaborators
-        .map((uid) => getCollaborator(uid)!)
+        .map(uid => getCollaborator(uid)!)
         .filter((c: Collaborator) => !!c)
     : [];
 
@@ -58,7 +59,7 @@ export const NotesItem: React.FunctionComponent<NoteProps> = ({
         >
           <IconButton
             className="actions__important"
-            onButtonClick={(evt) => {
+            onButtonClick={evt => {
               evt?.stopPropagation();
               toggleImportance(note.id);
             }}
@@ -83,9 +84,9 @@ export const NotesItem: React.FunctionComponent<NoteProps> = ({
             )}
 
             {collaborators &&
-              collaborators.map((c: Collaborator, index: number) => (
+              collaborators.map((c: Collaborator) => (
                 <Coin
-                  key={index}
+                  key={c.uid}
                   name={c.displayName}
                   email={c.email}
                   url={c.photoURL}
@@ -101,7 +102,7 @@ export const NotesItem: React.FunctionComponent<NoteProps> = ({
             {!note.createdBy && (
               <IconButton
                 className="actions__archive"
-                onButtonClick={(evt) => {
+                onButtonClick={evt => {
                   evt?.stopPropagation();
                   setIsConfirm("arch");
                 }}
@@ -112,7 +113,7 @@ export const NotesItem: React.FunctionComponent<NoteProps> = ({
 
             <IconButton
               className="actions__remove"
-              onButtonClick={(evt) => {
+              onButtonClick={evt => {
                 evt?.stopPropagation();
                 setIsConfirm("del");
               }}
@@ -158,8 +159,8 @@ export const NotesItem: React.FunctionComponent<NoteProps> = ({
               justifyContent={JustifyContent.start}
               flexWrap={FlexWrap.wrap}
             >
-              {note.tags.map((tagId, index) => (
-                <NoteTag key={index} tagId={tagId} />
+              {note.tags.map(tagId => (
+                <NoteTag key={tagId} tagId={tagId} />
               ))}
             </FlexBox>
           )}
@@ -171,7 +172,7 @@ export const NotesItem: React.FunctionComponent<NoteProps> = ({
           className="note__confirm"
           closeDialog={() => setIsConfirm(null)}
           buttonsProps={{
-            confirmButtonText: isConfirm === "arch" ? "Archive" : undefined,
+            confirmButtonText: isConfirm === "arch" ? "Archive" : undefined
           }}
           handleConfirm={() => {
             if (isConfirm === "del") {

@@ -3,14 +3,14 @@ import {
   RemoveTagAction,
   SetTagsAction,
   TagsActionsTypes,
-  TagsStoreState,
+  TagsStoreState
 } from "../store/store.types";
 
 export const tagsReducerDefaultState: TagsStoreState[] = [];
 
 type TagsAction = SetTagsAction | AddTagAction | RemoveTagAction;
 
-export default (
+export const tagsReducer = (
   state: TagsStoreState[] = tagsReducerDefaultState,
   action: TagsAction
 ) => {
@@ -22,7 +22,7 @@ export default (
       return action.tags ?? [];
 
     case TagsActionsTypes.removeTag:
-      return state.filter((tag) => tag.id !== action.id);
+      return state.filter(tag => tag.id !== action.id);
 
     default:
       return state;

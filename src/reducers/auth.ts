@@ -3,7 +3,7 @@ import {
   AuthStoreState,
   LoadingAction,
   LoginAction,
-  LogoutAction,
+  LogoutAction
 } from "../store/store.types";
 
 export type AuthAction = LoginAction | LogoutAction | LoadingAction;
@@ -13,10 +13,10 @@ export const defaultAuthStore: AuthStoreState = {
   url: null,
   uid: "",
   email: "",
-  loading: false,
+  loading: false
 };
 
-export default (
+export const authReducer = (
   state = defaultAuthStore,
   action: AuthAction
 ): AuthStoreState | object => {
@@ -24,10 +24,10 @@ export default (
     case AuthActionsTypes.login:
       return {
         ...state,
-        uid: action.uid,
-        name: action.name,
-        url: action.url,
-        email: action.email,
+        uid: action.data.uid,
+        name: action.data.name,
+        url: action.data.url,
+        email: action.data.email
       } as AuthStoreState;
 
     case AuthActionsTypes.logout:
@@ -36,7 +36,7 @@ export default (
     case AuthActionsTypes.loading:
       return {
         ...state,
-        loading: action.loading,
+        loading: action.loading
       } as AuthStoreState;
 
     default:

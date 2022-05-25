@@ -1,22 +1,23 @@
+import { History } from "history";
+import { stringify } from "query-string";
 import React from "react";
 import { connect } from "react-redux";
-import { stringify } from "query-string";
-import { AuthStoreState, Store } from "../../store/store.types";
-import { QueryKeys, RouteActions } from "../../routers/Routing";
+import { ThunkDispatch } from "redux-thunk";
+
 import { startLogout } from "../../actions/auth";
-import { Search } from "./Search";
-import { Controllers } from "./Controllers";
+import { QueryKeys, RouteActions } from "../../routers/Routing";
+import { AuthStoreState, Store } from "../../store/store.types";
+import "../../styles/components/common/_visibility.scss";
+import "../../styles/components/header/_header.scss";
+import "../../styles/components/header/_user-box.scss";
 import {
   IconButton,
   UserPhoto,
   ContentContainer,
-  LinkButton,
+  LinkButton
 } from "../ui-components";
-import "../../styles/components/header/_header.scss";
-import "../../styles/components/header/_user-box.scss";
-import "../../styles/components/common/_visibility.scss";
-import { ThunkDispatch } from "redux-thunk";
-import { History } from "history";
+import { Controllers } from "./Controllers";
+import { Search } from "./Search";
 
 export interface HeaderProps {
   showSidebar: (value: boolean) => void;
@@ -37,17 +38,17 @@ export const HeaderBase: React.FunctionComponent<Props> = ({
   startLogout,
   auth,
   showSidebar,
-  history,
+  history
 }) => {
   const onClickHandler = (key: QueryKeys) => {
     const query = stringify({
-      [key]: RouteActions.edit,
+      [key]: RouteActions.edit
     });
     history.push(`${history.location.pathname}?${query}`);
   };
 
   return (
-    <header className="header" onClick={(evt) => evt.stopPropagation()}>
+    <header className="header" onClick={evt => evt.stopPropagation()}>
       <ContentContainer>
         <div className="header__content">
           <IconButton
@@ -63,7 +64,7 @@ export const HeaderBase: React.FunctionComponent<Props> = ({
 
           <Controllers
             className="hide-for-mobile"
-            openDialog={(query) =>
+            openDialog={query =>
               history.push(`${history.location.pathname}?${query}`)
             }
           />
@@ -111,12 +112,12 @@ export const HeaderBase: React.FunctionComponent<Props> = ({
 const mapDispatchToProps = (
   dispatch: ThunkDispatch<{}, {}, any>
 ): DispatchProps => ({
-  startLogout: () => dispatch(startLogout()),
+  startLogout: () => dispatch(startLogout())
 });
 
 const mapStateToProps = (state: Store): StateProps => {
   return {
-    auth: state.auth,
+    auth: state.auth
   };
 };
 

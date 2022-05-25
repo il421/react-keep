@@ -1,23 +1,24 @@
-import React from "react";
-import { QueryKeys, RouteActions } from "../../routers/Routing";
 import { stringify } from "query-string";
-import { AlignItems, JustifyContent } from "../../common";
-import { IconButton, FlexBox } from "../ui-components";
-import "../../styles/components/common/_controllers.scss";
+import React from "react";
 
-interface Controllers extends Partial<Pick<HTMLElement, "className">> {
+import { AlignItems, JustifyContent } from "../../common";
+import { QueryKeys, RouteActions } from "../../routers/Routing";
+import "../../styles/components/common/_controllers.scss";
+import { IconButton, FlexBox } from "../ui-components";
+
+interface ControllersProps extends Partial<Pick<HTMLElement, "className">> {
   isMobile?: boolean;
   openDialog: (query: string) => void;
 }
 
-export const Controllers: React.FunctionComponent<Controllers> = ({
+export const Controllers: React.FunctionComponent<ControllersProps> = ({
   className,
   isMobile = false,
-  openDialog,
+  openDialog
 }) => {
   const getQuery = (key: keyof typeof QueryKeys) => {
     return stringify({
-      [key]: RouteActions.add,
+      [key]: RouteActions.add
     });
   };
 

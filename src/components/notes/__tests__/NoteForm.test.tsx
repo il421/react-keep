@@ -1,19 +1,20 @@
-import React from "react";
 import { ReactWrapper } from "enzyme";
-import { NoteFormBase, Props } from "../NoteForm";
+import React from "react";
+import { act } from "react-dom/test-utils";
 import { Form } from "react-final-form";
-import { notes } from "../../../testData/notes";
-import { tags } from "../../../testData/tags";
-import { NoteType } from "../notes.types";
+
+import { PickerColors, Placeholders } from "../../../common";
 import {
   flushPromises,
   mountInApp,
-  triggerInputChange,
+  triggerInputChange
 } from "../../../common/testUtils";
-import { TextInputField } from "../../form";
-import { PickerColors, Placeholders } from "../../../common";
-import { act } from "react-dom/test-utils";
+import { notes } from "../../../testData/notes";
+import { tags } from "../../../testData/tags";
 import { collaborators } from "../../../testData/users";
+import { TextInputField } from "../../form";
+import { NoteFormBase, Props } from "../NoteForm";
+import { NoteType } from "../notes.types";
 
 let wrapper: ReactWrapper | undefined, props: Props;
 const mockHistoryPush = jest.fn();
@@ -22,18 +23,18 @@ const history = {
   push: mockHistoryPush,
   location: {
     pathname: "pathname",
-    search: "?text=add",
-  },
+    search: "?text=add"
+  }
 };
 beforeEach(() => {
   props = {
-    notes: notes,
-    collaborators: collaborators,
+    notes,
+    collaborators,
     history: history as any,
-    tags: tags,
+    tags,
     type: NoteType.text,
     addNote: jest.fn(),
-    updateNote: jest.fn(),
+    updateNote: jest.fn()
   };
 });
 
@@ -52,7 +53,7 @@ describe("Rendering", () => {
           <NoteFormBase {...props}>
             <TextInputField
               isTextArea={true}
-              name={"content"}
+              name="content"
               placeholder={Placeholders.content}
               className="note-form__text"
             />
@@ -74,7 +75,7 @@ describe("Actions", () => {
           <NoteFormBase {...props}>
             <TextInputField
               isTextArea={true}
-              name={"content"}
+              name="content"
               placeholder={Placeholders.content}
               className="note-form__text"
             />
@@ -102,7 +103,7 @@ describe("Actions", () => {
           { name: "content" },
           notes[0].content as string,
           {
-            tag: "textarea",
+            tag: "textarea"
           }
         );
 
@@ -170,12 +171,12 @@ describe("Actions", () => {
           .simulate("submit");
         await flushPromises();
         expect(props.addNote).toHaveBeenLastCalledWith({
-          collaborators: collaborators.map((c) => c.uid),
+          collaborators: collaborators.map(c => c.uid),
           color: PickerColors.red,
           content: notes[0].content,
           tags: [tags[0].id, tags[1].id],
           title: notes[0].title,
-          type: NoteType.text,
+          type: NoteType.text
         });
       }
     });
@@ -190,13 +191,13 @@ describe("Actions", () => {
             history={
               {
                 ...history,
-                location: { ...history.location, search: "?text=4" },
+                location: { ...history.location, search: "?text=4" }
               } as any
             }
           >
             <TextInputField
               isTextArea={true}
-              name={"content"}
+              name="content"
               placeholder={Placeholders.content}
               className="note-form__text"
             />
@@ -286,7 +287,7 @@ describe("Actions", () => {
           type: NoteType.text,
           createdAt: notes[3].createdAt,
           updatedAt: expect.anything(),
-          collaborators: [collaborators[0].uid],
+          collaborators: [collaborators[0].uid]
         });
       }
     });

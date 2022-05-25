@@ -1,11 +1,12 @@
-import * as React from "react";
 import { mount, ReactWrapper } from "enzyme";
+import * as React from "react";
+
 import { ConfirmDialogProps, ConfirmDialog } from "../ConfirmDialog";
 
 let wrapper: ReactWrapper<ConfirmDialogProps>, props: ConfirmDialogProps;
 const btnNames = {
   confirmButtonText: "confirmTest",
-  cancelButtonText: "cancelTest",
+  cancelButtonText: "cancelTest"
 };
 beforeEach(() => {
   props = {
@@ -14,8 +15,8 @@ beforeEach(() => {
     handleConfirm: jest.fn(),
     buttonsProps: {
       confirmButtonText: btnNames.confirmButtonText,
-      cancelButtonText: btnNames.cancelButtonText,
-    },
+      cancelButtonText: btnNames.cancelButtonText
+    }
   };
   wrapper = mount(<ConfirmDialog {...props} />);
 });

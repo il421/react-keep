@@ -4,7 +4,7 @@ import {
   RemoveTagAction,
   SetTagsAction,
   TagsActionsTypes,
-  TagsStoreState,
+  TagsStoreState
 } from "../../store/store.types";
 import { tags } from "../../testData/tags";
 
@@ -12,7 +12,7 @@ describe("Tags reducer", () => {
   test("should set tags", () => {
     const action: SetTagsAction = {
       type: TagsActionsTypes.setTags,
-      tags,
+      tags
     };
 
     const state = tagsReducer(
@@ -26,7 +26,7 @@ describe("Tags reducer", () => {
   test("should add tag", () => {
     const action: AddTagAction = {
       type: TagsActionsTypes.addTag,
-      tag: tags[0],
+      tag: tags[0]
     };
 
     const state = tagsReducer(
@@ -40,7 +40,7 @@ describe("Tags reducer", () => {
   test("should remove tag", () => {
     const action: RemoveTagAction = {
       type: TagsActionsTypes.removeTag,
-      id: tags[0].id,
+      id: tags[0].id
     };
 
     const state = tagsReducer(tags, action) as TagsStoreState[];

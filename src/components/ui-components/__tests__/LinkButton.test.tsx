@@ -1,14 +1,15 @@
-import React from "react";
 import { shallow, ShallowWrapper } from "enzyme";
-import { LinkButton, LinkButtonProps } from "../LinkButton";
 import toJson from "enzyme-to-json";
+import React from "react";
+
+import { LinkButton, LinkButtonProps } from "../LinkButton";
 
 let props: LinkButtonProps, wrapper: ShallowWrapper;
 
 beforeEach(() => {
   props = {
     text: "text",
-    type: "submit",
+    type: "submit"
   };
 });
 

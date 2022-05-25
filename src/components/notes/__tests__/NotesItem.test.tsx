@@ -1,11 +1,12 @@
-import React from "react";
 import { ReactWrapper } from "enzyme";
-import { NotesItem, NoteProps } from "../NotesItem";
-import { notes } from "../../../testData/notes";
-import { NoteType } from "../notes.types";
+import React from "react";
+
 import { flushPromises, mountInApp } from "../../../common/testUtils";
-import { collaborators } from "../../../testData/users";
 import { Collaborator } from "../../../store/store.types";
+import { notes } from "../../../testData/notes";
+import { collaborators } from "../../../testData/users";
+import { NotesItem, NoteProps } from "../NotesItem";
+import { NoteType } from "../notes.types";
 
 let wrapper: ReactWrapper | undefined, props: NoteProps;
 
@@ -16,7 +17,7 @@ beforeEach(() => {
     moveToArchive: jest.fn(),
     toggleImportance: jest.fn(),
     onNoteSelected: jest.fn(),
-    getCollaborator: jest.fn(),
+    getCollaborator: jest.fn()
   };
 
   wrapper = mountInApp(<NotesItem {...props} />);
@@ -85,7 +86,7 @@ describe("Actions", () => {
       <NotesItem
         {...props}
         note={notes[0]}
-        getCollaborator={(uid) =>
+        getCollaborator={uid =>
           collaborators.find((c: Collaborator) => c.uid === uid)
         }
       />

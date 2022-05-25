@@ -1,24 +1,25 @@
+import { ValidationErrors } from "final-form";
+import { History } from "history";
 import React from "react";
+import { Field, FormRenderProps, FormSpy } from "react-final-form";
 import Modal from "react-modal";
-import { NoteFormValues, NoteType } from "./notes.types";
+
 import {
   isModal,
   nameOf,
   Placeholders,
   AlignItems,
   JustifyContent,
-  Errors,
+  Errors
 } from "../../common";
 import { PathNames, QueryKeys } from "../../routers/Routing";
-import { FileFormField, TextInputField } from "../form";
-import "../../styles/components/notes/_note-form.scss";
-import "../../styles/components/notes/_image-note-form-item.scss";
-import { NoteForm } from "./NoteForm";
-import { History } from "history";
 import { ImageItem } from "../../store/store.types";
-import { Field, FormRenderProps, FormSpy } from "react-final-form";
+import "../../styles/components/notes/_image-note-form-item.scss";
+import "../../styles/components/notes/_note-form.scss";
+import { FileFormField, TextInputField } from "../form";
 import { IconButton, FlexBox } from "../ui-components";
-import { ValidationErrors } from "final-form";
+import { NoteForm } from "./NoteForm";
+import { NoteFormValues, NoteType } from "./notes.types";
 
 export interface ImageNoteFormModalProps {
   history: History;
@@ -54,7 +55,7 @@ export class ImageNoteFormModal extends React.Component<
     if (
       !isModal({
         query: this.props.history.location.search,
-        type: QueryKeys.image,
+        type: QueryKeys.image
       })
     ) {
       return null;
@@ -77,7 +78,7 @@ export class ImageNoteFormModal extends React.Component<
             {({
               form,
               values,
-              initialValues,
+              initialValues
             }: FormRenderProps<NoteFormValues<ImageItem>>) => {
               return (
                 <div className="image-note-form-item">

@@ -1,17 +1,18 @@
-import React from "react";
 import { mount, ReactWrapper } from "enzyme";
-import { triggerInputChange } from "../../../common/testUtils";
-import { TagForm, Props, getValidationErrors } from "../TagForm";
-import { tags } from "../../../testData/tags";
 import { ValidationErrors } from "final-form";
+import React from "react";
+
 import { Errors } from "../../../common";
+import { triggerInputChange } from "../../../common/testUtils";
+import { tags } from "../../../testData/tags";
+import { TagForm, Props, getValidationErrors } from "../TagForm";
 
 let wrapper: ReactWrapper | undefined, props: Props;
 
 beforeEach(() => {
   props = {
-    tags: tags,
-    addTag: jest.fn(),
+    tags,
+    addTag: jest.fn()
   };
   wrapper = mount(<TagForm {...props} />);
 });
@@ -47,14 +48,14 @@ describe("Submitting", () => {
 describe("Validation", () => {
   test("should return no errors", () => {
     const noErrors: ValidationErrors = getValidationErrors({
-      value: "value",
+      value: "value"
     });
     expect(Object.keys(noErrors).length).toBe(0);
   });
 
   test("should return value required", () => {
     const requiredError: ValidationErrors = getValidationErrors({
-      value: "",
+      value: ""
     });
     expect(Object.keys(requiredError).length).toBe(1);
     expect(requiredError.value).toBe(Errors.required);
@@ -62,7 +63,7 @@ describe("Validation", () => {
 
   test("should return value 20 characters long", () => {
     const requiredError: ValidationErrors = getValidationErrors({
-      value: "123456789123456789123456789",
+      value: "123456789123456789123456789"
     });
     expect(Object.keys(requiredError).length).toBe(1);
     expect(requiredError.value).toBe(Errors.tag);

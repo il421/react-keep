@@ -1,25 +1,26 @@
 import * as React from "react";
+
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faBars } from "@fortawesome/free-solid-svg-icons/faBars";
-import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons/faSignOutAlt";
-import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes";
-import { faPalette } from "@fortawesome/free-solid-svg-icons/faPalette";
-import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons/faMapMarkerAlt";
-import { faBookmark } from "@fortawesome/free-solid-svg-icons/faBookmark";
-import { faTags } from "@fortawesome/free-solid-svg-icons/faTags";
-import { faEdit } from "@fortawesome/free-solid-svg-icons/faEdit";
-import { faTh } from "@fortawesome/free-solid-svg-icons/faTh";
-import { faCheckSquare } from "@fortawesome/free-solid-svg-icons/faCheckSquare";
+import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import { faAlignLeft } from "@fortawesome/free-solid-svg-icons/faAlignLeft";
-import { faImage } from "@fortawesome/free-solid-svg-icons/faImage";
-import { faPlusCircle } from "@fortawesome/free-solid-svg-icons/faPlusCircle";
-import { faUsersCog } from "@fortawesome/free-solid-svg-icons/faUsersCog";
 import { faArchive } from "@fortawesome/free-solid-svg-icons/faArchive";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons/faArrowRight";
-import { faUpload } from "@fortawesome/free-solid-svg-icons";
-import { faTrash } from "@fortawesome/free-solid-svg-icons/faTrash";
+import { faBars } from "@fortawesome/free-solid-svg-icons/faBars";
+import { faBookmark } from "@fortawesome/free-solid-svg-icons/faBookmark";
+import { faCheckSquare } from "@fortawesome/free-solid-svg-icons/faCheckSquare";
+import { faEdit } from "@fortawesome/free-solid-svg-icons/faEdit";
+import { faImage } from "@fortawesome/free-solid-svg-icons/faImage";
+import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons/faMapMarkerAlt";
+import { faPalette } from "@fortawesome/free-solid-svg-icons/faPalette";
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons/faPlusCircle";
 import { faShare } from "@fortawesome/free-solid-svg-icons/faShare";
+import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons/faSignOutAlt";
+import { faTags } from "@fortawesome/free-solid-svg-icons/faTags";
+import { faTh } from "@fortawesome/free-solid-svg-icons/faTh";
+import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes";
+import { faTrash } from "@fortawesome/free-solid-svg-icons/faTrash";
 import { faUserFriends } from "@fortawesome/free-solid-svg-icons/faUserFriends";
+import { faUsersCog } from "@fortawesome/free-solid-svg-icons/faUsersCog";
 
 library.add(
   faBars,

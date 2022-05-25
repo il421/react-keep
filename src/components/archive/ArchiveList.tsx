@@ -1,13 +1,13 @@
 import React from "react";
-import { FlexBox } from "../ui-components";
-import { JustifyContent } from "../../common";
+import { connect } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
 
-import { NotesStoreState, Store } from "../../store/store.types";
-import { connect } from "react-redux";
 import { changeNoteArchiveStatus } from "../../actions/notes";
-import { ArchiveItem } from "./ArchiveItem";
+import { JustifyContent } from "../../common";
+import { NotesStoreState, Store } from "../../store/store.types";
 import "../../styles/components/archive/_archive-list.scss";
+import { FlexBox } from "../ui-components";
+import { ArchiveItem } from "./ArchiveItem";
 
 interface StateProps {
   notes: NotesStoreState[];
@@ -21,7 +21,7 @@ export type Props = StateProps & DispatchProps;
 
 export const ArchiveListBase: React.FunctionComponent<Props> = ({
   notes,
-  unarchiveNote,
+  unarchiveNote
 }) => {
   return (
     <FlexBox
@@ -31,8 +31,8 @@ export const ArchiveListBase: React.FunctionComponent<Props> = ({
     >
       {notes
         .filter((note: NotesStoreState) => note.archive)
-        .map((note: NotesStoreState, index: number) => (
-          <ArchiveItem note={note} unarchiveNote={unarchiveNote} key={index} />
+        .map((note: NotesStoreState) => (
+          <ArchiveItem note={note} unarchiveNote={unarchiveNote} key={note.id} />
         ))}
     </FlexBox>
   );
@@ -41,12 +41,12 @@ export const ArchiveListBase: React.FunctionComponent<Props> = ({
 const mapDispatchToProps = (
   dispatch: ThunkDispatch<{}, {}, any>
 ): DispatchProps => ({
-  unarchiveNote: (id: string) => dispatch(changeNoteArchiveStatus(id)),
+  unarchiveNote: (id: string) => dispatch(changeNoteArchiveStatus(id))
 });
 
 const mapStateToProps = (state: Store): StateProps => {
   return {
-    notes: state.notes,
+    notes: state.notes
   };
 };
 

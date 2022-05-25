@@ -1,5 +1,6 @@
-import React from "react";
 import { shallow, ShallowWrapper } from "enzyme";
+import React from "react";
+
 import { SideBar, SideBarProp } from "../SideBar";
 
 let props: SideBarProp, wrapper: ShallowWrapper<SideBarProp, any>;
@@ -7,7 +8,7 @@ let props: SideBarProp, wrapper: ShallowWrapper<SideBarProp, any>;
 beforeEach(() => {
   props = {
     showBar: false,
-    setShowSidebar: jest.fn(),
+    setShowSidebar: jest.fn()
   };
 
   wrapper = shallow<SideBarProp>(<SideBar {...props} />);

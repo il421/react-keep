@@ -3,7 +3,7 @@ import { Note } from "../../store/store.types";
 export enum NoteType {
   text,
   list,
-  image,
+  image
 }
 
 export interface NoteFormValues<T>

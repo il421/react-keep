@@ -1,8 +1,9 @@
-import React from "react";
 import { shallow, ShallowWrapper } from "enzyme";
-import { DashboardPage, onNoteSelected } from "../DashboardPage";
 import { createBrowserHistory, History } from "history";
+import React from "react";
+
 import { NoteType } from "../../notes";
+import { DashboardPage, onNoteSelected } from "../DashboardPage";
 
 export const history: History = createBrowserHistory();
 
@@ -19,7 +20,7 @@ test("onNoteSelected should call history.push with correct pathname", () => {
     type: NoteType.text,
     id: "123",
     pathname: "pathname",
-    push: push as any,
+    push: push as any
   });
   expect(push).toBeCalledWith("pathname?text=123");
 
@@ -27,7 +28,7 @@ test("onNoteSelected should call history.push with correct pathname", () => {
     type: NoteType.list,
     id: "123",
     pathname: "pathname",
-    push: push as any,
+    push: push as any
   });
   expect(push).toBeCalledWith("pathname?list=123");
 
@@ -35,7 +36,7 @@ test("onNoteSelected should call history.push with correct pathname", () => {
     type: NoteType.image,
     id: "123",
     pathname: "pathname",
-    push: push as any,
+    push: push as any
   });
   expect(push).toBeCalledWith("pathname?image=123");
 });

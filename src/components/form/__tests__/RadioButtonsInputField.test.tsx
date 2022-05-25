@@ -1,10 +1,11 @@
-import React from "react";
 import { mount, ReactWrapper } from "enzyme";
+import React from "react";
+import { Form } from "react-final-form";
+
 import {
   RadioButtonsInputField,
-  RadioButtonsInputFieldProps,
+  RadioButtonsInputFieldProps
 } from "../RadioButtonsInputField";
-import { Form } from "react-final-form";
 
 let props: RadioButtonsInputFieldProps,
   wrapper: ReactWrapper<RadioButtonsInputFieldProps, {}>;
@@ -13,7 +14,7 @@ beforeEach(() => {
   props = {
     name: "name",
     id: "id",
-    radioClassName: "radioClassName",
+    radioClassName: "radioClassName"
   };
 });
 

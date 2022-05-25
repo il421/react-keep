@@ -1,5 +1,6 @@
-import React from "react";
 import { shallow, ShallowWrapper } from "enzyme";
+import React from "react";
+
 import { Controllers } from "../Controllers";
 
 test("should render Controllers correctly", () => {

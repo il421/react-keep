@@ -1,5 +1,6 @@
-import React from "react";
 import { shallow, ShallowWrapper } from "enzyme";
+import React from "react";
+
 import NotFoundPage from "../NotFoundPage";
 
 test("should render NotFoundPage correctly", () => {

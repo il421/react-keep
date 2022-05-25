@@ -1,24 +1,24 @@
-import React from "react";
-import Modal from "react-modal";
-import { ListItem } from "../../store/store.types";
-import { NoteFormValues, NoteType } from "./notes.types";
-import { PathNames, QueryKeys, RouteActions } from "../../routers/Routing";
-import { NoteForm } from "./NoteForm";
 import { History } from "history";
-import { FieldArray, FieldArrayRenderProps } from "react-final-form-arrays";
-
-import { ListNoteFromItem } from "./ListNoteFromItem";
+import { parse } from "query-string";
+import React from "react";
 import { FormRenderProps, FormSpy } from "react-final-form";
-import { FlexBox, IconButton } from "../ui-components";
+import { FieldArray, FieldArrayRenderProps } from "react-final-form-arrays";
+import Modal from "react-modal";
+
 import {
   AlignItems,
   isModal,
   JustifyContent,
   nameOf,
-  newLineRegEx,
+  NEW_LINE_REG_EX
 } from "../../common";
+import { PathNames, QueryKeys, RouteActions } from "../../routers/Routing";
+import { ListItem } from "../../store/store.types";
+import { FlexBox, IconButton } from "../ui-components";
+import { ListNoteFromItem } from "./ListNoteFromItem";
+import { NoteForm } from "./NoteForm";
+import { NoteFormValues, NoteType } from "./notes.types";
 import { getDefaultContent } from "./utils";
-import { parse } from "query-string";
 
 export interface ListNoteFormModalProps {
   history: History;
@@ -29,7 +29,7 @@ export class ListNoteFormModal extends React.Component<ListNoteFormModalProps> {
 
   private getCheckedItems = (content: ListItem[]): string => {
     if (!content) return "";
-    return `${content.length}/${content.filter((c) => c.checked).length}`;
+    return `${content.length}/${content.filter(c => c.checked).length}`;
   };
 
   private isNewNote: boolean =
@@ -40,7 +40,7 @@ export class ListNoteFormModal extends React.Component<ListNoteFormModalProps> {
     if (
       !isModal({
         query: this.props.history.location.search,
-        type: QueryKeys.list,
+        type: QueryKeys.list
       })
     ) {
       return null;
@@ -57,12 +57,12 @@ export class ListNoteFormModal extends React.Component<ListNoteFormModalProps> {
           <FormSpy>
             {({
               form,
-              values,
+              values
             }: FormRenderProps<NoteFormValues<ListItem[]>>) => {
               const addItem = () => {
                 form.change(this.nameOf("content"), [
                   getDefaultContent<ListItem[]>(NoteType.list)[0],
-                  ...values.content,
+                  ...values.content
                 ]);
               };
               return (
@@ -108,8 +108,8 @@ export class ListNoteFormModal extends React.Component<ListNoteFormModalProps> {
                           paste: string
                         ) => {
                           const values: string[] = paste
-                            .split(newLineRegEx)
-                            .filter((v) => !!v);
+                            .split(NEW_LINE_REG_EX)
+                            .filter(v => !!v);
 
                           if (values.length > 1) {
                             const defaultItem: ListItem = getDefaultContent<
@@ -121,13 +121,13 @@ export class ListNoteFormModal extends React.Component<ListNoteFormModalProps> {
                                   // update the first element
                                   props.fields.update(index, {
                                     ...defaultItem,
-                                    content: values[i].trim(),
+                                    content: values[i].trim()
                                   });
                                 } else {
                                   // push others
                                   props.fields.push({
                                     ...defaultItem,
-                                    content: values[i].trim(),
+                                    content: values[i].trim()
                                   });
                                 }
                               }
@@ -141,7 +141,7 @@ export class ListNoteFormModal extends React.Component<ListNoteFormModalProps> {
                               autoFocus={index === 0}
                               isChecked={props.fields.value[index].checked}
                               name={name}
-                              key={props.fields.length! - index} // to focus the first element
+                              key={(props.fields.length! - index).toString()} // to focus the first element
                               index={index}
                               onRemove={handleOnRemove(index)}
                               addItem={addItem}

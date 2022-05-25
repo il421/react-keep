@@ -1,5 +1,6 @@
 import React from "react";
-import CollaboratorForm from "./CollaboratorForm";
+
+import { CollaboratorForm } from "./CollaboratorForm";
 import { CollaboratorsList } from "./CollaboratorsList";
 
 interface CollaboratorsProps {}

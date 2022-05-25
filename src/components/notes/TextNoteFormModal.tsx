@@ -1,13 +1,14 @@
-import React from "react";
-import Modal from "react-modal";
-import { NoteFormValues, NoteType } from "./notes.types";
-import { isModal, nameOf, Placeholders } from "../../common";
-import { PathNames, QueryKeys, RouteActions } from "../../routers/Routing";
-import { TextInputField } from "../form";
-import "../../styles/components/notes/_note-form.scss";
-import { NoteForm } from "./NoteForm";
 import { History } from "history";
 import { parse } from "query-string";
+import React from "react";
+import Modal from "react-modal";
+
+import { isModal, nameOf, Placeholders } from "../../common";
+import { PathNames, QueryKeys, RouteActions } from "../../routers/Routing";
+import "../../styles/components/notes/_note-form.scss";
+import { TextInputField } from "../form";
+import { NoteForm } from "./NoteForm";
+import { NoteFormValues, NoteType } from "./notes.types";
 
 export interface TextNoteFormModalProps {
   history: History;
@@ -25,7 +26,7 @@ export class TextNoteFormModal extends React.Component<TextNoteFormModalProps> {
     if (
       !isModal({
         query: this.props.history.location.search,
-        type: QueryKeys.text,
+        type: QueryKeys.text
       })
     ) {
       return null;

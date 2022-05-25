@@ -1,14 +1,15 @@
-import React from "react";
 import { shallow, ShallowWrapper } from "enzyme";
-import { ArchiveListBase, Props } from "../ArchiveList";
+import React from "react";
+
 import { notes } from "../../../testData/notes";
+import { ArchiveListBase, Props } from "../ArchiveList";
 
 let props: Props, wrapper: ShallowWrapper<Props, {}>;
 
 beforeEach(() => {
   props = {
-    notes: notes,
-    unarchiveNote: jest.fn(),
+    notes,
+    unarchiveNote: jest.fn()
   };
 
   wrapper = shallow<Props>(<ArchiveListBase {...props} />);

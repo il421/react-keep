@@ -1,7 +1,8 @@
 import { parse } from "query-string";
+import { v4 as uuidv4 } from "uuid";
+
 import { ImageItem, ListItem, Note } from "../../store/store.types";
 import { NoteFormValues, NoteType } from "./notes.types";
-import { v4 as uuidv4 } from "uuid";
 
 /**
  * Method returns selected noted by route query
@@ -49,7 +50,7 @@ export const getInitialNoteFormValues = <
           : (content as T),
       tags,
       color,
-      collaborators,
+      collaborators
     } as NoteFormValues<T>;
   }
   return options.defaultValues;
@@ -67,14 +68,14 @@ export const getDefaultContent = <T extends string | ListItem[] | ImageItem>(
           id: uuidv4(),
           content: "",
           checked: false,
-          position: 0,
-        },
+          position: 0
+        }
       ] as T;
     case NoteType.image:
       return {
         text: "",
         imageUrl: null,
-        imageId: null,
+        imageId: null
       } as T;
     default:
       return "" as T;

@@ -1,7 +1,8 @@
-import React from "react";
 import { shallow, ShallowWrapper } from "enzyme";
-import { UserPhoto, UserPhotoProps } from "../UserPhoto";
 import toJson from "enzyme-to-json";
+import React from "react";
+
+import { UserPhoto, UserPhotoProps } from "../UserPhoto";
 
 let props: UserPhotoProps, wrapper: ShallowWrapper;
 
@@ -9,7 +10,7 @@ beforeEach(() => {
   props = {
     src: "src",
     height: 100,
-    width: 100,
+    width: 100
   };
 });
 

@@ -1,24 +1,24 @@
 import React from "react";
+import Masonry from "react-masonry-css";
 import { connect } from "react-redux";
+import { ThunkDispatch } from "redux-thunk";
+
+import {
+  changeNoteArchiveStatus,
+  changeNoteImportance,
+  handleRemoveNote
+} from "../../actions/notes";
+import { getFilteredNotes, JustifyContent } from "../../common";
 import {
   AuthStoreState,
   Collaborator,
   Note,
-  Store,
+  Store
 } from "../../store/store.types";
-import { NotesItem } from "./NotesItem";
-import { ThunkDispatch } from "redux-thunk";
-import {
-  changeNoteArchiveStatus,
-  changeNoteImportance,
-  handleRemoveNote,
-} from "../../actions/notes";
-import { NoteType } from "./notes.types";
-import Masonry from "react-masonry-css";
-import { getFilteredNotes } from "../../common";
-import { FlexBox, ContentContainer } from "../ui-components";
-import { JustifyContent } from "../../common";
 import "../../styles/components/notes/_note-list.scss";
+import { FlexBox, ContentContainer } from "../ui-components";
+import { NotesItem } from "./NotesItem";
+import { NoteType } from "./notes.types";
 
 interface StateProps {
   notes: Note[];
@@ -45,14 +45,14 @@ export const NotesListBase: React.FunctionComponent<Props> = ({
   removeNote,
   moveToArchive,
   toggleImportance,
-  onNoteSelected,
+  onNoteSelected
 }): JSX.Element => {
   const breakpointColumnsObj = {
     default: 5,
     1400: 4,
     991: 3,
     794: 2,
-    569: 2,
+    569: 2
   };
 
   const getCollaborator = (uid: string): Collaborator | undefined => {
@@ -69,9 +69,9 @@ export const NotesListBase: React.FunctionComponent<Props> = ({
           className="my-masonry-grid"
           columnClassName="my-masonry-grid_column"
         >
-          {notes.map((note: Note, index: number) => (
+          {notes.map((note: Note) => (
             <NotesItem
-              key={index}
+              key={note.id}
               note={note}
               toggleImportance={toggleImportance}
               removeNote={removeNote}
@@ -89,10 +89,10 @@ export const NotesListBase: React.FunctionComponent<Props> = ({
 const mapStateToProps = (state: Store): StateProps => ({
   notes: getFilteredNotes(state.notes, {
     search: state.filters.search,
-    tagFilters: state.filters.tagFilters,
+    tagFilters: state.filters.tagFilters
   }),
   collaborators: state.collaborators,
-  auth: state.auth,
+  auth: state.auth
 });
 
 const mapDispatchToProps = (
@@ -100,7 +100,7 @@ const mapDispatchToProps = (
 ): DispatchProps => ({
   removeNote: (id: string) => dispatch(handleRemoveNote(id)),
   moveToArchive: (id: string) => dispatch(changeNoteArchiveStatus(id)),
-  toggleImportance: (id: string) => dispatch(changeNoteImportance(id)),
+  toggleImportance: (id: string) => dispatch(changeNoteImportance(id))
 });
 
 export const NotesList = connect<

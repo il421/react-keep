@@ -1,4 +1,5 @@
 import React, { CSSProperties } from "react";
+
 import { AlignItems, FlexWrap, JustifyContent } from "../../common";
 
 export interface FlexBoxProps extends Partial<Pick<HTMLElement, "className">> {
@@ -23,7 +24,7 @@ export class FlexBox extends React.PureComponent<FlexBoxProps> {
     justifyContent: this.props.justifyContent,
     alignItems: this.props.alignItems ?? AlignItems.inherit,
     flexWrap: this.props.flexWrap ?? FlexWrap.inherit,
-    flexGrow: this.props.flexGrow ? 1 : 0,
+    flexGrow: this.props.flexGrow ? 1 : 0
   };
 
   render() {

@@ -1,12 +1,12 @@
 import collaboratorsReducer, {
-  collaboratorsReducerDefaultState,
+  collaboratorsReducerDefaultState
 } from "../../reducers/collaborators";
 import {
   AddCollaboratorAction,
   CollaboratorsActionsTypes,
   CollaboratorsStoreState,
   RemoveCollaboratorAction,
-  SetCollaboratorsAction,
+  SetCollaboratorsAction
 } from "../../store/store.types";
 import { collaborators } from "../../testData/users";
 
@@ -14,7 +14,7 @@ describe("Collaborators reducer", () => {
   test("should set tags", () => {
     const action: SetCollaboratorsAction = {
       type: CollaboratorsActionsTypes.setCollaborators,
-      collaborators,
+      collaborators
     };
 
     const state = collaboratorsReducer(
@@ -28,7 +28,7 @@ describe("Collaborators reducer", () => {
   test("should add collaborator", () => {
     const action: AddCollaboratorAction = {
       type: CollaboratorsActionsTypes.addCollaborator,
-      data: collaborators[0],
+      data: collaborators[0]
     };
 
     const state = collaboratorsReducer(
@@ -42,7 +42,7 @@ describe("Collaborators reducer", () => {
   test("should remove collaborator", () => {
     const action: RemoveCollaboratorAction = {
       type: CollaboratorsActionsTypes.removeCollaborator,
-      uid: collaborators[0].uid,
+      uid: collaborators[0].uid
     };
 
     const state = collaboratorsReducer(

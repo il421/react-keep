@@ -1,8 +1,9 @@
 import React from "react";
-import { FlexBox, IconButton } from "../ui-components";
+
 import { AlignItems, JustifyContent } from "../../common";
 import { Collaborator } from "../../store/store.types";
 import "../../styles/components/collaborators/_collaborators-item.scss";
+import { FlexBox, IconButton } from "../ui-components";
 import { Coin } from "../ui-components/Coin";
 
 export interface CollaboratorsItemProps {

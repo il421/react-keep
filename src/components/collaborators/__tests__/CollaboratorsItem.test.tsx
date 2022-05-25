@@ -1,11 +1,12 @@
-import React from "react";
 import { mount, ReactWrapper } from "enzyme";
+import React from "react";
+
+import { WithFontAwesome } from "../../../common/WithFontAwesome";
+import { collaborators } from "../../../testData/users";
 import {
   CollaboratorsItemProps,
-  CollaboratorsItem,
+  CollaboratorsItem
 } from "../CollaboratorsItem";
-import { collaborators } from "../../../testData/users";
-import { WithFontAwesome } from "../../../common/WithFontAwesome";
 
 let props: CollaboratorsItemProps,
   wrapper: ReactWrapper<CollaboratorsItemProps>;
@@ -13,7 +14,7 @@ let props: CollaboratorsItemProps,
 beforeEach(() => {
   props = {
     collaborator: collaborators[0],
-    removeCollaborator: jest.fn(),
+    removeCollaborator: jest.fn()
   };
   wrapper = mount<CollaboratorsItemProps>(
     <WithFontAwesome>

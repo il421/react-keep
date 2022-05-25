@@ -1,7 +1,8 @@
 import React from "react";
 import { Field } from "react-final-form";
-import { ExposedFieldProps, FieldAdapterProps } from "./BaseForm.types";
+
 import { CheckboxGroup, CheckboxGroupProps } from "../ui-components";
+import { ExposedFieldProps, FieldAdapterProps } from "./BaseForm.types";
 
 const FieldAdapter: React.FunctionComponent<
   FieldAdapterProps<CheckboxGroupProps["selectedKeys"]> &
@@ -21,6 +22,6 @@ export type CheckboxGroupFieldProps = ExposedFieldProps<
   HTMLElement
 > &
   Pick<CheckboxGroupProps, "options" | "classNames">;
-export const CheckboxGroupField: React.FunctionComponent<CheckboxGroupFieldProps> = (
-  props
-) => <Field {...props} name={props.name} component={FieldAdapter} />;
+export const CheckboxGroupField: React.FunctionComponent<CheckboxGroupFieldProps> = props => (
+  <Field {...props} name={props.name} component={FieldAdapter} />
+);

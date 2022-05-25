@@ -1,0 +1,2 @@
+# create react app rewrites tsconfig.json which conflicts with prettier
+tsconfig.json

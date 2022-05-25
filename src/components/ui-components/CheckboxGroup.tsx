@@ -1,7 +1,8 @@
 import React from "react";
+
 import { JustifyContent } from "../../common";
-import { FlexBox } from "./FlexBox";
 import "../../styles/ui-components/_login-button.scss";
+import { FlexBox } from "./FlexBox";
 
 export interface Option {
   id: string;
@@ -24,7 +25,7 @@ export class CheckboxGroup extends React.PureComponent<CheckboxGroupProps> {
 
     const isAlreadySelected = selectedKeys.includes(selectedKey);
     if (isAlreadySelected) {
-      selectedKeys = selectedKeys.filter((x) => x !== selectedKey);
+      selectedKeys = selectedKeys.filter(x => x !== selectedKey);
     } else {
       selectedKeys = [...selectedKeys, selectedKey];
     }
@@ -38,12 +39,12 @@ export class CheckboxGroup extends React.PureComponent<CheckboxGroupProps> {
 
     return (
       <>
-        {options.map((o: Option, index: number) => {
+        {options.map((o: Option) => {
           const checked = selectedKeys.includes(o.id);
 
           return (
             <FlexBox
-              key={index}
+              key={o.id}
               justifyContent={JustifyContent.start}
               className={classNames?.option}
             >

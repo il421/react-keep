@@ -1,5 +1,6 @@
-import { NoteType } from "../components/notes";
 import { User } from "firebase";
+
+import { NoteType } from "../components/notes";
 
 export type Store = {
   auth: AuthStoreState;
@@ -18,8 +19,9 @@ export interface AuthStoreState {
   email?: string;
 }
 
-export interface LoginAction extends Omit<AuthStoreState, "loading"> {
+export interface LoginAction {
   type: AuthActionsTypes.login;
+  data: Omit<AuthStoreState, "loading">;
 }
 
 export interface LogoutAction {
@@ -175,12 +177,12 @@ export interface RemoveTagAction extends Pick<Tag, "id"> {
 export enum AuthActionsTypes {
   login = "login",
   logout = "logout",
-  loading = "loading",
+  loading = "loading"
 }
 
 export enum FiltersActionsTypes {
   setSearchFilter = "setSearchFilter",
-  setTagFilter = "setTagFilter",
+  setTagFilter = "setTagFilter"
 }
 
 export enum NotesActionsTypes {
@@ -190,17 +192,17 @@ export enum NotesActionsTypes {
   updateNote = "updateNote",
   toggleImportance = "toggleImportance",
   toggleArchive = "toggleArchive",
-  removeTagFromNote = "removeTagFromNote",
+  removeTagFromNote = "removeTagFromNote"
 }
 export enum TagsActionsTypes {
   addTag = "addTag",
   setTags = "setTags",
   removeTag = "removeTag",
-  updateTag = "updateTag",
+  updateTag = "updateTag"
 }
 
 export enum CollaboratorsActionsTypes {
   addCollaborator = "addCollaborator",
   setCollaborators = "setCollaborators",
-  removeCollaborator = "removeCollaborator",
+  removeCollaborator = "removeCollaborator"
 }

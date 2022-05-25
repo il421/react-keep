@@ -3,14 +3,14 @@ import {
   FiltersActionsTypes,
   FiltersStoreState,
   SearchFilterAction,
-  TagsFilterAction,
+  TagsFilterAction
 } from "../../store/store.types";
 
 describe("Filters reducer", () => {
   test("should set search filter", () => {
     const action: SearchFilterAction = {
       type: FiltersActionsTypes.setSearchFilter,
-      search: "search",
+      search: "search"
     };
 
     const state = filtersReducer(
@@ -23,7 +23,7 @@ describe("Filters reducer", () => {
   test("should set tag filter", () => {
     const action: TagsFilterAction = {
       type: FiltersActionsTypes.setTagFilter,
-      tag: "tag",
+      tag: "tag"
     };
 
     const state = filtersReducer(

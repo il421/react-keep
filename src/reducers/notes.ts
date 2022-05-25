@@ -7,7 +7,7 @@ import {
   SetNotesAction,
   ToggleArchiveAction,
   ToggleImportantAction,
-  UpdateNoteAction,
+  UpdateNoteAction
 } from "../store/store.types";
 
 type NotesAction =
@@ -21,7 +21,7 @@ type NotesAction =
 
 export const notesReducerDefaultState: NotesStoreState[] = [];
 
-export default (
+export const notesReducer = (
   state: NotesStoreState[] = notesReducerDefaultState,
   action: NotesAction
 ): NotesStoreState[] => {
@@ -33,14 +33,14 @@ export default (
       return action.notes ?? [];
 
     case NotesActionsTypes.removeNote:
-      return state.filter((note) => note.id !== action.id);
+      return state.filter(note => note.id !== action.id);
 
     case NotesActionsTypes.updateNote:
-      return state.map((note) => {
+      return state.map(note => {
         if (note.id === action.id) {
           return {
             ...note,
-            ...action.updates,
+            ...action.updates
           };
         } else {
           return note;
@@ -48,7 +48,7 @@ export default (
       });
 
     case NotesActionsTypes.toggleImportance:
-      return state.map((note) => {
+      return state.map(note => {
         if (note.id === action.id) {
           note.important = !note.important;
         }
@@ -56,7 +56,7 @@ export default (
       });
 
     case NotesActionsTypes.toggleArchive:
-      return state.map((note) => {
+      return state.map(note => {
         if (note.id === action.id) {
           note.archive = !note.archive;
         }
@@ -64,9 +64,9 @@ export default (
       });
 
     case NotesActionsTypes.removeTagFromNote:
-      return state.map((note) => {
+      return state.map(note => {
         if (note.tags.length > 0) {
-          note.tags = note.tags.filter((tag) => tag !== action.tagId);
+          note.tags = note.tags.filter(tag => tag !== action.tagId);
         }
         return note;
       });

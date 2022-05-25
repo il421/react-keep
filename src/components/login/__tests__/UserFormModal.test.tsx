@@ -1,10 +1,11 @@
-import React from "react";
 import { mount, ReactWrapper } from "enzyme";
-import { Props, UserFormModal } from "../UserFormModal";
+import fs from "fs";
+import React from "react";
+
 import { defaultAuthState } from "../../../actions/__tests__/auth.test";
 import { triggerInputChange } from "../../../common/testUtils";
 import { user } from "../../../testData/users";
-import fs from "fs";
+import { Props, UserFormModal } from "../UserFormModal";
 
 let wrapper: ReactWrapper | undefined, props: Props;
 const mockHistoryPush = jest.fn();
@@ -14,15 +15,15 @@ const history = {
   push: mockHistoryPush,
   location: {
     pathname: "pathname",
-    search: "?user=edit",
-  },
+    search: "?user=edit"
+  }
 };
 
 beforeEach(() => {
   props = {
     updateUserData: jest.fn(),
     history: history as any,
-    auth: { ...defaultAuthState.auth },
+    auth: { ...defaultAuthState.auth }
   };
   wrapper = mount(<UserFormModal {...props} />);
 });
@@ -62,7 +63,7 @@ describe("Submitting", () => {
       expect(props.updateUserData).toHaveBeenLastCalledWith({
         displayName: "test test",
         photoURL: null,
-        tenantId: user.uid,
+        tenantId: user.uid
       });
     }
   });

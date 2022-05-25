@@ -19,9 +19,13 @@ yarn-error.log*
 
 # editor
 /.idea
+/.vscode
 
 # git
 /.githooks
 
 #firebase
 /.firebase/
+
+# eslint
+.eslintcache

@@ -1,17 +1,18 @@
-import { user } from "../../testData/users";
-import { AuthStoreState, Tag, TagsActionsTypes } from "../../store/store.types";
 import configureMockStore from "redux-mock-store";
 import thunk from "redux-thunk";
-import { tags } from "../../testData/tags";
-import database from "../../firebase/firebase";
+
 import { Collections } from "../../firebase/Collections";
+import database from "../../firebase/firebase";
+import { AuthStoreState, Tag, TagsActionsTypes } from "../../store/store.types";
+import { tags } from "../../testData/tags";
+import { user } from "../../testData/users";
 import {
   addTag,
   handleAddTag,
   handleRemoveTag,
   handleSetTags,
   removeTag,
-  setTags,
+  setTags
 } from "../tags";
 
 const defaultAuthState = {
@@ -19,12 +20,13 @@ const defaultAuthState = {
     uid: user.uid,
     name: user.firstName,
     url: user.url,
-    loading: false,
-  } as AuthStoreState,
+    loading: false
+  } as AuthStoreState
 };
+
 const createMockStore = configureMockStore([thunk]);
 
-beforeAll((done) => {
+beforeAll(done => {
   // to firestore format data
   tags.forEach((tag: Tag) => {
     // set data to test firestore
@@ -38,14 +40,14 @@ beforeAll((done) => {
   });
 });
 
-afterAll((done) => {
+afterAll(done => {
   database
     .collection(Collections.users)
     .doc(user.uid)
     .collection(Collections.tags)
     .get()
-    .then((res) => {
-      res.forEach((tag) => {
+    .then(res => {
+      res.forEach(tag => {
         tag.ref.delete();
       });
     })
@@ -56,18 +58,18 @@ test("should setup set tags action object correctly", () => {
   const action = setTags(tags);
   expect(action).toEqual({
     type: TagsActionsTypes.setTags,
-    tags,
+    tags
   });
 });
 
-test("should fetch the tags from DB", (done) => {
+test("should fetch the tags from DB", done => {
   const store = createMockStore(defaultAuthState);
   store.dispatch<any>(handleSetTags()).then(() => {
     const actions = store.getActions();
 
     expect(actions[0]).toEqual({
       type: TagsActionsTypes.setTags,
-      tags: expect.arrayContaining(tags),
+      tags: expect.arrayContaining(tags)
     });
     done();
   });
@@ -77,13 +79,13 @@ test("should setup add tag action object correctly", () => {
   const action = addTag(tags[0]);
   expect(action).toEqual({
     type: TagsActionsTypes.addTag,
-    tag: tags[0],
+    tag: tags[0]
   });
 });
 
-test("should add a tag to DB and store", (done) => {
+test("should add a tag to DB and store", done => {
   const newTag: { value: string } = {
-    value: "Tag3",
+    value: "Tag3"
   };
   let id: undefined | string;
 
@@ -96,8 +98,8 @@ test("should add a tag to DB and store", (done) => {
       type: TagsActionsTypes.addTag,
       tag: {
         id,
-        ...newTag,
-      },
+        ...newTag
+      }
     });
 
     database
@@ -106,7 +108,7 @@ test("should add a tag to DB and store", (done) => {
       .collection(Collections.tags)
       .doc(actions[0].tag.id)
       .get()
-      .then((doc) => {
+      .then(doc => {
         if (doc.exists) {
           expect(doc.data()).toEqual(newTag);
         }
@@ -119,18 +121,18 @@ test("should setup remove tag action object correctly", () => {
   const action = removeTag(tags[0].id);
   expect(action).toEqual({
     type: TagsActionsTypes.removeTag,
-    id: tags[0].id,
+    id: tags[0].id
   });
 });
 
-test("should remove a tag from tags in DB and store by id", (done) => {
+test("should remove a tag from tags in DB and store by id", done => {
   const store = createMockStore(defaultAuthState);
 
   store.dispatch<any>(handleRemoveTag(tags[0].id)).then(() => {
     const actions = store.getActions();
     expect(actions[0]).toEqual({
       type: TagsActionsTypes.removeTag,
-      id: tags[0].id,
+      id: tags[0].id
     });
 
     database
@@ -139,7 +141,7 @@ test("should remove a tag from tags in DB and store by id", (done) => {
       .collection(Collections.tags)
       .doc(tags[0].id)
       .get()
-      .then((doc) => {
+      .then(doc => {
         expect(doc.exists).toBe(false);
         done();
       });

@@ -1,7 +1,8 @@
-import React from "react";
 import { mount, ReactWrapper } from "enzyme";
-import { Form } from "react-final-form";
 import { ValidationErrors } from "final-form";
+import React from "react";
+import { Form } from "react-final-form";
+
 import { Errors } from "../../../common";
 import { FileFormField, FileFormFieldProps } from "../FileFormField";
 
@@ -11,7 +12,7 @@ beforeEach(() => {
   props = {
     className: "className",
     name: "name",
-    id: "id",
+    id: "id"
   };
 });
 

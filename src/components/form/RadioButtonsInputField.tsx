@@ -1,9 +1,11 @@
 import React, { CSSProperties } from "react";
 import { Field } from "react-final-form";
-import { ExposedFieldProps, FieldAdapterProps } from "./BaseForm.types";
+
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import "../../styles/ui-components/_icon-radio.scss";
+import { ExposedFieldProps, FieldAdapterProps } from "./BaseForm.types";
 
 /**
  * RadioButtonInputField is based on Field component

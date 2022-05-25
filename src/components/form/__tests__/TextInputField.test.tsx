@@ -1,16 +1,17 @@
-import * as React from "react";
 import { mount, ReactWrapper } from "enzyme";
-import { TextInputField, TextInputFieldProps } from "../TextInputField";
-import { Form } from "react-final-form";
 import { ValidationErrors } from "final-form";
+import * as React from "react";
+import { Form } from "react-final-form";
+
 import { Errors } from "../../../common";
+import { TextInputField, TextInputFieldProps } from "../TextInputField";
 
 let props: TextInputFieldProps, wrapper: ReactWrapper<TextInputFieldProps, {}>;
 
 beforeEach(() => {
   props = {
     className: "className",
-    name: "name",
+    name: "name"
   };
 });
 

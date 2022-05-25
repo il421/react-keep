@@ -1,12 +1,13 @@
 import React from "react";
-import { FlexBox } from "../ui-components";
+import { connect } from "react-redux";
+import { ThunkDispatch } from "redux-thunk";
+
+import { handleRemoveCollaborator } from "../../actions/collaborators";
 import { JustifyContent } from "../../common";
 import { CollaboratorsStoreState, Store } from "../../store/store.types";
-import { ThunkDispatch } from "redux-thunk";
-import { connect } from "react-redux";
-import { CollaboratorsItem } from "./CollaboratorsItem";
-import { handleRemoveCollaborator } from "../../actions/collaborators";
 import "../../styles/components/collaborators/_collaborators-list.scss";
+import { FlexBox } from "../ui-components";
+import { CollaboratorsItem } from "./CollaboratorsItem";
 
 interface TagsListProps {}
 
@@ -28,7 +29,7 @@ export class CollaboratorsListBase extends React.PureComponent<Props> {
         justifyContent={JustifyContent.start}
         className="collaborators-list"
       >
-        {this.props.collaborators.map((coll) => (
+        {this.props.collaborators.map(coll => (
           <CollaboratorsItem
             key={coll.uid}
             collaborator={coll}
@@ -44,14 +45,14 @@ export class CollaboratorsListBase extends React.PureComponent<Props> {
 
 const mapStateToProps = (state: Store): StateProps => {
   return {
-    collaborators: state.collaborators,
+    collaborators: state.collaborators
   };
 };
 
 const mapDispatchToProps = (
   dispatch: ThunkDispatch<{}, {}, any>
 ): DispatchProps => ({
-  removeCollaborator: (id: string) => dispatch(handleRemoveCollaborator(id)),
+  removeCollaborator: (id: string) => dispatch(handleRemoveCollaborator(id))
 });
 
 export const CollaboratorsList = connect<

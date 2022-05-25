@@ -2,5 +2,9 @@
   "semi": true,
   "singleQuote": false,
   "printWidth": 80,
-  "endOfLine": "lf"
+  "endOfLine": "lf",
+  "trailingComma": "none",
+  "arrowParens": "avoid",
+  "importOrder": ["^[a-z]", "^[@]", "^[.]"],
+  "importOrderSeparation": true
 }

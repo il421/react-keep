@@ -1,8 +1,9 @@
 import React from "react";
-import { FlexBox, IconButton } from "../ui-components";
-import { AlignItems, JustifyContent, newLineRegEx } from "../../common";
-import { CheckboxInputField, FieldSpy, TextInputField } from "../form";
+
+import { AlignItems, JustifyContent, NEW_LINE_REG_EX } from "../../common";
 import "../../styles/components/notes/_list-note-form-item.scss";
+import { CheckboxInputField, FieldSpy, TextInputField } from "../form";
+import { FlexBox, IconButton } from "../ui-components";
 
 export interface ListNoteFromItemProps {
   name: string;
@@ -23,14 +24,14 @@ export const ListNoteFromItem: React.FunctionComponent<ListNoteFromItemProps> = 
   autoFocus,
   addItem,
   setPastedValue,
-  isChecked,
+  isChecked
 }) => {
   const handleOnPaste = (
     event: React.ClipboardEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
     const value: string = event.currentTarget.value.trim();
     const paste: string = event.clipboardData.getData("text").trim();
-    const match: RegExpExecArray | null = newLineRegEx.exec(paste);
+    const match: RegExpExecArray | null = NEW_LINE_REG_EX.exec(paste);
     // if paste contains newlines => setPastedValue
     if (value.length === 0 && paste.length > 0 && match) {
       setPastedValue(paste);

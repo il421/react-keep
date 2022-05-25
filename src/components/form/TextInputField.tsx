@@ -1,8 +1,9 @@
 import * as React from "react";
 import { Field } from "react-final-form";
 import TextareaAutosize from "react-textarea-autosize";
+
+import { NEW_LINE_REG_EX } from "../../common";
 import { ExposedFieldProps, FieldAdapterProps } from "./BaseForm.types";
-import { newLineRegEx } from "../../common";
 
 const FieldAdapter: React.FunctionComponent<FieldAdapterProps> = ({
   className,
@@ -21,10 +22,12 @@ const FieldAdapter: React.FunctionComponent<FieldAdapterProps> = ({
       input.onChange(event);
       return;
     }
+
     const isInsertFromPasteNativeEvent =
       (event.nativeEvent as InputEvent).inputType === "insertFromPaste";
+
     const value: string = event.currentTarget.value;
-    const match: RegExpExecArray | null = newLineRegEx.exec(value);
+    const match: RegExpExecArray | null = NEW_LINE_REG_EX.exec(value);
 
     if (!match) {
       input.onChange(event);
@@ -82,9 +85,7 @@ export interface TextInputFieldProps
     event: React.ClipboardEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => void;
 }
-export const TextInputField: React.FunctionComponent<TextInputFieldProps> = (
-  props
-) => (
+export const TextInputField: React.FunctionComponent<TextInputFieldProps> = props => (
   <Field
     {...props}
     name={props.name}

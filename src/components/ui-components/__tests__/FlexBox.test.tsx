@@ -1,14 +1,15 @@
-import React from "react";
 import { shallow, ShallowWrapper } from "enzyme";
-import { FlexBox, FlexBoxProps } from "../FlexBox";
-import { JustifyContent } from "../../../common";
 import toJson from "enzyme-to-json";
+import React from "react";
+
+import { JustifyContent } from "../../../common";
+import { FlexBox, FlexBoxProps } from "../FlexBox";
 
 let props: FlexBoxProps, wrapper: ShallowWrapper;
 
 beforeEach(() => {
   props = {
-    justifyContent: JustifyContent.center,
+    justifyContent: JustifyContent.center
   };
 });
 

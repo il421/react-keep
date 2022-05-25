@@ -1,5 +1,5 @@
-import { Note } from "../store/store.types";
 import { NoteType } from "../components/notes";
+import { Note } from "../store/store.types";
 import { tags } from "./tags";
 import { collaborators, user } from "./users";
 
@@ -15,8 +15,8 @@ export const notes: Note[] = [
     archive: false,
     createdAt: 100000,
     updatedAt: 100005,
-    collaborators: collaborators.map((c) => c.uid),
-    createdBy: user.uid,
+    collaborators: collaborators.map(c => c.uid),
+    createdBy: user.uid
   },
   {
     type: NoteType.list,
@@ -27,20 +27,20 @@ export const notes: Note[] = [
       {
         id: "2-1",
         content: "dog",
-        checked: false,
+        checked: false
       },
       {
         id: "2-2",
         content: "cat",
-        checked: true,
-      },
+        checked: true
+      }
     ],
     tags: [tags[0].id, tags[1].id],
     color: "#2",
     important: true,
     archive: false,
     createdAt: 100000,
-    updatedAt: 100005,
+    updatedAt: 100005
   },
   {
     type: NoteType.image,
@@ -53,7 +53,7 @@ export const notes: Note[] = [
     important: false,
     archive: true,
     createdAt: 100000,
-    updatedAt: 100005,
+    updatedAt: 100005
   },
   {
     type: NoteType.text,
@@ -66,8 +66,8 @@ export const notes: Note[] = [
     important: false,
     archive: false,
     createdAt: 100000,
-    updatedAt: 100005,
-  },
+    updatedAt: 100005
+  }
 ];
 
 export const newNote: Omit<Note, "id" | "createdAt" | "updatedAt"> = {
@@ -78,7 +78,7 @@ export const newNote: Omit<Note, "id" | "createdAt" | "updatedAt"> = {
   type: NoteType.text,
   content: "Dont forget to make a call",
   title: "Call",
-  collaborators: [],
+  collaborators: []
 };
 
 export const updatedNote: Omit<Note, "id"> = {
@@ -91,5 +91,5 @@ export const updatedNote: Omit<Note, "id"> = {
   title: "Call",
   createdAt: 54353534,
   collaborators: [],
-  updatedAt: 43432432,
+  updatedAt: 43432432
 };

@@ -4,5 +4,5 @@ export enum Collections {
   notes = "notes",
   tags = "tags",
   collaborators = "collaborators",
-  avatars = "avatars",
+  avatars = "avatars"
 }

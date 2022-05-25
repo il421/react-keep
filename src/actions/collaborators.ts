@@ -1,4 +1,11 @@
-import database from "../firebase/firebase";
+import { toast } from "react-toastify";
+import { Action, Dispatch } from "redux";
+import { ThunkAction } from "redux-thunk";
+
+import { getMessage, Message, unique } from "../common";
+import { Collections } from "../firebase/Collections";
+import { database } from "../firebase/firebase";
+import { getUserByUids } from "../libs/functions";
 import {
   AddCollaboratorAction,
   Collaborator,
@@ -7,14 +14,8 @@ import {
   RemoveCollaboratorAction,
   SetCollaboratorsAction,
   Store,
-  UserData,
+  UserData
 } from "../store/store.types";
-import { Action, Dispatch } from "redux";
-import { toast } from "react-toastify";
-import { getMessage, Message, unique } from "../common";
-import { Collections } from "../firebase/Collections";
-import { ThunkAction } from "redux-thunk";
-import { getUserByUids } from "../libs/functions";
 
 const initDocumentRef = (uid: string) => {
   return database
@@ -27,17 +28,17 @@ export const setCollaborators = (
   collaborators: Collaborator[]
 ): SetCollaboratorsAction => ({
   type: CollaboratorsActionsTypes.setCollaborators,
-  collaborators,
+  collaborators
 });
 
 export const addCollaborator = (data: UserData): AddCollaboratorAction => ({
   type: CollaboratorsActionsTypes.addCollaborator,
-  data,
+  data
 });
 
 export const removeCollaborator = (uid: string): RemoveCollaboratorAction => ({
   type: CollaboratorsActionsTypes.removeCollaborator,
-  uid,
+  uid
 });
 
 export const handleSetCollaborators = (): ThunkAction<
@@ -47,19 +48,20 @@ export const handleSetCollaborators = (): ThunkAction<
   Action
 > => {
   return async (dispatch: Dispatch, getState: () => Store) => {
-    let collaborators: Pick<Collaborator, "uid">[] = [];
+    const collaborators: Pick<Collaborator, "uid">[] = [];
     const uid = getState().auth.uid;
     const docRef = initDocumentRef(uid);
 
     try {
       const snapshot = await docRef.get();
-      snapshot.forEach((doc) => {
+      snapshot.forEach(doc => {
         if (doc.exists) {
           collaborators.push({
-            uid: doc.id,
+            uid: doc.id
           } as Pick<Collaborator, "uid">);
         } else {
-          console.log(getMessage(Message.errorNoSuchDoc));
+          // eslint-disable-next-line no-console
+          console.warn(getMessage(Message.errorNoSuchDoc));
           toast.error(getMessage(Message.errorNoSuchDoc));
         }
       });
@@ -70,18 +72,21 @@ export const handleSetCollaborators = (): ThunkAction<
 
       // get unique uids of collaborators, and noted owners
       const uids: string[] = unique([
-        ...collaborators.map((c) => c.uid),
-        ...notes.map((n: NotesStoreState) => n.createdBy!),
+        ...collaborators.map(c => c.uid),
+        ...notes.map((n: NotesStoreState) => n.createdBy!)
       ]);
 
       if (uids.length > 0) {
         await getUserByUids(uids, (users: UserData[]) => {
-          const mappedUsers: Collaborator[] = users.map((u: UserData) => {
-            const index = uids.findIndex((k: string) => k === u.uid);
-            if (index >= 0) {
-              return { ...u };
-            }
-          }) as Collaborator[];
+          const mappedUsers: Collaborator[] = users
+            .map((u: UserData) => {
+              const index = uids.findIndex((k: string) => k === u.uid);
+              if (index >= 0) {
+                return { ...u };
+              }
+              return undefined;
+            })
+            .filter(i => !i) as Collaborator[];
 
           // run get users func
           if (mappedUsers.length > 0) {
@@ -93,7 +98,8 @@ export const handleSetCollaborators = (): ThunkAction<
         });
       }
     } catch (e) {
-      console.log(e.message);
+      // eslint-disable-next-line no-console
+      console.warn(e.message);
       toast.error(e.message);
     }
   };
@@ -109,7 +115,8 @@ export const handleAddCollaborator = (
       await initDocumentRef(currentUid).doc(uid).set({});
       dispatch(addCollaborator(data));
     } catch (e) {
-      console.log(e.message);
+      // eslint-disable-next-line no-console
+      console.warn(e.message);
       toast.error(e.message);
     }
   };
@@ -126,7 +133,8 @@ export const handleRemoveCollaborator = (
       dispatch(removeCollaborator(id));
       await docRef.doc(id).delete();
     } catch (e) {
-      console.log(e.message);
+      // eslint-disable-next-line no-console
+      console.warn(e.message);
       toast.error(e.message);
     }
   };

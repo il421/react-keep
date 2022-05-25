@@ -1,10 +1,11 @@
-import React from "react";
-import { ImageItem, ListItem, Note } from "../../store/store.types";
-import { FlexBox, IconButton } from "../ui-components";
-import "../../styles/components/archive/_archive-item.scss";
-import { AlignItems, JustifyContent, getShortText } from "../../common";
 import moment from "moment";
+import React from "react";
+
+import { AlignItems, JustifyContent, getShortText } from "../../common";
+import { ImageItem, ListItem, Note } from "../../store/store.types";
+import "../../styles/components/archive/_archive-item.scss";
 import { NoteType } from "../notes";
+import { FlexBox, IconButton } from "../ui-components";
 
 export interface ArchiveItemProps {
   note: Note;
@@ -13,7 +14,7 @@ export interface ArchiveItemProps {
 
 export const ArchiveItem: React.FunctionComponent<ArchiveItemProps> = ({
   note,
-  unarchiveNote,
+  unarchiveNote
 }) => {
   const NO_IMAGE_URL: string = "img/no_image.png";
   return (
@@ -51,33 +52,30 @@ export const ArchiveItem: React.FunctionComponent<ArchiveItemProps> = ({
               ) : note.type === NoteType.list ? (
                 <ul className="content__list list">
                   {/* show 3 lines */}
-                  {(note.content as ListItem[])
-                    .slice(0, 3)
-                    .map((item, index) => (
-                      <li key={index}>
-                        <div
-                          className={`list__box ${
-                            item.checked && "list__box--checked"
-                          }`}
-                        />
-                        <span className="list__text">
-                          {getShortText(item.content, 10)}
-                        </span>
-                      </li>
-                    ))}
+                  {(note.content as ListItem[]).slice(0, 3).map(item => (
+                    <li key={item.id}>
+                      <div
+                        className={`list__box ${
+                          item.checked && "list__box--checked"
+                        }`}
+                      />
+                      <span className="list__text">
+                        {getShortText(item.content, 10)}
+                      </span>
+                    </li>
+                  ))}
                 </ul>
               ) : (
                 <div>
                   <div>
                     {getShortText((note.content as ImageItem).text, 20)}
                   </div>
-                  <img
-                    src={
+                  <image
+                    path={
                       (note.content as ImageItem).imageUrl !== null
                         ? (note.content as ImageItem).imageUrl!
                         : NO_IMAGE_URL
                     }
-                    alt="Picture of the note"
                   />
                 </div>
               )}

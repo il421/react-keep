@@ -1,10 +1,11 @@
-import React from "react";
 import { mount, ReactWrapper } from "enzyme";
+import React from "react";
+import { Form } from "react-final-form";
+
 import {
   CheckboxInputField,
-  CheckboxInputFieldProps,
+  CheckboxInputFieldProps
 } from "../CheckboxInputField";
-import { Form } from "react-final-form";
 
 let props: CheckboxInputFieldProps,
   wrapper: ReactWrapper<CheckboxInputFieldProps, {}>;
@@ -13,7 +14,7 @@ beforeEach(() => {
   props = {
     className: "className",
     name: "name",
-    id: "id",
+    id: "id"
   };
 });
 

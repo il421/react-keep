@@ -1,13 +1,14 @@
-import React from "react";
 import { shallow, mount, ShallowWrapper, ReactWrapper } from "enzyme";
-import { BaseForm, BaseFormProps } from "../BaseForm";
+import React from "react";
+
+import { PickerColors } from "../../../common";
 import { notes } from "../../../testData/notes";
 import {
   NoteFormValues,
   NoteType,
-  getInitialNoteFormValues,
+  getInitialNoteFormValues
 } from "../../notes";
-import { PickerColors } from "../../../common";
+import { BaseForm, BaseFormProps } from "../BaseForm";
 
 let props: BaseFormProps<NoteFormValues<string>>,
   wrapper: ShallowWrapper<BaseFormProps<NoteFormValues<string>>, any>;
@@ -16,7 +17,7 @@ const defaultNote: NoteFormValues<string> = {
   title: "",
   content: "",
   tags: [],
-  color: PickerColors.white,
+  color: PickerColors.white
 };
 
 beforeEach(() => {
@@ -24,11 +25,11 @@ beforeEach(() => {
     initialValues: getInitialNoteFormValues({
       type: NoteType.text,
       currentNote: notes[0],
-      defaultValues: defaultNote,
+      defaultValues: defaultNote
     }),
     onSubmit: jest.fn(),
     formClassName: "formClassName",
-    getFormActions: jest.fn(),
+    getFormActions: jest.fn()
   };
 
   wrapper = shallow<BaseFormProps<NoteFormValues<string>>>(

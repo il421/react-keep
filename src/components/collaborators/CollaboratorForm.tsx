@@ -1,19 +1,20 @@
+import { ValidationErrors } from "final-form";
 import React from "react";
+import { connect } from "react-redux";
+import { ThunkDispatch } from "redux-thunk";
+
+import { handleAddCollaborator } from "../../actions/collaborators";
+import { Placeholders, nameOf, Errors, EMAIL_REG_EX } from "../../common";
+import { getUserByEmail } from "../../libs/functions";
 import {
   AuthStoreState,
   CollaboratorsStoreState,
   Store,
-  UserData,
+  UserData
 } from "../../store/store.types";
-import { ThunkDispatch } from "redux-thunk";
-import { connect } from "react-redux";
-import { TextInputField, BaseForm } from "../form";
-import { Placeholders, nameOf, Errors, emailRegEx } from "../../common";
 import "../../styles/components/collaborators/_collaborators-form.scss";
+import { TextInputField, BaseForm } from "../form";
 import { IconButton } from "../ui-components";
-import { ValidationErrors } from "final-form";
-import { handleAddCollaborator } from "../../actions/collaborators";
-import { getUserByEmail } from "../../libs/functions";
 
 interface TagFormProps {}
 
@@ -40,7 +41,7 @@ export const getValidationErrors = (
 
   if (typeof email !== "undefined" && email.length === 0) {
     errors.email = Errors.required;
-  } else if (email && !emailRegEx.test(email.trim())) {
+  } else if (email && !EMAIL_REG_EX.test(email.trim())) {
     errors.email = Errors.email;
   } else if (email && email.trim() === userEmail) {
     errors.email = Errors.currentEmail;
@@ -50,7 +51,7 @@ export const getValidationErrors = (
   return errors;
 };
 
-export class CollaboratorForm extends React.PureComponent<Props> {
+class CollaboratorFormBase extends React.PureComponent<Props> {
   private nameOf = nameOf<CollaboratorFormValues>();
 
   private getUserDataByEmail = async (values: CollaboratorFormValues) => {
@@ -75,7 +76,7 @@ export class CollaboratorForm extends React.PureComponent<Props> {
         formClassName="collaborators-form"
         validate={getValidationErrors(
           this.props.auth.email!,
-          this.props.collaborators.map((c) => c.email!)
+          this.props.collaborators.map(c => c.email!)
         )}
         resetAfterSubmitting={true}
         getFormActions={this.getFormActions}
@@ -95,17 +96,22 @@ export class CollaboratorForm extends React.PureComponent<Props> {
 const mapStateToProps = (state: Store): StateProps => {
   return {
     collaborators: state.collaborators,
-    auth: state.auth,
+    auth: state.auth
   };
 };
 
 const mapDispatchToProps = (
   dispatch: ThunkDispatch<{}, {}, any>
 ): DispatchProps => ({
-  addCollaborator: (data: UserData) => dispatch(handleAddCollaborator(data)),
+  addCollaborator: (data: UserData) => dispatch(handleAddCollaborator(data))
 });
 
-export default connect<StateProps, DispatchProps, TagFormProps, Store>(
+export const CollaboratorForm = connect<
+  StateProps,
+  DispatchProps,
+  TagFormProps,
+  Store
+>(
   mapStateToProps,
   mapDispatchToProps
-)(CollaboratorForm);
+)(CollaboratorFormBase);

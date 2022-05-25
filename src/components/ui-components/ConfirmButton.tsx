@@ -1,8 +1,9 @@
 import React from "react";
 import { BeatLoader } from "react-spinners";
+
 import { Colors, JustifyContent } from "../../common";
-import { FlexBox } from "./FlexBox";
 import "../../styles/ui-components/_login-button.scss";
+import { FlexBox } from "./FlexBox";
 
 export interface ConfirmButtonProps
   extends Partial<Pick<HTMLButtonElement, "disabled" | "className" | "id">> {
@@ -23,7 +24,7 @@ export class ConfirmButton extends React.PureComponent<ConfirmButtonProps> {
       disabled = false,
       onCLick,
       id,
-      wrapperClassName,
+      wrapperClassName
     } = this.props;
     return (
       <FlexBox
@@ -44,7 +45,7 @@ export class ConfirmButton extends React.PureComponent<ConfirmButtonProps> {
           <BeatLoader
             size={10}
             color={Colors.fresh}
-            css={"height: 42px; display: flex; align-items: center"}
+            css="height: 42px; display: flex; align-items: center"
           />
         )}
       </FlexBox>

@@ -1,7 +1,8 @@
 import React from "react";
-import { NoteType } from "./notes.types";
-import { ImageItem, ListItem } from "../../store/store.types";
+
 import { getShortText } from "../../common";
+import { ImageItem, ListItem } from "../../store/store.types";
+import { NoteType } from "./notes.types";
 
 export interface NoteContentProps {
   type: NoteType;
@@ -10,7 +11,7 @@ export interface NoteContentProps {
 
 export const NoteContent: React.FunctionComponent<NoteContentProps> = ({
   type,
-  content,
+  content
 }): JSX.Element => {
   const NO_IMAGE_URL: string = "img/no_image.png";
   return (
@@ -20,7 +21,7 @@ export const NoteContent: React.FunctionComponent<NoteContentProps> = ({
         <div className="content__text">{getShortText(content as string)}</div>
       ) : /* LIST NOTE */
       type === NoteType.list ? (
-        <ul className={"content__list list"}>
+        <ul className="content__list list">
           {/* show 3 lines */}
           {(content as ListItem[])
             .slice(0, 3)
@@ -28,8 +29,8 @@ export const NoteContent: React.FunctionComponent<NoteContentProps> = ({
               (a: ListItem, b: ListItem) =>
                 Number(a.checked) - Number(b.checked)
             )
-            .map((item, index) => (
-              <li key={index}>
+            .map(item => (
+              <li key={item.id}>
                 <div
                   className={`list__box ${
                     item.checked && "list__box--checked"
@@ -45,13 +46,12 @@ export const NoteContent: React.FunctionComponent<NoteContentProps> = ({
       ) : (
         /* IMAGE NOTE */
         <div className="content__image">
-          <img
-            src={
+          <image
+            path={
               (content as ImageItem).imageUrl !== null
                 ? (content as ImageItem).imageUrl!
                 : NO_IMAGE_URL
             }
-            alt="Picture of the note"
           />
           <div className="content__text">
             {getShortText((content as ImageItem).text)}

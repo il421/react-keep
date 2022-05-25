@@ -1,14 +1,15 @@
+import { ValidationErrors } from "final-form";
 import React from "react";
 import { connect } from "react-redux";
-import { ValidationErrors } from "final-form";
 import { ToastContainer } from "react-toastify";
+import { ThunkDispatch } from "redux-thunk";
+
 import { startLogin, startSignUp } from "../../actions/auth";
+import { nameOf, Errors, EMAIL_REG_EX, Placeholders } from "../../common";
 import { Store } from "../../store/store.types";
-import { nameOf, Errors, emailRegEx, Placeholders } from "../../common";
 import "../../styles/components/login/_login-page.scss";
 import { BaseForm, CheckboxInputField, TextInputField } from "../form";
 import { ConfirmButton } from "../ui-components";
-import { ThunkDispatch } from "redux-thunk";
 
 export interface LoginFormValues {
   email: string;
@@ -40,18 +41,18 @@ export const getValidationErrors = (
 
   if (!email) {
     errors.email = Errors.required;
-  } else if (!emailRegEx.test(email.trim())) {
+  } else if (!EMAIL_REG_EX.test(email.trim())) {
     errors.email = Errors.email;
   }
 
   return errors;
 };
 
-export class LoginPage extends React.PureComponent<Props> {
+export class LoginPageBase extends React.PureComponent<Props> {
   private initialValues: LoginFormValues = {
     email: "",
     password: "",
-    isNew: false,
+    isNew: false
   };
 
   private nameOf = nameOf<LoginFormValues>();
@@ -128,7 +129,7 @@ export class LoginPage extends React.PureComponent<Props> {
 
 const mapStateToProps = (state: Store): StateProps => {
   return {
-    loading: state.auth.loading,
+    loading: state.auth.loading
   };
 };
 
@@ -138,10 +139,10 @@ const mapDispatchToProps = (
   startLogin: (email: string, password: string) =>
     dispatch(startLogin(email, password)),
   startSignUp: (email: string, password: string) =>
-    dispatch(startSignUp(email, password)),
+    dispatch(startSignUp(email, password))
 });
 
-export default connect<StateProps, DispatchProps, {}, Store>(
+export const LoginPage = connect<StateProps, DispatchProps, {}, Store>(
   mapStateToProps,
   mapDispatchToProps
-)(LoginPage);
+)(LoginPageBase);

@@ -1,14 +1,14 @@
 import { QueryKeys } from "../../routers/Routing";
+import { Note } from "../../store/store.types";
+import { notes } from "../../testData/notes";
+import { tags } from "../../testData/tags";
 import {
   getFilteredNotes,
   getShortText,
   isModal,
   nameOf,
-  toggleArrayElement,
+  toggleArrayElement
 } from "../utils";
-import { notes } from "../../testData/notes";
-import { Note } from "../../store/store.types";
-import { tags } from "../../testData/tags";
 
 interface TestValues {
   name: string;
@@ -30,9 +30,9 @@ describe("Utils", () => {
   });
 
   test("should toggle an element in an array", () => {
-    const arr: string[] = notes.map((n) => n.title);
+    const arr: string[] = notes.map(n => n.title);
     expect(toggleArrayElement(arr, notes[0].title)).toEqual(
-      arr.filter((el) => el !== notes[0].title)
+      arr.filter(el => el !== notes[0].title)
     );
 
     expect(toggleArrayElement(arr, "test")).toEqual([...arr, "test"]);
@@ -56,7 +56,7 @@ describe("Utils", () => {
     // case where there is match in two noted, but the second one has archive status true
     const filteredNotes = getFilteredNotes(notes, {
       search: "teXt",
-      tagFilters: [],
+      tagFilters: []
     });
 
     expect(filteredNotes).toEqual([notes[0], notes[3]]);
@@ -67,12 +67,12 @@ describe("Utils", () => {
     const notesArr: Note[] = [
       notes[0],
       notes[1],
-      { ...notes[2], archive: false },
+      { ...notes[2], archive: false }
     ];
 
     const filteredNotes = getFilteredNotes(notesArr, {
       search: "teXt",
-      tagFilters: [],
+      tagFilters: []
     });
 
     expect(filteredNotes).toEqual([notesArr[0], notesArr[2]]);
@@ -82,7 +82,7 @@ describe("Utils", () => {
     // case where there is match one note with list type
     const filteredNotes = getFilteredNotes(notes, {
       search: "dog",
-      tagFilters: [],
+      tagFilters: []
     });
 
     expect(filteredNotes).toEqual([notes[1]]);
@@ -92,7 +92,7 @@ describe("Utils", () => {
     // case where there is match one note in title
     const filteredNotes = getFilteredNotes(notes, {
       search: "1",
-      tagFilters: [],
+      tagFilters: []
     });
 
     expect(filteredNotes).toEqual([notes[0]]);
@@ -102,7 +102,7 @@ describe("Utils", () => {
     // case where there is match one note in title
     const filteredNotes = getFilteredNotes(notes, {
       search: "",
-      tagFilters: [tags[0].id],
+      tagFilters: [tags[0].id]
     });
 
     expect(filteredNotes).toEqual([notes[1], notes[0], notes[3]]);

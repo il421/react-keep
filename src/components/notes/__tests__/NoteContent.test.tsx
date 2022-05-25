@@ -1,9 +1,10 @@
-import React from "react";
 import { shallow } from "enzyme";
-import { NoteContent } from "../NoteContent";
 import toJson from "enzyme-to-json";
-import { NoteType } from "../notes.types";
+import React from "react";
+
 import { notes } from "../../../testData/notes";
+import { NoteContent } from "../NoteContent";
+import { NoteType } from "../notes.types";
 
 test("should render NoteContent", () => {
   const textWrapper = shallow(

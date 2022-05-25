@@ -4,14 +4,14 @@ import {
   AuthStoreState,
   LoadingAction,
   LoginAction,
-  LogoutAction,
+  LogoutAction
 } from "../../store/store.types";
 
 describe("Auth reducer", () => {
   test("should set loading value", () => {
     const action: LoadingAction = {
       type: AuthActionsTypes.loading,
-      loading: true,
+      loading: true
     };
 
     const state = authReducer(defaultAuthStore, action) as AuthStoreState;
@@ -23,8 +23,9 @@ describe("Auth reducer", () => {
       type: AuthActionsTypes.login,
       uid: "123",
       name: "123",
-      url: null,
+      url: null
     };
+
     const state = authReducer(defaultAuthStore, action) as AuthStoreState;
 
     expect(state.uid).toBe(action.uid);
@@ -34,7 +35,7 @@ describe("Auth reducer", () => {
 
   test("should clear uid for logout", () => {
     const action: LogoutAction = {
-      type: AuthActionsTypes.logout,
+      type: AuthActionsTypes.logout
     };
 
     const state = authReducer(defaultAuthStore, action) as AuthStoreState;

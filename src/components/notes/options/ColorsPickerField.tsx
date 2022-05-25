@@ -1,15 +1,14 @@
-import React from "react";
-import { FlexBox } from "../../ui-components";
+import React, { FunctionComponent } from "react";
+
 import { JustifyContent, PickerColors, nameOf } from "../../../common";
-import { RadioButtonsInputField } from "../../form";
-import "../../../styles/components/notes/_colors-picker.scss";
-import { NoteFormValues } from "../notes.types";
 import { ListItem } from "../../../store/store.types";
+import "../../../styles/components/notes/_colors-picker.scss";
+import { RadioButtonsInputField } from "../../form";
+import { FlexBox } from "../../ui-components";
+import { NoteFormValues } from "../notes.types";
 
-class ColorsPickerField extends React.PureComponent {
-  private nameOf = nameOf<NoteFormValues<string | ListItem[]>>();
-
-  render() {
+export const ColorsPickerField: FunctionComponent = () => {
+  const nameOfField = nameOf<NoteFormValues<string | ListItem[]>>();
     return (
       <FlexBox
         justifyContent={JustifyContent.spaceBetween}
@@ -19,17 +18,14 @@ class ColorsPickerField extends React.PureComponent {
           <RadioButtonsInputField
             id={`color-icon-${color}`}
             key={color}
-            name={this.nameOf("color")}
+            name={nameOfField("color")}
             radioClassName="colors-picker__item"
             value={color}
             labelProps={{
-              style: { backgroundColor: color, cursor: "pointer" },
+              style: { backgroundColor: color, cursor: "pointer" }
             }}
           />
         ))}
       </FlexBox>
     );
-  }
 }
-
-export default ColorsPickerField;

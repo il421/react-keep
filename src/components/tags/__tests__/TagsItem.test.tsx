@@ -1,8 +1,9 @@
-import React from "react";
 import { mount, ReactWrapper } from "enzyme";
-import TagsItem, { TagsItemProps } from "../TagsItem";
-import { tags } from "../../../testData/tags";
+import React from "react";
+
 import { WithFontAwesome } from "../../../common/WithFontAwesome";
+import { tags } from "../../../testData/tags";
+import TagsItem, { TagsItemProps } from "../TagsItem";
 
 let props: TagsItemProps, wrapper: ReactWrapper<TagsItemProps>;
 
@@ -11,7 +12,7 @@ beforeEach(() => {
     tag: tags[0],
     removeTag: jest.fn(),
     checked: true,
-    onChange: jest.fn(),
+    onChange: jest.fn()
   };
   wrapper = mount<TagsItemProps>(
     <WithFontAwesome>

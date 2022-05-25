@@ -1,28 +1,29 @@
-import React from "react";
-import { connect } from "react-redux";
+import { FormApi } from "final-form";
 import { History } from "history";
+import React from "react";
+import { Field, FormSpy } from "react-final-form";
 import Modal from "react-modal";
-import { PathNames, QueryKeys } from "../../routers/Routing";
+import { connect } from "react-redux";
+import { ThunkDispatch } from "redux-thunk";
+
+import { updateUserData } from "../../actions/auth";
 import {
   AlignItems,
   JustifyContent,
   isModal,
   nameOf,
-  Placeholders,
+  Placeholders
 } from "../../common";
+import { PathNames, QueryKeys } from "../../routers/Routing";
 import { AuthStoreState, Store, UpdateUser } from "../../store/store.types";
-import { updateUserData } from "../../actions/auth";
+import "../../styles/components/login/_user-form.scss";
+import { BaseForm, TextInputField, FileFormField } from "../form";
 import {
   ContentContainer,
   ConfirmButton,
   FlexBox,
-  IconButton,
+  IconButton
 } from "../ui-components";
-import { BaseForm, TextInputField, FileFormField } from "../form";
-import "../../styles/components/login/_user-form.scss";
-import { ThunkDispatch } from "redux-thunk";
-import { Field, FormSpy } from "react-final-form";
-import { FormApi } from "final-form";
 
 interface UserFormValues {
   firstName: string;
@@ -51,7 +52,7 @@ interface UserFormModalProps {
 
 export type Props = StateProps & UserFormModalProps & DispatchProps;
 
-export class UserFormModal extends React.PureComponent<Props> {
+export class UserFormModalBase extends React.PureComponent<Props> {
   private nameOf = nameOf<UserFormValues>();
   private readonly NO_AVATAR_URL: string = "img/no_avatar.png";
   private readonly FIELD_ID: string = "avatar";
@@ -64,14 +65,14 @@ export class UserFormModal extends React.PureComponent<Props> {
       firstName = auth.name.split(" ")[0];
       lastName = auth.name
         .split(" ")
-        .filter((i) => i !== firstName)
+        .filter(i => i !== firstName)
         .join(" ");
     }
 
     return {
       firstName,
       lastName,
-      photoUrl: auth.url,
+      photoUrl: auth.url
     };
   };
 
@@ -101,7 +102,7 @@ export class UserFormModal extends React.PureComponent<Props> {
       displayName: !!displayName ? displayName : null,
       photoFile: values.uploadingPhoto,
       photoURL: values.photoUrl,
-      tenantId: this.props.auth.uid,
+      tenantId: this.props.auth.uid
     });
     this.props.history.push(PathNames.base);
   };
@@ -117,7 +118,7 @@ export class UserFormModal extends React.PureComponent<Props> {
     if (
       !isModal({
         query: this.props.history.location.search,
-        type: QueryKeys.user,
+        type: QueryKeys.user
       })
     ) {
       return null;
@@ -147,9 +148,9 @@ export class UserFormModal extends React.PureComponent<Props> {
                     <>
                       <Field name={this.nameOf("photoUrl")}>
                         {() => (
-                          <img
+                          <image
                             className="avatar__img"
-                            src={
+                            path={
                               values.photoUrl && !values.uploadingPhoto
                                 ? values.photoUrl
                                 : values.uploadingPhoto
@@ -158,7 +159,6 @@ export class UserFormModal extends React.PureComponent<Props> {
                             }
                             width="95"
                             height="95"
-                            alt="User photo"
                           />
                         )}
                       </Field>
@@ -238,17 +238,22 @@ export class UserFormModal extends React.PureComponent<Props> {
 
 const mapStateToProps = (state: Store): StateProps => {
   return {
-    auth: state.auth,
+    auth: state.auth
   };
 };
 
 const mapDispatchToProps = (
   dispatch: ThunkDispatch<{}, {}, any>
 ): DispatchProps => ({
-  updateUserData: (data: UpdateUser) => dispatch(updateUserData(data)),
+  updateUserData: (data: UpdateUser) => dispatch(updateUserData(data))
 });
 
-export default connect<StateProps, DispatchProps, UserFormModalProps, Store>(
+export const UserFormModal = connect<
+  StateProps,
+  DispatchProps,
+  UserFormModalProps,
+  Store
+>(
   mapStateToProps,
   mapDispatchToProps
-)(UserFormModal);
+)(UserFormModalBase);

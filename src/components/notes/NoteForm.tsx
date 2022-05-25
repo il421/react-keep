@@ -1,6 +1,21 @@
+import { ValidationErrors } from "final-form";
+import { History } from "history";
+import moment from "moment";
 import React from "react";
 import { connect } from "react-redux";
-import { History } from "history";
+import { ThunkDispatch } from "redux-thunk";
+
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
+
+import { handleAddNote, handleUpdateNote } from "../../actions/notes";
+import {
+  AlignItems,
+  JustifyContent,
+  nameOf,
+  PickerColors,
+  Placeholders
+} from "../../common";
+import { PathNames } from "../../routers/Routing";
 import {
   AddNote,
   CollaboratorsStoreState,
@@ -10,41 +25,28 @@ import {
   NotesStoreState,
   Store,
   TagsStoreState,
-  UpdateNote,
+  UpdateNote
 } from "../../store/store.types";
-import { NoteFormValues, NoteType } from "./notes.types";
-import ColorsPickerField from "./options/ColorsPickerField";
-import {
-  AlignItems,
-  JustifyContent,
-  nameOf,
-  PickerColors,
-  Placeholders,
-} from "../../common";
-import { PathNames } from "../../routers/Routing";
+import "../../styles/components/notes/_note-form.scss";
+import "../../styles/ui-components/_icon-button.scss";
+import "../../styles/ui-components/_link-button.scss";
 import { BaseForm, FieldSpy, TextInputField } from "../form";
-import { handleAddNote, handleUpdateNote } from "../../actions/notes";
-import { ThunkDispatch } from "redux-thunk";
-import moment from "moment";
-import {
-  getDefaultContent,
-  getInitialNoteFormValues,
-  getSelectedNote,
-} from "./utils";
 import {
   ConfirmButton,
   ContentContainer,
   FlexBox,
   IconButton,
-  LinkButton,
+  LinkButton
 } from "../ui-components";
-import TagsPickerField from "./options/TagsPickerField";
-import { ValidationErrors } from "final-form";
-import CollaboratorsField from "./options/CollaboratorsField";
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import "../../styles/components/notes/_note-form.scss";
-import "../../styles/ui-components/_icon-button.scss";
-import "../../styles/ui-components/_link-button.scss";
+import { NoteFormValues, NoteType } from "./notes.types";
+import { CollaboratorsField } from "./options/CollaboratorsField";
+import { ColorsPickerField } from "./options/ColorsPickerField";
+import { TagsPickerField } from "./options/TagsPickerField";
+import {
+  getDefaultContent,
+  getInitialNoteFormValues,
+  getSelectedNote
+} from "./utils";
 
 interface StateProps {
   notes: NotesStoreState[];
@@ -71,7 +73,7 @@ enum NoteFormOptions {
   none = "none",
   palette = "palette",
   tags = "tags",
-  collaborators = "share",
+  collaborators = "share"
 }
 
 interface TextNoteFormModalState {
@@ -89,7 +91,7 @@ export class NoteFormBase extends React.PureComponent<Props> {
     content: getDefaultContent(this.props.type),
     tags: [],
     color: PickerColors.white,
-    collaborators: [],
+    collaborators: []
   };
 
   private nameOf = nameOf<NoteFormValues<string | ListItem[] | ImageItem>>();
@@ -102,7 +104,7 @@ export class NoteFormBase extends React.PureComponent<Props> {
     currentNoteColor:
       getSelectedNote(this.props.history.location.search, this.props.notes)
         ?.color ?? this.defaultNote.color,
-    currentOption: null,
+    currentOption: null
   } as TextNoteFormModalState;
 
   private onSubmitAction = async (
@@ -115,7 +117,7 @@ export class NoteFormBase extends React.PureComponent<Props> {
       const update: UpdateNote = {
         ...this.state.currentNote,
         ...note,
-        updatedAt: moment().valueOf(),
+        updatedAt: moment().valueOf()
       };
 
       await this.props.updateNote(this.state.currentNote.id, update);
@@ -204,7 +206,7 @@ export class NoteFormBase extends React.PureComponent<Props> {
       <ContentContainer
         className="note-modal__container"
         style={{
-          backgroundColor: this.state.currentNoteColor,
+          backgroundColor: this.state.currentNoteColor
         }}
       >
         <BaseForm<NoteFormValues<string | ListItem[] | ImageItem>>
@@ -212,7 +214,7 @@ export class NoteFormBase extends React.PureComponent<Props> {
           initialValues={getInitialNoteFormValues({
             type: this.props.type,
             currentNote: this.state.currentNote,
-            defaultValues: this.defaultNote,
+            defaultValues: this.defaultNote
           })}
           validate={this.props.validate}
           onSubmit={this.onSubmitAction}
@@ -248,7 +250,7 @@ export class NoteFormBase extends React.PureComponent<Props> {
 const mapStateToProps = (state: Store): StateProps => ({
   notes: state.notes,
   tags: state.tags,
-  collaborators: state.collaborators,
+  collaborators: state.collaborators
 });
 
 const mapDispatchToProps = (
@@ -256,7 +258,7 @@ const mapDispatchToProps = (
 ): DispatchProps => ({
   addNote: (note: AddNote) => dispatch(handleAddNote(note)),
   updateNote: (id: string, note: UpdateNote) =>
-    dispatch(handleUpdateNote(id, note)),
+    dispatch(handleUpdateNote(id, note))
 });
 
 export const NoteForm = connect<StateProps, DispatchProps, any, Store>(

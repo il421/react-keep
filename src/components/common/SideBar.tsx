@@ -1,7 +1,8 @@
 import React from "react";
-import { IconButton, FlexBox } from "../ui-components";
-import "../../styles/components/common/_sidebar.scss";
+
 import { JustifyContent } from "../../common";
+import "../../styles/components/common/_sidebar.scss";
+import { IconButton, FlexBox } from "../ui-components";
 
 export interface SideBarProp {
   showBar: boolean;

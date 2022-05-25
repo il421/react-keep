@@ -1,19 +1,20 @@
-import React from "react";
 import { mount, ReactWrapper } from "enzyme";
-import { Props, TagsListBase } from "../TagsList";
-import { tags } from "../../../testData/tags";
-import { filters } from "../../../testData/filters";
+import React from "react";
+
 import { WithFontAwesome } from "../../../common/WithFontAwesome";
+import { filters } from "../../../testData/filters";
+import { tags } from "../../../testData/tags";
+import { Props, TagsListBase } from "../TagsList";
 
 let props: Props, wrapper: ReactWrapper<Props>;
 
 beforeEach(() => {
   props = {
-    tags: tags,
-    filters: filters,
+    tags,
+    filters,
     removeTag: jest.fn(),
     toggleTag: jest.fn(),
-    removeTagFromNotes: jest.fn(),
+    removeTagFromNotes: jest.fn()
   };
   wrapper = mount<Props>(
     <WithFontAwesome>

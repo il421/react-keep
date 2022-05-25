@@ -1,26 +1,27 @@
+import { History, Path } from "history";
+import { stringify } from "query-string";
 import React, { useState } from "react";
 import { ToastContainer } from "react-toastify";
-import { History, Path } from "history";
+
 import { JustifyContent, toggleArrayElement } from "../../common";
-import { Header } from "./Header";
-import { SideBar } from "./SideBar";
-import { Controllers } from "./Controllers";
-import UserFormModal from "../login/UserFormModal";
+import { QueryKeys } from "../../routers/Routing";
 import "../../styles/components/common/_dashboard.scss";
 import "../../styles/components/notes/_note-modal.scss";
-import { QueryKeys } from "../../routers/Routing";
-import { stringify } from "query-string";
+import { ArchiveList } from "../archive/ArchiveList";
+import { Collaborators } from "../collaborators/Collaborators";
+import { UserFormModal } from "../login/UserFormModal";
 import {
   NoteType,
   ImageNoteFormModal,
   TextNoteFormModal,
-  ListNoteFormModal,
+  ListNoteFormModal
 } from "../notes";
-import { IconButton, FlexBox } from "../ui-components";
-import { Collaborators } from "../collaborators/Collaborators";
-import { ArchiveList } from "../archive/ArchiveList";
 import { NotesList } from "../notes/NotesList";
-import Tags from "../tags/Tags";
+import { Tags } from "../tags/Tags";
+import { IconButton, FlexBox } from "../ui-components";
+import { Controllers } from "./Controllers";
+import { Header } from "./Header";
+import { SideBar } from "./SideBar";
 
 export interface DashboardPageProps {
   history: History;
@@ -29,7 +30,7 @@ export interface DashboardPageProps {
 enum CollapseType {
   "tags",
   "arch",
-  "collaborators",
+  "collaborators"
 }
 
 export const onNoteSelected = (options: {
@@ -52,13 +53,13 @@ export const onNoteSelected = (options: {
   }
 
   const query = stringify({
-    [key]: id,
+    [key]: id
   });
   push(`${pathname}?${query}`);
 };
 
 export const DashboardPage: React.FunctionComponent<DashboardPageProps> = ({
-  history,
+  history
 }): JSX.Element => {
   const [showBar, setShowSidebar] = useState<boolean>(false);
   const [collapsed, setCollapsed] = useState<CollapseType[]>([]);
@@ -79,7 +80,7 @@ export const DashboardPage: React.FunctionComponent<DashboardPageProps> = ({
             type,
             id,
             pathname: history.location.pathname,
-            push: history.push,
+            push: history.push
           })
         }
       />
@@ -143,7 +144,7 @@ export const DashboardPage: React.FunctionComponent<DashboardPageProps> = ({
       <UserFormModal history={history} />
       <Controllers
         isMobile
-        openDialog={(query) =>
+        openDialog={query =>
           history.push(`${history.location.pathname}?${query}`)
         }
       />

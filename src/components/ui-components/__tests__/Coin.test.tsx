@@ -1,8 +1,9 @@
-import React from "react";
 import { shallow, ShallowWrapper } from "enzyme";
-import { Coin, CoinBaseProps } from "../Coin";
 import toJson from "enzyme-to-json";
+import React from "react";
+
 import { user } from "../../../testData/users";
+import { Coin, CoinBaseProps } from "../Coin";
 
 let props: CoinBaseProps, wrapper: ShallowWrapper;
 
@@ -10,7 +11,7 @@ beforeEach(() => {
   props = {
     url: "url",
     name: user.firstName,
-    email: user.email,
+    email: user.email
   };
 });
 

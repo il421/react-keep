@@ -1,6 +1,8 @@
 import React from "react";
-import { Store, TagsStoreState } from "../../store/store.types";
 import { connect } from "react-redux";
+
+import { Store, TagsStoreState } from "../../store/store.types";
+
 interface NoteTagProps {
   tagId: string;
 }
@@ -13,10 +15,10 @@ export type Props = NoteTagProps & StateProps;
 
 export const NoteTagBase: React.FunctionComponent<Props> = ({
   tagId,
-  tags,
+  tags
 }): JSX.Element => {
   const getTagById = (tagId: string): string | undefined => {
-    const tag = tags.find((t) => t.id === tagId);
+    const tag = tags.find(t => t.id === tagId);
     return tag ? tag.value : undefined;
   };
 
@@ -25,7 +27,7 @@ export const NoteTagBase: React.FunctionComponent<Props> = ({
 
 const mapStateToProps = (state: Store): StateProps => {
   return {
-    tags: state.tags,
+    tags: state.tags
   };
 };
 

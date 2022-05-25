@@ -1,7 +1,8 @@
-import React from "react";
 import { shallow, ShallowWrapper } from "enzyme";
-import { HeaderBase, Props } from "../Header";
+import React from "react";
+
 import { defaultAuthStore } from "../../../reducers/auth";
+import { HeaderBase, Props } from "../Header";
 
 let props: Props, wrapper: ShallowWrapper<Props, any>;
 const mockHistoryPush = jest.fn();
@@ -9,15 +10,15 @@ const mockHistoryPush = jest.fn();
 const history = {
   push: mockHistoryPush,
   location: {
-    pathname: "pathname",
-  },
+    pathname: "pathname"
+  }
 };
 beforeEach(() => {
   props = {
     showSidebar: jest.fn(),
     startLogout: jest.fn(),
     history: history as any,
-    auth: defaultAuthStore,
+    auth: defaultAuthStore
   };
 
   wrapper = shallow<Props>(<HeaderBase {...props} />);

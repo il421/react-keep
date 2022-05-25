@@ -1,11 +1,12 @@
-import React from "react";
 import { mount, ReactWrapper } from "enzyme";
-import { ListNoteFromItemProps, ListNoteFromItem } from "../ListNoteFromItem";
+import React from "react";
 import { Form } from "react-final-form";
+
 import {
   triggerCheckboxChange,
-  triggerInputChange,
+  triggerInputChange
 } from "../../../common/testUtils";
+import { ListNoteFromItemProps, ListNoteFromItem } from "../ListNoteFromItem";
 
 let wrapper: ReactWrapper | undefined, props: ListNoteFromItemProps;
 
@@ -16,7 +17,7 @@ beforeEach(() => {
     addItem: jest.fn(),
     onRemove: jest.fn(),
     onChecked: jest.fn(),
-    setPastedValue: jest.fn(),
+    setPastedValue: jest.fn()
   };
 
   wrapper = mount(
@@ -64,7 +65,7 @@ describe("Actions", () => {
     // check item
     triggerCheckboxChange(wrapper, { name: "text.checked" }, true);
     expect(props.onChecked).toHaveBeenLastCalledWith(true, {
-      text: { checked: true },
+      text: { checked: true }
     });
   });
 });

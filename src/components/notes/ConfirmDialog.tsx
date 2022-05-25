@@ -1,7 +1,8 @@
 import React from "react";
-import { FlexBox, ConfirmButton } from "../ui-components";
+
 import { AlignItems, JustifyContent } from "../../common";
 import "../../styles/components/notes/_confirm-dialog.scss";
+import { FlexBox, ConfirmButton } from "../ui-components";
 
 /**
  * This component works only as a part of Note for now.
@@ -20,7 +21,7 @@ export const ConfirmDialog: React.FunctionComponent<ConfirmDialogProps> = ({
   className,
   closeDialog,
   handleConfirm,
-  buttonsProps,
+  buttonsProps
 }) => {
   return (
     <FlexBox
@@ -37,7 +38,7 @@ export const ConfirmDialog: React.FunctionComponent<ConfirmDialogProps> = ({
           type="button"
           text={buttonsProps?.confirmButtonText! ?? "Delete"}
           wrapperClassName="confirm-dialog__button"
-          onCLick={(evt) => {
+          onCLick={evt => {
             evt?.stopPropagation();
             handleConfirm();
           }}
@@ -48,7 +49,7 @@ export const ConfirmDialog: React.FunctionComponent<ConfirmDialogProps> = ({
           type="button"
           text={buttonsProps?.cancelButtonText! ?? "Don't"}
           wrapperClassName="confirm-dialog__button"
-          onCLick={(evt) => {
+          onCLick={evt => {
             evt?.stopPropagation();
             closeDialog();
           }}

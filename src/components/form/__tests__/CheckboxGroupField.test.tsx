@@ -1,9 +1,10 @@
-import React from "react";
 import { mount, ReactWrapper } from "enzyme";
+import React from "react";
 import { Form } from "react-final-form";
+
 import {
   CheckboxGroupField,
-  CheckboxGroupFieldProps,
+  CheckboxGroupFieldProps
 } from "../CheckboxGroupField";
 
 let props: CheckboxGroupFieldProps,
@@ -15,13 +16,13 @@ beforeEach(() => {
     options: [
       {
         id: "id1",
-        value: "1",
+        value: "1"
       },
       {
         id: "id2",
-        value: "2",
-      },
-    ],
+        value: "2"
+      }
+    ]
   };
 });
 

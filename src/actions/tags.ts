@@ -1,17 +1,18 @@
-import database from "../firebase/firebase";
+import { toast } from "react-toastify";
+import { Action, Dispatch } from "redux";
+import { ThunkAction } from "redux-thunk";
+
+import { getMessage, Message } from "../common";
+import { Collections } from "../firebase/Collections";
+import { database } from "../firebase/firebase";
 import {
   AddTagAction,
   RemoveTagAction,
   SetTagsAction,
   Store,
   Tag,
-  TagsActionsTypes,
+  TagsActionsTypes
 } from "../store/store.types";
-import { Action, Dispatch } from "redux";
-import { toast } from "react-toastify";
-import { getMessage, Message } from "../common";
-import { Collections } from "../firebase/Collections";
-import { ThunkAction } from "redux-thunk";
 
 const initDocumentRef = (uid: string) => {
   return database
@@ -22,38 +23,40 @@ const initDocumentRef = (uid: string) => {
 
 export const setTags = (tags: Tag[]): SetTagsAction => ({
   type: TagsActionsTypes.setTags,
-  tags,
+  tags
 });
 
 export const addTag = (tag: Tag): AddTagAction => ({
   type: TagsActionsTypes.addTag,
-  tag,
+  tag
 });
 
 export const removeTag = (id: string): RemoveTagAction => ({
   type: TagsActionsTypes.removeTag,
-  id,
+  id
 });
 
 export const handleSetTags = (): ThunkAction<any, Store, any, Action> => {
   return async (dispatch: Dispatch, getState: () => Store) => {
-    let tags: Tag[] = [];
+    const tags: Tag[] = [];
     const uid = getState().auth.uid;
     const docRef = initDocumentRef(uid);
 
     try {
       const snapshot = await docRef.get();
-      snapshot.forEach((doc) => {
+      snapshot.forEach(doc => {
         if (doc.exists) {
           tags.unshift({ id: doc.id, ...(doc.data() as Tag) });
         } else {
-          console.log(getMessage(Message.errorNoSuchDoc));
+          // eslint-disable-next-line no-console
+          console.warn(getMessage(Message.errorNoSuchDoc));
           toast.error(getMessage(Message.errorNoSuchDoc));
         }
       });
       dispatch(setTags(tags));
     } catch (e) {
-      console.log(e.message);
+      // eslint-disable-next-line no-console
+      console.warn(e.message);
       toast.error(e.message);
     }
   };
@@ -70,11 +73,12 @@ export const handleAddTag = (
       dispatch(
         addTag({
           id: docRef.id,
-          value,
+          value
         })
       );
     } catch (e) {
-      console.log(e.message);
+      // eslint-disable-next-line no-console
+      console.warn(e.message);
       toast.error(e.message);
     }
   };
@@ -91,7 +95,8 @@ export const handleRemoveTag = (
       dispatch(removeTag(id));
       await docRef.doc(id).delete();
     } catch (e) {
-      console.log(e.message);
+      // eslint-disable-next-line no-console
+      console.warn(e.message);
       toast.error(e.message);
     }
   };

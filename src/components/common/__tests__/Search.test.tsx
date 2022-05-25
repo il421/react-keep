@@ -1,12 +1,13 @@
-import React from "react";
 import { shallow, ShallowWrapper } from "enzyme";
+import React from "react";
+
 import { DispatchProps, SearchBase } from "../Search";
 
 let wrapper: ShallowWrapper<DispatchProps, any>, props: DispatchProps;
 
 beforeEach(() => {
   props = {
-    setSearchFilter: jest.fn(),
+    setSearchFilter: jest.fn()
   };
   wrapper = shallow<DispatchProps>(<SearchBase {...props} />);
 });
@@ -18,7 +19,7 @@ test("should render Search", () => {
 
 test("should setSearchFilter when search", () => {
   wrapper.find(".search").simulate("change", {
-    target: { value: "test" },
+    target: { value: "test" }
   });
   expect(props.setSearchFilter).toHaveBeenLastCalledWith("test");
 });

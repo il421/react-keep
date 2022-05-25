@@ -1,7 +1,8 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import { UserData } from "../store/store.types";
+
 import { getMessage, Message } from "../common";
+import { UserData } from "../store/store.types";
 
 export const getUserByEmail = (
   email: string,
@@ -10,10 +11,10 @@ export const getUserByEmail = (
   return axios
     .get(`${process.env.REACT_APP_FUNCTION_URL}/getUserByEmail`, {
       params: {
-        email,
-      },
+        email
+      }
     })
-    .then((response) => {
+    .then(response => {
       if (response.status >= 200 && response.status <= 308) {
         if (
           Object.keys(response.data).length === 0 &&
@@ -26,10 +27,11 @@ export const getUserByEmail = (
         callback(response.data as UserData);
       }
     })
-    .catch((error) => {
+    .catch(error => {
       // handle error
       toast.error(error.message);
-      console.log(error.message);
+      // eslint-disable-next-line no-console
+      console.warn(error.message);
     });
 };
 
@@ -40,10 +42,10 @@ export const getUserByUids = (
   return axios
     .get(`${process.env.REACT_APP_FUNCTION_URL}/getUserByUids`, {
       params: {
-        uids,
-      },
+        uids
+      }
     })
-    .then((response) => {
+    .then(response => {
       // handle success
       if (response.status >= 200 && response.status <= 308) {
         if (
@@ -57,9 +59,10 @@ export const getUserByUids = (
         callback(response.data.users as UserData[]);
       }
     })
-    .catch((error) => {
+    .catch(error => {
       // handle error
       toast.error(error.message);
-      console.log(error.message);
+      // eslint-disable-next-line no-console
+      console.warn(error.message);
     });
 };

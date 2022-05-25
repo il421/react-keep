@@ -1,27 +1,49 @@
 {
-  "extends": "react-app",
+  "extends": ["react-app"],
+  "plugins": ["react-hooks", "const-case","jest"],
   "rules": {
     "jsx-a11y/anchor-is-valid": "off",
-    "no-unused-vars": "off",
-    "unused-imports/no-unused-imports": 2,
-    "unused-imports/no-unused-vars": 2,
-    "object-curly-spacing": ["error", "always"],
-    "indent": "off",
-    "linebreak-style": [
-      "error",
-      "unix"
+    "quotes": [2, "double", { "avoidEscape": true }],
+    "no-console": "warn",
+    "no-var": "error",
+    "prefer-const": "error",
+    "no-const-assign": "error",
+    "camelcase": ["error", { "properties": "always" }],
+    "no-duplicate-imports": "error",
+    "no-useless-rename": "error",
+    "prefer-template": "error",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/jsx-curly-brace-presence": "warn",
+    "react/self-closing-comp": "error",
+    "react/jsx-key": "error",
+    "react/no-array-index-key": "error",
+    "no-param-reassign": "error",
+    "no-undef-init": "error",
+    "object-shorthand": ["error", "always"],
+    "no-unneeded-ternary": "error",
+    "no-dupe-class-members": "error",
+    "no-debugger": "warn",
+    "no-setter-return": "error",
+    "no-unreachable": "error",
+    "no-await-in-loop": "error",
+    "new-cap": ["error", { "capIsNewExceptions": ["Intl.DateTimeFormat"] }],
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      { "vars": "all", "args": "after-used", "ignoreRestSiblings": true }
     ],
-    "quotes": [
-      "error",
-      "double"
+    "const-case/uppercase": "error",
+    "import/no-default-export": "error",
+    "max-params": ["error", 3],
+    "padding-line-between-statements": [
+      "warn",
+      { "blankLine": "always", "prev": "multiline-const", "next": "const" },
+      { "blankLine": "always", "prev": "if", "next": "const" },
+      { "blankLine": "always", "prev": "multiline-expression", "next": "const" }
     ],
-    "semi": [
-      "error",
-      "always"
-    ]
+    "jest/no-focused-tests": "warn",
+    "jest/no-disabled-tests": "warn"
   },
   "globals": {
-    "gtm": false
-  },
-  "plugins": ["unused-imports"]
+  }
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
+
 import { Store } from "../store/store.types";
 import { PathNames } from "./Routing";
 
@@ -16,7 +17,7 @@ export interface RouterStateProps {
 
 type Prop = PublicRouterProps & RouterStateProps;
 
-const PublicRouter: React.FunctionComponent<Prop> = ({
+const PublicRouterBase: React.FunctionComponent<Prop> = ({
   isAuthenticated,
   component: Component,
   ...rest
@@ -34,9 +35,12 @@ const PublicRouter: React.FunctionComponent<Prop> = ({
 );
 
 const mapStateToProps = (state: Store): RouterStateProps => ({
-  isAuthenticated: !!state.auth.uid,
+  isAuthenticated: !!state.auth.uid
 });
 
-export default connect<RouterStateProps, {}, PublicRouterProps, Store>(
-  mapStateToProps
-)(PublicRouter);
+export const PublicRouter = connect<
+  RouterStateProps,
+  {},
+  PublicRouterProps,
+  Store
+>(mapStateToProps)(PublicRouterBase);

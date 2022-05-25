@@ -1,5 +1,6 @@
-import React from "react";
 import { mount, ReactWrapper } from "enzyme";
+import React from "react";
+
 import { ConfirmButton, ConfirmButtonProps } from "../ConfirmButton";
 
 let props: ConfirmButtonProps, wrapper: ReactWrapper<ConfirmButtonProps, {}>;
@@ -7,7 +8,7 @@ let props: ConfirmButtonProps, wrapper: ReactWrapper<ConfirmButtonProps, {}>;
 beforeEach(() => {
   props = {
     text: "text",
-    onCLick: jest.fn(),
+    onCLick: jest.fn()
   };
 });
 

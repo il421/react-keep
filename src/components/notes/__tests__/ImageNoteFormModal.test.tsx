@@ -1,16 +1,17 @@
-import * as React from "react";
 import { ReactWrapper } from "enzyme";
+import { ValidationErrors } from "final-form";
+import fs from "fs";
+import * as React from "react";
+
+import { Errors } from "../../../common";
+import { mountInApp } from "../../../common/testUtils";
+import { ImageItem } from "../../../store/store.types";
+import { notes } from "../../../testData/notes";
 import {
   ImageNoteFormModalProps,
   ImageNoteFormModal,
-  getValidationErrors,
+  getValidationErrors
 } from "../ImageNoteFormModal";
-import { ImageItem } from "../../../store/store.types";
-import { notes } from "../../../testData/notes";
-import { ValidationErrors } from "final-form";
-import { Errors } from "../../../common";
-import fs from "fs";
-import { mountInApp } from "../../../common/testUtils";
 
 let wrapper: ReactWrapper | undefined, props: ImageNoteFormModalProps;
 const mockHistoryPush = jest.fn();
@@ -19,14 +20,15 @@ const history = {
   push: mockHistoryPush,
   location: {
     pathname: "pathname",
-    search: "?image=add",
-  },
+    search: "?image=add"
+  }
 };
+
 const file = fs.readFileSync("./src/testData/test_img.jpg");
 
 beforeEach(() => {
   props = {
-    history: history as any,
+    history: history as any
   };
 });
 
@@ -64,7 +66,7 @@ describe("Rendering", () => {
       <ImageNoteFormModal
         history={{
           ...props.history,
-          location: { pathname: "pathname", search: "?image=3" } as any,
+          location: { pathname: "pathname", search: "?image=3" } as any
         }}
       />
     );
@@ -109,8 +111,8 @@ describe("Validation", () => {
         uploadedImage,
         imageId: null,
         imageUrl: null,
-        text: "text",
-      },
+        text: "text"
+      }
     });
     expect(Object.keys(noErrors.content).length).toBe(0);
   });
@@ -121,8 +123,8 @@ describe("Validation", () => {
         uploadedImage: undefined,
         imageUrl: "imageUrl",
         imageId: "imageId",
-        text: "text",
-      },
+        text: "text"
+      }
     });
     expect(Object.keys(noErrors.content).length).toBe(0);
   });
@@ -133,8 +135,8 @@ describe("Validation", () => {
         uploadedImage: undefined,
         imageUrl: null,
         imageId: null,
-        text: "text",
-      },
+        text: "text"
+      }
     });
     expect(Object.keys(emailIsRequiredError).length).toBe(1);
     expect(emailIsRequiredError.content.uploadedImage).toBe(Errors.required);

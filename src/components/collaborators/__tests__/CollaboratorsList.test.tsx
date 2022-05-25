@@ -1,16 +1,16 @@
-import React from "react";
 import { mount, ReactWrapper } from "enzyme";
-import { Props, CollaboratorsListBase } from "../CollaboratorsList";
+import React from "react";
 
-import { collaborators } from "../../../testData/users";
 import { WithFontAwesome } from "../../../common/WithFontAwesome";
+import { collaborators } from "../../../testData/users";
+import { Props, CollaboratorsListBase } from "../CollaboratorsList";
 
 let props: Props, wrapper: ReactWrapper<Props>;
 
 beforeEach(() => {
   props = {
     collaborators,
-    removeCollaborator: jest.fn(),
+    removeCollaborator: jest.fn()
   };
   wrapper = mount<Props>(
     <WithFontAwesome>

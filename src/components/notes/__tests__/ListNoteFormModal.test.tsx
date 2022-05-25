@@ -1,19 +1,20 @@
-import React from "react";
 import { mount, ReactWrapper } from "enzyme";
-import {
-  ListNoteFormModalProps,
-  ListNoteFormModal,
-} from "../ListNoteFormModal";
+import React from "react";
 import { Provider } from "react-redux";
 import configureMockStore from "redux-mock-store";
 import thunk from "redux-thunk";
+
+import {
+  triggerCheckboxChange,
+  triggerInputChange
+} from "../../../common/testUtils";
 import { ListItem, Store } from "../../../store/store.types";
 import { notes } from "../../../testData/notes";
 import { tags } from "../../../testData/tags";
 import {
-  triggerCheckboxChange,
-  triggerInputChange,
-} from "../../../common/testUtils";
+  ListNoteFormModalProps,
+  ListNoteFormModal
+} from "../ListNoteFormModal";
 
 let wrapper: ReactWrapper | undefined, props: ListNoteFormModalProps;
 const mockHistoryPush = jest.fn();
@@ -22,14 +23,15 @@ const history = {
   push: mockHistoryPush,
   location: {
     pathname: "pathname",
-    search: "?list=add",
-  },
+    search: "?list=add"
+  }
 };
+
 const createMockStore = configureMockStore([thunk]);
 
 beforeEach(() => {
   props = {
-    history: history as any,
+    history: history as any
   };
 });
 
@@ -43,7 +45,7 @@ afterEach(() => {
 describe("Rendering", () => {
   test("should render ListNoteFormModal correctly", () => {
     wrapper = mount(
-      <Provider store={createMockStore({ notes: notes, tags: tags } as Store)}>
+      <Provider store={createMockStore({ notes, tags } as Store)}>
         <ListNoteFormModal {...props} />
       </Provider>
     );
@@ -55,7 +57,7 @@ describe("Rendering", () => {
 
   test("should render correct initial state", () => {
     wrapper = mount(
-      <Provider store={createMockStore({ notes: notes, tags: tags } as Store)}>
+      <Provider store={createMockStore({ notes, tags } as Store)}>
         <ListNoteFormModal {...props} />
       </Provider>
     );
@@ -73,7 +75,7 @@ describe("Rendering", () => {
 
   test("should add, remove, and check items", () => {
     wrapper = mount(
-      <Provider store={createMockStore({ notes: notes, tags: tags } as Store)}>
+      <Provider store={createMockStore({ notes, tags } as Store)}>
         <ListNoteFormModal {...props} />
       </Provider>
     );
@@ -94,7 +96,7 @@ describe("Rendering", () => {
       checkedItems = 1;
       expect(wrapper.find("FieldArray").children().length).toBe(numberOfItems);
       triggerInputChange(wrapper, { name: "content[0].content" }, "text", {
-        tag: "textarea",
+        tag: "textarea"
       });
 
       triggerCheckboxChange(wrapper, { name: "content[0].checked" }, true);
@@ -117,11 +119,11 @@ describe("Rendering", () => {
 
   test("should render form for an existing note in ListNoteFormModal correctly", () => {
     wrapper = mount(
-      <Provider store={createMockStore({ notes: notes, tags: tags } as Store)}>
+      <Provider store={createMockStore({ notes, tags } as Store)}>
         <ListNoteFormModal
           history={{
             ...props.history,
-            location: { pathname: "pathname", search: "?list=2" } as any,
+            location: { pathname: "pathname", search: "?list=2" } as any
           }}
         />
       </Provider>

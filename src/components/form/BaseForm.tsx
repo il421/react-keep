@@ -1,8 +1,9 @@
+import { FormApi, ValidationErrors } from "final-form";
+import arrayMutators from "final-form-arrays";
 import React, { ReactNode } from "react";
 import { Form, FormRenderProps } from "react-final-form";
-import { FormApi, ValidationErrors } from "final-form";
+
 import { sortArray } from "../../common";
-import arrayMutators from "final-form-arrays";
 
 /**
  * Base Form initially works with all types of notes, however also
@@ -44,7 +45,7 @@ export class BaseForm<FormValues> extends React.PureComponent<
       onSubmit,
       validate,
       getFormActions,
-      resetAfterSubmitting = false,
+      resetAfterSubmitting = false
     } = this.props;
     return (
       <Form
@@ -60,7 +61,7 @@ export class BaseForm<FormValues> extends React.PureComponent<
             submitting,
             submitSucceeded,
             form,
-            handleSubmit,
+            handleSubmit
           } = props;
           // reset form if form is submitted successfully
           resetAfterSubmitting && submitSucceeded && form.reset();

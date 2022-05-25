@@ -10,7 +10,7 @@ export class UserPhoto extends React.PureComponent<UserPhotoProps> {
     const { className, ...rest } = this.props;
     return (
       <div className={className}>
-        <img {...rest} alt="User photo" />
+        <image {...rest} />
       </div>
     );
   }

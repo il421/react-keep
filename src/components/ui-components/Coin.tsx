@@ -1,7 +1,8 @@
 import React, { memo } from "react";
 import ReactTooltip from "react-tooltip";
-import "../../styles/ui-components/_coin.scss";
+
 import { getRandomColor, getShortText, JustifyContent } from "../../common";
+import "../../styles/ui-components/_coin.scss";
 import { FlexBox } from "./FlexBox";
 
 export interface CoinBaseProps {
@@ -16,7 +17,7 @@ const CoinBase: React.FunctionComponent<CoinBaseProps> = ({
   name,
   url,
   showTooltip,
-  className,
+  className
 }) => {
   return (
     <div data-tip={name ?? email}>
@@ -25,12 +26,7 @@ const CoinBase: React.FunctionComponent<CoinBaseProps> = ({
         className={`coin ${className}`}
       >
         {url ? (
-          <img
-            src={url}
-            alt={`Photo of ${name ?? email}`}
-            width={25}
-            height={25}
-          />
+          <image path={url} width={25} height={25} />
         ) : (
           <span style={{ backgroundColor: getRandomColor() }}>
             {getShortText(name ?? email!, 2, false)}

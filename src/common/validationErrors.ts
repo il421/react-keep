@@ -5,5 +5,5 @@ export enum Errors {
   existingCollaborator = "Yor added this user already",
   password = "Password must be 8 characters long!",
   name = "Try to avoid gaps in the name!",
-  tag = "Tag must be 20 characters long!",
+  tag = "Tag must be 20 characters long!"
 }
