@@ -1,17 +1,17 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 
 export interface UserPhotoProps
   extends Pick<HTMLImageElement, "src" | "width" | "height"> {
   className?: string;
 }
 
-export class UserPhoto extends React.PureComponent<UserPhotoProps> {
-  render() {
-    const { className, ...rest } = this.props;
-    return (
-      <div className={className}>
-        <image {...rest} />
-      </div>
-    );
-  }
-}
+export const UserPhoto: FunctionComponent<UserPhotoProps> = ({
+  className,
+  ...rest
+}) => {
+  return (
+    <div className={className}>
+      <img {...rest} alt="User photo" />
+    </div>
+  );
+};

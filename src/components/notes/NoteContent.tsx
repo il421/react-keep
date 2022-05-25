@@ -46,8 +46,8 @@ export const NoteContent: React.FunctionComponent<NoteContentProps> = ({
       ) : (
         /* IMAGE NOTE */
         <div className="content__image">
-          <image
-            path={
+          <img
+            src={
               (content as ImageItem).imageUrl !== null
                 ? (content as ImageItem).imageUrl!
                 : NO_IMAGE_URL

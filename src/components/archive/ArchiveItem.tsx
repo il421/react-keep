@@ -70,8 +70,8 @@ export const ArchiveItem: React.FunctionComponent<ArchiveItemProps> = ({
                   <div>
                     {getShortText((note.content as ImageItem).text, 20)}
                   </div>
-                  <image
-                    path={
+                  <img
+                    src={
                       (note.content as ImageItem).imageUrl !== null
                         ? (note.content as ImageItem).imageUrl!
                         : NO_IMAGE_URL

@@ -27,7 +27,6 @@ export const TagsItem: FunctionComponent<TagsItemProps> = ({
       <FlexBox justifyContent={JustifyContent.start}>
         <div className="tags-item__checkbox">
           <input
-            ref={`${tag.id}-list`}
             id={`${tag.id}-list`}
             type="checkbox"
             checked={checked}

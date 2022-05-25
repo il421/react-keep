@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 
 import { JustifyContent } from "../../common";
 import "../../styles/components/common/_sidebar.scss";
@@ -9,33 +9,35 @@ export interface SideBarProp {
   setShowSidebar: (value: boolean) => void;
 }
 
-export class SideBar extends React.PureComponent<SideBarProp> {
-  render() {
-    return (
-      <>
-        <div className={`sidebar ${this.props.showBar && "sidebar--show"}`}>
-          <FlexBox justifyContent={JustifyContent.end}>
-            <IconButton
-              className="sidebar__close-button"
-              onButtonClick={() => this.props.setShowSidebar(false)}
-              icon="times"
-              size="2x"
-            />
-          </FlexBox>
+export const SideBar: FunctionComponent<SideBarProp> = ({
+  showBar,
+  setShowSidebar,
+  children
+}) => {
+  return (
+    <>
+      <div className={`sidebar ${showBar && "sidebar--show"}`}>
+        <FlexBox justifyContent={JustifyContent.end}>
+          <IconButton
+            className="sidebar__close-button"
+            onButtonClick={() => setShowSidebar(false)}
+            icon="times"
+            size="2x"
+          />
+        </FlexBox>
 
-          {this.props.children}
-        </div>
+        {children}
+      </div>
 
-        {
-          // handle click on cover to close the sidebar
-          this.props.showBar && (
-            <div
-              className="sidebar__cover"
-              onClick={() => this.props.setShowSidebar(false)}
-            />
-          )
-        }
-      </>
-    );
-  }
-}
+      {
+        // handle click on cover to close the sidebar
+        showBar && (
+          <div
+            className="sidebar__cover"
+            onClick={() => setShowSidebar(false)}
+          />
+        )
+      }
+    </>
+  );
+};

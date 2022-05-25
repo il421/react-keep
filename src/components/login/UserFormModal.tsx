@@ -148,9 +148,9 @@ export class UserFormModalBase extends React.PureComponent<Props> {
                     <>
                       <Field name={this.nameOf("photoUrl")}>
                         {() => (
-                          <image
+                          <img
                             className="avatar__img"
-                            path={
+                            src={
                               values.photoUrl && !values.uploadingPhoto
                                 ? values.photoUrl
                                 : values.uploadingPhoto

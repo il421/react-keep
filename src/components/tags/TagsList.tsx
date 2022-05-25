@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import { connect } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
 
@@ -30,30 +30,34 @@ interface DispatchProps {
 
 export type Props = DispatchProps & StateProps;
 
-export class TagsListBase extends React.PureComponent<Props> {
-  render() {
-    return (
-      <FlexBox
-        vertical
-        justifyContent={JustifyContent.start}
-        className="tags-list"
-      >
-        {this.props.tags.map(tag => (
-          <TagsItem
-            key={tag.id}
-            tag={tag}
-            removeTag={(id: string) => {
-              this.props.removeTag(id);
-              this.props.removeTagFromNotes(id);
-            }}
-            checked={this.props.filters.tagFilters.includes(tag.id)}
-            onChange={this.props.toggleTag}
-          />
-        ))}
-      </FlexBox>
-    );
-  }
-}
+const TagsListBase: FunctionComponent<Props> = ({
+  tags,
+  toggleTag,
+  removeTag,
+  filters,
+  removeTagFromNotes
+}) => {
+  return (
+    <FlexBox
+      vertical
+      justifyContent={JustifyContent.start}
+      className="tags-list"
+    >
+      {tags.map(tag => (
+        <TagsItem
+          key={tag.id}
+          tag={tag}
+          removeTag={(id: string) => {
+            removeTag(id);
+            removeTagFromNotes(id);
+          }}
+          checked={filters.tagFilters.includes(tag.id)}
+          onChange={toggleTag}
+        />
+      ))}
+    </FlexBox>
+  );
+};
 
 const mapStateToProps = (state: Store): StateProps => {
   return {
