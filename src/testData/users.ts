@@ -2,7 +2,7 @@ import { Collaborator } from "../store/store.types";
 
 export const user = {
   email: "app.ilya.testing@gmail.com",
-  password: "{SECURE_TEST_USER_PASS}",
+  password: "il421sugTest",
   uid: "{SECURE_TEST_USER_UID}",
   firstName: "Ilya",
   lastName: "Suglobov",
